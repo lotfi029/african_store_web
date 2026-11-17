@@ -959,8 +959,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="store.seo.site-name" datatype="html">
-        <source>متجر جمعية التعلم الإلكتروني</source>
-        <target state="translated">E-Learning Association Store</target>
+        <source>متجر التبرعات — دار أفريقيا</source>
+        <target state="translated">Dar Africa donation store</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/seo/seo.service.ts</context>
           <context context-type="linenumber">30</context>
@@ -1395,7 +1395,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">112,113</context>
+          <context context-type="linenumber">121,122</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.account.details" datatype="html">
@@ -2831,7 +2831,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">94,96</context>
+          <context context-type="linenumber">100,102</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/project/project.page.html</context>
@@ -2883,7 +2883,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">67,69</context>
+          <context context-type="linenumber">73,75</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/order/order.page.html</context>
@@ -3915,8 +3915,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="store.admin.login-brand" datatype="html">
-        <source>متجر تعلّم — لوحة الفريق</source>
-        <target state="translated">ta3lom store — team panel</target>
+        <source>متجر دار أفريقيا — لوحة الفريق</source>
+        <target state="translated">Dar Africa store — team panel</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/admin/login/admin-login.page.html</context>
           <context context-type="linenumber">8,10</context>
@@ -4075,8 +4075,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="store.admin.login-description" datatype="html">
-        <source>دخول فريق متجر جمعية التعلم الإلكتروني.</source>
-        <target state="translated">Sign-in for the E-Learning Association store team.</target>
+        <source>دخول فريق متجر التبرعات — دار أفريقيا.</source>
+        <target state="translated">Sign-in for the Dar Africa donation store team.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/admin/login/admin-login.page.ts</context>
           <context context-type="linenumber">93</context>
@@ -5859,8 +5859,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="store.admin.brand-name" datatype="html">
-        <source>متجر تعلّم</source>
-        <target state="translated">ta3lom store</target>
+        <source>متجر دار أفريقيا</source>
+        <target state="translated">Dar Africa store</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/admin/shell/admin-shell.html</context>
           <context context-type="linenumber">14,15</context>
@@ -6909,7 +6909,7 @@
               &gt;"/>”</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">39,41</context>
+          <context context-type="linenumber">45,47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.clear-search" datatype="html">
@@ -6917,11 +6917,11 @@
         <target state="translated">Clear search</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">48,51</context>
+          <context context-type="linenumber">54,57</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">177,179</context>
+          <context context-type="linenumber">186,188</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.sort-label" datatype="html">
@@ -6929,7 +6929,7 @@
         <target state="translated">Sort</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">54,55</context>
+          <context context-type="linenumber">60,61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.stale" datatype="html">
@@ -6937,7 +6937,7 @@
         <target state="translated">Couldn't refresh the data — what you see may not be the latest.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">65,66</context>
+          <context context-type="linenumber">71,72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.category-unavailable" datatype="html">
@@ -6945,7 +6945,7 @@
         <target state="translated">This category is not available</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">74,77</context>
+          <context context-type="linenumber">80,83</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.listing.show-all" datatype="html">
@@ -6953,11 +6953,11 @@
         <target state="translated">Show all projects</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">81,84</context>
+          <context context-type="linenumber">87,90</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">187,189</context>
+          <context context-type="linenumber">196,198</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/project/project.page.html</context>
@@ -6969,7 +6969,7 @@
         <target state="translated">Previous</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">122,124</context>
+          <context context-type="linenumber">131,133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.page-next" datatype="html">
@@ -6977,7 +6977,7 @@
         <target state="translated">Next</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">156,158</context>
+          <context context-type="linenumber">165,167</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.listing.empty-title" datatype="html">
@@ -6985,11 +6985,11 @@
         <target state="translated">No matching projects</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">164,166</context>
+          <context context-type="linenumber">173,175</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">190,191</context>
+          <context context-type="linenumber">199,200</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.no-results" datatype="html">
@@ -6999,7 +6999,7 @@
                   &gt;"/>”.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">167,169</context>
+          <context context-type="linenumber">176,178</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.category-empty" datatype="html">
@@ -7007,7 +7007,7 @@
         <target state="translated">There are no projects in this category right now</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">180,182</context>
+          <context context-type="linenumber">189,191</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.listing.empty-none" datatype="html">
@@ -7015,7 +7015,7 @@
         <target state="translated">No projects are published right now. Come back soon.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">191,194</context>
+          <context context-type="linenumber">200,203</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.count-zero" datatype="html">
@@ -7023,7 +7023,7 @@
         <target state="translated">No projects</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.count-one" datatype="html">
@@ -7031,7 +7031,7 @@
         <target state="translated">1 project</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.count-two" datatype="html">
@@ -7039,7 +7039,7 @@
         <target state="translated">2 projects</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.count-few" datatype="html">
@@ -7047,7 +7047,7 @@
         <target state="translated"><x id="n" equiv-text="n"/> projects</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.count-many" datatype="html">
@@ -7055,7 +7055,7 @@
         <target state="translated"><x id="n" equiv-text="n"/> projects</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.count-other" datatype="html">
@@ -7063,7 +7063,7 @@
         <target state="translated"><x id="n" equiv-text="n"/> projects</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.listing.sort-newest" datatype="html">
@@ -7071,7 +7071,7 @@
         <target state="translated">Newest</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">215</context>
+          <context context-type="linenumber">250</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.sort-title" datatype="html">
@@ -7079,7 +7079,7 @@
         <target state="translated">Name</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">217</context>
+          <context context-type="linenumber">252</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.sort-featured" datatype="html">
@@ -7087,7 +7087,7 @@
         <target state="translated">Featured</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">219</context>
+          <context context-type="linenumber">254</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.page-label" datatype="html">
@@ -7095,15 +7095,15 @@
         <target state="translated">Page <x id="n" equiv-text="n"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">224</context>
+          <context context-type="linenumber">259</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.layout.association" datatype="html">
-        <source>جمعية التعلم الإلكتروني</source>
-        <target state="translated">E-Learning Association</target>
+        <source>جمعية الدعوة والتعليم باللغات الأفريقية</source>
+        <target state="translated">Association for Da'wah and Education in African Languages</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">276</context>
+          <context context-type="linenumber">311</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/project/project.page.ts</context>
@@ -7123,7 +7123,7 @@
         <target state="translated">Search results for “<x id="q" equiv-text="qText"/>”</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">297</context>
+          <context context-type="linenumber">332</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.listing.seo-category" datatype="html">
@@ -7131,15 +7131,15 @@
         <target state="translated"><x id="category" equiv-text="this.categoryName(cat)"/> projects</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">299</context>
+          <context context-type="linenumber">334</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.seo-description" datatype="html">
-        <source>تبرّع لمشاريع جمعية التعلم الإلكتروني أو لتصنيف عام: كفالات، سقيا، طباعة ونشر العلم. تبرّع سريع وآمن بالريال السعودي.</source>
-        <target state="translated">Give to the E-Learning Association's projects or to a general category: sponsorships, water, printing and spreading knowledge. Quick, secure donations in Saudi riyals.</target>
+        <source>تبرّع لمشاريع جمعية الدعوة والتعليم باللغات الأفريقية أو لتصنيف عام: كفالة الدعاة، الترجمة والطباعة، التعليم بلغات أفريقيا وسقيا الماء. تبرّع سريع وآمن بالريال السعودي.</source>
+        <target state="translated">Donate to the projects of the Association for Da'wah and Education in African Languages or to a general category: preacher sponsorship, translation and printing, teaching in African languages and water. Quick, secure donations in Saudi riyals.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">301</context>
+          <context context-type="linenumber">336</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.card.badge-urgent" datatype="html">
@@ -7775,16 +7775,16 @@
         </context-group>
       </trans-unit>
       <trans-unit id="store.layout.logo-alt" datatype="html">
-        <source>شعار جمعية التعلم الإلكتروني</source>
-        <target state="translated">E-Learning Association logo</target>
+        <source>شعار دار أفريقيا</source>
+        <target state="translated">Dar Africa logo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/footer/footer.html</context>
           <context context-type="linenumber">9,10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.layout.footer-about-r5" datatype="html">
-        <source> متجر تبرعات جمعية التعلم الإلكتروني: تبرعك يصل إلى المشروع أو التصنيف الذي تختاره. </source>
-        <target state="translated">The E-Learning Association donations store: your gift goes to the project or category you choose.</target>
+        <source> جمعية مرخّصة، تنشر العلم الشرعي وتعليم العربية بلغات أفريقيا عبر الدعاة والترجمة والإنتاج الصوتي والمرئي. </source>
+        <target state="translated">A licensed association spreading Islamic knowledge and Arabic teaching in African languages through preachers, translation and audio-visual production.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/footer/footer.html</context>
           <context context-type="linenumber">16,20</context>

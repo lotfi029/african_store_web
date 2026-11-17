@@ -14,11 +14,11 @@ for (const locale of ['ar', 'en'] as const) {
       const header = page.locator('header.hdr');
       const util = page.locator('.util');
       await expect(util).toContainText(locale === 'ar' ? 'ترخيص' : 'Licence');
-      await expect(util.locator('.ulink')).toHaveAttribute('href', /^https:\/\/ta3lom\.sa/);
+      await expect(util.locator('.ulink')).toHaveAttribute('href', /^https:\/\/darafrica\.org/);
       await expect(header.locator('form[role=search] #hdr-q')).toBeVisible();
       // Empty cart: the button says "السلة" without a total; the accessible name says it is empty.
       await expect(header.locator('a.cartbtn .ctot')).toHaveCount(0);
-      await expect(header.locator('.brand')).toHaveAttribute('href', /^https:\/\/ta3lom\.sa/);
+      await expect(header.locator('.brand')).toHaveAttribute('href', /^https:\/\/darafrica\.org/);
       await expect(header.locator('a.cartbtn')).toHaveAttribute('href', `/${locale}/cart`);
       await expect(header.locator('a.signin')).toHaveAttribute('href', `/${locale}/login`);
       await expect(page.locator('.util a.lang')).toHaveAttribute(

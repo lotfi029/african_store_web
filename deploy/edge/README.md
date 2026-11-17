@@ -1,19 +1,19 @@
 # Edge block for the store (F8 fallback)
 
-The final session could not reach `lotfi029/ta3lom-deploy` (no repository access), so the store's edge configuration is
-kept here and handed over. Everything below is an **owner step** on the VPS / in ta3lom-deploy.
+The association's VPS edge configuration (the shared edge Caddy) lives outside this repository, so the store's edge block is
+kept here and handed over (as in ta3lom_store_web). Everything below is an **owner step** on the VPS / in the edge deploy repo.
 
 ## 1. Copy the block
 
-1. Copy `deploy/edge/store.caddy` to ta3lom-deploy `edge/conf/store.caddy`.
+1. Copy `deploy/edge/store.caddy` to the edge deploy repo `edge/conf/store.caddy`.
 2. Add `import conf/store.caddy` to `Caddyfile`, `Caddyfile.cutover` and `Caddyfile.staging` (the same file serves all
    three: the staging hosts are inert until their DNS points at the VPS).
 3. Validate before reloading: `scripts/validate-caddy.sh` here, or on the VPS
    `docker compose exec edge caddy validate --config /etc/caddy/Caddyfile`, then `caddy reload`.
 
-What it does: `store.ta3lom.sa` → `store-web:8080`, `store-api.ta3lom.sa` → `store-api:8080` (bodies up to 21 MB; the
-payment webhook path `/v1/payments/webhooks/*` is not cached or buffered), `store-staging.ta3lom.sa` →
-`store-web-staging:8080`, `store-api-staging.ta3lom.sa` → `store-api-staging:8080`. HSTS on the two production names
+What it does: `store.darafrica.org` → `store-web:8080`, `store-api.darafrica.org` → `store-api:8080` (bodies up to 21 MB; the
+payment webhook path `/v1/payments/webhooks/*` is not cached or buffered), `store-staging.darafrica.org` →
+`store-web-staging:8080`, `store-api-staging.darafrica.org` → `store-api-staging:8080`. HSTS on the two production names
 only; `X-Robots-Tag: noindex, nofollow` on the staging names. The containers send their own CSP and security headers.
 
 ## 2. The `edge` network needs a fixed IPv4 subnet
@@ -43,7 +43,7 @@ docker network create --driver bridge --subnet "$EDGE_SUBNET" edge
 # 4. Start the edge, then the projects (they re-attach by name): main site, store API (prod + staging), store web.
 ```
 
-Put the same command in ta3lom-deploy `edge/up.sh` so the network is always created that way, and set `EDGE_SUBNET` in
+Put the same command in the edge deploy repo `edge/up.sh` so the network is always created that way, and set `EDGE_SUBNET` in
 both store API env files. The API refuses to start without it.
 
 ## 3. Start order and memory
@@ -54,4 +54,4 @@ both store API env files. The API refuses to start without it.
 ## 4. Backups
 
 The store API repository has its own `deploy/backup.sh` and `deploy/restore-test.sh` (PostgreSQL dumps + the receipts
-and media volumes). Call it from ta3lom-deploy's `backup.sh` / `offsite.sh` with the main site's retention.
+and media volumes). Call it from the edge deploy repo's `backup.sh` / `offsite.sh` with the main site's retention.

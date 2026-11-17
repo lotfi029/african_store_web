@@ -12,7 +12,7 @@
 export const ENVS = {
   local: {
     apiUrl: 'http://localhost:5080/v1',
-    site: 'https://store.ta3lom.sa',
+    site: 'https://store.darafrica.org',
     robots: 'index',
     deployable: false,
     errorReportUrl: '',
@@ -20,7 +20,7 @@ export const ENVS = {
   },
   ci: {
     apiUrl: 'http://localhost:3000/v1',
-    site: 'https://store.ta3lom.sa',
+    site: 'https://store.darafrica.org',
     robots: 'index',
     deployable: false,
     errorReportUrl: '',
@@ -29,7 +29,7 @@ export const ENVS = {
   // The ci build with showcase on: the @showcase e2e on the stub (environment.ci-showcase.ts). Never published.
   'ci-showcase': {
     apiUrl: 'http://localhost:3000/v1',
-    site: 'https://store.ta3lom.sa',
+    site: 'https://store.darafrica.org',
     robots: 'index',
     deployable: false,
     errorReportUrl: '',
@@ -37,24 +37,24 @@ export const ENVS = {
   },
   // F10 full-stack e2e (scripts/full-stack-e2e.sh): production names served locally; never published.
   fullstack: {
-    apiUrl: 'https://store-api.ta3lom.sa/v1',
-    site: 'https://store.ta3lom.sa',
+    apiUrl: 'https://store-api.darafrica.org/v1',
+    site: 'https://store.darafrica.org',
     robots: 'noindex',
     deployable: false,
     errorReportUrl: '',
     showcase: false,
   },
   staging: {
-    apiUrl: 'https://store-api-staging.ta3lom.sa/v1',
-    site: 'https://store-staging.ta3lom.sa',
+    apiUrl: 'https://store-api-staging.darafrica.org/v1',
+    site: 'https://store-staging.darafrica.org',
     robots: 'noindex',
     deployable: true,
     errorReportUrl: '',
     showcase: true,
   },
   production: {
-    apiUrl: 'https://store-api.ta3lom.sa/v1',
-    site: 'https://store.ta3lom.sa',
+    apiUrl: 'https://store-api.darafrica.org/v1',
+    site: 'https://store.darafrica.org',
     robots: 'index',
     deployable: true,
     errorReportUrl: '',

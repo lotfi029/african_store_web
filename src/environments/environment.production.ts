@@ -1,13 +1,13 @@
 /**
- * Production: https://store.ta3lom.sa reading https://store-api.ta3lom.sa/v1 (ADR-S09).
+ * Production: https://store.darafrica.org reading https://store-api.darafrica.org/v1 (ADR-S09).
  * Must match scripts/lib/envs.mjs `production`.
  */
 export const environment = {
   production: true,
   envName: 'production' as 'development' | 'local' | 'ci' | 'fullstack' | 'staging' | 'production',
-  apiUrl: 'https://store-api.ta3lom.sa/v1',
-  siteOrigin: 'https://store.ta3lom.sa',
-  mainSiteUrl: 'https://ta3lom.sa',
+  apiUrl: 'https://store-api.darafrica.org/v1',
+  siteOrigin: 'https://store.darafrica.org',
+  mainSiteUrl: 'https://darafrica.org',
   /** `noindex` = every page `noindex, nofollow` whatever the route says (staging). */
   robots: 'index' as 'index' | 'noindex',
   /**

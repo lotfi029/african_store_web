@@ -3,6 +3,7 @@ import type { JsonLd } from '../../../core/seo/seo.service';
 import { breadcrumbJsonLd } from '../../../core/seo/seo.service';
 import { type Locale, pick } from '../../../core/i18n/i18n';
 import { compare } from '../../../core/money/money';
+import { environment } from '../../../../environments/environment';
 
 /**
  * JSON-LD of a project page: a schema.org `DonateAction` (the project is what the visitor gives to; the NGO is the
@@ -24,7 +25,7 @@ export function projectJsonLd(
     description: pick(locale, p.summaryAr ?? '', p.summaryEn) || undefined,
     url: urls.page,
     image: p.coverUrl ?? undefined,
-    recipient: { '@type': 'NGO', name: names.association, url: 'https://ta3lom.sa' },
+    recipient: { '@type': 'NGO', name: names.association, url: environment.mainSiteUrl },
     priceSpecification: {
       '@type': 'PriceSpecification',
       priceCurrency: 'SAR',

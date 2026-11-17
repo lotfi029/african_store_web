@@ -2,12 +2,14 @@
 <html lang="ar" dir="rtl">
   <head>
     <meta charset="utf-8" />
-    <title>متجر جمعية التعلم الإلكتروني</title>
+    <title>متجر التبرعات — دار أفريقيا</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#1B2E2E" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1B2E2E" media="(prefers-color-scheme: dark)" />
     <!--
-      Theme before first paint (ta3lom-web ADR-011): a stored 'light'/'dark' wins, otherwise the OS decides.
+      Theme before first paint (inherited from ta3lom-web ADR-011): a stored 'light'/'dark' wins, otherwise the OS decides.
       deploy/caddy-headers.conf allows this script by its sha256 HASH (never 'unsafe-inline'). Changing one byte
       changes the hash: `npm run build` then fails in scripts/check-csp.mjs, which prints the new token.
     -->

@@ -5,11 +5,11 @@ import { freshMobile, otpFor, resetOtpLimits } from '../e2e/support/auth';
 
 /**
  * C.2 prototype check (plan §7): the same seven screens of the built app and of the approved prototype
- * (docs/design/ta3lom-store-prototype.html), ar and en, 1440 and 375 px → docs/screenshots/. Run with
+ * (docs/reference/ta3lom/design/ta3lom-store-prototype.html), ar and en, 1440 and 375 px → docs/screenshots/. Run with
  * `npm run screenshots` (built output on :4320, real API). JPEG (quality 60) keeps the folder small.
  */
 const OUT = join(process.cwd(), 'docs', 'screenshots');
-const PROTO = `file://${join(process.cwd(), 'docs', 'design', 'ta3lom-store-prototype.html')}`;
+const PROTO = `file://${join(process.cwd(), 'docs', 'reference', 'ta3lom', 'design', 'ta3lom-store-prototype.html')}`;
 const WIDTHS = [1440, 375] as const;
 
 async function shoot(page: Page, name: string): Promise<void> {

@@ -90,7 +90,7 @@ export class AdminLoginPage {
   constructor() {
     this.seo.set({
       title: $localize`:@@store.admin.login-title:دخول فريق المتجر`,
-      description: $localize`:@@store.admin.login-description:دخول فريق متجر جمعية التعلم الإلكتروني.`,
+      description: $localize`:@@store.admin.login-description:دخول فريق متجر التبرعات — دار أفريقيا.`,
       path: '/admin/login',
       noindex: true,
     });

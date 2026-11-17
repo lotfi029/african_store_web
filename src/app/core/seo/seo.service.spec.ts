@@ -10,18 +10,18 @@ describe('SeoService', () => {
     return { seo: TestBed.inject(SeoService), doc: TestBed.inject(DOCUMENT) };
   }
 
-  it('puts the canonical and hreflang alternates on store.ta3lom.sa', () => {
+  it('puts the canonical and hreflang alternates on store.darafrica.org', () => {
     const { seo, doc } = setup('en');
     seo.set({ title: 'Smart study', description: 'd', path: '/p/smart-study' });
-    expect(doc.title).toBe('Smart study — متجر جمعية التعلم الإلكتروني');
+    expect(doc.title).toBe('Smart study — متجر التبرعات — دار أفريقيا');
     expect(doc.querySelector('link[rel=canonical]')?.getAttribute('href')).toBe(
-      'https://store.ta3lom.sa/en/p/smart-study',
+      'https://store.darafrica.org/en/p/smart-study',
     );
     expect(doc.querySelector('link[hreflang=ar]')?.getAttribute('href')).toBe(
-      'https://store.ta3lom.sa/ar/p/smart-study',
+      'https://store.darafrica.org/ar/p/smart-study',
     );
     expect(doc.querySelector('link[hreflang=x-default]')?.getAttribute('href')).toBe(
-      'https://store.ta3lom.sa/ar/p/smart-study',
+      'https://store.darafrica.org/ar/p/smart-study',
     );
     expect(doc.querySelector('meta[name=robots]')?.getAttribute('content')).toBe('index, follow');
   });

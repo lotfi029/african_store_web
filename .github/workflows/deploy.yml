@@ -1,6 +1,10 @@
 name: Deploy
 
-# Runbook: deploy/README.md. Images: ghcr.io/lotfi029/ta3lom-store-web (private package; the VPS pulls with its OWN
+# DAR AFRICA (W-00): deploys are OFF until the owner sets the repository variable DEPLOY_ENABLED=true together with the
+# `staging` / `production` environments, the VPS SSH secrets and the GHCR read token on the VPS (docs/W-00-report.md,
+# owner steps; plan §11). Every job that builds, pushes or deploys an image checks vars.DEPLOY_ENABLED; the PR dry run
+# (echo only, no secret, no image) still runs.
+# Runbook: deploy/README.md. Images: ghcr.io/lotfi029/african-store-web (private package; the VPS pulls with its OWN
 # read:packages token — this workflow never sends a registry token to the VPS, owner H-4).
 # Deploys run ONLY after CI succeeded on the same commit (review 06 D-1):
 #   CI succeeded on a push to main                                  → build the STAGING image, check-container on it,
@@ -50,7 +54,7 @@ permissions:
   contents: read
 
 env:
-  IMAGE: ghcr.io/lotfi029/ta3lom-store-web
+  IMAGE: ghcr.io/lotfi029/african-store-web
   # "1" only while the repository variable ALLOW_EMPTY_CATALOGUE is "true" (first deploy); empty otherwise.
   ALLOW_EMPTY_CATALOGUE: ${{ vars.ALLOW_EMPTY_CATALOGUE == 'true' && '1' || '' }}
 
@@ -58,7 +62,7 @@ jobs:
   # Decides what (if anything) this run deploys, and from which commit. A deploy never starts unless CI succeeded on
   # that commit (review 06 D-1).
   gate:
-    if: github.event_name != 'pull_request' && github.event_name != 'workflow_dispatch'
+    if: vars.DEPLOY_ENABLED == 'true' && github.event_name != 'pull_request' && github.event_name != 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 60
     permissions:
@@ -134,7 +138,7 @@ jobs:
     steps:
       - name: Dry run of the staging deploy
         env:
-          PRERENDER_API_URL: https://store-api-staging.ta3lom.sa/v1
+          PRERENDER_API_URL: https://store-api-staging.darafrica.org/v1
         run: |
           if curl -sf --max-time 15 "$PRERENDER_API_URL/catalog/config" > /dev/null; then
             echo "Staging API is up: a main run builds and pushes $IMAGE:staging-<sha> and :staging."
@@ -144,11 +148,11 @@ jobs:
           echo "A main run then executes on the staging VPS (STAGING_SSH_* secrets):"
           echo "  cd \$STAGING_DEPLOY_DIR && EDGE_ALIAS=store-web-staging STORE_WEB_IMAGE=$IMAGE:staging-${{ github.event.pull_request.head.sha }} docker compose -f docker-compose.store-web.yml -p store-web-staging pull"
           echo "  EDGE_ALIAS=store-web-staging STORE_WEB_IMAGE=$IMAGE:staging-${{ github.event.pull_request.head.sha }} docker compose -f docker-compose.store-web.yml -p store-web-staging up -d --wait"
-          echo "and smoke-checks: node scripts/smoke-deploy.mjs https://store-staging.ta3lom.sa <sha> --env staging"
+          echo "and smoke-checks: node scripts/smoke-deploy.mjs https://store-staging.darafrica.org <sha> --env staging"
 
   staging:
     needs: gate
-    if: needs.gate.outputs.target == 'staging'
+    if: vars.DEPLOY_ENABLED == 'true' && needs.gate.outputs.target == 'staging'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -156,13 +160,13 @@ jobs:
       packages: write
     environment:
       name: staging
-      url: https://store-staging.ta3lom.sa
+      url: https://store-staging.darafrica.org
     concurrency:
       group: deploy-staging
       cancel-in-progress: false
     env:
-      PRERENDER_API_URL: https://store-api-staging.ta3lom.sa/v1
-      SITE: https://store-staging.ta3lom.sa
+      PRERENDER_API_URL: https://store-api-staging.darafrica.org/v1
+      SITE: https://store-staging.darafrica.org
       SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
       SSH_USER: ${{ secrets.STAGING_SSH_USER }}
       SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
@@ -241,7 +245,7 @@ jobs:
           printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes "$SSH_USER@$SSH_HOST" "$REMOTE"
           echo "deployed=true" >> "$GITHUB_OUTPUT"
-      - name: Smoke-check https://store-staging.ta3lom.sa
+      - name: Smoke-check https://store-staging.darafrica.org
         if: steps.deploy.outputs.deployed == 'true'
         run: node scripts/smoke-deploy.mjs "$SITE" "$SHA" --env staging
       - name: Remove the SSH key
@@ -250,7 +254,7 @@ jobs:
 
   production-image:
     needs: gate
-    if: needs.gate.outputs.target == 'production'
+    if: vars.DEPLOY_ENABLED == 'true' && needs.gate.outputs.target == 'production'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -261,7 +265,7 @@ jobs:
       group: production-image
       cancel-in-progress: false
     env:
-      PRERENDER_API_URL: https://store-api.ta3lom.sa/v1
+      PRERENDER_API_URL: https://store-api.darafrica.org/v1
       SHA: ${{ needs.gate.outputs.sha }}
       VERSION: ${{ needs.gate.outputs.version }}
     outputs:
@@ -311,17 +315,18 @@ jobs:
 
   production:
     needs: [gate, production-image]
+    if: vars.DEPLOY_ENABLED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     # The `production` environment has a required reviewer (repository settings): this job waits for that approval.
     environment:
       name: production
-      url: https://store.ta3lom.sa
+      url: https://store.darafrica.org
     concurrency:
       group: deploy-production
       cancel-in-progress: false
     env:
-      SITE: https://store.ta3lom.sa
+      SITE: https://store.darafrica.org
       SSH_HOST: ${{ secrets.PRODUCTION_SSH_HOST }}
       SSH_USER: ${{ secrets.PRODUCTION_SSH_USER }}
       SSH_KEY: ${{ secrets.PRODUCTION_SSH_KEY }}
@@ -344,7 +349,7 @@ jobs:
           printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes "$SSH_USER@$SSH_HOST" \
             "cd '$DEPLOY_DIR' && EDGE_ALIAS=store-web STORE_WEB_IMAGE='$IMAGE:$TAG' docker compose -f docker-compose.store-web.yml -p store-web pull && EDGE_ALIAS=store-web STORE_WEB_IMAGE='$IMAGE:$TAG' docker compose -f docker-compose.store-web.yml -p store-web up -d --wait"
-      - name: Smoke-check https://store.ta3lom.sa
+      - name: Smoke-check https://store.darafrica.org
         run: node scripts/smoke-deploy.mjs "$SITE" "$SHA" --env production
       - name: Remove the SSH key
         if: always()
@@ -353,7 +358,7 @@ jobs:
   # Run it from the TAG for production ("Use workflow from: <tag>") — the production environment only allows v* refs
   # (deploy/README.md §7, review 06 L-2).
   rollback:
-    if: github.event_name == 'workflow_dispatch'
+    if: vars.DEPLOY_ENABLED == 'true' && github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -373,7 +378,7 @@ jobs:
       SSH_KNOWN_HOSTS: ${{ inputs.environment == 'production' && secrets.PRODUCTION_SSH_KNOWN_HOSTS || secrets.STAGING_SSH_KNOWN_HOSTS }}
       DEPLOY_DIR: ${{ inputs.environment == 'production' && (vars.PRODUCTION_DEPLOY_DIR || '/srv/store-web') || (vars.STAGING_DEPLOY_DIR || '/srv/store-web-staging') }}
       PROJECT: ${{ inputs.environment == 'production' && 'store-web' || 'store-web-staging' }}
-      SITE: ${{ inputs.environment == 'production' && 'https://store.ta3lom.sa' || 'https://store-staging.ta3lom.sa' }}
+      SITE: ${{ inputs.environment == 'production' && 'https://store.darafrica.org' || 'https://store-staging.darafrica.org' }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -395,7 +400,7 @@ jobs:
       - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
       - name: The image's config label must match the environment (D-2)
         run: |
-          label="$(docker buildx imagetools inspect "$IMAGE:$TAG" --format '{{ json .Image }}' | jq -r '.config.Labels["sa.ta3lom.store-web.config"] // empty')"
+          label="$(docker buildx imagetools inspect "$IMAGE:$TAG" --format '{{ json .Image }}' | jq -r '.config.Labels["org.darafrica.store-web.config"] // empty')"
           [ "$label" = "$TARGET" ] || { echo "::error::$IMAGE:$TAG was built for '${label:-unknown}', not $TARGET"; exit 1; }
       - name: Redeploy ${{ inputs.tag }} to ${{ inputs.environment }}
         run: |

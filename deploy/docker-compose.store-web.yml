@@ -1,10 +1,10 @@
 # Store web on the shared VPS behind the EDGE Caddy (plan §6 F7; the same model as the store API's deploy/compose.yaml).
-# This file runs NO proxy and publishes NO port: the edge (ta3lom-deploy/edge, the only Caddy on 80/443, terminating TLS)
+# This file runs NO proxy and publishes NO port: the edge (the edge deploy repo, `edge/`, the only Caddy on 80/443, terminating TLS)
 # reaches the container over the external `edge` network by its alias — `store-web` (production) or
 # `store-web-staging` (staging); see deploy/edge/store.caddy. One file, two projects:
-#   EDGE_ALIAS=store-web         STORE_WEB_IMAGE=ghcr.io/lotfi029/ta3lom-store-web:<tag> \
+#   EDGE_ALIAS=store-web         STORE_WEB_IMAGE=ghcr.io/lotfi029/african-store-web:<tag> \
 #     docker compose -f docker-compose.store-web.yml -p store-web up -d --wait
-#   EDGE_ALIAS=store-web-staging STORE_WEB_IMAGE=ghcr.io/lotfi029/ta3lom-store-web:staging-<sha> \
+#   EDGE_ALIAS=store-web-staging STORE_WEB_IMAGE=ghcr.io/lotfi029/african-store-web:staging-<sha> \
 #     docker compose -f docker-compose.store-web.yml -p store-web-staging up -d --wait
 # (EDGE_ALIAS also lives in each folder's .env; the deploy workflow passes it explicitly.) No secrets: the image is
 # public static files. Runbook: deploy/README.md.
@@ -14,7 +14,7 @@
 # (scripts/check-edge-aliases.sh proves it with both projects side by side, in CI).
 services:
   web:
-    image: ${STORE_WEB_IMAGE:?set STORE_WEB_IMAGE, e.g. ghcr.io/lotfi029/ta3lom-store-web:staging}
+    image: ${STORE_WEB_IMAGE:?set STORE_WEB_IMAGE, e.g. ghcr.io/lotfi029/african-store-web:staging}
     restart: unless-stopped
     environment:
       TLS_MODE: edge
@@ -39,7 +39,7 @@ services:
       options: { max-size: "10m", max-file: "3" }
 
 networks:
-  # Created once by ta3lom-deploy (edge/up.sh) with a fixed IPv4 subnet (deploy/edge/README.md); shared with the edge
+  # Created once by the edge deploy repo (edge/up.sh) with a fixed IPv4 subnet (deploy/edge/README.md); shared with the edge
   # Caddy and the store API.
   edge:
     external: true

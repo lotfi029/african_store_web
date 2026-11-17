@@ -202,7 +202,7 @@ export class ProjectPage {
         },
         {
           home: siteName(),
-          association: $localize`:@@store.layout.association:جمعية التعلم الإلكتروني`,
+          association: $localize`:@@store.layout.association:جمعية الدعوة والتعليم باللغات الأفريقية`,
         },
         this.showcase,
       ),

@@ -57,7 +57,7 @@ for (const locale of ['ar', 'en'] as const) {
       await expect(titles).toHaveCount(filtered.items.length);
       await expect(page.locator('link[rel=canonical]')).toHaveAttribute(
         'href',
-        `https://store.ta3lom.sa/${locale}/`,
+        `https://store.darafrica.org/${locale}/`,
       );
 
       await page.locator('#hdr-q').fill(api.items[0].titleAr.split(' ')[0]);

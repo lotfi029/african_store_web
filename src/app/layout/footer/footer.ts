@@ -4,7 +4,7 @@ import { environment } from '../../../environments/environment';
 import { SHOWCASE } from '../../core/showcase/showcase';
 
 /**
- * Store footer (prototype `#foot`): about, store links, association links on ta3lom.sa (identity, privacy, contact) and
+ * Store footer (prototype `#foot`): about, store links, association links on darafrica.org (identity, privacy, contact) and
  * the contact e-mail. No payment marks while online payment is off (D-W2).
  */
 @Component({

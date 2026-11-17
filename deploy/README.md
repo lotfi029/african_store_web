@@ -6,9 +6,9 @@ by the VPS from GHCR. Go-live checklist: [docs/production-checklist.md](../docs/
 
 | | Staging | Production |
 |---|---|---|
-| Site | `https://store-staging.ta3lom.sa` | `https://store.ta3lom.sa` |
-| API (runtime, compiled in) | `https://store-api-staging.ta3lom.sa/v1` | `https://store-api.ta3lom.sa/v1` |
-| Image | `ghcr.io/lotfi029/ta3lom-store-web:staging-<sha>` (+ `:staging`) | `ghcr.io/lotfi029/ta3lom-store-web:<version>` (+ `:latest`) |
+| Site | `https://store-staging.darafrica.org` | `https://store.darafrica.org` |
+| API (runtime, compiled in) | `https://store-api-staging.darafrica.org/v1` | `https://store-api.darafrica.org/v1` |
+| Image | `ghcr.io/lotfi029/african-store-web:staging-<sha>` (+ `:staging`) | `ghcr.io/lotfi029/african-store-web:<version>` (+ `:latest`) |
 | Built on | push to `main`, nightly 01:23 UTC, `repository_dispatch: catalog-changed` | tag `vX.Y.Z` |
 | Deployed | automatically (`staging` environment) | after the `production` environment's required reviewer approves |
 | Robots | `noindex, nofollow` everywhere (meta, `X-Robots-Tag`, `robots.txt Disallow: /`, no sitemap), "نسخة تجريبية" ribbon | indexable, sitemap |
@@ -70,7 +70,7 @@ Image (`Dockerfile`): `node:24-alpine` builds `CONFIG=staging|production` → `c
 **:8080** as uid 10001 (read-only root filesystem compatible), `HEALTHCHECK` on `/healthz`.
 
 ```bash
-docker build --build-arg CONFIG=staging --build-arg PRERENDER_API_URL=https://store-api-staging.ta3lom.sa/v1 \
+docker build --build-arg CONFIG=staging --build-arg PRERENDER_API_URL=https://store-api-staging.darafrica.org/v1 \
   --build-arg VERSION="$(git describe --tags --always)" --build-arg GIT_SHA="$(git rev-parse HEAD)" -t store-web:staging .
 node scripts/check-container.mjs store-web:staging --env staging
 ```
@@ -95,10 +95,10 @@ X-Robots-Tag on staging, client-route fallbacks, real 404s, cache headers, compr
 
 ### TLS: the edge model (F7)
 
-- The VPS runs ONE edge Caddy (repo `ta3lom-deploy`, `edge/`) on 80/443 that terminates TLS for every site. This
+- The VPS runs ONE edge Caddy (the owner's edge deploy repo, `edge/`) on 80/443 that terminates TLS for every site. This
   container publishes **no port**: it joins the external Docker network `edge` with the alias `store-web` (production) or
   `store-web-staging` (staging), and the edge proxies to `store-web:8080` / `store-web-staging:8080`. The store block for
-  the edge is `deploy/edge/store.caddy` in this repo (copy it into ta3lom-deploy — `deploy/edge/README.md`); it sends
+  the edge is `deploy/edge/store.caddy` in this repo (copy it into the edge deploy repo — `deploy/edge/README.md`); it sends
   HSTS on the production names and `X-Robots-Tag: noindex` on the staging names.
 - The container sends no HSTS (owner M-8) and the edge must not add its own CSP — the container's is generated per
   build.
@@ -107,7 +107,7 @@ X-Robots-Tag on staging, client-route fallbacks, real 404s, cache headers, compr
 
 ## 3. First-time VPS setup
 
-1. **DNS.** `A`/`AAAA` records: `store.ta3lom.sa` and `store-staging.ta3lom.sa` → the VPS (same host as the API is fine).
+1. **DNS.** `A`/`AAAA` records: `store.darafrica.org` and `store-staging.darafrica.org` → the VPS (same host as the API is fine).
 2. **Docker** with the compose plugin. A deploy user (e.g. `deploy`) in the `docker` group, no sudo.
 3. **Folders.** `/srv/store-web` (production) and `/srv/store-web-staging`; copy `deploy/docker-compose.store-web.yml`
    into each and add a `.env` next to it:
@@ -118,7 +118,7 @@ X-Robots-Tag on staging, client-route fallbacks, real 404s, cache headers, compr
    ```
 
    (`/srv/store-web/.env`: `EDGE_ALIAS=store-web`.) The deploy passes `EDGE_ALIAS` and `STORE_WEB_IMAGE` per run. The
-   `edge` network must exist first (ta3lom-deploy `edge/up.sh`, fixed IPv4 subnet — `deploy/edge/README.md`).
+   `edge` network must exist first (the edge deploy repo `edge/up.sh`, fixed IPv4 subnet — `deploy/edge/README.md`).
 4. **GHCR pull access (owner H-4, review 06 L-7).** The package stays **private**. GHCR does **not** accept
    fine-grained tokens: create a **classic** personal access token with **`read:packages` only**, on a **dedicated machine
    user** (a GitHub account used only for pulls, given read access to the package) — a classic `read:packages` token can
@@ -133,9 +133,9 @@ X-Robots-Tag on staging, client-route fallbacks, real 404s, cache headers, compr
    configured: install `docker-credential-pass` (or `secretservice`) and set `"credsStore"` in that file first, or at
    least keep the file `0600` and owned by the deploy user. The workflow never sends a registry token to the VPS.
    **Rotate** it before it expires: create a new token, run the same login again, check a pull
-   (`docker pull ghcr.io/lotfi029/ta3lom-store-web:staging`), then revoke the old token.
+   (`docker pull ghcr.io/lotfi029/african-store-web:staging`), then revoke the old token.
 5. **Edge proxy:** import `store.caddy` (§2) in the edge Caddyfile(s) and reload the edge.
-6. **API side.** CORS on the API = the site origin only (`https://store.ta3lom.sa`, staging its own), refresh cookies
+6. **API side.** CORS on the API = the site origin only (`https://store.darafrica.org`, staging its own), refresh cookies
    for that site. The web sends credentials and bearer tokens only to its API origin. The API repo's old Caddy block that
    served these files and imported `caddy-headers.conf` for its CSP must be replaced by the reverse proxy above (the CSP
    now comes from this container) — see the PR's "API follow-ups".
@@ -166,8 +166,8 @@ its environment, and only then pushed. A failed CI run deploys nothing.
 
   ```bash
   cd /srv/store-web-staging
-  STORE_WEB_IMAGE=ghcr.io/lotfi029/ta3lom-store-web:staging-<sha> docker compose -f docker-compose.store-web.yml -p store-web-staging pull
-  STORE_WEB_IMAGE=ghcr.io/lotfi029/ta3lom-store-web:staging-<sha> docker compose -f docker-compose.store-web.yml -p store-web-staging up -d --wait
+  STORE_WEB_IMAGE=ghcr.io/lotfi029/african-store-web:staging-<sha> docker compose -f docker-compose.store-web.yml -p store-web-staging pull
+  STORE_WEB_IMAGE=ghcr.io/lotfi029/african-store-web:staging-<sha> docker compose -f docker-compose.store-web.yml -p store-web-staging up -d --wait
   ```
 
 - **Production:** push a tag `vX.Y.Z` (strict semver — a pre-release such as `v1.2.3-rc.1` is
@@ -194,7 +194,7 @@ alias on the shared `edge` network. Only `EDGE_ALIAS` names an environment there
 (`scripts/check-edge-aliases.sh`) and fails if `store-web` resolves to anything but the production container.
 
 **Apple Pay (review 04).** Moyasar's hosted page offers Apple Pay only on a verified domain: Apple fetches
-`https://store.ta3lom.sa/.well-known/apple-developer-merchantid-domain-association` (served `text/plain`, `no-cache`;
+`https://store.darafrica.org/.well-known/apple-developer-merchantid-domain-association` (served `text/plain`, `no-cache`;
 `check-container` asserts both). The repository holds a PLACEHOLDER in `deploy/well-known/`; the owner replaces it with
 the file from the Moyasar dashboard (Settings → Apple Pay → domains), commits it, and verifies the domain there.
 `check-deploy-output` warns on staging and in CI's production dry run, and **fails a real production build** while the
@@ -203,9 +203,9 @@ placeholder is in place — except a showcase build (no payments yet), which onl
 ## 6. Verify
 
 ```bash
-node scripts/smoke-deploy.mjs https://store-staging.ta3lom.sa <commit-sha> --env staging
-node scripts/smoke-deploy.mjs https://store.ta3lom.sa <commit-sha> --env production
-curl -sI https://store.ta3lom.sa/ar/ | grep -iE 'content-security-policy|strict-transport|x-robots'
+node scripts/smoke-deploy.mjs https://store-staging.darafrica.org <commit-sha> --env staging
+node scripts/smoke-deploy.mjs https://store.darafrica.org <commit-sha> --env production
+curl -sI https://store.darafrica.org/ar/ | grep -iE 'content-security-policy|strict-transport|x-robots'
 ```
 
 The smoke check (also run by the workflow) wants `/healthz` = `ok`, `/ar/` and `/en/` 200 with the build stamp,
@@ -218,7 +218,7 @@ Actions → **Deploy** → *Run workflow*. **For production, pick "Use workflow 
 environment + an earlier image tag (list them under the repository's Packages):
 
 - `production` accepts only `X.Y.Z`; `staging` accepts only `staging-<sha>` — any other pair fails (review 06 D-2);
-- the image's `sa.ta3lom.store-web.config` label must equal the environment (`docker buildx imagetools inspect`), so a
+- the image's `org.darafrica.store-web.config` label must equal the environment (`docker buildx imagetools inspect`), so a
   staging build (noindex, staging API, ribbon) can never be redeployed to production.
 
 The job redeploys that tag with the same compose commands and smoke-checks it (production still needs the reviewer).
@@ -226,8 +226,8 @@ By hand on the VPS: the same two commands with the older tag (check the label fi
 
 ## 8. Monitoring
 
-- **Uptime:** an external monitor (UptimeRobot, Better Stack, …) every 1–5 min on `https://store.ta3lom.sa/healthz`
-  (expects `200` and `ok`) and on `https://store.ta3lom.sa/ar/` (expects `200` and the text `متجر التبرعات`); alert the
+- **Uptime:** an external monitor (UptimeRobot, Better Stack, …) every 1–5 min on `https://store.darafrica.org/healthz`
+  (expects `200` and `ok`) and on `https://store.darafrica.org/ar/` (expects `200` and the text `متجر التبرعات`); alert the
   owner. `/healthz` proves the container serves; `/ar/` proves the edge, TLS and the site.
 - **Container health:** `docker compose -p store-web ps` (healthy), `docker compose -p store-web logs --tail 100`.
 - **Client errors:** set `errorReportUrl` in `environment.production.ts` to an endpoint you control (its origin is added

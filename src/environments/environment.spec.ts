@@ -12,15 +12,15 @@ describe('environments', () => {
   it('points production at the store API origin over https', () => {
     expect(production.production).toBe(true);
     expect(production.envName).toBe('production');
-    expect(production.apiUrl).toBe('https://store-api.ta3lom.sa/v1');
-    expect(production.siteOrigin).toBe('https://store.ta3lom.sa');
+    expect(production.apiUrl).toBe('https://store-api.darafrica.org/v1');
+    expect(production.siteOrigin).toBe('https://store.darafrica.org');
     expect(production.robots).toBe('index');
   });
 
   it('staging: its own API and site, https, never indexed', () => {
     expect(staging.envName).toBe('staging');
-    expect(staging.apiUrl).toBe('https://store-api-staging.ta3lom.sa/v1');
-    expect(staging.siteOrigin).toBe('https://store-staging.ta3lom.sa');
+    expect(staging.apiUrl).toBe('https://store-api-staging.darafrica.org/v1');
+    expect(staging.siteOrigin).toBe('https://store-staging.darafrica.org');
     expect(staging.robots).toBe('noindex');
   });
 
@@ -37,7 +37,7 @@ describe('environments', () => {
     expect(fullstack.apiUrl).toBe(production.apiUrl);
     expect(fullstack.siteOrigin).toBe(production.siteOrigin);
     expect(fullstack.robots).toBe('noindex');
-    expect(fullstack.paymentHosts).toEqual(['store-api.ta3lom.sa']);
+    expect(fullstack.paymentHosts).toEqual(['store-api.darafrica.org']);
     expect(fullstack.paymentAllowHttp).toBe(false);
   });
 

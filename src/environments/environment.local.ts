@@ -7,8 +7,8 @@ export const environment = {
   production: true,
   envName: 'local' as 'development' | 'local' | 'ci' | 'fullstack' | 'staging' | 'production',
   apiUrl: 'http://localhost:5080/v1',
-  siteOrigin: 'https://store.ta3lom.sa',
-  mainSiteUrl: 'https://ta3lom.sa',
+  siteOrigin: 'https://store.darafrica.org',
+  mainSiteUrl: 'https://darafrica.org',
   /** `noindex` = every page `noindex, nofollow` whatever the route says (staging). */
   robots: 'index' as 'index' | 'noindex',
   /**

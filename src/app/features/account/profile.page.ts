@@ -130,7 +130,7 @@ export class ProfilePage {
     if (this.exporting()) return;
     this.exporting.set(true);
     try {
-      saveFile(await this.data.exportData(), 'ta3lom-donations-export.json');
+      saveFile(await this.data.exportData(), 'darafrica-donations-export.json');
     } catch (e) {
       this.toast.show(problemMessage(toProblem(e)), 'error');
     } finally {

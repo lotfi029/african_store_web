@@ -308,7 +308,7 @@ export class HomePage {
       {
         '@context': 'https://schema.org',
         '@type': 'NGO',
-        name: $localize`:@@store.layout.association:جمعية التعلم الإلكتروني`,
+        name: $localize`:@@store.layout.association:جمعية الدعوة والتعليم باللغات الأفريقية`,
         url: environment.mainSiteUrl,
         sameAs: [environment.mainSiteUrl],
       },
@@ -333,7 +333,7 @@ export class HomePage {
         : cat
           ? $localize`:@@store.listing.seo-category:مشاريع ${this.categoryName(cat)}:category:`
           : undefined,
-      description: $localize`:@@store.home.seo-description:تبرّع لمشاريع جمعية التعلم الإلكتروني أو لتصنيف عام: كفالات، سقيا، طباعة ونشر العلم. تبرّع سريع وآمن بالريال السعودي.`,
+      description: $localize`:@@store.home.seo-description:تبرّع لمشاريع جمعية الدعوة والتعليم باللغات الأفريقية أو لتصنيف عام: كفالة الدعاة، الترجمة والطباعة، التعليم بلغات أفريقيا وسقيا الماء. تبرّع سريع وآمن بالريال السعودي.`,
       path: rules.path,
       noindex: rules.noindex,
       follow: rules.follow,

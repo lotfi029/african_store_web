@@ -1,6 +1,6 @@
 # Store web image — ONE image per environment (owner brief P2): CONFIG=staging | production (| ci for the CI check).
 # A production image is never re-tagged from a staging one: each runs its own build (environment, CSP, robots, sitemap).
-#   docker build --build-arg CONFIG=staging --build-arg PRERENDER_API_URL=https://store-api-staging.ta3lom.sa/v1 \
+#   docker build --build-arg CONFIG=staging --build-arg PRERENDER_API_URL=https://store-api-staging.darafrica.org/v1 \
 #                --build-arg VERSION=$(git describe --tags --always) --build-arg GIT_SHA=$(git rev-parse HEAD) -t web .
 # No secret is needed or accepted: the app is public static files.
 
@@ -33,13 +33,13 @@ FROM ${CADDY_IMAGE} AS runtime
 ARG CONFIG=staging
 ARG VERSION=dev
 ARG GIT_SHA=unknown
-LABEL org.opencontainers.image.title="ta3lom-store-web" \
-      org.opencontainers.image.description="ta3lom store web (static, Caddy) — ${CONFIG}" \
-      org.opencontainers.image.source="https://github.com/lotfi029/ta3lom_store_web" \
+LABEL org.opencontainers.image.title="african-store-web" \
+      org.opencontainers.image.description="Dar Africa store web (static, Caddy) — ${CONFIG}" \
+      org.opencontainers.image.source="https://github.com/lotfi029/african_store_web" \
       org.opencontainers.image.version="${VERSION}" \
       org.opencontainers.image.revision="${GIT_SHA}" \
       org.opencontainers.image.licenses="UNLICENSED" \
-      sa.ta3lom.store-web.config="${CONFIG}"
+      org.darafrica.store-web.config="${CONFIG}"
 # Non-root, read-only root filesystem compatible: Caddy's own state goes to /tmp (a tmpfs in compose).
 # The upstream binary carries the cap_net_bind_service FILE capability, which cannot be exec'd with cap_drop ALL +
 # no-new-privileges; we listen on 8080, so a plain copy (no xattrs) replaces it.

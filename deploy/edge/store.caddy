@@ -1,5 +1,5 @@
-# Store sites on the shared edge Caddy (plan §7 F8). ta3lom-deploy was not reachable from the final session, so this block
-# lives here and the owner copies it to ta3lom-deploy `edge/conf/store.caddy`, imported by `Caddyfile`,
+# Store sites on the shared edge Caddy (inherited from ta3lom_store_web F8). The VPS edge config lives in the owner's edge
+# deploy repo, so this block lives here and the owner copies it to that repo's `edge/conf/store.caddy`, imported by `Caddyfile`,
 # `Caddyfile.cutover` and `Caddyfile.staging` (deploy/edge/README.md). Validated by scripts/validate-caddy.sh.
 # Upstreams are Docker aliases on the external `edge` network (no published ports):
 #   store-web / store-web-staging  — this repo's container (deploy/docker-compose.store-web.yml), :8080
@@ -38,24 +38,24 @@
 	}
 }
 
-store.ta3lom.sa {
+store.darafrica.org {
 	import store_hsts
 	encode zstd gzip
 	reverse_proxy store-web:8080
 }
 
-store-api.ta3lom.sa {
+store-api.darafrica.org {
 	import store_hsts
 	import store_api store-api
 }
 
-store-staging.ta3lom.sa {
+store-staging.darafrica.org {
 	import store_noindex
 	encode zstd gzip
 	reverse_proxy store-web-staging:8080
 }
 
-store-api-staging.ta3lom.sa {
+store-api-staging.darafrica.org {
 	import store_noindex
 	import store_api store-api-staging
 }

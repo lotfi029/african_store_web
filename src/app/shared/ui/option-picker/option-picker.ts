@@ -80,11 +80,13 @@ export const OPEN_AMOUNT = 'open';
     .chip:hover {
       border-color: var(--c-text);
     }
+    /* Selected (W-00 prototype): 2 px brand ring on the tint; the radio's checked state carries it for AT. */
     .chip.on {
-      border-color: var(--c-accent-strong);
+      border-color: var(--c-brand);
+      box-shadow: inset 0 0 0 1px var(--c-brand);
       background: var(--c-tint);
       color: var(--c-accent-strong);
-      font-weight: 600;
+      font-weight: 700;
     }
     .chip:focus-within {
       outline: 2px solid var(--c-focus);

@@ -1041,7 +1041,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">251</context>
+          <context context-type="linenumber">252</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.cart.total" datatype="html">
@@ -1253,7 +1253,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">121,122</context>
+          <context context-type="linenumber">129,130</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.account.details" datatype="html">
@@ -2576,7 +2576,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">100,102</context>
+          <context context-type="linenumber">108,110</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/project/project.page.html</context>
@@ -2625,7 +2625,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">73,75</context>
+          <context context-type="linenumber">81,83</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/order/order.page.html</context>
@@ -6063,60 +6063,60 @@
         <source>المبلغ</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">236</context>
+          <context context-type="linenumber">237</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/quick-donate/quick-donate-form.ts</context>
-          <context context-type="linenumber">156</context>
+          <context context-type="linenumber">161</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.donate.options-legend" datatype="html">
         <source>خيارات التبرع لمشروع <x id="title" equiv-text="this.title()"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">249</context>
+          <context context-type="linenumber">250</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.donate.add-for" datatype="html">
         <source>اضافة تبرع لمشروع <x id="title" equiv-text="this.title()"/> إلى السلة</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">253</context>
+          <context context-type="linenumber">254</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.donate.donate-for" datatype="html">
         <source>تبرع الآن لمشروع <x id="title" equiv-text="this.title()"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">256</context>
+          <context context-type="linenumber">257</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.donate.choose" datatype="html">
         <source>اختر أحد خيارات التبرع أولًا.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">282</context>
+          <context context-type="linenumber">283</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.donate.amount-invalid" datatype="html">
         <source>أدخل مبلغًا صحيحًا للتبرع.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">283</context>
+          <context context-type="linenumber">284</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.donate.added" datatype="html">
         <source>أضيف تبرعك إلى السلة.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">303</context>
+          <context context-type="linenumber">304</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.donate.view-cart" datatype="html">
         <source>عرض السلة</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">304</context>
+          <context context-type="linenumber">305</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.listing.categories-label" datatype="html">
@@ -6132,54 +6132,72 @@
           <context context-type="sourcefile">src/app/features/store/home/category-tabs.ts</context>
           <context context-type="linenumber">26,28</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
+          <context context-type="linenumber">46,48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="store.home.banner-urgent" datatype="html">
+        <source>حملة عاجلة</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/store/home/home-banner.ts</context>
+          <context context-type="linenumber">48,49</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="store.home.banner-cta-showcase" datatype="html">
         <source>تعرّف على المشروع</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home-banner.ts</context>
-          <context context-type="linenumber">51,53</context>
+          <context context-type="linenumber">59,61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.banner-cta" datatype="html">
         <source>تبرع الآن</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home-banner.ts</context>
-          <context context-type="linenumber">53,54</context>
+          <context context-type="linenumber">61,62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="store.home.banner-details" datatype="html">
+        <source>التفاصيل</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/store/home/home-banner.ts</context>
+          <context context-type="linenumber">66,67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.banner-prev" datatype="html">
         <source>الحملة السابقة</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home-banner.ts</context>
-          <context context-type="linenumber">62,63</context>
+          <context context-type="linenumber">76,77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.banner-next" datatype="html">
         <source>الحملة التالية</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home-banner.ts</context>
-          <context context-type="linenumber">84,85</context>
+          <context context-type="linenumber">98,99</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.banner-label" datatype="html">
         <source>حملات التبرع</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home-banner.ts</context>
-          <context context-type="linenumber">276</context>
+          <context context-type="linenumber">291</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.banner-announce" datatype="html">
         <source>الحملة <x id="n" equiv-text="next + 1"/> من <x id="total" equiv-text="n"/>: <x id="title" equiv-text="this.title(s)"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home-banner.ts</context>
-          <context context-type="linenumber">285</context>
+          <context context-type="linenumber">300</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.banner-dot" datatype="html">
         <source>الحملة <x id="n" equiv-text="n"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home-banner.ts</context>
-          <context context-type="linenumber">308</context>
+          <context context-type="linenumber">319</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.h1-hidden" datatype="html">
@@ -6189,11 +6207,18 @@
           <context context-type="linenumber">5,8</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="store.home.quick-title" datatype="html">
-        <source>تبرع سريع للصندوق العام</source>
+      <trans-unit id="store.home.quick-title-da" datatype="html">
+        <source>تبرع سريع</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">15,16</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="store.home.quick-sub" datatype="html">
+        <source>يُصرف حيث الحاجة أشد</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
+          <context context-type="linenumber">19,21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.listing.results-for" datatype="html">
@@ -6201,50 +6226,50 @@
               &gt;"/>» </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">45,47</context>
+          <context context-type="linenumber">53,55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.clear-search" datatype="html">
         <source>مسح البحث</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">54,57</context>
+          <context context-type="linenumber">62,65</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">186,188</context>
+          <context context-type="linenumber">194,196</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.sort-label" datatype="html">
         <source>ترتيب</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">60,61</context>
+          <context context-type="linenumber">68,69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.stale" datatype="html">
         <source>تعذّر تحديث البيانات — قد لا تكون المعروضة هي الأحدث.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">71,72</context>
+          <context context-type="linenumber">79,80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.category-unavailable" datatype="html">
         <source>هذا التصنيف غير متاح</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">80,83</context>
+          <context context-type="linenumber">88,91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.listing.show-all" datatype="html">
         <source>عرض كل المشاريع</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">87,90</context>
+          <context context-type="linenumber">95,98</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">196,198</context>
+          <context context-type="linenumber">204,206</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/project/project.page.html</context>
@@ -6255,25 +6280,25 @@
         <source>السابق</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">131,133</context>
+          <context context-type="linenumber">139,141</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.page-next" datatype="html">
         <source>التالي</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">165,167</context>
+          <context context-type="linenumber">173,175</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.listing.empty-title" datatype="html">
         <source>لا توجد مشاريع مطابقة</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">173,175</context>
+          <context context-type="linenumber">181,183</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">199,200</context>
+          <context context-type="linenumber">207,208</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.no-results" datatype="html">
@@ -6281,98 +6306,98 @@
                   &gt;"/>».</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">176,178</context>
+          <context context-type="linenumber">184,186</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.category-empty" datatype="html">
         <source>لا توجد مشاريع في هذا التصنيف حاليًا</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">189,191</context>
+          <context context-type="linenumber">197,199</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.listing.empty-none" datatype="html">
         <source>لا توجد مشاريع منشورة الآن. عُد قريبًا.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.html</context>
-          <context context-type="linenumber">200,203</context>
+          <context context-type="linenumber">208,211</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.count-zero" datatype="html">
         <source>لا توجد مشاريع</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.count-one" datatype="html">
         <source>مشروع واحد</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.count-two" datatype="html">
         <source>مشروعان</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.count-few" datatype="html">
         <source><x id="n" equiv-text="n"/> مشاريع</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.count-many" datatype="html">
         <source><x id="n" equiv-text="n"/> مشروعًا</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.count-other" datatype="html">
         <source><x id="n" equiv-text="n"/> مشروع</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.listing.sort-newest" datatype="html">
         <source>الأحدث</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">250</context>
+          <context context-type="linenumber">252</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.sort-title" datatype="html">
         <source>الاسم</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">252</context>
+          <context context-type="linenumber">254</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.sort-featured" datatype="html">
         <source>المميزة</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">254</context>
+          <context context-type="linenumber">256</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.page-label" datatype="html">
         <source>الصفحة <x id="n" equiv-text="n"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">259</context>
+          <context context-type="linenumber">261</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.layout.association" datatype="html">
         <source>جمعية الدعوة والتعليم باللغات الأفريقية</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">311</context>
+          <context context-type="linenumber">313</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/project/project.page.ts</context>
@@ -6391,28 +6416,28 @@
         <source>نتائج البحث عن «<x id="q" equiv-text="qText"/>»</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">332</context>
+          <context context-type="linenumber">334</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.listing.seo-category" datatype="html">
         <source>مشاريع <x id="category" equiv-text="this.categoryName(cat)"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">334</context>
+          <context context-type="linenumber">336</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.seo-description" datatype="html">
         <source>تبرّع لمشاريع جمعية الدعوة والتعليم باللغات الأفريقية أو لتصنيف عام: كفالة الدعاة، الترجمة والطباعة، التعليم بلغات أفريقيا وسقيا الماء. تبرّع سريع وآمن بالريال السعودي.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/home.page.ts</context>
-          <context context-type="linenumber">336</context>
+          <context context-type="linenumber">338</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.card.badge-urgent" datatype="html">
         <source>عاجل</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/project-card.ts</context>
-          <context context-type="linenumber">30,31</context>
+          <context context-type="linenumber">31,32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/project/project.page.html</context>
@@ -6423,7 +6448,7 @@
         <source>جديد</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/project-card.ts</context>
-          <context context-type="linenumber">32,34</context>
+          <context context-type="linenumber">33,36</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/project/project.page.html</context>
@@ -6434,63 +6459,77 @@
         <source>جمعية مرخّصة</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/trust-row.ts</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">29</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="store.home.trust-licensed-text" datatype="html">
-        <source>ترخيص رقم [رقم الترخيص]</source>
+      <trans-unit id="store.home.trust-licensed-text-da" datatype="html">
+        <source>تحت إشراف الجهات الرسمية المختصة</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/trust-row.ts</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.trust-receipt" datatype="html">
         <source>إيصال فوري</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/trust-row.ts</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.trust-receipt-text" datatype="html">
         <source>برسالة نصية بعد الدفع</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/trust-row.ts</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="store.home.trust-payment" datatype="html">
+        <source>دفع آمن</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/store/home/trust-row.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="store.home.trust-payment-text" datatype="html">
+        <source>مدى · Apple Pay · فيزا · ماستركارد</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/store/home/trust-row.ts</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.trust-zakat" datatype="html">
         <source>زكاة مستقلة</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/trust-row.ts</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.trust-zakat-text" datatype="html">
         <source>سجل خاص لأموال الزكاة</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/trust-row.ts</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.trust-updates" datatype="html">
         <source>تحديثات التنفيذ</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/trust-row.ts</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.trust-updates-text" datatype="html">
         <source>تابع أثر تبرعك</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/trust-row.ts</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.home.trust-label" datatype="html">
         <source>لماذا تتبرع معنا</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/home/trust-row.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">76</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.login.title" datatype="html">
@@ -6868,35 +6907,35 @@
         <source>التصنيف</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/quick-donate/quick-donate-form.ts</context>
-          <context context-type="linenumber">38,40</context>
+          <context context-type="linenumber">39,41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.quick.choose" datatype="html">
         <source>اختر</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/quick-donate/quick-donate-form.ts</context>
-          <context context-type="linenumber">45,47</context>
+          <context context-type="linenumber">46,48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.quick.submit" datatype="html">
         <source>تبرع الآن</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/quick-donate/quick-donate-form.ts</context>
-          <context context-type="linenumber">76,78</context>
+          <context context-type="linenumber">78,79</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.quick.other-amount" datatype="html">
         <source>مبلغ آخر</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/quick-donate/quick-donate-form.ts</context>
-          <context context-type="linenumber">157</context>
+          <context context-type="linenumber">162</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.quick.category-required" datatype="html">
         <source>اختر التصنيف.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/quick-donate/quick-donate-form.ts</context>
-          <context context-type="linenumber">174</context>
+          <context context-type="linenumber">179</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.quick.lede" datatype="html">
@@ -7246,7 +7285,7 @@
         <source>مبالغ مقترحة</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/ui/amount-input/amount-input.ts</context>
-          <context context-type="linenumber">162</context>
+          <context context-type="linenumber">177</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.ui.was-price" datatype="html">

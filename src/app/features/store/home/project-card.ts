@@ -10,7 +10,8 @@ import { ShareSheet } from '../share/share-sheet';
 
 /**
  * The compact project card (Option C §4, D-W5): image 3:2 (lazy, alt from the API) with the badge at the top start
- * corner and an icon share button (spec C-1, REVIEW) at the top end; the category name; the title linking to
+ * corner («عاجل» sand, «جديد» white); then (W-00 prototype) the category pill on the sand tint with the icon share
+ * button (spec C-1, REVIEW) at the end of the same row; the title linking to
  * `/p/{slug}`; a 2-line summary; then the donate box (option chips + "تبرع مفتوح" → qty stepper or amount, تبرع /
  * اضافة). No progress bar. Options come with the card (`ProjectCard.options`, API-9) — no request per card.
  */
@@ -27,16 +28,18 @@ import { ShareSheet } from '../share/share-sheet';
           <div class="cover ph" aria-hidden="true"></div>
         }
         @if (project().badge === 'urgent') {
-          <span class="badge" i18n="@@store.card.badge-urgent">عاجل</span>
+          <span class="badge urgent" i18n="@@store.card.badge-urgent">عاجل</span>
         } @else if (project().badge === 'new') {
-          <span class="badge" i18n="@@store.card.badge-new">جديد</span>
+          <span class="badge new" i18n="@@store.card.badge-new">جديد</span>
         }
-        <div class="share"><ta-share-sheet [url]="url()" [title]="title()" [compact]="true" /></div>
       </div>
       <div class="body">
-        @if (categoryName()) {
-          <span class="cat">{{ categoryName() }}</span>
-        }
+        <div class="row1">
+          @if (categoryName()) {
+            <span class="cat">{{ categoryName() }}</span>
+          }
+          <div class="share"><ta-share-sheet [url]="url()" [title]="title()" [compact]="true" /></div>
+        </div>
         @if (headingLevel() === 2) {
           <h2 class="t" [id]="'pc-' + project().id">
             <a [routerLink]="['/p', project().slug]">{{ title() }}</a>
@@ -66,6 +69,22 @@ import { ShareSheet } from '../share/share-sheet';
       display: flex;
       flex-direction: column;
       block-size: 100%;
+      transition:
+        box-shadow var(--dur-1) var(--ease),
+        transform var(--dur-1) var(--ease);
+    }
+    /* Hover lift (prototype .card:hover); none under reduced motion. */
+    .pcard:hover {
+      box-shadow: var(--shadow-card);
+      transform: translateY(-2px);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .pcard {
+        transition: none;
+      }
+      .pcard:hover {
+        transform: none;
+      }
     }
     .media {
       position: relative;
@@ -84,30 +103,47 @@ import { ShareSheet } from '../share/share-sheet';
       padding-block: var(--space-1);
       padding-inline: var(--space-3);
       border-radius: var(--rp);
-      background: var(--c-gold);
-      color: var(--c-on-gold);
       font-size: 0.75rem;
       font-weight: 700;
     }
+    /* «عاجل» = sand fill, «جديد» = white */
+    .badge.urgent {
+      background: var(--c-gold);
+      color: var(--c-on-gold);
+    }
+    .badge.new {
+      background: var(--c-surface);
+      color: var(--c-text);
+    }
+    .row1 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+      min-block-size: 44px;
+    }
     .share {
-      position: absolute;
-      inset-block-start: var(--space-2);
-      inset-inline-end: var(--space-2);
+      margin-inline-start: auto;
     }
     .body {
       flex: 1;
       display: flex;
       flex-direction: column;
       gap: var(--space-2);
-      padding: var(--space-4);
+      padding: var(--space-4) var(--space-5) var(--space-5);
     }
+    /* Category pill on the sand tint (--c-gold-text 4.77:1) */
     .cat {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--c-link);
+      padding-block: 2px;
+      padding-inline: var(--space-3);
+      border-radius: var(--rp);
+      background: var(--c-gold-tint);
+      color: var(--c-gold-text);
+      font-size: 0.78rem;
+      font-weight: 700;
     }
     .t {
-      font-size: 1rem;
+      font-size: 1.05rem;
       line-height: 1.5;
       font-weight: 700;
       margin: 0;

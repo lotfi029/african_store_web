@@ -16,6 +16,7 @@ import { CartStore } from '../../../core/cart/cart-store';
 import { CartSummary } from '../../../core/cart/cart-summary';
 import { I18nService } from '../../../core/i18n/i18n';
 import { AmountInput } from '../../../shared/ui/amount-input/amount-input';
+import { Money } from '../../../shared/ui/money/money';
 import { Icon } from '../../../shared/ui/icon/icon';
 import type { CheckoutNavState } from '../donate/donate-box';
 
@@ -29,7 +30,7 @@ import type { CheckoutNavState } from '../donate/donate-box';
  */
 @Component({
   selector: 'ta-quick-donate-form',
-  imports: [AmountInput, Icon],
+  imports: [AmountInput, Icon, Money],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <form class="qdf" [class.inline]="variant() === 'inline'" (submit)="submit($event)" novalidate>
@@ -54,6 +55,7 @@ import type { CheckoutNavState } from '../donate/donate-box';
         </div>
       }
       <ta-amount-input
+        [class.grid]="variant() === 'inline'"
         [inputId]="idPrefix() + '-amount'"
         [label]="amountLabel"
         [placeholder]="otherAmount"
@@ -74,6 +76,9 @@ import type { CheckoutNavState } from '../donate/donate-box';
         [attr.aria-busy]="busy()"
       >
         <ta-icon name="heart" [size]="18" /><span i18n="@@store.quick.submit">تبرع الآن</span>
+        @if (amount(); as a) {
+          <span class="amt"><span aria-hidden="true">·</span> <ta-money [value]="a" /></span>
+        }
       </button>
     </form>
   `,
@@ -97,9 +102,9 @@ import type { CheckoutNavState } from '../donate/donate-box';
     }
     select {
       inline-size: 100%;
-      min-block-size: 44px;
+      min-block-size: 46px;
       border-radius: var(--r);
-      border: 1px solid var(--c-border-2);
+      border: 1px solid var(--c-border);
       background: var(--c-surface);
       color: var(--c-text);
       font: inherit;
@@ -122,8 +127,8 @@ import type { CheckoutNavState } from '../donate/donate-box';
       gap: var(--space-2);
       min-block-size: 50px;
       border: 0;
-      border-radius: var(--rp);
-      background: var(--c-brand-strong);
+      border-radius: var(--rb);
+      background: var(--c-brand);
       color: var(--c-on-brand);
       font: inherit;
       font-weight: 700;

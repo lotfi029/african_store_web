@@ -12,7 +12,6 @@ import type { Category, ProjectCard } from '../../../core/api/api.types';
 import { I18nService } from '../../../core/i18n/i18n';
 import { SHOWCASE } from '../../../core/showcase/showcase';
 import { Icon } from '../../../shared/ui/icon/icon';
-import { Image } from '../../../shared/ui/image/image';
 
 /**
  * The cards the banner shows (Option C §2, §3 row 4): every `urgent` featured card, else the first featured card,
@@ -25,21 +24,30 @@ export function bannerSlides(featured: readonly ProjectCard[]): ProjectCard[] {
 }
 
 /**
- * Campaign banner (Option C §3 row 4, `--c-surface-indigo` with the brand glow): category label, the title — the
- * page's single `<h1>` —, summary and the "تبرع الآن" CTA → `/p/{slug}`. Several urgent cards: labelled previous/next
- * buttons and dots, NO auto-rotate; the change is announced in a polite live region. The cover is the LCP candidate
- * on wide screens (`priority` → eager, `fetchpriority=high`).
+ * Campaign banner (Dar Africa prototype, W-00): ink panel with decorative ring art, a sand pill («حملة عاجلة» for an
+ * urgent card, else the category), the title — the page's single `<h1>` —, summary, the sand «تبرع الآن» CTA and the
+ * «التفاصيل» ghost link → `/p/{slug}`. Several urgent cards: labelled previous/next buttons and dots (`aria-pressed`),
+ * NO auto-rotate; the change is announced in a polite live region. No cover image and no progress bar (A-10).
  */
 @Component({
   selector: 'ta-home-banner',
-  imports: [RouterLink, Icon, Image],
+  imports: [RouterLink, Icon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @if (slide(); as s) {
       <section class="banner" [attr.aria-label]="regionLabel">
+        <!-- Decorative ring art (Dar Africa prototype), never announced. -->
+        <svg class="rings" viewBox="0 0 420 420" aria-hidden="true" focusable="false">
+          <circle cx="210" cy="210" r="205" />
+          <circle cx="210" cy="210" r="150" />
+          <circle cx="210" cy="210" r="95" />
+          <path d="M5 210h410M210 5v410" />
+        </svg>
         <div class="txt">
-          @if (categoryName(s); as cat) {
-            <span class="kicker">{{ cat }}</span>
+          @if (s.badge === 'urgent') {
+            <span class="pill" i18n="@@store.home.banner-urgent">حملة عاجلة</span>
+          } @else if (categoryName(s); as cat) {
+            <span class="pill">{{ cat }}</span>
           }
           <h1 class="t">{{ title(s) }}</h1>
           @if (summary(s); as sum) {
@@ -47,12 +55,18 @@ export function bannerSlides(featured: readonly ProjectCard[]): ProjectCard[] {
           }
           <div class="row">
             <a class="cta" [routerLink]="['/p', s.slug]"
-              >@if (showcase) {
+              ><ta-icon name="heart" [size]="18" />@if (showcase) {
                 <span i18n="@@store.home.banner-cta-showcase">تعرّف على المشروع</span>
               } @else {
                 <span i18n="@@store.home.banner-cta">تبرع الآن</span>
               }<span class="visually-hidden">: {{ title(s) }}</span></a
             >
+            @if (!showcase) {
+              <a class="ghost" [routerLink]="['/p', s.slug]"
+                ><span i18n="@@store.home.banner-details">التفاصيل</span
+                ><span class="visually-hidden">: {{ title(s) }}</span></a
+              >
+            }
             @if (slides().length > 1) {
               <div class="ctrl">
                 <button
@@ -69,7 +83,7 @@ export function bannerSlides(featured: readonly ProjectCard[]): ProjectCard[] {
                     <button
                       type="button"
                       class="dot"
-                      [attr.aria-current]="i === index() ? 'true' : null"
+                      [attr.aria-pressed]="i === index() ? 'true' : 'false'"
                       [attr.aria-label]="dotLabel(i)"
                       (click)="go(i)"
                     >
@@ -91,11 +105,6 @@ export function bannerSlides(featured: readonly ProjectCard[]): ProjectCard[] {
           </div>
           <p class="visually-hidden" aria-live="polite">{{ announce() }}</p>
         </div>
-        @if (s.coverUrl; as src) {
-          <div class="media">
-            <ta-image [src]="src" [alt]="alt(s)" [width]="600" [height]="400" [priority]="true" />
-          </div>
-        }
       </section>
     }
   `,
@@ -107,36 +116,36 @@ export function bannerSlides(featured: readonly ProjectCard[]): ProjectCard[] {
     .banner {
       position: relative;
       overflow: hidden;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: var(--space-5);
-      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
       block-size: 100%;
-      min-block-size: 260px;
-      padding: var(--space-7);
+      min-block-size: 360px;
+      padding: var(--space-8);
       border-radius: var(--r-lg);
-      background: var(--c-surface-indigo);
+      background: var(--c-surface-dark);
       color: var(--c-on-brand);
     }
-    /* The brand glow sits on the media (end) side, never under the text (contrast in both directions). */
-    .banner::before {
-      content: '';
+    .rings {
       position: absolute;
-      inset-block-start: -40%;
-      inset-inline-end: -15%;
-      inline-size: 65%;
-      block-size: 130%;
-      background: radial-gradient(closest-side, var(--c-hero-glow-brand), transparent);
+      inset-block-start: -70px;
+      inset-inline-end: -70px;
+      inline-size: 420px;
+      block-size: 420px;
+      fill: none;
+      stroke: var(--c-highlight);
+      stroke-width: 1.5;
+      opacity: 0.28;
       pointer-events: none;
-    }
-    @media (width >= 900px) {
-      .banner {
-        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-      }
     }
     @media (width < 600px) {
       .banner {
         padding: var(--space-5);
+        min-block-size: 300px;
+      }
+      .rings {
+        inline-size: 300px;
+        block-size: 300px;
       }
     }
     .txt {
@@ -146,46 +155,64 @@ export function bannerSlides(featured: readonly ProjectCard[]): ProjectCard[] {
       gap: var(--space-3);
       min-inline-size: 0;
     }
-    .kicker {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--c-gold-on-dark);
+    .pill {
+      align-self: flex-start;
+      padding: 3px 14px;
+      border-radius: var(--rp);
+      background: var(--c-gold);
+      color: var(--c-on-gold);
+      font-size: 0.82rem;
+      font-weight: 700;
     }
     .t {
       margin: 0;
-      font-size: clamp(1.6rem, 3.6vw, 2.4rem);
-      line-height: 1.3;
+      font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+      line-height: 1.35;
       font-weight: 700;
       color: var(--c-on-brand);
+      max-inline-size: 30ch;
     }
     .sum {
       margin: 0;
-      color: var(--c-on-dark-78);
-      font-size: 1rem;
-      max-inline-size: 52ch;
+      color: var(--c-on-dark);
+      font-size: 1.05rem;
+      max-inline-size: 56ch;
     }
     .row {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: var(--space-3) var(--space-4);
-      margin-block-start: var(--space-2);
+      gap: var(--space-3);
+      margin-block-start: var(--space-3);
     }
-    .cta {
+    .cta,
+    .ghost {
       display: inline-flex;
       align-items: center;
-      min-block-size: 50px;
+      gap: var(--space-2);
+      min-block-size: 48px;
       padding-inline: var(--space-6);
-      border-radius: var(--rp);
-      background: var(--c-gold);
-      color: var(--c-on-gold);
+      border-radius: var(--rb);
       font-weight: 700;
       text-decoration: none;
+    }
+    .cta {
+      background: var(--c-gold);
+      color: var(--c-on-gold);
     }
     .cta:hover {
       box-shadow: var(--shadow-gold);
     }
+    .ghost {
+      border: 1px solid var(--c-border-on-dark-strong);
+      color: var(--c-on-brand);
+      font-weight: 500;
+    }
+    .ghost:hover {
+      background: var(--c-on-dark-hover);
+    }
     .cta:focus-visible,
+    .ghost:focus-visible,
     .nav:focus-visible,
     .dot:focus-visible {
       outline: 2px solid var(--c-on-brand);
@@ -195,6 +222,7 @@ export function bannerSlides(featured: readonly ProjectCard[]): ProjectCard[] {
       display: flex;
       align-items: center;
       gap: var(--space-1);
+      margin-inline-start: auto;
     }
     .nav {
       display: grid;
@@ -226,30 +254,17 @@ export function bannerSlides(featured: readonly ProjectCard[]): ProjectCard[] {
       background: none;
       cursor: pointer;
     }
+    /* Decoration only: aria-pressed carries the state; the wide sand pip mirrors it. */
     .pip {
-      inline-size: 8px;
-      block-size: 8px;
+      inline-size: 10px;
+      block-size: 10px;
       border-radius: var(--rp);
-      background: var(--c-on-dark-65);
+      background: var(--c-on-dark-dot);
       transition: inline-size var(--dur-1);
     }
-    .dot[aria-current='true'] .pip {
-      inline-size: 22px;
-      background: var(--c-on-brand);
-    }
-    .media {
-      display: none;
-      position: relative;
-      z-index: 1;
-      aspect-ratio: 3 / 2;
-      border-radius: var(--rc);
-      overflow: hidden;
-      background: var(--c-dark-surface-edge);
-    }
-    @media (width >= 900px) {
-      .media {
-        display: block;
-      }
+    .dot[aria-pressed='true'] .pip {
+      inline-size: 28px;
+      background: var(--c-highlight);
     }
     @media (prefers-reduced-motion: reduce) {
       .pip {
@@ -292,10 +307,6 @@ export class HomeBanner {
 
   protected summary(c: ProjectCard): string {
     return this.i18n.pick(c.summaryAr ?? '', c.summaryEn);
-  }
-
-  protected alt(c: ProjectCard): string {
-    return this.i18n.pick(c.coverAltAr ?? '', c.coverAltEn) || this.title(c);
   }
 
   protected categoryName(c: ProjectCard): string {

@@ -96,9 +96,23 @@ export function amountMessage(check: AmountCheck, locale: 'ar' | 'en'): string |
       cursor: pointer;
     }
     .preset[aria-pressed='true'] {
-      border-color: var(--c-accent-strong);
+      border-color: var(--c-brand);
+      box-shadow: inset 0 0 0 1px var(--c-brand);
       background: var(--c-tint);
       color: var(--c-accent-strong);
+    }
+    /* \`<ta-amount-input class="grid">\` (home quick donate, W-00 prototype): presets 2 × 2, square-ish buttons. */
+    :host(.grid) .presets {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-block-end: 12px;
+    }
+    :host(.grid) .preset {
+      min-block-size: 48px;
+      border-radius: var(--r);
+      font-weight: 700;
+      white-space: nowrap;
     }
     .lbl {
       display: block;
@@ -109,8 +123,9 @@ export function amountMessage(check: AmountCheck, locale: 'ar' | 'en'): string |
     .field {
       display: flex;
       align-items: center;
-      border: 1px solid var(--c-border-2);
-      border-radius: 12px;
+      gap: 8px;
+      border: 1px solid var(--c-border);
+      border-radius: var(--r);
       background: var(--c-surface);
       padding-inline: 12px;
     }
@@ -123,7 +138,7 @@ export function amountMessage(check: AmountCheck, locale: 'ar' | 'en'): string |
     input {
       flex: 1;
       min-inline-size: 0;
-      block-size: 44px;
+      block-size: 46px;
       border: 0;
       background: none;
       font: inherit;

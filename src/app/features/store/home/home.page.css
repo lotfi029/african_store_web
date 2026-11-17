@@ -63,10 +63,33 @@
   flex: 1;
 }
 
+.qc-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.qc-ic {
+  display: grid;
+  place-items: center;
+  inline-size: 44px;
+  block-size: 44px;
+  flex: none;
+  border-radius: var(--r);
+  background: var(--c-gold-tint);
+  color: var(--c-gold-text);
+}
+
 .qc-h {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 700;
+}
+
+.qc-sub {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--c-muted);
 }
 
 /* Row 5 — filter bar */
@@ -77,15 +100,10 @@
 .fbar {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: space-between;
+  align-items: flex-end;
   gap: var(--space-3);
-  padding-block: var(--space-3);
-  padding-inline: var(--space-4);
-  margin-block-end: var(--space-5);
-  border-radius: var(--rc);
-  background: var(--c-surface);
-  border: 1px solid var(--c-border);
+  margin-block: var(--space-8) var(--space-5);
   scroll-margin-block-start: 96px;
 }
 
@@ -99,8 +117,17 @@
 
 .count {
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.6rem;
   font-weight: 700;
+  line-height: 1.35;
+}
+
+/* «{n} مشروعًا» under the heading (prototype .lhead p) */
+.count .n {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--c-muted);
 }
 
 .count:focus {
@@ -113,8 +140,7 @@
 }
 
 .cname {
-  color: var(--c-link);
-  margin-inline-end: var(--space-2);
+  color: var(--c-text);
 }
 
 .for {

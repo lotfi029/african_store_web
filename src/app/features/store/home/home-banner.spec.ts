@@ -65,7 +65,7 @@ describe('home banner (Option C §2, §3 row 4)', () => {
     const h1 = () => el.querySelector('h1')?.textContent?.trim();
     expect(el.querySelectorAll('.dot')).toHaveLength(3);
     expect(el.querySelector('.prev')?.getAttribute('aria-label')).toBeTruthy();
-    expect(el.querySelector('.dot[aria-current=true]')?.getAttribute('aria-label')).toContain('1');
+    expect(el.querySelector('.dot[aria-pressed=true]')?.getAttribute('aria-label')).toContain('1');
     await new Promise((r) => setTimeout(r, 50));
     f.detectChanges();
     expect(h1()).toBe('مشروع a'); // never moves on its own
@@ -82,14 +82,14 @@ describe('home banner (Option C §2, §3 row 4)', () => {
     expect(h1()).toBe('مشروع a');
   });
 
-  it('L-11: when the featured list shrinks, the index resets and aria-current points at a real slide', () => {
+  it('L-11: when the featured list shrinks, the index resets and aria-pressed points at a real slide', () => {
     const f = mount([card('a', 'urgent'), card('b', 'urgent'), card('c', 'urgent')]);
     const el = f.nativeElement as HTMLElement;
     (el.querySelector('.prev') as HTMLButtonElement).click(); // → c (index 2)
     f.detectChanges();
     f.componentRef.setInput('featured', [card('a', 'urgent'), card('b', 'urgent')]);
     f.detectChanges();
-    const current = el.querySelectorAll('.dot[aria-current=true]');
+    const current = el.querySelectorAll('.dot[aria-pressed=true]');
     expect(current).toHaveLength(1);
     expect(el.querySelector('h1')?.textContent?.trim()).toBe('مشروع a');
   });

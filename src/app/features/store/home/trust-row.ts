@@ -10,7 +10,7 @@ export interface TrustFlags {
 }
 
 interface TrustItem {
-  key: 'licensed' | 'receipt' | 'zakat' | 'updates';
+  key: 'licensed' | 'receipt' | 'payment' | 'zakat' | 'updates';
   icon: IconName;
   title: string;
   text: string;
@@ -18,7 +18,8 @@ interface TrustItem {
 
 /**
  * The items to show (Option C §3 row 8): licensed and receipt always; zakat and updates only behind their flags.
- * Showcase mode: no receipt item ("by SMS after payment" — nothing can be paid yet).
+ * W-00 adds «دفع آمن» (the gateway's methods, information only). Showcase mode: no receipt and no payment item
+ * (nothing can be paid yet).
  */
 export function trustItems(flags: TrustFlags, showcase = false): TrustItem[] {
   const all: TrustItem[] = [
@@ -26,13 +27,20 @@ export function trustItems(flags: TrustFlags, showcase = false): TrustItem[] {
       key: 'licensed',
       icon: 'shield',
       title: $localize`:@@store.home.trust-licensed:جمعية مرخّصة`,
-      text: $localize`:@@store.home.trust-licensed-text:ترخيص رقم [رقم الترخيص]`,
+      // W-00: ta3lom shipped «ترخيص رقم [رقم الترخيص]» here — never a placeholder; the number joins once the API exposes it.
+      text: $localize`:@@store.home.trust-licensed-text-da:تحت إشراف الجهات الرسمية المختصة`,
     },
     {
       key: 'receipt',
       icon: 'receipt',
       title: $localize`:@@store.home.trust-receipt:إيصال فوري`,
       text: $localize`:@@store.home.trust-receipt-text:برسالة نصية بعد الدفع`,
+    },
+    {
+      key: 'payment',
+      icon: 'lock',
+      title: $localize`:@@store.home.trust-payment:دفع آمن`,
+      text: $localize`:@@store.home.trust-payment-text:مدى · Apple Pay · فيزا · ماستركارد`,
     },
     {
       key: 'zakat',
@@ -51,7 +59,8 @@ export function trustItems(flags: TrustFlags, showcase = false): TrustItem[] {
     (i) =>
       (i.key !== 'zakat' || flags.showZakat) &&
       (i.key !== 'updates' || flags.showUpdates) &&
-      (i.key !== 'receipt' || !showcase),
+      (i.key !== 'receipt' || !showcase) &&
+      (i.key !== 'payment' || !showcase),
   );
 }
 
@@ -79,22 +88,27 @@ export function trustItems(flags: TrustFlags, showcase = false): TrustItem[] {
     </section>
   `,
   styles: `
+    /* W-00 prototype: a bordered panel inside the content column, icon tiles on the tint. */
     :host {
       display: block;
-      background: var(--c-surface);
-      border-block-start: 1px solid var(--c-border);
+      max-width: 1240px;
+      margin-inline: auto;
+      padding-inline: var(--space-6);
+      padding-block: var(--space-8) var(--space-9);
     }
     .trust {
-      padding-block: var(--space-7);
+      padding: var(--space-5) var(--space-6);
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--rc);
     }
     .row {
       list-style: none;
-      margin: 0 auto;
-      max-width: 1200px;
-      padding-inline: var(--space-6);
+      margin: 0;
+      padding: 0;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: var(--space-5);
+      gap: var(--space-4);
     }
     li {
       display: flex;
@@ -122,8 +136,11 @@ export function trustItems(flags: TrustFlags, showcase = false): TrustItem[] {
       color: var(--c-muted);
     }
     @media (width < 600px) {
-      .row {
+      :host {
         padding-inline: var(--space-4);
+      }
+      .trust {
+        padding: var(--space-4);
       }
     }
   `,

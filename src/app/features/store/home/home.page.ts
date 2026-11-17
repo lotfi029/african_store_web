@@ -24,6 +24,7 @@ import { I18nService } from '../../../core/i18n/i18n';
 import { QuickDonate } from '../../../core/ui/quick-donate.service';
 import { SHOWCASE } from '../../../core/showcase/showcase';
 import { type JsonLd, SeoService, siteName } from '../../../core/seo/seo.service';
+import { Icon } from '../../../shared/ui/icon/icon';
 import { ResourceState } from '../../../shared/ui/resource-state/resource-state';
 import { ShowcaseNote } from '../../../shared/ui/showcase-note/showcase-note';
 import { QuickDonateForm } from '../quick-donate/quick-donate-form';
@@ -78,6 +79,7 @@ export function projectCount(n: number, locale: 'ar' | 'en'): string {
     QuickDonateForm,
     TrustRow,
     ShowcaseNote,
+    Icon,
   ],
   providers: [HomeData],
   changeDetection: ChangeDetectionStrategy.OnPush,

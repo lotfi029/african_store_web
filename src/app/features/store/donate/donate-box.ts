@@ -185,9 +185,9 @@ export interface CheckoutNavState {
       justify-content: center;
       gap: 6px;
       min-block-size: 44px;
-      border-radius: var(--r);
+      border-radius: var(--rb);
       font: inherit;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       border: 1px solid transparent;
     }
@@ -195,22 +195,23 @@ export interface CheckoutNavState {
       opacity: 0.55;
       cursor: default;
     }
+    /* إضافة — outline in the brand colour with the cart icon (W-00 prototype .btn-line) */
     .add {
       padding-inline: var(--space-4);
       background: var(--c-surface);
-      border-color: var(--c-border-2);
-      color: var(--c-text-2);
+      border-color: var(--c-brand);
+      color: var(--c-link);
+      font-weight: 600;
     }
     .add:hover {
-      border-color: var(--c-text);
-    }
-    .large .add {
-      border-color: var(--c-link);
-      color: var(--c-link);
+      background: var(--c-tint);
     }
     .donate {
-      background: var(--c-brand-strong);
+      background: var(--c-brand);
       color: var(--c-on-brand);
+    }
+    .donate:hover {
+      background: var(--c-brand-strong);
     }
     .large .btn {
       min-block-size: 50px;

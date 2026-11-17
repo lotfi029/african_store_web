@@ -12,7 +12,13 @@
       }
       @if (showQuick()) {
         <aside class="qcard" aria-labelledby="qc-h">
-          <h2 id="qc-h" class="qc-h" i18n="@@store.home.quick-title">تبرع سريع للصندوق العام</h2>
+          <div class="qc-head">
+            <span class="qc-ic" aria-hidden="true"><ta-icon name="gift" [size]="22" /></span>
+            <div>
+              <h2 id="qc-h" class="qc-h" i18n="@@store.home.quick-title-da">تبرع سريع</h2>
+              <p class="qc-sub" i18n="@@store.home.quick-sub">يُصرف حيث الحاجة أشد</p>
+            </div>
+          </div>
           <!-- Hydrated with the page: a click on a preset of a deferred form was not replayed (Angular event replay). -->
           <ta-quick-donate-form [list]="data.giftCategories()" variant="inline" idPrefix="qi" />
         </aside>
@@ -36,8 +42,10 @@
         <h2 id="list-h" class="count" tabindex="-1">
           @if (activeCategory(); as c) {
             <span class="cname">{{ categoryName(c) }}</span>
+          } @else {
+            <span class="cname" i18n="@@store.home.tab-all">كل المشاريع</span>
           }
-          {{ countText() }}
+          <span class="n">{{ countText() }}</span>
         </h2>
         @if (query().q) {
           <p class="for">

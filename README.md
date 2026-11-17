@@ -1,10 +1,11 @@
-# ta3lom_store_web
+# african_store_web
 
-Storefront, customer account and staff admin of the ta3lom store — Angular 22, static output, served at
-https://store.ta3lom.sa. Start with [CLAUDE.md](CLAUDE.md) and [docs/store-web-plan.md](docs/store-web-plan.md).
+Storefront, customer account and staff admin of the **Dar Africa donation store** (جمعية الدعوة والتعليم باللغات
+الأفريقية) — Angular 22, static output, served at https://store.darafrica.org. Start with [CLAUDE.md](CLAUDE.md) and
+[docs/plan/w-00-plan.md](docs/plan/w-00-plan.md).
 
-**Payments are on** (R5-Payments): checkout leaves for Moyasar's hosted page (mada, Visa, Mastercard, Apple Pay,
-STC Pay); the order page never trusts the return URL and polls the API until the order is paid, needs a retry, expired,
-is in payment review or was refunded. Finance refunds and reviews payments in the admin. Runbook:
-[deploy/README.md](deploy/README.md); before the first production release the Apple Pay domain file from the Moyasar
-dashboard replaces the placeholder in `deploy/well-known/`.
+Forked from `lotfi029/ta3lom_store_web` (same architecture, Angular version and rules) and talking to the same
+`ta3lom_store_api` `/v1` endpoints. **Showcase mode is on** in staging and production: projects are browsable and the
+donate boxes are read-only («التبرع الإلكتروني قريبًا») until the association has a Moyasar account. When it does,
+checkout leaves for Moyasar's hosted page and the order page polls the API (owner steps:
+[docs/W-00-report.md](docs/W-00-report.md), runbook [deploy/README.md](deploy/README.md)).

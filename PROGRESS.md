@@ -1,139 +1,25 @@
 # Store web progress
-Next: owner go-live steps (PR descriptions, docs/production-checklist.md); payments are on since the final session
 
-Local run and deploy readiness (2026-10-30): `dev-env.sh` checks Node ≥ 24.15; `api-up.sh` starts PostgreSQL from the API's
-`compose.dev.yaml`; full DoD on the real API green (types, typecheck, lint, unit, build, 65 e2e, a11y 26 × 2). Production
-hosting = Docker on one VPS from the API repo (`Dockerfile`, `deploy/compose.yaml`, Caddy serving this build).
+Session W-00 — Dar Africa store web (`docs/plan/w-00-plan.md`), branch `feat/w-00-african-store`.
+Forked from `lotfi029/ta3lom_store_web` @ `16e0ecf` (ta3lom's progress log: [docs/reference/ta3lom/PROGRESS.md](docs/reference/ta3lom/PROGRESS.md)).
 
-Auth fixes (2026-10-30): sign out everywhere refreshes and retries on 401 (else signs this device out and says so); its
-success toast only on success; a transient refresh failure no longer ends the donor or staff session. Unit 268 green.
+**Recovery rule:** after a context reset read the plan, this file and `git log`, then continue from the first phase
+without a commit. Never redo a committed phase.
 
-## Final session (plan 01: F1 … F10)
-
-| Phase | Repo / branch | Commit | Status |
+| Phase | Commit | Status | Gates |
 |---|---|---|---|
-| F1 | web `claude/store-web-option-c-prod-7eb3at` | HC — review fixes | done (gates: types, typecheck, lint, test 326 + scripts 5, build:ci, home e2e 24, container check) |
-| F2–F4 | api `final/api-payments-hosting` (PR lotfi029/ta3lom_store_api#17) | F2a…F4, F5b (template samples) | done (728 tests, Domain 96.6 %, Application 90.6 %) |
-| F5a | web `final/web-payments-perf` (stacked on the branch above) | F5a — checkout and order page | done (unit 341, smoke 57, a11y) |
-| F5b | web `final/web-payments-perf` | F5b — account and admin payments | done (unit 345 + scripts 5, build:ci, smoke 27 passed on the stub, a11y) |
-| F5c | web `final/web-payments-perf` | F5c — e2e | done (payments 12/12 ar+en on the real API + fake gateway; full e2e 99 passed after a rebuild; smoke on the stub) |
-| F6.1–F6.5 | web `final/web-payments-perf` | F6.1 … F6.5 (+ F5 fix: payment http flag) | done (numbers in DECISIONS) |
-| F6.6, F6 floors | web `final/web-payments-perf` | F6.6 — transfer state measured, LHCI floors raised | done (perf ≥ 0.82, LCP ≤ 2800, TBT ≤ 450; target 90 not reached on the home — REVIEW) |
-| F7 | web `final/web-payments-perf` | F7 — hosting alignment | done |
-| F8 | ta3lom-deploy — **not reachable from the session** (add_repo: no access) → fallback in web branch (b) `deploy/edge/` | F8 — edge block (fallback) | done (caddy validate) |
-| F9 | ta3lom-web `final/store-integration` (PR lotfi029/ta3lom-web#34, draft) | F9 — store integration | done (unit 356, scripts 12, e2e 174 + 11 flag-on skipped, a11y 66 × 2; flag-on run local) |
-| F10a | web `final/web-payments-perf` | F10a — full-stack e2e | done (12/12 over the local edge, API final/api-payments-hosting 8419a46) |
-| F10b | web `final/web-payments-perf` | F10b — contract v2 and checklist | done (docs/r5/15 v2 section; checklist code items ticked) |
+| 0 Import | W-00.0 — import ta3lom store web @ 16e0ecf | done | — (pure copy) |
+| 0 Bootstrap | W-00.1 — bootstrap: docs, logs, CLAUDE.md | done | npm ci (Node 24.22.3, npm 11.19.1); G-fast green: typecheck, lint, unit 413 (70 files) + scripts |
+| 1 Stack + API | W-00.2 | | |
+| 2 Identity | W-00.3 | | |
+| 3 Tokens, fonts, logo | W-00.4 | | |
+| 4 Layout | W-00.5 | | |
+| 5 Home | W-00.6 | | |
+| 6 Project … admin | W-00.7 | | |
+| 7 Seed, stub, screenshots | W-00.8 | | |
+| 8 DoD, container, LHCI | W-00.9 | | |
+| 9 Report | W-00.10 | | |
 
-## Option C home + production readiness (one PR "Store web — Option C home + production readiness")
+## Open REVIEW rows
 
-| Phase | Status | Commit | Tests (unit / smoke e2e / a11y) | Notes |
-|---|---|---|---|---|
-| H1a Seed + stub | done | H1a | 268 / 35 / 26 × 2 | 28 projects, 10 categories (1 empty) via the admin API; stub re-captured |
-| H1b Header + tabs | done | H1b | 273 / 35 / 26 × 2 | utility row, big search, cart total (M-2), quick donate gated (M-4), category tabs |
-| H1c Home body | done | H1c | 289 / 51 / 26 × 2 | banner, inline quick donate, filter bar, grid 20, pagination, compact card, M-5, M-6 |
-| H1d Trust, SEO, i18n, screens | done | H1d | 292 / 51 / 70 routes × 2 | trust row (M-3 flags), docs/screens/home-c/ (12 shots) |
-| P1 Build configurations | done | P1 | 294 / 51 / 70 × 2 | development/local/ci/staging/production; generated CSP; robots/sitemap per env; build stamp; staging ribbon |
-| P2 Container + web server | done | P2 | 294 / 51 / 70 × 2 + container check | Dockerfile (caddy, uid 10001, read-only), Caddyfile, compose; check-container |
-| P3 CI/CD | done | P3 | + audit gate | ci.yml pinned + container check; deploy.yml staging/production/rollback/nightly/dispatch; Dependabot; zod fixed |
-| P4 Quality bars | done (REVIEW) | P4 | 295 / 51 / 70 × 2 + LHCI | CLS 0.478 → 0 (stub no-store broke the transfer cache); a11y 100, BP 96, SEO 100; perf 73–79, LCP 2.56–2.82 s, TBT 505–857 ms (floors, REVIEW) |
-| P5 Runtime robustness | done | P5 | 313 / 53 / 70 × 2 | GET retry (M-7), kept prerendered data + notice, PII-free error reporter (off) |
-| P6 Docs + handover | done | P6 | — | runbook, production checklist, spec in docs/r5/, .session/ removed |
-
-**TODO before go-live (owner, C-2 / Q-11):** replace `[رقم الترخيص]` / `[licence number]` in
-`@@store.layout.utility-licence` and `@@store.home.trust-licensed-text` (src/locales: messages.xlf source in the
-templates + `en.json`) with the association's licence number and confirm the trust texts.
-
-## R5 — donations (one PR "Store web — R5 donations", API `792521a`)
-
-| Phase | Status | Commit | Screens | Tests (unit / e2e / a11y routes) | Notes |
-|---|---|---|---|---|---|
-| W-M0 Foundation and clean-up | done | W-M0 | placeholders for the screens rebuilt in W-M1…W-M5; login, 404, admin login/shell, staff, settings, templates, audit adapted | 159 / 17 smoke (stub) / 24 × 2 themes | OpenAPI snapshot + types; check-no-commerce; r4 code deleted; W-1…W-5 fixed with tests; StoreConfig; payments flag + prod guard; problem messages R5; stub (stateful); routes.mjs → projects; C-1; seed R5; 124 KB JS |
-| W-M1 Home/listing + card | done | W-M1 | home = hero + search + category chips (API) + sort + paged grid; project card (image, share bar, chips → stepper, open amount, اضافة / تبرع); shared `amount-input`, `option-picker`, `qty-stepper` | 183 / 23 smoke (+ listing ar/en on the real API) / 24 × 2 | C-4 SEO, U-2 API order, JSON-LD NGO + ItemList; 126.5 KB JS |
-| W-M2 Project page | done | W-M2 | `/p/:slug`: cover, title, summary, Markdown story (`<ta-markdown>`, own safe renderer), large donate box with presets, share sheet (+ Facebook), not-found (noindex), old-slug redirect (replaceUrl) | 195 / 27 smoke (+ project ar/en on the real API) / 24 × 2 | JSON-LD DonateAction + BreadcrumbList; prerendered + refreshed after hydration |
-| W-M3 Quick donate, cart, checkout, order | done | W-M3 | quick-donate modal (header, menu, hero, side button ≥ 1320 px), `/cart` (3 line kinds, inline problems + fixes, limits, clear), `/checkout` (inline OTP, contact saved to profile, quote summary, C-3 notice, body-bound Idempotency-Key), `/orders/:ref` (pending = end state, token stripped, no-referrer, sign-in state) | 205 / 31 smoke incl. the full donate journey on the stub (+ real API: `/me` updated) / 24 × 2 | 127.8 KB JS |
-| W-M4 Account | done | W-M4 | `/account` shell; My donations (paged) + detail; Profile (edit, export JSON, sign out everywhere, delete with typed confirmation) | 212 / 35 smoke (+ account, sign-in on the real API) / 24 × 2 | W-2 name + mobile in menu and shell |
-| W-M5 Admin | done | W-M5 | `/admin/password` (forced + self); dashboard; categories (reorder, image, gifts); projects list + editor (details, options editor, publish/archive/preview, unsaved guard, conflict dialog); media (images); donors (block/unblock); orders (search, detail, cancel) | 239 / smoke (stub) / 24 × 2 | API-1, API-2, API-3 workarounds; placeholder removed |
-| W-M6 e2e, a11y, CI, docs | done | W-M6 | — | 240 / 65 on the real API (35 smoke on the stub) / 26 × 2 | refresh-after-hydration fix (reload when stable); admin e2e clean up after themselves; i18n staleness check; order page in the a11y sweep; `docs/W-report-r5.md` + `docs/screenshots/r5/`; `.session/` moved to `docs/r5/` |
-
-### API follow-ups — all closed at `cd26a80` (lotfi029/ta3lom_store_api#15)
-
-| # | Closed by the API | Web after the review fixes |
-|---|---|---|
-| API-1 | 409 `order.cancel_not_allowed` carries `orderStatus`; `status` is numeric again | Reads `code` only (unchanged) |
-| API-2 | References match in any case | Upper case kept for display and links only |
-| API-3 | Bad option bodies → 400 `validation.failed` | Client row checks kept as UX |
-| API-4 | Production CORS = `https://store.ta3lom.sa` only | No longer a production blocker |
-| API-5 | `/v1/cart/summary` total re-priced | Badge stays a line count (choice recorded) |
-| API-6 | By design: validation texts stay English (API README "Errors") | Mapped by field (unchanged) |
-| API-7 | OpenAPI CI artifact `store-api-openapi` | Snapshot still from `npm run api:openapi`; the artifact is the source of truth |
-| API-8 | Development OTP caps `Store__Otp__Development__MaxPerIp/MaxPerMobile` | Raised in `dev-env.sh`; DB cleanup removed |
-| API-9 | `ProjectCard.options` | Cards use them; no per-card detail request (F-1) |
-| API-10 | `coverAltEn`, `imageAltEn` | English alt via `pick()` |
-
-## r4 (history)
-
-| Session | Status (todo/doing/done/blocked) | PR | Screens | Endpoints # | Tests (unit/e2e/a11y) | Notes |
-|---|---|---|---|---|---|---|
-| STEP 0 | done | — | — | — | — | setup READY (node 24.21, dotnet 10.0.112, PG 16); API cloned, built, migrated, on :5080 |
-| W-00 Bootstrap and tooling | done | [#1](https://github.com/lotfi029/ta3lom_store_web/pull/1) | placeholder home | #3 (`fields=slug`, prerender) | 3 / 3 smoke / 28 routes × 2 themes | budgets 89 KB JS / 95 KB transfer (ar) |
-| W-01 Core | done | [#2](https://github.com/lotfi029/ta3lom_store_web/pull/2) | — (core only) | #11, #16–#20 (auth service), #47–#51 (staff auth service) | 48 / 3 smoke / 28 × 2 | money, problem → 71 r4 messages, SEO, theme, StoreAuth/StaffAuth, store-API interceptor, guards, CartSummary; 93 KB JS |
-| W-02 Layout | done | [#3](https://github.com/lotfi029/ta3lom_store_web/pull/3) | header, footer, skip link, account menu, 404, toast, resource-state | #11 (badge), #18 (session restore), #19 (sign out) | 102 / 17 (layout + smoke, ar+en, 320 px, keyboard, axe both themes) / 28 × 2 | kit layout ported to the store prototype header; store icon set; 113 KB JS |
-| W-03 Catalogue | done | [#4](https://github.com/lotfi029/ta3lom_store_web/pull/4) | home, /courses, /books, /search, /p/:slug (course, book), unavailable product | #1, #2, #3, #4, #5, #9 | 114 / 32 (15 catalogue ar+en: API-driven chips/filter/sort, search, course + book pages, JSON-LD, share, related, 320 px, axe both themes; no-JS prerender smoke) / 28 × 2 | 26 pages prerendered; buy box presentational (cart in W-05); 121 KB JS |
-| W-04 Sign-in | done | [#5](https://github.com/lotfi029/ta3lom_store_web/pull/5) | /login, `<ta-otp-sign-in>` (reused at checkout), account menu sign out / sign out everywhere | #16, #17, #18, #19, #20 (+ #129, #131, #132 as test tooling) | 122 / 42 (10 sign-in ar+en: OTP from /dev/sms, wrong number, attempts left, session restore, sign out, sign out everywhere, rate limit (mock), blocked customer (real)) / 32 × 2 | Signal Forms; auto-submit on 6 digits; Arabic-Indic digits; 125 KB JS |
-| W-05 Cart | done | [#6](https://github.com/lotfi029/ta3lom_store_web/pull/6) | buy boxes (course / book formats, print stepper, stock state, sticky bar), add / buy now, /cart (one group, qty, remove, totals, shipping note, notices, price-changed banner, line issues) | #10, #11, #12, #13, #14, #40 (quote, price check) (+ #57, #61 admin as e2e tooling) | 131 / 54 (12 cart ar+en: add course + print ×2, qty, totals, remove, empty; duplicate course RUL-13; guest cart kept after sign-in RUL-17; price changed RUL-15; out of stock RUL-30; mobile sticky bar; axe both themes) / 34 × 2 | `CartStore` optimistic + queued + rollback; 125 KB JS |
-| W-06 Checkout and thanks | done | [#7](https://github.com/lotfi029/ta3lom_store_web/pull/7) | /checkout (inline OTP, details, National Address only with print, saved addresses, payment methods, terms, quote summary, price-changed, invalid lines), /orders/:ref/thanks (pending, paid, failed, review, expired/cancelled + cartRestored, slow, not found; dev Simulate payment) | #40, #41, #42, #21 (prefill), #24 (saved addresses), dev confirm-payment | 152 / 70 (16 checkout ar+en: buy a course → awaiting payment → simulate → paid; books print ×2 + digital with National Address validation and shipping; guest merge drops an owned course; price changed → new Idempotency-Key; out of stock → invalid line; expired (mock) → cart restored, gateway `status` ignored; thanks needs session or token; empty cart → /cart; axe each step and state) / 34 × 2 | `cartNotEmptyGuard` NG0203 fixed; 125 KB JS |
-| W-07 Account | done | [#8](https://github.com/lotfi029/ta3lom_store_web/pull/8) | /account shell (side menu with counts); My courses (progress, Start/Resume, certificate link, access being prepared); My books (downloads with remaining count, shipments with tracking); Orders (paged list, detail, invoice PDF); Profile (details, language, marketing consent, address book CRUD + default, export JSON, sign out everywhere, delete with typed confirmation) | #20, #21–#32, #35–#39, #46 (+ #75 ship as e2e tooling) | 162 / 84 (14 account ar+en: guard → sign in, empty tabs, 320 px; launch (LMS mocked); download 5 → 4 left + shipment preparing → shipped; orders → detail → invoice PDF; profile + address book + export; delete account; sign out everywhere; axe each tab) / 34 × 2 | address model and `<ta-address-fields>` shared with checkout; 126 KB JS |
-| W-08 Admin shell and platform | done | [#9](https://github.com/lotfi029/ta3lom_store_web/pull/9) | /admin/login (password → TOTP enrol with setup key, or verify), admin shell (top bar, side nav filtered by `can()`, `<ta-requires>` reasons), home, team (list, create with one-time password, edit roles/active, reset password, reset TOTP, unlock), settings (typed per key, r4 allowlist), templates (r4 keys, edit, preview, test send), audit log (filters, diff) | #47–#52, #118–#128, #133 | 174 / 94 (10 admin ar+en: return URL + wrong password; viewer nav/read-only with reason, staff route refused; create member → first sign-in enrols TOTP → reset TOTP; settings typed save + invalid + audit filter; template preview + test send; axe each screen) / 36 × 2 | admin lazy chunk; 126.5 KB initial JS |
-| W-09 Admin catalogue | done | [#10](https://github.com/lotfi029/ta3lom_store_web/pull/10) | products list (type/status/category/text filters), product editor (general + SEO, cover picker with upload, course details + curriculum reorder, book details, print/digital formats with private file upload, print stock movements, publish/archive with confirmation and missing list, preview with the store card, freshness notice, type lock read-only), categories (create/edit, slug check), media library (upload with mandatory alt, MIME/size checks, alt edit) | #54–#62, #64–#66, #72–#80 | 185 / 102 (8 admin catalogue ar+en: store manager creates + publishes a course (cover, curriculum) → storefront client fallback; book with digital file + print stock → published; viewer read-only with reasons; categories + media alt; axe on every screen) / 36 × 2 | e2e products archived after each test; 126.6 KB JS |
-| W-10 Admin operations | done | [#11](https://github.com/lotfi029/ta3lom_store_web/pull/11) | dashboard (sales today/7/30, awaiting payment, top sellers, low stock, alerts), orders (search, detail with lines, contact/address, timeline from dates + gateway events + notifications, payments, documents; cancel with reason; resend documents; download reset by grant id), shipments queue (packing slip PDF, ship with carrier/tracking, deliver, return with restock), stock (low filter, movements, restock/adjust), customers (exact lookup, orders + courses, block/unblock), reports (sales, VAT, shipments; table + CSV) | #53, #78–#80, #85–#88, #94–#99, #117, #129–#132 | 196 / 118 (16 admin ops ar+en: dashboard + 320 px; fulfilment slip → ship → deliver; finance cancels unpaid order + store manager sees Cancel disabled with reason; viewer disabled + no reports; stock restock/adjust; customers block/unblock; reports + CSV; download reset; axe on every screen) / 36 × 2 | 127.8 KB JS |
-| W-11 Hardening and release prep | done | #12 | Empty-the-cart (#15); admin roles refresh (#52); deploy README; screenshots (56, app vs prototype); report | #15, #52 (+ all, C.1 table in docs/W-report.md) | 197 / 120 / 36 × 2; Lighthouse home/course/book LCP ≤ 0.92 s, CLS 0, TBT ≤ 13 ms | CLS 0.2–0.3 → 0 (hydration transfer cache + font preloads); DECISIONS.md rebuilt from history; docs/reference removed; 127.8 KB JS |
-
-## Checklist
-- [x] W-00 … W-11 done and merged
-- [x] Every r4 web endpoint of plan §1 used by a screen and covered by an e2e test (exceptions listed in docs/W-report.md §3: #30, #88, #99 outcome)
-- [x] axe clean on every route, ar/en, light/dark
-- [x] Budgets met; Lighthouse: LCP <= 2.0 s, INP <= 200 ms, CLS <= 0.05 (home, a course, a book)
-- [x] Prototype screenshots compared (docs/screenshots, ar/en, 1440 + 375 px)
-- [x] reference/ removed; docs/W-report.md pushed
-
-## Environment (resume notes)
-- Session HC: Docker Hub answers 429 — pull `mirror.gcr.io/library/{postgres:18,node:24-alpine,caddy:2-alpine}` and
-  re-tag; `docker build --network host --secret id=build_ca,src=/root/.ccr/ca-bundle.crt …` (the session inspects TLS);
-  Playwright 1.64's Chromium lives in `~/.cache/store-web/pw-browsers` (`PLAYWRIGHT_BROWSERS_PATH` via dev-env.sh);
-  LHCI locally: `CHROME_PATH=~/.cache/store-web/pw-browsers/chromium-1248/chrome-linux64/chrome npm run lhci`;
-  a stale `node_modules/.vitest-cache` once replayed an old module — delete it when a fix "doesn't take".
-- `. scripts/dev-env.sh && npm run api:up && npm run api:seed` — API on :5080 (postgres:18 in docker `t3s-pg` on
-  :5440; `api:up` starts `dockerd` and the container), staff in `e2e/.auth/staff.json` (git-ignored).
-- Node 24 lives in `/opt/node24` (dev-env.sh puts it first on PATH).
-- Never `pkill -f` with a pattern that appears in your own command line; stop servers by port (`fuser -k 4320/tcp`).
-
-## Showcase mode (branch `claude/showcase-mode`)
-
-| Item | Status | Tests (red first) |
-|---|---|---|
-| SW-1 environments, `paymentsEnabled` removed | done | environment.spec (ci-showcase missing → red) |
-| SW-2 read-only donate box, header/footer/home/trust row, JSON-LD | done | src/app/showcase.spec.ts (compile red, then 14 green), trust-row.spec |
-| SW-3 `showcaseGuard` | done | showcase.guard.spec.ts (red: no guard) |
-| SW-4 problem messages | done | problem-message.spec (red 1/9) |
-| SW-5 deploy-output checks | done | scripts/tests/showcase-checks.test.mjs (red: no module) |
-| SW-6 admin badge, OpenAPI/types | done | dashboard-showcase.spec.ts (red 2/2) |
-| SW-7 @showcase e2e + axe, screenshots | done | e2e/showcase.spec.ts on `build:ci-showcase` |
-| SW-8 docs | done | — |
-
-## Admin redesign (docs/admin-redesign/)
-
-| Phase | Status | Commit | Screens | Tests |
-|---|---|---|---|---|
-| W-A0 Groundwork | done | (see PR) | none visible (tokens, icons, utilities, badge) | `ui/badge.spec.ts` (every wire value), contrast-check +16 pairs; storefront before set in `docs/screenshots/admin-redesign/storefront-before/` |
-| W-A1 Shell | done | (see PR) | shell (dashboard frame), menu | `shell/admin-nav.spec.ts` (role filtering, routes kept, active section, title, 30 s throttle), `palette-target.spec.ts`; e2e `admin-shell.spec.ts` (rail names, Ctrl+K reference/mobile/text, 390 tab bar + More page, viewer + disabled); storefront before/after identical |
-| W-A2 Projects index | done | (see PR) | projects | `ui/index-page/index-page.spec.ts` (selection, bulk 2-at-a-time + 422 labels); e2e status views, search pills, bulk publish partial failure, viewer bulk disabled, 390 card list |
-| W-A3 Project editor | done | (see PR) | project | `project-editor.spec.ts` (save-bar text, requirements); existing `catalog.spec.ts`, `options-editor.spec.ts` unchanged and green; e2e create/publish via the new layout (EN tab), save bar + publish disabled while dirty + Ctrl+S + 422 requirements, 390 |
-| W-A4 Donations | done | (see PR) | orders, order | `ops.spec.ts` (search routing), `order-detail.spec.ts` (ported W-2 pending refunds); e2e search → side panel `?ref=` → full page → cancel; payments e2e on the shared detail |
-| W-A5 Dashboard | done | (see PR) | dashboard | `ops.spec.ts` (bar widths in halalas, readiness checks), `dashboard-showcase.spec.ts` (ported); e2e metrics + tasks, finance without the audit block |
-| W-A6 Media, settings, login, rest | done | (see PR) | media, settings, settings-store, staff, login, donors, categories, templates, audit, reports, orphans | e2e settings index → store settings, team 2FA column, donors badges; full set of screenshots |
-
-## Storefront TBT fix (branch `fix/storefront-hydration-tbt`)
-| Item | State | Evidence |
-|---|---|---|
-| Home grid + inline quick donate hydrate on viewport / interaction / focus / listing change | done | e2e/home-c.spec.ts (phone: tab → grid follows, preset → checkout), e2e/listing.spec.ts, local Lighthouse A/B (DECISIONS) |
+See `DECISIONS.md` (column REVIEW?).

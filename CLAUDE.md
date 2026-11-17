@@ -1,21 +1,24 @@
-# ta3lom store web
+# Dar Africa store web
 
-Storefront, customer account and staff admin of the ta3lom store, served as static files at
-**https://store.ta3lom.sa** ([ADR-S09](docs/adr/ADR-S09-store-web-separate-app.md)). **R5: donations only** —
-projects with options and open amounts, general gifts to categories (DECISIONS rows `R5`). Data comes from the store
-API at `https://store-api.ta3lom.sa/v1` (repo `lotfi029/ta3lom_store_api`, R5-Core).
+Storefront, customer account and staff admin of the **Dar Africa** donation store (جمعية الدعوة والتعليم باللغات
+الأفريقية), served as static files at **https://store.darafrica.org**. **Donations only** — projects with options and
+open amounts, general gifts to categories. Data comes from the store API at `https://store-api.darafrica.org/v1`
+(a deployment of `lotfi029/ta3lom_store_api`, the backend of both store web apps; same `/v1` contract — owner step,
+plan §11).
 
-Bilingual Arabic/English, **Arabic-first, right-to-left**. Same conventions, tokens, fonts and look as `ta3lom-web`
-(copied, not shared). R5 plan and contract: [docs/r5/](docs/r5/) (home = Option C, [docs/r5/home-option-c-spec.md](docs/r5/home-option-c-spec.md)); go-live: [docs/production-checklist.md](docs/production-checklist.md); report: [docs/W-report-r5.md](docs/W-report-r5.md) (r4 plan: [docs/store-web-plan.md](docs/store-web-plan.md)).
-**Admin redesign:** [docs/admin-redesign/](docs/admin-redesign/) (spec, plan, mockups) is the approved staff admin look; the
-storefront look is unchanged.
+**Forked from** `lotfi029/ta3lom_store_web` @ `16e0ecf` (W-00, [docs/plan/w-00-plan.md](docs/plan/w-00-plan.md)): same
+architecture, same Angular version (ta3lom's lockfile), same rules. Internal names (`ta-` selectors, `@@store.*` ids,
+file names) are kept so fixes can be cherry-picked. Target look: [docs/design/darafrica-store-prototype.html](docs/design/darafrica-store-prototype.html).
+ta3lom's rule sources (R5 spec, ADRs, admin redesign, its decision and progress logs) live under
+[docs/reference/ta3lom/](docs/reference/ta3lom/); go-live: [docs/production-checklist.md](docs/production-checklist.md);
+report: [docs/W-00-report.md](docs/W-00-report.md).
 
 ## Stack
 
 | | |
 |---|---|
 | Framework | Angular 22.2 — standalone, zoneless, signals, `input()`/`output()`, `@if`/`@for`/`@defer` |
-| Data | `httpResource()` in `*.data.ts` services; types generated from `docs/openapi/store-api.v1.json` (snapshot of the live API: `npm run api:openapi`) |
+| Data | `httpResource()` in `*.data.ts` services; types generated from `docs/openapi/store-api.v1.json` (ta3lom's snapshot of the API, kept identical; refreshed only with `npm run api:openapi` in step with ta3lom) |
 | Forms / a11y | Signal Forms (`@angular/forms/signals`), Angular Aria primitives |
 | Rendering | `@angular/ssr` **static output**: `/` and `/p/:slug` prerendered; cart, checkout, orders, account, admin client-rendered |
 | i18n | `@angular/localize`, `/ar` (source) and `/en`; ids `@@store.<area>.<element>`; English in `src/locales/en.json` |
@@ -33,7 +36,7 @@ npm run types:gen                # regenerate src/app/core/api/store-api.types.t
 npm run typecheck && npm run lint && npm test
 npm run build                    # both locales, prerender against $PRERENDER_API_URL/$STORE_API_URL, budgets, CSP, deploy output
 npm run build:staging            # staging (noindex, ribbon); PRERENDER_API_URL = where the build reads the catalogue
-npm run build:prod               # production build (payments on since R5-Payments)
+npm run build:prod               # production build (showcase on until the Moyasar account exists)
 npm run audit:prod               # no high/critical advisory in production deps (audit-allowlist.json, 30-day entries)
 docker build --build-arg CONFIG=ci -t store-web:ci . && node scripts/check-container.mjs store-web:ci --env ci --keep
 npm run lhci                     # Lighthouse (mobile) against that container on :8099; prints the owner targets
@@ -63,7 +66,7 @@ features (store | account | admin) → shared → core          layout → share
 1. **Logical CSS only** (`margin-inline-start`, `inset-inline-end`…). Stylelint forbids `left/right/margin-left…`.
 2. **Arabic first.** Build and check RTL first. Arabic body `line-height: 1.85`, English `1.55`. Western digits everywhere.
 3. **English falls back to Arabic** through `pick()` — never an empty string.
-4. **Every route calls `SeoService.set()`** (title, description, canonical on `store.ta3lom.sa`, hreflang, OG); noindex
+4. **Every route calls `SeoService.set()`** (title, description, canonical on `store.darafrica.org`, hreflang, OG); noindex
    on cart, checkout, orders, account, admin, login, 404, listing searches (`?q=`) and pages > 1 (`noindex, follow`).
 5. **Exactly one `<h1>` per route**; landmarks `<main>`, `<nav>`, `<footer>`.
 6. **Images:** `alt` is a required input and comes from the API `MediaAsset` (`altAr`/`altEn`), never hardcoded.

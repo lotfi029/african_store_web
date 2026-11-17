@@ -10,7 +10,7 @@ without a commit. Never redo a committed phase.
 |---|---|---|---|
 | 0 Import | W-00.0 — import ta3lom store web @ 16e0ecf | done | — (pure copy) |
 | 0 Bootstrap | W-00.1 — bootstrap: docs, logs, CLAUDE.md | done | npm ci (Node 24.22.3, npm 11.19.1); G-fast green: typecheck, lint, unit 413 (70 files) + scripts |
-| 1 Stack + API | W-00.2 | | |
+| 1 Stack + API | W-00.2 — same stack and API contract as ta3lom | done | package.json, lockfile, OpenAPI, generated types byte-identical to ta3lom @ 16e0ecf; Angular CLI 22.2.7 / core 22.2.6 / build 22.2.7 / TypeScript 6.0.3 / Node 24.22.3 / npm 11.19.1; types:check ok; 68 endpoints (docs/api-endpoints.md); G-fast green (unit 413, scripts 16); build:ci green, 58 prerendered routes, initial JS ar 137.5 / en 135.8 kB gzip |
 | 2 Identity | W-00.3 | | |
 | 3 Tokens, fonts, logo | W-00.4 | | |
 | 4 Layout | W-00.5 | | |

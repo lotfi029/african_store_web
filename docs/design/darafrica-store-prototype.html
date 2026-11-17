@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>متجر التبرعات — دار أفريقيا (نموذج أولي)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── Palette (Dar Africa) ─────────────────────────────────────────── */
+:root{
+  --ink:#1B2E2E; --teal:#304F50; --teal-2:#3D6161; --teal-3:#24403F;
+  --sand:#BAA87E; --sand-dark:#7E6C43; --sand-tint:#FAF7EF; --sand-line:#E9DFC6;
+  --cream:#FAF9F6; --white:#FFFFFF; --line:#E4E4DC; --line-2:#EFEFE8;
+  --text:#1E2A29; --text-2:#44514F; --muted:#606A67; --mint:#EAF0EE; --danger:#9A3B35;
+
+  /* ── Semantic layer (the plan keeps exactly these names) ── */
+  --c-bg:var(--cream); --c-surface:var(--white); --c-surface-2:var(--cream);
+  --c-text:var(--text); --c-text-2:var(--text-2); --c-muted:var(--muted);
+  --c-border:var(--line); --c-border-2:var(--line-2);
+  --c-heading:var(--ink); --c-link:var(--teal);
+  --c-brand:var(--teal); --c-on-brand:#FFFFFF;
+  --c-gold:var(--sand); --c-on-gold:var(--ink);
+  --c-gold-text:var(--sand-dark); --c-gold-tint:var(--sand-tint); --c-gold-line:var(--sand-line);
+  --c-tint:var(--mint);
+  --c-surface-dark:var(--ink); --c-on-dark:#D9E2E1; --c-on-dark-muted:#BCC8C5; --c-border-on-dark:#304F50;
+  --c-danger:var(--danger); --c-focus:var(--teal);
+  --r-card:18px; --r-panel:22px; --r-btn:14px; --r-field:12px;
+  color-scheme:light;
+}
+[data-theme="dark"]{
+  --c-bg:#0F1919; --c-surface:#162323; --c-surface-2:#1B2A2A;
+  --c-text:#E6ECEA; --c-text-2:#C3CFCC; --c-muted:#9EACA9;
+  --c-border:#2B3C3C; --c-border-2:#243434;
+  --c-heading:#F2F5F4; --c-link:#9CC3BE;
+  --c-tint:#22393A; --c-gold-text:#D6C59B; --c-gold-tint:#2A2A20; --c-gold-line:#4A4430;
+  --c-surface-dark:#0B1414; --c-border-on-dark:#243434; --c-focus:var(--sand);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:'IBM Plex Sans Arabic','Segoe UI',Tahoma,sans-serif;background:var(--c-bg);color:var(--c-text);line-height:1.7}
+a{color:var(--c-link)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--c-focus);outline-offset:2px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:24px}
+.ltr{direction:ltr;unicode-bidi:isolate}
+h1,h2,h3{color:var(--c-heading)}
+.skip{position:absolute;inset-inline-start:12px;top:-60px;background:var(--c-gold);color:var(--c-on-gold);padding:10px 16px;border-radius:10px;z-index:50}
+.skip:focus{top:12px}
+#main:focus{outline:none}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 24px;border-radius:var(--r-btn);border:0;font-weight:700;text-decoration:none;cursor:pointer;transition:transform .15s ease, filter .15s ease}
+.btn:hover{filter:brightness(1.06)}
+.btn:active{transform:translateY(1px)}
+.btn-brand{background:var(--c-brand);color:var(--c-on-brand)}
+.btn-gold{background:var(--c-gold);color:var(--c-on-gold)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-line{background:var(--c-surface);border:1px solid var(--c-brand);color:var(--c-link);font-weight:600}
+.btn-ghost-dark{border:1px solid rgba(255,255,255,.35);color:#fff;background:transparent;font-weight:500}
+.btn-block{width:100%}
+.icon-btn{width:44px;height:44px;border-radius:12px;border:1px solid var(--c-border);background:var(--c-surface);display:grid;place-items:center;cursor:pointer}
+
+/* Utility bar + header */
+.util{background:var(--c-surface-dark);color:var(--c-on-dark);font-size:13px}
+.util .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-block:8px}
+.util a{color:var(--c-on-dark);text-decoration:none}
+.util .links{display:flex;gap:18px;align-items:center}
+header.top{background:var(--c-surface);border-bottom:1px solid var(--c-border);position:sticky;top:0;z-index:20}
+.hrow{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding-block:14px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--c-heading)}
+.brand .mark{width:50px;height:50px;border-radius:14px;background:var(--ink);display:grid;place-items:center;flex:0 0 auto}
+.brand b{display:block;font-size:17px;line-height:1.3}
+.brand small{display:block;font-size:13px;color:var(--c-muted)}
+.search{flex:1 1 360px;display:flex;align-items:center;gap:8px;border:2px solid var(--c-brand);border-radius:999px;padding:4px;padding-inline-start:18px;background:var(--c-surface)}
+.search input{flex:1;border:0;outline:0;background:transparent;min-width:0;font-size:15px}
+.search button{height:42px;padding:0 22px;border:0;border-radius:999px;background:var(--c-brand);color:var(--c-on-brand);font-weight:600;cursor:pointer}
+.hnav{display:flex;align-items:center;gap:8px}
+.hnav a.plain{display:flex;align-items:center;gap:8px;height:44px;padding:0 12px;border-radius:12px;color:var(--c-heading);text-decoration:none}
+.cartbtn{display:flex;align-items:center;gap:10px;height:44px;padding:0 16px;border-radius:12px;background:var(--c-tint);color:var(--c-heading);text-decoration:none;font-weight:600}
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.tabs a{padding:12px 16px;white-space:nowrap;text-decoration:none;color:var(--c-text-2);border-bottom:3px solid transparent;font-weight:500}
+.tabs a[aria-current="page"]{color:var(--c-heading);font-weight:700;border-bottom-color:var(--c-gold)}
+
+/* Home top */
+.top-grid{display:flex;gap:24px;flex-wrap:wrap;padding-top:28px}
+.banner{flex:2 1 560px;position:relative;overflow:hidden;background:var(--ink);color:#fff;border-radius:24px;padding:40px;min-height:360px;display:flex;flex-direction:column;justify-content:flex-end;gap:14px}
+.banner .rings{position:absolute;inset-inline-end:-60px;top:-60px;pointer-events:none}
+.banner h1{color:#fff;margin:0;font-size:clamp(26px,3.2vw,38px);line-height:1.35;max-width:620px}
+.banner p{margin:0;color:#D9E2E1;font-size:17px;max-width:600px}
+.pill-gold{align-self:flex-start;background:var(--c-gold);color:var(--c-on-gold);font-size:13px;font-weight:700;border-radius:999px;padding:3px 14px}
+.dots{margin-inline-start:auto;display:flex;gap:8px}
+.dots button{width:10px;height:10px;border-radius:999px;border:0;background:rgba(255,255,255,.35);cursor:pointer;padding:0}
+.dots button[aria-pressed="true"]{width:28px;background:var(--c-gold)}
+.progress{display:flex;flex-direction:column;gap:6px}
+.bar{height:8px;border-radius:999px;background:var(--c-tint);overflow:hidden}
+.bar > i{display:block;height:100%;background:var(--c-brand);border-radius:999px}
+.banner .bar{height:10px;background:rgba(255,255,255,.15)}
+.banner .bar > i{background:var(--c-gold)}
+.pmeta{display:flex;justify-content:space-between;font-size:13px;color:var(--c-text-2)}
+.banner .pmeta{color:#D9E2E1;font-size:14px}
+.banner .pmeta b{color:#fff}
+.banner .pmeta > b{color:var(--c-gold)!important}
+
+.panel{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-panel);padding:24px}
+.quick{flex:1 1 320px;display:flex;flex-direction:column;gap:14px}
+.qh{display:flex;align-items:center;gap:12px}
+.qh .ic{width:44px;height:44px;border-radius:12px;background:var(--c-gold-tint);display:grid;place-items:center}
+.qh h2{margin:0;font-size:20px}
+.qh p{margin:0;font-size:13px;color:var(--c-muted)}
+.field{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600}
+.field small{font-weight:400;color:var(--c-muted);font-size:12.5px}
+.input,.select,textarea.input{min-height:46px;border:1px solid var(--c-border);border-radius:var(--r-field);padding:0 12px;background:var(--c-surface);font-weight:400;width:100%}
+textarea.input{padding:10px 12px;resize:vertical}
+.affix{display:flex;align-items:center;gap:8px;border:1px solid var(--c-border);border-radius:var(--r-field);min-height:46px;padding:0 14px;background:var(--c-surface)}
+.affix input{flex:1;border:0;outline:0;background:transparent;min-width:0;font-weight:400}
+.affix span{color:var(--c-muted);font-weight:400}
+.presets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.preset{white-space:nowrap;min-height:48px;border-radius:12px;border:1px solid var(--c-border);background:var(--c-surface);font-weight:700;cursor:pointer}
+.preset[aria-pressed="true"]{border:2px solid var(--c-brand);background:var(--c-tint)}
+.gift-link{font-size:14px;color:var(--c-gold-text);text-decoration:none;display:flex;gap:6px;align-items:center;justify-content:center}
+
+/* Listing */
+.lhead{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin:40px 0 18px}
+.lhead h2{margin:0;font-size:26px}
+.lhead p{margin:0;color:var(--c-muted);font-size:14px}
+.sort{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--c-text-2)}
+.grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px}
+.card{display:flex;flex-direction:column;height:100%;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-card);overflow:hidden;transition:box-shadow .2s ease, transform .2s ease}
+.card:hover{box-shadow:0 14px 34px rgba(27,46,46,.10);transform:translateY(-2px)}
+.media{position:relative;display:block;aspect-ratio:3/2;overflow:hidden}
+.media .ph{position:absolute;inset:0;display:grid;place-items:center;color:rgba(255,255,255,.78);font-size:12px}
+.badge{position:absolute;top:12px;inset-inline-start:12px;font-size:12px;font-weight:700;border-radius:999px;padding:3px 12px;background:#fff;color:var(--ink)}
+.badge.urgent{background:var(--c-gold);color:var(--c-on-gold)}
+.cbody{flex:1;display:flex;flex-direction:column;gap:10px;padding:16px}
+.crow{display:flex;justify-content:space-between;align-items:center}
+.catpill{font-size:12px;font-weight:600;color:var(--c-gold-text);background:var(--c-gold-tint);border-radius:999px;padding:2px 10px}
+.card h3{margin:0;font-size:16px;line-height:1.55}
+.card h3 a{color:inherit;text-decoration:none}
+.card h3 a:hover{color:var(--c-link)}
+.sum{margin:0;font-size:13.5px;color:var(--c-muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.chip{min-height:36px;padding:0 12px;border-radius:999px;border:1px solid var(--c-border);background:var(--c-surface);font-size:13px;cursor:pointer}
+.chip[aria-pressed="true"]{border:2px solid var(--c-brand);background:var(--c-tint);font-weight:700}
+.cactions{display:flex;gap:8px}
+.cactions .btn{min-height:44px;padding:0 14px;border-radius:12px}
+.cactions .btn-brand{flex:1}
+.pager{display:flex;justify-content:center;gap:6px;margin-top:28px;flex-wrap:wrap}
+.pager a{min-width:44px;height:44px;padding:0 14px;border-radius:12px;border:1px solid var(--c-border);background:var(--c-surface);color:var(--c-heading);text-decoration:none;display:grid;place-items:center}
+.pager a[aria-current="page"]{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:700}
+
+/* Bands */
+.giftband{margin-top:48px;background:var(--c-gold-tint);border:1px solid var(--c-gold-line);border-radius:24px;padding:32px;display:flex;gap:32px;align-items:center;flex-wrap:wrap}
+.giftcard{flex:0 0 auto;width:220px;aspect-ratio:3/2;border-radius:16px;background:var(--ink);color:#fff;padding:18px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 12px 30px rgba(27,46,46,.18)}
+.giftcard small{color:var(--c-gold)}
+.giftband h2{margin:0 0 6px;font-size:24px}
+.giftband p{margin:0;color:var(--c-text-2)}
+.stats,.trust{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.stats li{background:var(--c-surface);border:1px solid var(--c-border);border-radius:18px;padding:22px}
+.stats b{display:block;font-size:32px;color:var(--c-link)}
+.trust{padding:22px;background:var(--c-surface);border:1px solid var(--c-border);border-radius:18px;margin-top:40px}
+.trust li{display:flex;gap:12px;align-items:flex-start}
+.trust .ic{flex:0 0 auto;width:42px;height:42px;border-radius:12px;background:var(--c-tint);display:grid;place-items:center}
+.trust b{display:block;color:var(--c-heading)}
+.trust span{font-size:13.5px;color:var(--c-muted)}
+
+/* Footer */
+footer.foot{margin-top:56px;background:var(--c-surface-dark);color:var(--c-on-dark)}
+.fband{border-bottom:1px solid var(--c-border-on-dark)}
+.fband .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:26px}
+.fband p{margin:0;font-size:20px;color:#fff;font-weight:600}
+.fcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;padding-block:36px;font-size:14px}
+.fcols > *{display:flex;flex-direction:column;gap:8px}
+.fcols b{color:#fff}
+.fcols a{color:var(--c-on-dark);text-decoration:none}
+.fcols a:hover{color:#fff}
+.paymarks{display:flex;gap:6px;flex-wrap:wrap;direction:ltr;justify-content:flex-end}
+.paymarks span{background:#fff;color:var(--ink);border-radius:6px;padding:2px 8px;font-size:12px;font-weight:700}
+.copy{border-top:1px solid var(--c-border-on-dark);padding:16px 24px;text-align:center;font-size:13px;color:var(--c-on-dark-muted)}
+
+/* Project page */
+.crumbs{font-size:13px;color:var(--c-muted);margin:22px 0 14px}
+.crumbs a{text-decoration:none}
+.pgrid{display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start}
+.pmain{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:22px}
+.paside{flex:1 1 380px;max-width:440px;display:flex;flex-direction:column;gap:16px;position:sticky;top:110px}
+.hero{position:relative;aspect-ratio:16/9;border-radius:22px;overflow:hidden}
+.thumbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.thumbs button{aspect-ratio:16/10;border-radius:12px;border:1px solid var(--c-border);cursor:pointer}
+.thumbs button[aria-pressed="true"]{border:3px solid var(--c-gold)}
+.ptitle h1{margin:12px 0 8px;font-size:clamp(24px,2.6vw,32px);line-height:1.4}
+.ptitle p{margin:0;font-size:17px;color:var(--c-text-2)}
+.minis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;text-align:center;font-size:12.5px;color:var(--c-muted)}
+.minis span{background:var(--c-surface-2);border-radius:10px;padding:8px}
+.minis b{display:block;color:var(--c-heading);font-size:15px}
+.opt{display:flex;justify-content:space-between;align-items:center;min-height:50px;padding:0 16px;border-radius:14px;border:1px solid var(--c-border);background:var(--c-surface);cursor:pointer;width:100%}
+.opt[aria-pressed="true"]{border:2px solid var(--c-brand);background:var(--c-tint)}
+.stepper{display:flex;align-items:center;gap:4px;border:1px solid var(--c-border);border-radius:12px;padding:3px}
+.stepper button{width:40px;height:40px;border:0;border-radius:10px;background:var(--c-surface-2);font-size:20px;cursor:pointer}
+.stepper b{min-width:36px;text-align:center}
+.total{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px dashed var(--c-border)}
+.total b{font-size:22px;color:var(--c-heading)}
+.giftbox{border:1px solid var(--c-border);border-radius:16px;padding:14px;transition:background .2s ease}
+.giftbox.on{border-color:var(--c-gold-line);background:var(--c-gold-tint)}
+.check{display:flex;align-items:center;gap:10px;font-weight:600;cursor:pointer;min-height:32px}
+.check input{width:20px;height:20px;accent-color:var(--teal)}
+.gfields{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.cards3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.cards3 button{height:56px;border-radius:10px;border:1px solid var(--c-border);cursor:pointer}
+.cards3 button[aria-pressed="true"]{border:3px solid var(--c-brand);box-shadow:inset 0 0 0 2px #fff}
+.timeline{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px}
+.timeline li{display:flex;gap:14px}
+.timeline i{flex:0 0 auto;width:12px;height:12px;margin-top:8px;border-radius:50%;background:var(--c-brand)}
+.share{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.share a,.share button{min-height:40px;padding:0 12px;border-radius:10px;border:0;background:var(--c-tint);color:var(--c-heading);text-decoration:none;font-size:13px;display:inline-flex;align-items:center;cursor:pointer}
+
+/* Checkout */
+.steps{list-style:none;margin:0 auto;padding:0;display:flex;gap:10px;align-items:center;font-size:14px}
+.steps li{display:flex;align-items:center;gap:8px;color:var(--c-muted)}
+.steps li.done,.steps li[aria-current="step"]{color:var(--c-link);font-weight:700}
+.steps .n{width:28px;height:28px;border-radius:50%;border:2px solid var(--c-border);display:grid;place-items:center;font-size:13px}
+.steps li.done .n,.steps li[aria-current="step"] .n{background:var(--c-brand);border-color:var(--c-brand);color:#fff}
+.steps .sep{width:40px;height:2px;background:var(--c-border)}
+.steps .sep.done{background:var(--c-brand)}
+.lines{list-style:none;margin:0;padding:0}
+.lines li{display:flex;gap:14px;align-items:center;padding:14px 0;border-top:1px solid var(--c-border-2);flex-wrap:wrap}
+.lines .thumb{width:72px;height:54px;border-radius:10px;flex:0 0 auto}
+.lines .info{flex:1 1 240px;display:flex;flex-direction:column}
+.lines .amt{min-width:110px;text-align:left;font-weight:700}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.methods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.method{min-height:72px;border-radius:14px;border:1px solid var(--c-border);background:var(--c-surface);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.method[aria-checked="true"]{border:2px solid var(--c-brand);background:var(--c-tint)}
+.method small{color:var(--c-muted)}
+.cardform{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:14px;background:var(--c-surface-2);border-radius:14px}
+.srow{display:flex;justify-content:space-between;color:var(--c-text-2)}
+.note{display:flex;gap:10px;align-items:center;background:var(--c-tint);border-radius:12px;padding:12px;font-size:13px;color:var(--c-link)}
+
+/* Receipt */
+.thanks{background:var(--ink);color:#fff}
+.thanks .wrap{padding-block:44px 96px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+.thanks h1{color:#fff;margin:0;font-size:clamp(24px,3vw,34px)}
+.thanks p{margin:0;color:#D9E2E1;font-size:17px}
+.okmark{width:72px;height:72px;border-radius:50%;background:var(--c-gold);display:grid;place-items:center;animation:pop .5s ease both}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+.rgrid{max-width:1040px;margin:-64px auto 0;padding:0 24px 64px;display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}
+.kv{margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;font-size:13.5px}
+.kv div{background:var(--c-surface-2);border-radius:12px;padding:10px 12px}
+.kv dt{color:var(--c-muted)}
+.kv dd{margin:0;font-weight:600}
+table.rt{width:100%;border-collapse:collapse;font-size:14.5px}
+table.rt th{font-weight:500;color:var(--c-muted);text-align:start;padding:8px 0}
+table.rt td{padding:10px 0;border-top:1px solid var(--c-border-2)}
+table.rt .num{text-align:left}
+table.rt tfoot td,table.rt tfoot th{border-top:2px solid var(--c-heading);padding-top:12px;color:var(--c-heading)}
+.status{background:var(--c-tint);color:var(--c-link);font-weight:700;font-size:13px;border-radius:999px;padding:4px 14px}
+
+/* Toast + bottom nav */
+.toast{position:fixed;bottom:24px;inset-inline-start:50%;transform:translateX(50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;opacity:0;transition:.25s;z-index:60;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(50%) translateY(0)}
+.bnav{display:none}
+.proto-note{font-size:12px;color:var(--c-muted);text-align:center;padding:10px}
+
+@media (max-width: 760px){
+  .wrap{padding-inline:16px}
+  .util .links a:not(:first-child){display:none}
+  .hrow{gap:12px}
+  .hnav .plain,.hnav .cartbtn{display:none}
+  .search{order:3;flex-basis:100%}
+  .banner{padding:22px;min-height:0}
+  .banner .rings{width:260px;height:260px}
+  .banner p{font-size:15px}
+  .presets{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .g2,.kv{grid-template-columns:1fr}
+  .methods{grid-template-columns:1fr}
+  .paside{position:static;max-width:none}
+  .steps .lbl{display:none}
+  .giftband{padding:22px}
+  body{padding-bottom:76px}
+  .bnav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;bottom:0;inset-inline:0;height:68px;background:var(--c-surface);border-top:1px solid var(--c-border);z-index:30}
+  .bnav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;font-size:11.5px;color:var(--c-muted)}
+  .bnav a[aria-current="page"]{color:var(--c-link);font-weight:700}
+  .toast{bottom:84px}
+}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+
+<div class="util">
+  <div class="wrap">
+    <span style="display:flex;align-items:center;gap:8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#BAA87E" stroke-width="2" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="m9 12 2 2 4-4"/></svg> جميع التبرعات موثّقة بإيصال رسمي · ترخيص رقم [رقم الترخيص]</span>
+    <span class="links"><a href="https://darafrica.org">الموقع الرئيسي</a><a href="#" lang="en">English</a></span>
+  </div>
+</div>
+
+<header class="top">
+  <div class="wrap hrow">
+    <a class="brand" href="#/" aria-label="دار أفريقيا — متجر التبرعات">
+      <span class="mark" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="#BAA87E" stroke-width="2"><path d="M16 4c6 4 9 8 9 13a9 9 0 0 1-18 0c0-5 3-9 9-13z"/><path d="M11 18h10M16 13v10"/></svg></span>
+      <span><b>دار أفريقيا</b><small>متجر التبرعات</small></span>
+    </a>
+    <form class="search" role="search" data-form="search">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="color:var(--c-muted)"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <label for="q" class="vh">ابحث في المتجر</label>
+      <input id="q" type="search" placeholder="ابحث عن مشروع: كفالة داعية، ترجمة، سقيا…">
+      <button type="submit">بحث</button>
+    </form>
+    <nav class="hnav" aria-label="الحساب والسلة">
+      <a class="plain" href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg> دخول</a>
+      <a class="cartbtn" href="#/checkout"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg> السلة · <span class="ltr" id="cartTotal">0</span></a>
+      <button class="icon-btn" type="button" data-action="theme" aria-label="تبديل الوضع الداكن"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
+    </nav>
+  </div>
+  <nav class="wrap tabs" id="tabs" aria-label="التصنيفات"></nav>
+</header>
+
+<main id="main" tabindex="-1"></main>
+
+<footer class="foot">
+  <div class="fband"><div class="wrap"><p>«مَن دلّ على خير فله مثلُ أجر فاعله»</p><a class="btn btn-gold" href="#/checkout" data-action="quick-general">تبرع للصندوق العام</a></div></div>
+  <div class="wrap fcols">
+    <div><b style="font-size:16px">جمعية الدعوة والتعليم باللغات الأفريقية</b><span style="color:var(--c-on-dark-muted)">جمعية مرخّصة، تنشر العلم الشرعي وتعليم العربية بلغات أفريقيا عبر الدعاة والترجمة والإنتاج الصوتي والمرئي.</span><span style="color:var(--c-gold)">ترخيص رقم [رقم الترخيص]</span></div>
+    <nav aria-label="الجمعية"><b>الجمعية</b><a href="https://darafrica.org">الموقع الرئيسي</a><a href="#">عن الجمعية</a><a href="#">الحوكمة والتقارير</a><a href="#">المكتبة</a></nav>
+    <nav aria-label="المتجر"><b>المتجر</b><a href="#/">كل المشاريع</a><a href="#">تبرعاتي وإيصالاتي</a><a href="#">سياسة الاسترجاع</a><a href="#">سياسة الخصوصية</a></nav>
+    <div><b>تواصل معنا</b><span class="ltr" style="text-align:right">[store@darafrica.org]</span><span>[رقم الجوال]</span><span style="color:var(--c-on-dark-muted)">خيارات الدفع</span><span class="paymarks"><span>mada</span><span>Apple Pay</span><span>VISA</span><span>Mastercard</span></span></div>
+  </div>
+  <div class="copy">© 2026 جمعية الدعوة والتعليم باللغات الأفريقية — جميع الحقوق محفوظة</div>
+</footer>
+
+<nav class="bnav" aria-label="التنقل السفلي" id="bnav"></nav>
+<div class="toast" role="status" aria-live="polite" id="toast"></div>
+
+<script>
+(function () {
+  'use strict';
+  var fmt = function (n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ','); };
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); };
+
+  /* Sample data — in the Angular app every list below comes from the store API. */
+  var CATS = ['كل المشاريع', 'كفالة الدعاة', 'الترجمة والطباعة', 'التعليم بلغات أفريقيا', 'الإنتاج الصوتي والمرئي', 'سقيا الماء', 'المساجد', 'الصندوق العام'];
+  var PROJECTS = [
+    { id: 'p1', c: 1, t: 'كفالة داعية في نيجيريا لمدة عام', s: 'راتب داعية متفرغ يعلّم بلغة الهوسا في القرى النائية، مع تقرير شهري.', bg: '#304F50', b: 'عاجل', raised: 66960, goal: 108000, o: [['شهر', 300], ['3 أشهر', 900], ['سنة', 3600]], open: true },
+    { id: 'p2', c: 2, t: 'طباعة ترجمة معاني القرآن بلغة الهوسا', s: 'طباعة وتوزيع نسخ مراجَعة من ترجمة معاني القرآن الكريم.', bg: '#A08D62', b: 'جديد', raised: 18450, goal: 45000, o: [['نسخة', 25], ['10 نسخ', 250]], open: true },
+    { id: 'p3', c: 4, t: 'تسجيل دروس صوتية بالسواحيلية', s: 'إنتاج سلسلة دروس في العقيدة والفقه تُنشر في المكتبة الصوتية.', bg: '#24403F', b: '', raised: 23400, goal: 30000, o: [['حلقة', 150], ['5 حلقات', 750]], open: false },
+    { id: 'p4', c: 3, t: 'دورة تعليم العربية للناطقين بالصومالية', s: 'مقعد دراسي في دورة مكثفة لتعليم العربية مع المواد والشهادة.', bg: '#7E6C43', b: '', raised: 7000, goal: 20000, o: [['مقعد', 200], ['5 مقاعد', 1000]], open: true },
+    { id: 'p5', c: 5, t: 'حفر بئر ارتوازية في النيجر', s: 'سقيا ماء دائمة لقرية ومسجدها ومدرستها القرآنية.', bg: '#3D6161', b: 'عاجل', raised: 31680, goal: 36000, o: [['سهم', 100], ['سهم', 250], ['سهم', 500]], open: true },
+    { id: 'p6', c: 6, t: 'ترميم مصلى ومدرسة قرآنية في تشاد', s: 'إعادة تأهيل المصلى وتجهيز فصول التحفيظ.', bg: '#5A6866', b: '', raised: 5280, goal: 24000, o: [['سهم', 100], ['سهم', 300]], open: true },
+    { id: 'p7', c: 2, t: 'ترجمة كتب العقيدة إلى الأمهرية', s: 'ترجمة ومراجعة ونشر رقمي لثلاثة كتب أساسية.', bg: '#1B2E2E', b: 'جديد', raised: 9720, goal: 18000, o: [['صفحة', 50], ['فصل', 500]], open: false },
+    { id: 'p8', c: 7, t: 'الصندوق العام للجمعية', s: 'يُصرف على المشاريع الأشد حاجة وفق قرار الجمعية.', bg: '#BAA87E', b: '', raised: 0, goal: 0, o: [], open: true }
+  ];
+  var PRESETS = [50, 100, 250, 500];
+
+  var S = { route: '/', cat: 0, preset: 1, picks: {}, cart: 0, slide: 0,
+            opt: 0, qty: 3, gift: true, card: 0, shot: 0, pay: 0, anon: false };
+
+  var ICON = {
+    cart: '<path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><path d="M14 10v4M12 12h4"/>',
+    share: '<circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4"/>',
+    heart: '<path d="M12 21s-7.5-4.6-9.5-9.3C1 8.2 3.2 4.5 6.9 4.5c2.1 0 3.7 1.2 5.1 3 1.4-1.8 3-3 5.1-3 3.7 0 5.9 3.7 4.4 7.2C19.5 16.4 12 21 12 21z"/>',
+    gift: '<rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18M12 8c-2-4-6-4-6-1.5S10 8 12 8zm0 0c2-4 6-4 6-1.5S14 8 12 8z"/>',
+    bolt: '<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',
+    lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+    shield: '<path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="m9 12 2 2 4-4"/>',
+    receipt: '<path d="M6 2h12v20l-3-2-3 2-3-2-3 2zM9 7h6M9 11h6M9 15h4"/>',
+    card: '<path d="M3 6h18v12H3zM3 10h18M7 15h4"/>',
+    chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+    trash: '<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
+    down: '<path d="M12 3v12m0 0-4-4m4 4 4-4M4 19h16"/>',
+    home: '<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+    grid: '<path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/>',
+    search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
+    user: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',
+    check: '<path d="m5 12 5 5 9-10"/>'
+  };
+  var svg = function (k, size, color) { return '<svg width="' + (size || 18) + '" height="' + (size || 18) + '" viewBox="0 0 24 24" fill="none" stroke="' + (color || 'currentColor') + '" stroke-width="2" aria-hidden="true">' + ICON[k] + '</svg>'; };
+  var art = '<svg width="100%" height="100%" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#fff" stroke-opacity=".13" aria-hidden="true"><circle cx="230" cy="40" r="90"/><circle cx="230" cy="40" r="60"/><circle cx="230" cy="40" r="30"/><path d="M0 170c60-30 120-30 180 0s120 30 180 0"/></svg>';
+  var progress = function (raised, goal) {
+    var pct = Math.round(raised / goal * 100);
+    return '<div class="progress"><div class="bar" role="progressbar" aria-valuenow="' + pct + '" aria-valuemin="0" aria-valuemax="100" aria-label="نسبة الإنجاز"><i style="width:' + pct + '%"></i></div>' +
+      '<div class="pmeta"><span>جُمع <b class="ltr">' + fmt(raised) + '</b> من <span class="ltr">' + fmt(goal) + '</span> ر.س</span><b style="color:var(--c-link)">' + pct + '%</b></div></div>';
+  };
+
+  /* ── Views ─────────────────────────────────────────────────────── */
+  function viewHome() {
+    var list = PROJECTS.filter(function (p) { return S.cat === 0 || p.c === S.cat; });
+    var cards = list.map(function (p) {
+      var labels = p.o.map(function (o) { return o[0] + ' · ' + fmt(o[1]); });
+      if (p.open) labels.push('تبرع مفتوح');
+      var picked = S.picks[p.id] || 0;
+      return '<li><article class="card" aria-labelledby="t-' + p.id + '">' +
+        '<a class="media" href="#/p" style="background:' + p.bg + '" tabindex="-1" aria-hidden="true">' + art + '<span class="ph">صورة المشروع</span>' +
+        (p.b ? '<span class="badge' + (p.b === 'عاجل' ? ' urgent' : '') + '">' + p.b + '</span>' : '') + '</a>' +
+        '<div class="cbody"><div class="crow"><span class="catpill">' + CATS[p.c] + '</span>' +
+        '<button class="icon-btn" style="width:36px;height:36px;border-radius:10px" type="button" data-action="share" aria-label="مشاركة: ' + esc(p.t) + '">' + svg('share', 16) + '</button></div>' +
+        '<h3 id="t-' + p.id + '"><a href="#/p">' + p.t + '</a></h3><p class="sum">' + p.s + '</p>' +
+        (p.goal ? progress(p.raised, p.goal) : '') +
+        '<div class="chips" role="group" aria-label="خيارات التبرع">' + labels.map(function (l, i) {
+          return '<button type="button" class="chip" data-action="pick" data-p="' + p.id + '" data-i="' + i + '" aria-pressed="' + (picked === i) + '">' + l + '</button>';
+        }).join('') + '</div>' +
+        '<div class="cactions"><a class="btn btn-brand" href="#/checkout">تبرع</a>' +
+        '<button type="button" class="btn btn-line" data-action="add" data-p="' + p.id + '" aria-label="إضافة ' + esc(p.t) + ' إلى السلة">' + svg('cart', 18) + ' إضافة</button></div></div></article></li>';
+    }).join('');
+
+    return '<div class="wrap">' +
+      '<section class="top-grid">' +
+        '<article class="banner" aria-roledescription="شريحة">' +
+          '<svg class="rings" width="420" height="420" viewBox="0 0 200 200" fill="none" stroke="#BAA87E" stroke-opacity=".18" aria-hidden="true"><circle cx="100" cy="100" r="96"/><circle cx="100" cy="100" r="76"/><circle cx="100" cy="100" r="56"/><path d="M100 4v192M4 100h192M32 32l136 136M168 32 32 168"/></svg>' +
+          '<span class="pill-gold">حملة عاجلة</span>' +
+          '<h1>اكفل داعيةً يعلّم الناس دينهم بلغتهم في غرب أفريقيا</h1>' +
+          '<p>كفالتك تغطي راتب داعية متفرغ يقدّم الدروس والدورات بلغة الهوسا والفولانية، مع تقارير دورية عن أثره.</p>' +
+          '<div style="max-width:560px;margin-top:6px">' + progress(66960, 108000) + '</div>' +
+          '<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:8px">' +
+            '<a class="btn btn-gold" href="#/p">' + svg('heart', 18) + ' تبرع الآن</a>' +
+            '<a class="btn btn-ghost-dark" href="#/p">تفاصيل الحملة</a>' +
+            '<span class="dots" role="group" aria-label="الحملات المميزة">' + [0, 1, 2].map(function (i) { return '<button type="button" data-action="slide" data-i="' + i + '" aria-label="الحملة ' + (i + 1) + '" aria-pressed="' + (S.slide === i) + '"></button>'; }).join('') + '</span>' +
+          '</div>' +
+        '</article>' +
+        '<aside class="panel quick" aria-labelledby="qd-h">' +
+          '<div class="qh"><span class="ic" aria-hidden="true">' + svg('bolt', 22, '#7E6C43') + '</span><div><h2 id="qd-h">تبرع سريع</h2><p>يُصرف حيث الحاجة أشد</p></div></div>' +
+          '<label class="field">جهة التبرع<select class="select"><option>الصندوق العام للجمعية</option><option>كفالة الدعاة</option><option>الترجمة والطباعة</option><option>سقيا الماء</option></select></label>' +
+          '<div class="presets" role="group" aria-label="مبلغ التبرع">' + PRESETS.map(function (v, i) { return '<button type="button" class="preset" data-action="preset" data-i="' + i + '" aria-pressed="' + (S.preset === i) + '"><span class="ltr">' + v + '</span> ر.س</button>'; }).join('') + '</div>' +
+          '<label class="field">مبلغ آخر<span class="affix"><input inputmode="numeric" placeholder="أدخل المبلغ" data-input="custom"><span>ر.س</span></span></label>' +
+          '<a class="btn btn-brand btn-block" href="#/checkout">تبرع الآن · <span class="ltr" id="qAmt">' + PRESETS[S.preset] + '</span> ر.س</a>' +
+          '<a class="gift-link" href="#/p" data-action="to-gift">' + svg('gift', 16) + ' أهدِ تبرعك لمن تحب</a>' +
+        '</aside>' +
+      '</section>' +
+      '<section id="projects" aria-labelledby="list-h">' +
+        '<div class="lhead"><div><h2 id="list-h">' + CATS[S.cat] + '</h2><p>' + list.length + ' مشروعًا</p></div>' +
+          '<label class="sort">ترتيب<select class="select" style="min-height:42px;width:auto"><option>المميزة</option><option>الأحدث</option><option>الأقرب للاكتمال</option><option>الاسم</option></select></label></div>' +
+        '<ul class="grid" role="list">' + cards + '</ul>' +
+        '<nav class="pager" aria-label="الصفحات"><a href="#/">السابق</a><a href="#/" aria-current="page">1</a><a href="#/">2</a><a href="#/">3</a><a href="#/">التالي</a></nav>' +
+      '</section>' +
+      '<section class="giftband" aria-labelledby="gift-h">' +
+        '<div class="giftcard" aria-hidden="true"><small>بطاقة إهداء</small><span><b>تبرّع عنك: محمد</b><br><span style="font-size:13px;color:#D9E2E1">في كفالة داعية</span></span></div>' +
+        '<div style="flex:1 1 380px"><h2 id="gift-h">أهدِ أجر تبرعك لمن تحب</h2><p>اختر أي مشروع، واكتب اسم المُهدى إليه ورقم جواله، وتصله بطاقة إهداء برسالتك عبر الرسائل النصية.</p></div>' +
+        '<a class="btn btn-dark" href="#/p" data-action="to-gift">ابدأ الإهداء</a>' +
+      '</section>' +
+      '<section aria-labelledby="impact-h" style="margin-top:48px"><h2 id="impact-h" style="margin:0 0 18px;font-size:26px">أثرنا بالأرقام</h2>' +
+        '<ul class="stats" role="list"><li><b>[—]</b>داعية مكفول</li><li><b>[—]</b>لغة أفريقية</li><li><b>[—]</b>مادة صوتية ومرئية</li><li><b>[—]</b>مستفيد من الدورات</li></ul></section>' +
+      '<ul class="trust" role="list" aria-label="لماذا تتبرع معنا">' +
+        [['shield', 'جمعية مرخّصة', 'تحت إشراف الجهات الرسمية المختصة'], ['receipt', 'إيصال فوري', 'يصلك الإيصال بالبريد والجوال بعد الدفع'], ['card', 'دفع آمن', 'مدى · Apple Pay · فيزا · ماستركارد'], ['chart', 'تقارير الإنجاز', 'نشارك صور وتقارير تنفيذ المشاريع']]
+          .map(function (t) { return '<li><span class="ic" aria-hidden="true">' + svg(t[0], 20, '#304F50') + '</span><span><b>' + t[1] + '</b><span>' + t[2] + '</span></span></li>'; }).join('') +
+      '</ul></div>';
+  }
+
+  function viewProject() {
+    var opts = [['كفالة شهر', 300], ['كفالة 3 أشهر', 900], ['كفالة سنة', 3600], ['تبرع مفتوح', 0]];
+    var isOpen = S.opt === 3, total = isOpen ? 500 : opts[S.opt][1] * S.qty;
+    var shots = ['#304F50', '#A08D62', '#24403F', '#3D6161'], cards = ['#1B2E2E', '#BAA87E', '#3D6161'];
+    return '<div class="wrap" style="padding-bottom:64px">' +
+      '<nav class="crumbs" aria-label="مسار التنقل"><a href="#/">المتجر</a> / <a href="#/">كفالة الدعاة</a> / <span aria-current="page">كفالة داعية في نيجيريا</span></nav>' +
+      '<div class="pgrid"><div class="pmain">' +
+        '<div class="hero" style="background:' + shots[S.shot] + '">' + art + '<span class="media"><span class="ph">صورة ' + (S.shot + 1) + ' من 4</span></span><span class="badge urgent" style="top:16px;inset-inline-start:16px">عاجل</span></div>' +
+        '<div class="thumbs" role="group" aria-label="صور المشروع">' + shots.map(function (c, i) { return '<button type="button" data-action="shot" data-i="' + i + '" aria-label="الصورة ' + (i + 1) + '" aria-pressed="' + (S.shot === i) + '" style="background:' + c + '"></button>'; }).join('') + '</div>' +
+        '<div class="ptitle"><span class="catpill">كفالة الدعاة</span><h1>كفالة داعية في نيجيريا لمدة عام</h1><p>راتب داعية متفرغ يعلّم الناس دينهم بلغة الهوسا في القرى النائية، مع تقرير شهري عن الدروس والدورات والمستفيدين.</p></div>' +
+        '<section class="panel" aria-labelledby="about-h"><h2 id="about-h" style="margin:0 0 10px;font-size:20px">عن المشروع</h2><p style="margin:0 0 12px;color:var(--c-text-2)">[نص المشروع من لوحة التحكم: الهدف، المنطقة، مدة الكفالة، ما يشمله المبلغ، وكيف تُتابع الجمعية الداعية.]</p>' +
+          '<ul style="margin:0;padding-inline-start:20px;color:var(--c-text-2)"><li>دروس أسبوعية في العقيدة والفقه بلغة الهوسا</li><li>حلقات لتعليم القرآن والعربية للأطفال</li><li>تقرير شهري بالصور يصلك في «تبرعاتي»</li></ul></section>' +
+        '<section class="panel" aria-labelledby="up-h"><h2 id="up-h" style="margin:0 0 14px;font-size:20px">تحديثات التنفيذ</h2><ol class="timeline"><li><i></i><span><b>[تاريخ التحديث]</b><br><span style="color:var(--c-text-2)">[ملخص التحديث يُضاف من لوحة التحكم مع صور أو ملف PDF]</span></span></li><li><i style="background:var(--c-gold)"></i><span><b>[تاريخ التحديث]</b><br><span style="color:var(--c-text-2)">[ملخص التحديث]</span></span></li></ol></section>' +
+      '</div>' +
+      '<aside class="paside" aria-labelledby="don-h"><div class="panel" style="display:flex;flex-direction:column;gap:16px">' +
+        '<h2 id="don-h" style="margin:0;font-size:20px">تبرّع لهذا المشروع</h2>' + progress(66960, 108000) +
+        '<div class="minis"><span><b class="ltr">41,040</b>المتبقي</span><span><b class="ltr">214</b>متبرعًا</span><span><b class="ltr">12/30</b>داعية مكفول</span></div>' +
+        '<div role="group" aria-label="خيار التبرع" style="display:flex;flex-direction:column;gap:8px">' + opts.map(function (o, i) {
+          return '<button type="button" class="opt" data-action="opt" data-i="' + i + '" aria-pressed="' + (S.opt === i) + '"><span>' + o[0] + '</span><b class="ltr">' + (o[1] ? fmt(o[1]) + ' ر.س' : 'أي مبلغ') + '</b></button>';
+        }).join('') + '</div>' +
+        (isOpen
+          ? '<label class="field">مبلغ التبرع<span class="affix"><input inputmode="numeric" value="500"><span>ر.س</span></span><small>الحد الأدنى 10 ر.س</small></label>'
+          : '<div style="display:flex;justify-content:space-between;align-items:center"><span style="font-weight:600;font-size:14px">العدد</span><span class="stepper"><button type="button" data-action="dec" aria-label="إنقاص">−</button><b aria-live="polite">' + S.qty + '</b><button type="button" data-action="inc" aria-label="زيادة">+</button></span></div>') +
+        '<div class="total"><span style="color:var(--c-text-2)">الإجمالي</span><b><span class="ltr">' + fmt(total) + '</span> ر.س</b></div>' +
+        '<div id="gift" class="giftbox' + (S.gift ? ' on' : '') + '"><label class="check"><input type="checkbox" data-action="gift"' + (S.gift ? ' checked' : '') + '>' + svg('gift', 18, '#7E6C43') + ' اجعله إهداءً</label>' +
+          (S.gift ? '<div class="gfields">' +
+            '<label class="field">اسم المُهدي (يظهر في البطاقة)<input class="input" placeholder="مثال: عبدالله"></label>' +
+            '<label class="field">اسم المُهدى إليه<input class="input" placeholder="مثال: والدتي"></label>' +
+            '<div class="field"><span id="gm">جوال المُهدى إليه</span><span style="display:flex;gap:6px" dir="ltr"><select class="select" style="width:auto" aria-label="رمز الدولة"><option>+966</option><option>+971</option><option>+965</option><option>+968</option><option>+973</option><option>+974</option><option>+20</option></select><input class="input" inputmode="tel" placeholder="5X XXX XXXX" aria-labelledby="gm"></span></div>' +
+            '<span style="font-size:14px;font-weight:600">تصميم البطاقة</span><div class="cards3" role="group" aria-label="تصميم البطاقة">' + cards.map(function (c, i) { return '<button type="button" data-action="card" data-i="' + i + '" aria-label="تصميم ' + (i + 1) + '" aria-pressed="' + (S.card === i) + '" style="background:' + c + '"></button>'; }).join('') + '</div>' +
+            '<label class="field">رسالة (اختياري)<textarea class="input" rows="2" placeholder="اكتب رسالة قصيرة تصل مع البطاقة"></textarea></label></div>' : '') +
+        '</div>' +
+        '<div style="display:flex;gap:8px"><a class="btn btn-brand" style="flex:1;min-height:52px" href="#/checkout">' + (S.gift ? 'أهدِ التبرع الآن' : 'تبرع الآن') + '</a><button type="button" class="btn btn-line" style="width:52px;padding:0" data-action="add" data-p="p1" aria-label="إضافة إلى السلة">' + svg('cart', 20) + '</button></div>' +
+        '<p style="margin:0;font-size:12.5px;color:var(--c-muted);display:flex;gap:6px;align-items:center">' + svg('lock', 14, '#304F50') + ' دفع آمن · إيصال رسمي فوري</p>' +
+      '</div>' +
+      '<div class="panel share" style="padding:16px"><b style="font-size:14px">شارك الأجر</b><span style="flex:1"></span><a href="#">واتساب</a><a href="#">X</a><button type="button" data-action="copy">نسخ الرابط</button></div>' +
+      '</aside></div></div>';
+  }
+
+  function viewCheckout() {
+    var methods = [['mada', 'بطاقة مدى'], ['Apple Pay', 'الدفع السريع'], ['VISA / Mastercard', 'بطاقة ائتمانية']];
+    var lines = [['كفالة داعية في نيجيريا', 'كفالة 3 أشهر × 1', '900', '#304F50', true], ['طباعة ترجمة معاني القرآن بالهوسا', 'نسخة × 4', '100', '#A08D62', false], ['الصندوق العام للجمعية', 'تبرع سريع', '250', '#BAA87E', false]];
+    return '<div class="wrap" style="padding-block:24px 64px">' +
+      '<ol class="steps" aria-label="خطوات التبرع" style="margin-bottom:20px"><li class="done"><span class="n">1</span><span class="lbl">السلة</span></li><li class="sep done" aria-hidden="true"></li><li aria-current="step"><span class="n">2</span><span class="lbl">بيانات المتبرع والدفع</span></li><li class="sep" aria-hidden="true"></li><li><span class="n">3</span><span class="lbl">الإيصال</span></li></ol>' +
+      '<h1 style="margin:0 0 20px;font-size:28px">إتمام التبرع</h1>' +
+      '<div class="pgrid"><div class="pmain" style="gap:20px">' +
+        '<section class="panel" aria-labelledby="cart-h"><h2 id="cart-h" style="margin:0 0 8px;font-size:19px">السلة (3)</h2><ul class="lines" role="list">' + lines.map(function (l) {
+          return '<li><span class="thumb" style="background:' + l[3] + '" aria-hidden="true"></span><span class="info"><b>' + l[0] + '</b><span style="font-size:13px;color:var(--c-muted)">' + l[1] + '</span>' +
+            (l[4] ? '<span class="catpill" style="align-self:flex-start;margin-top:4px">إهداء إلى: والدتي</span>' : '') + '</span><span class="amt"><span class="ltr">' + l[2] + '</span> ر.س</span>' +
+            '<button type="button" class="icon-btn" style="width:40px;height:40px" aria-label="حذف ' + l[0] + ' من السلة" data-action="remove">' + svg('trash', 16, '#9A3B35') + '</button></li>';
+        }).join('') + '</ul></section>' +
+        '<section class="panel" aria-labelledby="donor-h" style="display:flex;flex-direction:column;gap:14px"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><h2 id="donor-h" style="margin:0;font-size:19px">بيانات المتبرع</h2><span style="font-size:13px;color:var(--c-muted)">لديك حساب؟ <a href="#">سجّل الدخول برقم الجوال</a></span></div>' +
+          '<div class="g2"><label class="field">الاسم<input class="input" placeholder="الاسم كما يظهر في الإيصال"></label>' +
+          '<div class="field"><span id="mob">رقم الجوال (لإرسال الإيصال)</span><span style="display:flex;gap:6px" dir="ltr"><select class="select" style="width:auto" aria-label="رمز الدولة"><option>+966</option><option>+971</option><option>+965</option><option>+20</option></select><input class="input" inputmode="tel" placeholder="5X XXX XXXX" aria-labelledby="mob"></span></div>' +
+          '<label class="field">البريد الإلكتروني (اختياري)<input class="input" type="email" dir="ltr" placeholder="name@example.com" style="text-align:right"></label>' +
+          '<label class="check" style="font-weight:400;font-size:14px;align-self:end;min-height:46px"><input type="checkbox" data-action="anon"' + (S.anon ? ' checked' : '') + '> تبرع دون إظهار اسمي (فاعل خير)</label></div></section>' +
+        '<section class="panel" aria-labelledby="pay-h" style="display:flex;flex-direction:column;gap:12px"><h2 id="pay-h" style="margin:0;font-size:19px">طريقة الدفع</h2>' +
+          '<div class="methods" role="radiogroup" aria-label="طريقة الدفع">' + methods.map(function (m, i) { return '<button type="button" class="method" role="radio" data-action="pay" data-i="' + i + '" aria-checked="' + (S.pay === i) + '"><b class="ltr">' + m[0] + '</b><small>' + m[1] + '</small></button>'; }).join('') + '</div>' +
+          '<p style="margin:0;font-size:13px;color:var(--c-muted)">تُكمل الدفع في صفحة بوابة الدفع الآمنة، ثم تعود إلى صفحة الإيصال. لا تُدخل بيانات البطاقة في المتجر.</p>' +
+        '</section></div>' +
+      '<aside class="paside panel" aria-labelledby="sum-h" style="display:flex;flex-direction:column;gap:12px"><h2 id="sum-h" style="margin:0;font-size:19px">ملخص التبرع</h2>' +
+        lines.map(function (l) { return '<div class="srow"><span>' + l[0] + '</span><span><span class="ltr">' + l[2] + '</span> ر.س</span></div>'; }).join('') +
+        '<div class="total"><b style="font-size:16px">الإجمالي</b><b style="font-size:24px"><span class="ltr">1,250</span> ر.س</b></div>' +
+        '<a class="btn btn-brand btn-block" style="min-height:54px" href="#/receipt">' + (S.pay === 1 ? 'ادفع عبر Apple Pay · 1,250 ر.س' : 'المتابعة للدفع · 1,250 ر.س') + '</a>' +
+        '<p style="margin:0;font-size:12.5px;color:var(--c-muted);text-align:center">بالمتابعة توافق على <a href="#">سياسة الاسترجاع</a> و<a href="#">الخصوصية</a></p>' +
+        '<div class="note">' + svg('shield', 18) + ' يصلك إيصال رسمي فور نجاح الدفع، ويصل المُهدى إليه بطاقة الإهداء.</div>' +
+      '</aside></div></div>';
+  }
+
+  function viewReceipt() {
+    return '<section class="thanks"><div class="wrap"><span class="okmark" aria-hidden="true">' + svg('check', 36, '#1B2E2E') + '</span><h1>جزاك الله خيرًا، تم استلام تبرعك</h1><p>أرسلنا الإيصال إلى جوالك، وأُرسلت بطاقة الإهداء إلى المُهدى إليه.</p></div></section>' +
+      '<div class="rgrid"><article class="panel" aria-labelledby="rc-h" style="flex:999 1 520px;min-width:0;display:flex;flex-direction:column;gap:14px">' +
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap"><div><h2 id="rc-h" style="margin:0;font-size:20px">إيصال تبرع</h2><span style="font-size:13px;color:var(--c-muted)">رقم الإيصال <b class="ltr">[DR-0000-000000]</b> · [التاريخ والوقت]</span></div><span class="status">مدفوع</span></div>' +
+        '<dl class="kv"><div><dt>المتبرع</dt><dd>[اسم المتبرع]</dd></div><div><dt>طريقة الدفع</dt><dd class="ltr" style="text-align:right">mada •••• [0000]</dd></div><div><dt>رقم الطلب</dt><dd class="ltr" style="text-align:right">[REF-00-000000]</dd></div></dl>' +
+        '<table class="rt"><caption class="vh">بنود التبرع</caption><thead><tr><th scope="col">البند</th><th scope="col">الكمية</th><th scope="col" class="num">المبلغ</th></tr></thead><tbody>' +
+          '<tr><td>كفالة داعية في نيجيريا — 3 أشهر <span style="font-size:12px;color:var(--c-gold-text)">(إهداء)</span></td><td>1</td><td class="num"><span class="ltr">900</span> ر.س</td></tr>' +
+          '<tr><td>طباعة ترجمة معاني القرآن بالهوسا</td><td>4</td><td class="num"><span class="ltr">100</span> ر.س</td></tr>' +
+          '<tr><td>الصندوق العام للجمعية</td><td>—</td><td class="num"><span class="ltr">250</span> ر.س</td></tr></tbody>' +
+          '<tfoot><tr><th scope="row" style="text-align:start">الإجمالي</th><td></td><td class="num" style="font-weight:700;font-size:20px"><span class="ltr">1,250</span> ر.س</td></tr></tfoot></table>' +
+        '<div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-brand" href="#">' + svg('down', 18) + ' تحميل الإيصال PDF</a><a class="btn btn-line" href="#">تبرعاتي وإيصالاتي</a><a class="btn" style="color:var(--c-text-2)" href="#/">العودة للمتجر</a></div>' +
+      '</article>' +
+      '<aside style="flex:1 1 300px;max-width:360px;display:flex;flex-direction:column;gap:16px">' +
+        '<div class="panel" style="display:flex;flex-direction:column;gap:12px;padding:20px"><b>بطاقة الإهداء المُرسلة</b><div class="giftcard" style="width:100%"><small>دار أفريقيا · بطاقة إهداء</small><span><span style="font-size:13px;color:#D9E2E1">أُهدي إليكِ أجر</span><br><b style="font-size:18px">كفالة داعية في نيجيريا</b></span><span style="font-size:13px;color:#D9E2E1">من: عبدالله · إلى: والدتي</span></div></div>' +
+        '<div class="giftband" style="margin:0;padding:20px;flex-direction:column;align-items:stretch;gap:10px"><b>ضاعف أجرك بالمشاركة</b><span style="font-size:14px;color:var(--c-text-2)">شارك رابط المشروع مع أهلك وأصدقائك.</span><div class="share"><a href="#" style="flex:1;justify-content:center;background:var(--c-surface)">واتساب</a><button type="button" data-action="copy" style="flex:1;justify-content:center;background:var(--c-surface)">نسخ الرابط</button></div></div>' +
+      '</aside></div>';
+  }
+
+  /* ── Shell ─────────────────────────────────────────────────────── */
+  var main = document.getElementById('main');
+  function renderTabs() {
+    document.getElementById('tabs').innerHTML = CATS.map(function (c, i) {
+      return '<a href="#/" data-action="cat" data-i="' + i + '"' + (S.route === '/' && S.cat === i ? ' aria-current="page"' : '') + '>' + c + '</a>';
+    }).join('');
+    var b = [['/', 'الرئيسية', 'home'], ['/cats', 'الأقسام', 'grid'], ['/search', 'البحث', 'search'], ['/checkout', 'السلة', 'cart'], ['/account', 'حسابي', 'user']];
+    document.getElementById('bnav').innerHTML = b.map(function (x) {
+      return '<a href="#' + (x[0] === '/cats' || x[0] === '/search' || x[0] === '/account' ? '/' : x[0]) + '" data-bnav="' + x[0] + '"' + (S.route === x[0] ? ' aria-current="page"' : '') + '>' + svg(x[2], 22) + x[1] + '</a>';
+    }).join('');
+    document.getElementById('cartTotal').textContent = S.cart ? fmt(S.cart) + ' ر.س' : '0';
+  }
+  var TITLES = { '/': 'متجر التبرعات — دار أفريقيا', '/p': 'كفالة داعية في نيجيريا — دار أفريقيا', '/checkout': 'إتمام التبرع — دار أفريقيا', '/receipt': 'شكرًا لتبرعك — دار أفريقيا' };
+  function render(focus) {
+    var v = { '/': viewHome, '/p': viewProject, '/checkout': viewCheckout, '/receipt': viewReceipt }[S.route] || viewHome;
+    main.innerHTML = v();
+    document.title = TITLES[S.route] || TITLES['/'];
+    renderTabs();
+    if (focus) { window.scrollTo(0, 0); main.focus({ preventScroll: true }); }
+  }
+  function route() {
+    var r = (location.hash || '#/').slice(1) || '/';
+    S.route = ['/', '/p', '/checkout', '/receipt'].indexOf(r) >= 0 ? r : '/';
+    render(true);
+    if (S.pendingGift && S.route === '/p') { S.pendingGift = false; var g = document.getElementById('gift'); if (g) g.scrollIntoView({ block: 'center' }); }
+  }
+  var toastEl = document.getElementById('toast'), tt;
+  function toast(msg) { toastEl.textContent = msg; toastEl.classList.add('show'); clearTimeout(tt); tt = setTimeout(function () { toastEl.classList.remove('show'); }, 2200); }
+
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-action]');
+    if (!el) return;
+    var a = el.getAttribute('data-action'), i = +el.getAttribute('data-i');
+    var keep = function (fn) { var y = window.scrollY; fn(); render(false); window.scrollTo(0, y); };
+    switch (a) {
+      case 'cat': S.cat = i; if (S.route !== '/') return; e.preventDefault(); keep(function () {}); document.getElementById('projects').scrollIntoView({ behavior: 'smooth' }); break;
+      case 'preset': keep(function () { S.preset = i; }); break;
+      case 'slide': keep(function () { S.slide = i; }); break;
+      case 'pick': keep(function () { S.picks[el.getAttribute('data-p')] = i; }); break;
+      case 'add': S.cart += 300; renderTabs(); toast('أُضيف إلى السلة'); break;
+      case 'share': case 'copy': toast('نُسخ الرابط'); break;
+      case 'opt': keep(function () { S.opt = i; }); break;
+      case 'inc': keep(function () { S.qty = Math.min(99, S.qty + 1); }); break;
+      case 'dec': keep(function () { S.qty = Math.max(1, S.qty - 1); }); break;
+      case 'gift': keep(function () { S.gift = el.checked; }); break;
+      case 'card': keep(function () { S.card = i; }); break;
+      case 'shot': keep(function () { S.shot = i; }); break;
+      case 'pay': keep(function () { S.pay = i; }); break;
+      case 'anon': S.anon = el.checked; break;
+      case 'remove': toast('حُذف البند (نموذج أولي)'); break;
+      case 'to-gift': S.pendingGift = true; S.gift = true; break;
+      case 'theme':
+        var d = document.documentElement, next = d.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        d.setAttribute('data-theme', next); break;
+    }
+  });
+  document.addEventListener('submit', function (e) { e.preventDefault(); toast('البحث في النموذج الأولي غير مفعّل'); });
+  document.addEventListener('input', function (e) {
+    if (e.target.matches('[data-input="custom"]')) {
+      var v = e.target.value.replace(/[^\d]/g, ''); var q = document.getElementById('qAmt');
+      if (q) q.textContent = v || PRESETS[S.preset];
+    }
+  });
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.setAttribute('data-theme', 'dark');
+  window.addEventListener('hashchange', route);
+  route();
+})();
+</script>
+</body>
+</html>

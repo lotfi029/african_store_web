@@ -31,3 +31,14 @@ without a commit. Never redo a committed phase.
 ## Open REVIEW rows
 
 See `DECISIONS.md` (column REVIEW?) and the summary in [docs/W-00-report.md](docs/W-00-report.md#review-rows-owner-must-read): A-7 payments, Apple Pay placeholder kept, fonts +7.5 kB on /ar/, utility-row licence removed, footer omissions, trust-row text, checkout payment panel, Lighthouse TBT.
+
+## Definition of done (plan §10)
+
+- [x] Phases 0–9 committed in order on `feat/w-00-african-store` (`W-00.0` … `W-00.10`).
+- [x] G-full green on the real API (117 e2e passed, a11y 58 routes × 2 themes).
+- [x] `build:prod` + container check green.
+- [x] LHCI numbers logged (DECISIONS "Lighthouse", REVIEW: TBT).
+- [x] Screenshots in `docs/screens/w-00/` (56); prototype differences listed (DECISIONS, report).
+- [x] No ta3lom brand string in `src/`, `public/` or `deploy/` (only source-repo / API references; report "Brand check").
+- [x] `DECISIONS.md`, `PROGRESS.md` and `docs/W-00-report.md` written.
+- [x] PR open: https://github.com/lotfi029/african_store_web/pull/1 (draft); CI watched.

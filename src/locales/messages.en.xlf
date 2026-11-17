@@ -1167,7 +1167,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">252</context>
+          <context context-type="linenumber">290</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.cart.total" datatype="html">
@@ -1207,7 +1207,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/checkout/checkout.page.html</context>
-          <context context-type="linenumber">177,178</context>
+          <context context-type="linenumber">192,193</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/order/order.page.html</context>
@@ -2831,7 +2831,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/project/project.page.html</context>
-          <context context-type="linenumber">97,98</context>
+          <context context-type="linenumber">102,103</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/project/project.page.ts</context>
@@ -6555,7 +6555,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/checkout/checkout.page.html</context>
-          <context context-type="linenumber">147,148</context>
+          <context context-type="linenumber">162,163</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.cart.checkout-r5" datatype="html">
@@ -6666,12 +6666,28 @@
           <context context-type="linenumber">128,130</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="store.checkout.payment-heading" datatype="html">
+        <source>طريقة الدفع</source>
+        <target state="translated">Payment method</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/store/checkout/checkout.page.html</context>
+          <context context-type="linenumber">136,137</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="store.checkout.hosted-note" datatype="html">
+        <source> تُكمل الدفع في صفحة بوابة الدفع الآمنة، ولا نطلب بيانات بطاقتك في هذه الصفحة. </source>
+        <target state="translated">You complete the payment on the secure payment gateway's page; we never ask for your card details on this page.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/store/checkout/checkout.page.html</context>
+          <context context-type="linenumber">144,146</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="store.checkout.pay" datatype="html">
         <source>ادفع الآن</source>
         <target state="translated">Pay now</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/checkout/checkout.page.html</context>
-          <context context-type="linenumber">140,142</context>
+          <context context-type="linenumber">155,157</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.checkout.other-donations" datatype="html">
@@ -6679,7 +6695,7 @@
         <target state="translated">Your cart contains other donations</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/checkout/checkout.page.html</context>
-          <context context-type="linenumber">150,153</context>
+          <context context-type="linenumber">165,168</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.checkout.edit-cart" datatype="html">
@@ -6687,7 +6703,7 @@
         <target state="translated">Edit the cart</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/checkout/checkout.page.html</context>
-          <context context-type="linenumber">184,186</context>
+          <context context-type="linenumber">199,201</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.checkout.name-required" datatype="html">
@@ -6711,7 +6727,7 @@
         <target state="translated">Open amount</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">62,63</context>
+          <context context-type="linenumber">63,64</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.showcase.open-from" datatype="html">
@@ -6723,7 +6739,15 @@
                 /&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">64,66</context>
+          <context context-type="linenumber">65,67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="store.donate.total" datatype="html">
+        <source>الإجمالي</source>
+        <target state="translated">Total</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
+          <context context-type="linenumber">117</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.donate.donate" datatype="html">
@@ -6731,7 +6755,7 @@
         <target state="translated">Donate</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">121,123</context>
+          <context context-type="linenumber">130,132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.donate.add" datatype="html">
@@ -6739,7 +6763,15 @@
         <target state="translated">Add</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">131,133</context>
+          <context context-type="linenumber">140,142</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="store.donate.secure-line" datatype="html">
+        <source>دفع آمن · إيصال رسمي فوري</source>
+        <target state="translated">Secure payment · instant official receipt</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
+          <context context-type="linenumber">146,149</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.donate.amount-label" datatype="html">
@@ -6747,7 +6779,7 @@
         <target state="translated">Amount</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">237</context>
+          <context context-type="linenumber">275</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/quick-donate/quick-donate-form.ts</context>
@@ -6759,7 +6791,7 @@
         <target state="translated">Donation options for <x id="title" equiv-text="this.title()"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">250</context>
+          <context context-type="linenumber">288</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.donate.add-for" datatype="html">
@@ -6767,7 +6799,7 @@
         <target state="translated">Add a donation to <x id="title" equiv-text="this.title()"/> to the cart</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">254</context>
+          <context context-type="linenumber">292</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.donate.donate-for" datatype="html">
@@ -6775,7 +6807,7 @@
         <target state="translated">Donate now to <x id="title" equiv-text="this.title()"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">257</context>
+          <context context-type="linenumber">295</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.donate.choose" datatype="html">
@@ -6783,7 +6815,7 @@
         <target state="translated">Choose one of the donation options first.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">283</context>
+          <context context-type="linenumber">327</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.donate.amount-invalid" datatype="html">
@@ -6791,7 +6823,7 @@
         <target state="translated">Enter a valid donation amount.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">284</context>
+          <context context-type="linenumber">328</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.donate.added" datatype="html">
@@ -6799,7 +6831,7 @@
         <target state="translated">Your donation was added to the cart.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">304</context>
+          <context context-type="linenumber">348</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.donate.view-cart" datatype="html">
@@ -6807,7 +6839,7 @@
         <target state="translated">View cart</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/donate/donate-box.ts</context>
-          <context context-type="linenumber">305</context>
+          <context context-type="linenumber">349</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.listing.categories-label" datatype="html">
@@ -7666,12 +7698,28 @@
           <context context-type="linenumber">179</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="store.project.about-heading" datatype="html">
+        <source>عن المشروع</source>
+        <target state="translated">About the project</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/store/project/project.page.html</context>
+          <context context-type="linenumber">52,54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="store.project.share-heading" datatype="html">
+        <source>شارك الأجر</source>
+        <target state="translated">Share the reward</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/store/project/project.page.html</context>
+          <context context-type="linenumber">59,60</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="store.project.options-heading" datatype="html">
         <source>خيارات التبرع</source>
         <target state="translated">Donation options</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/project/project.page.html</context>
-          <context context-type="linenumber">61,63</context>
+          <context context-type="linenumber">66,68</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.project.donate-heading" datatype="html">
@@ -7679,7 +7727,7 @@
         <target state="translated">Donate to this project</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/project/project.page.html</context>
-          <context context-type="linenumber">63,65</context>
+          <context context-type="linenumber">68,70</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.project.bar-from" datatype="html">
@@ -7687,7 +7735,7 @@
         <target state="translated">From</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/project/project.page.html</context>
-          <context context-type="linenumber">80,81</context>
+          <context context-type="linenumber">85,86</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.project.bar-donate" datatype="html">
@@ -7695,7 +7743,7 @@
         <target state="translated">Donate now</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/store/project/project.page.html</context>
-          <context context-type="linenumber">85,88</context>
+          <context context-type="linenumber">90,93</context>
         </context-group>
       </trans-unit>
       <trans-unit id="store.quick.category" datatype="html">

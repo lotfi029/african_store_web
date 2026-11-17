@@ -103,6 +103,23 @@ export const OPEN_AMOUNT = 'open';
       font-variant-numeric: tabular-nums;
       font-weight: 600;
     }
+    /* \`<ta-option-picker class="rows">\` (project page, W-00 prototype): one full-width row per option, label at the
+       start and the amount at the end. Style only — the radio group is unchanged. */
+    :host(.rows) .chips {
+      display: grid;
+      gap: 8px;
+    }
+    :host(.rows) .chip {
+      display: flex;
+      justify-content: space-between;
+      inline-size: 100%;
+      min-block-size: 48px;
+      padding-inline: 14px;
+      border-radius: var(--r);
+    }
+    :host(.rows) .p {
+      font-weight: 700;
+    }
   `,
 })
 export class OptionPicker {

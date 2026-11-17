@@ -39,21 +39,26 @@
             @if (p.badge === 'urgent') {
               <span class="tag gold" i18n="@@store.card.badge-urgent">عاجل</span>
             } @else if (p.badge === 'new') {
-              <span class="tag green" i18n="@@store.card.badge-new">جديد</span>
+              <span class="tag new" i18n="@@store.card.badge-new">جديد</span>
             }
-            <span class="tag grey">{{ categoryName() }}</span>
-            <span class="spacer"></span>
-            <ta-share-sheet [url]="canonical()" [title]="title()" />
+            <span class="catpill">{{ categoryName() }}</span>
           </div>
           <h1>{{ title() }}</h1>
           @if (summary()) {
             <p class="lede">{{ summary() }}</p>
           }
           @if (body()) {
-            <div class="prose">
-              <ta-markdown [source]="body()" />
-            </div>
+            <section class="panel" aria-labelledby="about-h">
+              <h2 id="about-h" class="pnh" i18n="@@store.project.about-heading">عن المشروع</h2>
+              <div class="prose">
+                <ta-markdown [source]="body()" />
+              </div>
+            </section>
           }
+          <section class="panel share-panel" aria-labelledby="share-h">
+            <h2 id="share-h" class="pnh" i18n="@@store.project.share-heading">شارك الأجر</h2>
+            <ta-share-sheet [url]="canonical()" [title]="title()" />
+          </section>
         </div>
 
         <aside #buybox class="buybox" aria-labelledby="donate-h">

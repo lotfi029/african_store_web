@@ -23,6 +23,7 @@ import {
   type PickerOption,
 } from '../../../shared/ui/option-picker/option-picker';
 import { Money } from '../../../shared/ui/money/money';
+import { times } from '../../../core/money/money';
 import { QtyStepper } from '../../../shared/ui/qty-stepper/qty-stepper';
 import { ShowcaseNote } from '../../../shared/ui/showcase-note/showcase-note';
 import { type DonateProject, donateDraft, initialChoice } from './donate-draft';
@@ -75,6 +76,7 @@ export interface CheckoutNavState {
         <div class="skel chips-skel" aria-hidden="true"></div>
       } @else if (pickerOptions().length) {
         <ta-option-picker
+          [class.rows]="size() === 'page'"
           [name]="idPrefix() + '-opt'"
           [legend]="legend()"
           [options]="pickerOptions()"
@@ -109,6 +111,13 @@ export interface CheckoutNavState {
         <p class="err" role="alert">{{ e }}</p>
       }
 
+      <!-- W-00 prototype: the project page shows the line total (integer-halala arithmetic, core/money). -->
+      @if (size() === 'page' && total(); as t) {
+        <p class="total">
+          <span i18n="@@store.donate.total">الإجمالي</span><strong><ta-money [value]="t" /></strong>
+        </p>
+      }
+
       <div class="acts">
         <button
           type="button"
@@ -131,6 +140,13 @@ export interface CheckoutNavState {
           <ta-icon name="cart" [size]="18" /><span i18n="@@store.donate.add">اضافة</span>
         </button>
       </div>
+      @if (size() === 'page') {
+        <p class="secure">
+          <ta-icon name="lock" [size]="14" /><span i18n="@@store.donate.secure-line"
+            >دفع آمن · إيصال رسمي فوري</span
+          >
+        </p>
+      }
     </div>
     }
   `,
@@ -217,6 +233,28 @@ export interface CheckoutNavState {
       min-block-size: 50px;
       font-size: 1.02rem;
     }
+    .total {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin: 0;
+      padding-block: var(--space-3);
+      border-block: 1px dashed var(--c-border);
+      color: var(--c-text-2);
+    }
+    .total strong {
+      font-size: 1.25rem;
+      color: var(--c-text);
+    }
+    .secure {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin: 0;
+      font-size: 0.8rem;
+      color: var(--c-muted);
+    }
   `,
 })
 export class DonateBox {
@@ -267,6 +305,12 @@ export class DonateBox {
     (this.project().options ?? []).find((o) => o.id === this.choice()),
   );
   protected readonly maxQuantity = computed(() => this.config.maxQuantity() ?? 999);
+  /** The line total shown on the project page: option × quantity, or the valid open amount; null when unknown. */
+  protected readonly total = computed<string | null>(() => {
+    const o = this.selectedOption();
+    if (o) return times(o.amount, this.quantity());
+    return this.choice() === OPEN_AMOUNT ? this.amount() : null;
+  });
   /** Limits come from the config: until it answers (and while a request runs) the buttons wait. */
   protected readonly ready = computed(
     () => this.config.ready() && this.project().options !== null && !this.busy(),

@@ -899,5 +899,11 @@
   "store.home.banner-urgent": "Urgent campaign",
   "store.home.banner-details": "Details",
   "store.home.quick-title-da": "Quick donation",
-  "store.home.quick-sub": "Spent where the need is greatest"
+  "store.home.quick-sub": "Spent where the need is greatest",
+  "store.checkout.payment-heading": "Payment method",
+  "store.checkout.hosted-note": "You complete the payment on the secure payment gateway's page; we never ask for your card details on this page.",
+  "store.donate.total": "Total",
+  "store.donate.secure-line": "Secure payment · instant official receipt",
+  "store.project.about-heading": "About the project",
+  "store.project.share-heading": "Share the reward"
 }

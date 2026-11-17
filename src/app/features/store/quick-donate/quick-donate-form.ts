@@ -138,6 +138,10 @@ import type { CheckoutNavState } from '../donate/donate-box';
     .go:hover {
       background: var(--c-brand-deep);
     }
+    /* The amount inside the teal button: ta-money's currency label is muted elsewhere; white on the fill here. */
+    .amt {
+      --c-muted-2: var(--c-on-brand);
+    }
     .go:disabled {
       opacity: 0.6;
       cursor: default;

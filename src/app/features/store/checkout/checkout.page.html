@@ -130,6 +130,21 @@
                 </div>
               </section>
 
+              <!-- W-00 prototype: the gateway's methods as INFORMATION only. No card field on our page (rule 18): the pay
+                   button leaves for the gateway's hosted page. -->
+              <section class="cgroup paysec" aria-labelledby="co-pay-h">
+                <h2 id="co-pay-h" i18n="@@store.checkout.payment-heading">طريقة الدفع</h2>
+                <ul class="pmarks" role="list">
+                  <li dir="ltr">mada</li>
+                  <li dir="ltr">Apple Pay</li>
+                  <li dir="ltr">VISA</li>
+                  <li dir="ltr">Mastercard</li>
+                </ul>
+                <p class="note" i18n="@@store.checkout.hosted-note">
+                  تُكمل الدفع في صفحة بوابة الدفع الآمنة، ولا نطلب بيانات بطاقتك في هذه الصفحة.
+                </p>
+              </section>
+
               <button
                 type="submit"
                 class="b cta pay-btn"

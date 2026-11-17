@@ -1,12 +1,26 @@
+/* W-00 prototype: the thank-you page opens on an ink hero. */
+.ph.hero {
+  background: var(--c-surface-dark);
+  color: var(--c-on-dark);
+}
+
+.ph.hero h1 {
+  color: var(--c-on-brand);
+}
+
+.ph.hero p {
+  color: var(--c-on-dark-muted);
+}
+
 .osec {
-  padding-block: 8px 72px;
+  padding-block: 32px 72px;
 }
 
 .card {
   max-inline-size: 640px;
   background: var(--c-surface);
   border: 1px solid var(--c-border);
-  border-radius: 20px;
+  border-radius: var(--r-lg);
   padding: 28px;
 }
 
@@ -25,6 +39,26 @@
 .ic.ok {
   background: var(--c-success-tint);
   color: var(--c-success-text);
+  animation: ok-in var(--dur-3) var(--ease) both;
+}
+
+/* The paid check pops in once; reduced motion stops it (non-negotiable #8). */
+@keyframes ok-in {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ic.ok {
+    animation: none;
+  }
 }
 
 h2 {

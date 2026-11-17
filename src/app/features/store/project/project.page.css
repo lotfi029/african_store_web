@@ -1,0 +1,185 @@
+.crumbs-row {
+  padding-block: 28px 0;
+}
+
+.crumbs-row .crumbs {
+  margin: 0;
+}
+
+.pp {
+  padding-block: 12px 56px;
+}
+
+.hero-media {
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--c-tint);
+  aspect-ratio: 16 / 10;
+}
+
+.tagrow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-block: 22px 10px;
+}
+
+.tag.grey {
+  background: var(--c-surface-3);
+  color: var(--c-text-2);
+}
+
+.spacer {
+  flex: 1;
+}
+
+h1 {
+  font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+  margin: 0;
+}
+
+.lede {
+  font-size: 1.08rem;
+  color: var(--c-text-2);
+  margin-block: 12px 0;
+}
+
+.prose {
+  margin-block-start: 24px;
+}
+
+.buybox {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 30px 70px var(--c-header-shadow);
+  align-self: start;
+}
+
+@media (width >= 1000px) {
+  .buybox {
+    position: sticky;
+    inset-block-start: 88px;
+  }
+}
+
+.bh {
+  font-size: 1.15rem;
+  margin-block: 0 14px;
+}
+
+.gone {
+  padding-block: var(--space-10);
+  text-align: center;
+}
+
+.gone p {
+  color: var(--c-text-2);
+}
+
+.links a {
+  color: var(--c-link);
+  min-block-size: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.loading {
+  padding-block: 40px;
+}
+
+.sk-media {
+  aspect-ratio: 16 / 10;
+}
+
+.sk-box {
+  block-size: 360px;
+}
+
+/* Sticky donate bar — phones and tablets only (from 1000 px the donate box itself is sticky). */
+.dbar {
+  display: none;
+}
+
+@media (width < 1000px) {
+  .dbar {
+    display: block;
+    position: fixed;
+    inset-inline: 0;
+    inset-block-end: 0;
+    z-index: 45;
+    background: var(--c-surface);
+    border-block-start: 1px solid var(--c-border);
+    box-shadow: 0 -10px 30px var(--c-header-shadow);
+    padding-block: var(--space-3) calc(var(--space-3) + env(safe-area-inset-bottom, 0px));
+    padding-inline: var(--space-4);
+    transform: translateY(110%);
+    transition: transform var(--dur-2) var(--ease);
+  }
+
+  .dbar.show {
+    transform: none;
+  }
+
+  /* Room for the bar under the page so nothing ends up hidden behind it. */
+  .pp {
+    padding-block-end: 112px;
+  }
+}
+
+.dbar-in {
+  max-width: 720px;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.dbar-txt {
+  flex: 1 1 0;
+  min-inline-size: 0;
+  display: grid;
+}
+
+.dbar-t {
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dbar-from {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3em;
+  font-size: 0.85rem;
+  color: var(--c-text-2);
+}
+
+.dbar-go {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-block-size: 48px;
+  padding-inline: var(--space-6);
+  border: 0;
+  border-radius: var(--rp);
+  background: var(--c-brand-strong);
+  color: var(--c-on-brand);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dbar-go:hover {
+  background: var(--c-brand-deep);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dbar {
+    transition: none;
+  }
+}

@@ -1,0 +1,156 @@
+<div class="util">
+  <div class="uwrap">
+    <p class="utext" i18n="@@store.layout.utility-licence">
+      جميع التبرعات موثّقة بإيصال رسمي · ترخيص رقم [رقم الترخيص]
+    </p>
+    <div class="ulinks">
+      <a class="ulink" [href]="mainSite" i18n="@@store.layout.main-site">الموقع الرئيسي</a>
+      <ta-lang-switch variant="text" />
+    </div>
+  </div>
+</div>
+
+<header class="hdr" [class.scrolled]="scrolled()" [class.away]="away()" (focusin)="away.set(false)">
+  <div class="wrap">
+    <a class="brand" [href]="mainSite">
+      <svg class="mark" viewBox="380 320 1250 1060" aria-hidden="true" focusable="false">
+        <use href="logo.svg#logo-src" />
+      </svg>
+      <span class="nm">
+        <ng-container i18n="@@store.layout.association">جمعية التعلم الإلكتروني</ng-container>
+        <span class="sub" i18n="@@store.layout.store-tagline-r5">متجر التبرعات</span>
+      </span>
+    </a>
+
+    <form class="hsearch" role="search" (submit)="search($event, q)">
+      <label class="visually-hidden" for="hdr-q" i18n="@@store.layout.search-label"
+        >ابحث في المتجر</label
+      >
+      <input
+        #q
+        id="hdr-q"
+        name="q"
+        type="search"
+        maxlength="100"
+        [value]="currentQ()"
+        placeholder="ابحث: سقيا، سلة غذائية، كفالة…"
+        i18n-placeholder="@@store.layout.search-placeholder-c"
+        autocomplete="off"
+      />
+      <button type="submit" class="hsearch-btn">
+        <ta-icon name="search" [size]="18" class="hsearch-ic" />
+        <span class="hsearch-lbl" i18n="@@store.layout.search-submit">بحث</span>
+      </button>
+    </form>
+
+    <div class="acts">
+      @if (quick.available()) {
+        <button type="button" class="quick" (click)="quick.show($event.currentTarget)">
+          <ta-icon name="gift" [size]="18" /><span class="lbl" i18n="@@store.quick.title"
+            >تبرع سريع</span
+          >
+        </button>
+      }
+      @if (showcase) {
+        <!-- Showcase mode (SW-2): no sign-in, account or cart entry. -->
+      } @else if (auth.isSignedIn()) {
+        <!-- F6.2: the menu (and the problem texts it shows) is a lazy chunk; pages are prerendered signed out. -->
+        @defer (on immediate) {
+          <ta-account-menu />
+        } @placeholder {
+          <span class="signin" aria-hidden="true"><ta-icon name="user" [size]="18" /></span>
+        }
+      } @else {
+        <a class="signin" routerLink="/login"
+          ><ta-icon name="user" [size]="18" /><span class="lbl" i18n="@@store.layout.sign-in"
+            >دخول</span
+          ></a
+        >
+      }
+      @if (!showcase) {
+      <a
+        class="cartbtn"
+        routerLink="/cart"
+        [class.bump]="bump()"
+        [attr.aria-label]="cartLabel()"
+        [attr.data-lines]="cart.count()"
+      >
+        <ta-icon name="cart" [size]="18" />
+        @if (cart.count() > 0) {
+          <span class="cbadge" aria-hidden="true">{{ cart.count() }}</span>
+        }
+        <span class="clbl" aria-hidden="true"
+          ><span class="ctxt" i18n="@@store.layout.nav-cart">السلة</span>
+          @if (cart.count() > 0) {
+            <span class="ctot"
+              ><span class="sep"> · </span><ta-money [value]="cart.total()"
+            /></span>
+          }
+        </span>
+      </a>
+      }
+      <ta-theme-toggle class="htheme" />
+      <button
+        #burger
+        type="button"
+        class="burger"
+        [attr.aria-expanded]="mobileOpen()"
+        aria-controls="mobile-nav"
+        (click)="mobileOpen.set(!mobileOpen())"
+      >
+        <span></span><span></span><span></span>
+        <span class="visually-hidden" i18n="@@store.layout.menu">القائمة</span>
+      </button>
+    </div>
+  </div>
+
+  <nav
+    id="mobile-nav"
+    class="mnav"
+    [hidden]="!mobileOpen()"
+    aria-label="القائمة على الجوال"
+    i18n-aria-label="@@store.layout.mobile-nav-label"
+  >
+    <a class="ml" routerLink="/" (click)="mobileOpen.set(false)" i18n="@@store.layout.nav-home"
+      >الرئيسية</a
+    >
+    @if (quick.available()) {
+      <button
+        type="button"
+        class="quick mquick"
+        (click)="mobileOpen.set(false); quick.show(burger)"
+      >
+        <ta-icon name="gift" [size]="18" /><span i18n="@@store.quick.title">تبرع سريع</span>
+      </button>
+    }
+    @if (showcase) {
+      <!-- Showcase mode (SW-2): no cart, sign-in or account entry. -->
+    } @else {
+    <a class="ml" routerLink="/cart" (click)="mobileOpen.set(false)" i18n="@@store.layout.nav-cart"
+      >السلة</a
+    >
+    @if (auth.isSignedIn()) {
+      <a
+        class="ml"
+        routerLink="/account/donations"
+        (click)="mobileOpen.set(false)"
+        i18n="@@store.layout.account"
+        >حسابي</a
+      >
+    } @else {
+      <a
+        class="ml"
+        routerLink="/login"
+        (click)="mobileOpen.set(false)"
+        i18n="@@store.layout.sign-in"
+        >دخول</a
+      >
+    }
+    }
+    <a class="ml" [href]="mainSite" i18n="@@store.layout.main-site">الموقع الرئيسي</a>
+    <div class="mtheme">
+      <span i18n="@@store.layout.theme">المظهر</span>
+      <ta-theme-toggle />
+    </div>
+  </nav>
+</header>

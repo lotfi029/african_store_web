@@ -1,0 +1,29 @@
+# Dependency updates (owner brief P3): npm (Angular grouped), GitHub Actions (pinned by SHA) and the Docker base images.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: sunday
+    open-pull-requests-limit: 10
+    ignore:
+      # @angular/build 22.x requires typescript >=6.0 <6.1; TypeScript 7 broke `npm ci` on main (#26). Lift this with the
+      # Angular major that supports it.
+      - dependency-name: typescript
+        versions: ['>=6.1.0']
+    groups:
+      angular:
+        patterns: ['@angular/*', '@angular-devkit/*', '@schematics/angular', 'angular-eslint', '@angular-eslint/*']
+      testing:
+        patterns: ['vitest', '@vitest/*', '@playwright/test', 'playwright', '@axe-core/*', 'axe-core', '@lhci/cli']
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: sunday
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+      day: sunday

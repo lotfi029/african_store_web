@@ -1,0 +1,16 @@
+/node_modules
+/dist
+/.angular
+/out-tsc
+/coverage
+/test-results
+/playwright-report
+/.lighthouseci
+/.api
+/.e2e
+/e2e/.auth
+routes.txt
+.DS_Store
+*.log
+/public/sitemap.xml
+/public/robots.txt

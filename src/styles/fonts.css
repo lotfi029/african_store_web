@@ -1,0 +1,64 @@
+/**
+ * Self-hosted, subsetted fonts (woff2 only, font-display: swap).
+ *
+ * Readex Pro (CR-01 FE-1, client decision 7) — ONE family for both scripts, variable weight, so a
+ * page needs one file per script instead of one per weight. Files are the Fontsource builds of
+ * @fontsource-variable/readex-pro 5.3.0 (SIL OFL 1.1, see fonts/OFL-readex-pro.txt), copied in as
+ * assets — the package is not a dependency. Same subsetting as before: the Arabic block and
+ * Latin-basic (which carries the Western 0123 numerals used in both locales); Latin-extended,
+ * Vietnamese etc. are not shipped.
+ *
+ *   readex-pro-arabic-wght.woff2  22.9 kB   (preloaded — scripts/postbuild.mjs adds the <link>)
+ *   readex-pro-latin-wght.woff2   31.4 kB
+ *
+ * The IBM Plex Sans / Plex Sans Arabic faces this replaced were 11 files, ~190 kB across weights.
+ * IBM Plex Mono stays for numbers (stats, dates, licence numbers).
+ */
+
+/* Readex Pro — Arabic subset, every weight in one variable file */
+@font-face {
+  font-family: 'Readex Pro';
+  font-style: normal;
+  font-weight: 160 700;
+  font-display: swap;
+  src: url('./fonts/readex-pro-arabic-wght.woff2') format('woff2');
+
+  /* F6.4: trimmed with pyftsubset to Arabic + presentation forms (the Arabic Supplement/Extended and math blocks went) —
+     22.9 → 21.5 kB. The range lists exactly what the file holds, so other characters fall back cleanly. */
+  unicode-range: U+0600-06FF, U+200C-200F, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+
+/* Readex Pro — Latin-basic subset (English text, Western numerals, punctuation) */
+@font-face {
+  font-family: 'Readex Pro';
+  font-style: normal;
+  font-weight: 160 700;
+  font-display: swap;
+  src: url('./fonts/readex-pro-latin-wght.woff2') format('woff2');
+
+  /* F6.4: trimmed to ASCII + the typographic punctuation the UI uses (31.4 → 19.0 kB); accented Latin falls back to the
+     system font. */
+  unicode-range: U+0020-007E, U+00A0, U+00AB, U+00B7, U+00BB, U+00D7, U+2010-2014, U+2018-201D, U+2022, U+2026,
+    U+2039-203A, U+20AC, U+2122, U+2212, U+FEFF, U+FFFD;
+}
+
+/* IBM Plex Mono — digits, colon and basic Latin only (stats, dates, code) */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./fonts/plex-mono-latin-400.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./fonts/plex-mono-latin-500.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}

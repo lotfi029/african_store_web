@@ -16,7 +16,7 @@ without a commit. Never redo a committed phase.
 | 4 Layout | W-00.5 — layout: header, tabs, footer, bottom nav | done | G-fast green (unit 418, scripts 16); build:ci green (ar 138.1 / en 136.4 kB JS); e2e layout.spec 20/20 on the stub (2 new tests); a11y 70 routes × light + dark, 0 violations |
 | 5 Home | W-00.6 — home: banner, quick donate, cards, trust | done | G-fast green (unit 419, scripts 16); build:ci green (ar 138.1 / en 136.4 kB JS); e2e home-c + listing + layout 50/50 on the stub; a11y 70 routes × light + dark, 0 violations; LHCI → Phase 8 |
 | 6 Project … admin | W-00.7 — project, checkout, order, account, admin skin | done | G-fast green (unit 419, scripts 16); build:ci green; e2e on the stub: project + checkout + payments + account 16 passed / 12 skipped (real-API only), @showcase 17/17 (build:ci-showcase); a11y 70 routes × light + dark, 0 violations; sign-in (real API only) → Phase 8 |
-| 7 Seed, stub, screenshots | W-00.8 | | |
+| 7 Seed, stub, screenshots | W-00.8 — seed, stub, screenshots | done | real API up (Node 24, .NET 10.0.100, postgres:18); api:seed: dev seed retired, 8 categories / 22 projects; stub re-recorded (29 responses, 7 images); @smoke 69/69 on the new stub; 56 screenshots in docs/screens/w-00 (7 screens × ar/en × light/dark × 1440/390); G-fast green (unit 419, scripts 16) |
 | 8 DoD, container, LHCI | W-00.9 | | |
 | 9 Report | W-00.10 | | |
 

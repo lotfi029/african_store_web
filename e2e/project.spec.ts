@@ -69,7 +69,7 @@ for (const locale of ['ar', 'en'] as const) {
       page,
     }) => {
       await page.setViewportSize({ width: 390, height: 844 });
-      await page.goto(`/${locale}/p/support-a-daiya`, { waitUntil: 'networkidle' });
+      await page.goto(`/${locale}/p/c-preacher-nigeria`, { waitUntil: 'networkidle' });
       const bar = page.locator('.dbar');
       await expect(bar).toHaveClass(/show/);
       await expect(bar.locator('.dbar-from')).toContainText(/\d/);

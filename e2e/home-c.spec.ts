@@ -30,7 +30,7 @@ const titles = (page: Page) => page.locator('ta-project-card h3');
 const titleOf = (c: Card, locale: 'ar' | 'en') => pick(c.titleAr, c.titleEn, locale);
 
 /**
- * Option C home (docs/r5/home-option-c-spec.md §3–§5) on the seeded catalogue (28 projects, 10 categories, one empty):
+ * Option C home (docs/r5/home-option-c-spec.md §3–§5) on the seeded catalogue (Dar Africa set: 22 projects, 8 categories, one empty):
  * tabs, paging and back/forward, search, sort, the banner, the inline quick donate, empty and unknown categories,
  * URL normalisation (M-5) and the focus/announce behaviour (M-6). Arabic first.
  */

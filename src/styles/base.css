@@ -75,19 +75,16 @@ html[dir='ltr'] body {
   line-height: 1.55;
 }
 
+/* W-00: Dar Africa headings are bold (prototype). IBM Plex Sans Arabic ships 400 and 700 only (DECISIONS: fonts), so
+   ta3lom's 400/500 heading weights would both render 400. */
 h1,
 h2,
 h3,
 h4 {
   margin: 0;
-  font-weight: 400;
-  line-height: 1.15;
+  font-weight: 700;
+  line-height: 1.35;
   text-wrap: balance;
-}
-
-h3,
-h4 {
-  font-weight: 500;
 }
 
 p {

@@ -4,8 +4,8 @@
       "url": [
         "http://localhost:8099/ar/",
         "http://localhost:8099/en/",
-        "http://localhost:8099/ar/p/support-a-daiya",
-        "http://localhost:8099/en/p/support-a-daiya"
+        "http://localhost:8099/ar/p/c-preacher-nigeria",
+        "http://localhost:8099/en/p/c-preacher-nigeria"
       ],
       "numberOfRuns": 3,
       "settings": { "chromeFlags": "--no-sandbox --headless=new" }

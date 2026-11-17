@@ -1,291 +1,133 @@
 /**
- * Option C catalogue for e2e, the stub capture and screenshots — added through the ADMIN API (never SQL), idempotent.
- * On top of the API's Development seed (3 categories, 6 projects) it adds 7 categories (one left EMPTY, for the empty
- * state) and 22 published projects, so the home page has > 20 projects (two pages), 9+ category tabs, several `urgent`
- * cards (banner prev/next) and every card shape: options only, open amount only, both.
- * Slugs start with `c-` (categories `c-…`, projects `c-…`): not `e2e-…`, so hideE2eCatalogue() keeps them.
+ * Dar Africa catalogue (W-00 plan Phase 7) for local runs, e2e, the stub capture and screenshots ONLY — added through
+ * the ADMIN API (never SQL), idempotent. Never used for staging or production (the catalogue there is the owner's,
+ * created in /admin — plan §11).
+ * The API's Development seed (ta3lom's 3 categories and 6 projects) is RETIRED, not mixed in: its projects are archived
+ * and its categories deactivated through the admin API (the API repo is not edited). Then 8 categories (one left EMPTY
+ * for the empty state; «الصندوق العام» is the only one that accepts general gifts) and 22 published projects: more than
+ * 20 (two pages, as the e2e expects), two `urgent` (banner prev/next) and two `new`, and every card shape: options only,
+ * open amount only, both. English titles avoid the banned words (check-no-commerce: "printing", never "books").
+ * Slugs start with `c-`: not `e2e-…`, so hideE2eCatalogue() keeps them.
  */
 import { png } from './lib/png.mjs';
 
-/** [slug, nameAr, nameEn, acceptsGeneralGifts, rgb] — sort follows the array after the Development seed's three. */
+/** The API's Development seed (ta3lom_store_api DevelopmentCatalogSeeder) — retired by seedCatalogue(). */
+export const RETIRED_CATEGORIES = ['dawah', 'education', 'relief'];
+export const RETIRED_PROJECTS = [
+  'print-a-title',
+  'dawah-umrah',
+  'support-a-daiya',
+  'water-wells',
+  'iftar-meals',
+  'learner-support',
+];
+
+/** [slug, nameAr, nameEn, acceptsGeneralGifts, rgb] — placeholder cover colours from the Dar Africa palette. */
 export const CATEGORIES = [
-  ['c-water', 'سقيا الماء', 'Water', false, [26, 120, 150]],
-  ['c-feeding', 'الإطعام', 'Feeding', false, [170, 120, 40]],
-  ['c-orphans', 'كفالة الأيتام', 'Orphan care', false, [110, 80, 150]],
-  ['c-health', 'الرعاية الصحية', 'Health care', false, [40, 140, 100]],
-  ['c-housing', 'الإسكان', 'Housing', false, [120, 100, 80]],
-  ['c-relief', 'الإغاثة العاجلة', 'Emergency relief', false, [170, 70, 60]],
-  ['c-mosques', 'المساجد', 'Mosques', false, [60, 90, 130]], // stays empty (empty-category state)
+  ['c-preachers', 'كفالة الدعاة', 'Preacher sponsorship', false, [48, 79, 80]],
+  ['c-translation', 'الترجمة والطباعة', 'Translation and printing', false, [160, 141, 98]],
+  ['c-african-langs', 'التعليم بلغات أفريقيا', 'Teaching in African languages', false, [61, 97, 97]],
+  ['c-media', 'الإنتاج الصوتي والمرئي', 'Audio and video production', false, [36, 64, 63]],
+  ['c-water', 'سقيا الماء', 'Water', false, [46, 110, 130]],
+  ['c-mosques', 'المساجد', 'Mosques', false, [90, 101, 99]],
+  ['c-general-fund', 'الصندوق العام', 'General fund', true, [27, 46, 46]],
+  ['c-iftar', 'إفطار الصائمين', 'Iftar meals', false, [126, 108, 67]], // stays empty (empty-category state)
 ];
 
 const opt = (labelAr, labelEn, amount) => ({ labelAr, labelEn, amount });
+const P = (slug, cat, titleAr, titleEn, summaryAr, summaryEn, badge, open, min, options) => [
+  slug, cat, titleAr, titleEn, summaryAr, summaryEn, badge, open, min, options,
+];
 /** [slug, category, titleAr, titleEn, summaryAr, summaryEn, badge, allowOpenAmount, minAmount, options] */
 export const PROJECTS = [
-  [
-    'c-mosque-cooler',
-    'c-water',
-    'برادة مياه لمسجد',
-    'Water cooler for a mosque',
-    'ماء بارد للمصلين طوال العام.',
-    'Cold water for worshippers all year.',
-    'urgent',
-    true,
-    '10.00',
-    [opt('برادة', 'Cooler', '2500.00')],
-  ],
-  [
-    'c-water-well',
-    'c-water',
-    'حفر بئر',
-    'Dig a well',
-    'بئر تروي قرية كاملة لسنوات.',
-    'A well that serves a whole village for years.',
-    null,
-    false,
-    null,
-    [opt('بئر سطحية', 'Shallow well', '6000.00'), opt('بئر ارتوازية', 'Deep well', '18000.00')],
-  ],
-  [
-    'c-water-tank',
-    'c-water',
-    'خزان مياه',
-    'Water tank',
-    'خزان يحفظ الماء للأسر المحتاجة.',
-    'A tank that stores water for families in need.',
-    'new',
-    true,
-    '20.00',
-    [],
-  ],
-  [
-    'c-water-bottles',
-    'c-water',
-    'سقيا الحجاج',
-    'Water for pilgrims',
-    'عبوات ماء تُوزّع في المشاعر.',
-    'Bottled water handed out at the holy sites.',
-    null,
-    true,
-    '10.00',
-    [opt('كرتون', 'Carton', '15.00')],
-  ],
-  [
-    'c-food-basket',
-    'c-feeding',
-    'سلة غذائية لأسرة',
-    'Food basket for a family',
-    'سلة تكفي أسرة لمدة شهر.',
-    'A basket that feeds a family for a month.',
-    null,
-    true,
-    '10.00',
-    [opt('سلة', 'Basket', '250.00'), opt('سلتان', 'Two baskets', '500.00')],
-  ],
-  [
-    'c-iftar',
-    'c-feeding',
-    'إفطار صائم',
-    'Iftar meal',
-    'وجبة إفطار متكاملة للصائمين.',
-    'A full iftar meal for people fasting.',
-    'urgent',
-    false,
-    null,
-    [opt('وجبة', 'Meal', '15.00'), opt('عشر وجبات', 'Ten meals', '150.00')],
-  ],
-  [
-    'c-bread',
-    'c-feeding',
-    'خبز يومي',
-    'Daily bread',
-    'خبز طازج للأسر المتعففة.',
-    'Fresh bread for families in need.',
-    null,
-    true,
-    '10.00',
-    [],
-  ],
-  [
-    'c-orphan-sponsor',
-    'c-orphans',
-    'كفالة يتيم',
-    'Sponsor an orphan',
-    'معيشة وتعليم ورعاية لطفل يتيم.',
-    'Living costs, schooling and care for an orphan.',
-    'new',
-    false,
-    null,
-    [opt('شهر', 'One month', '300.00'), opt('سنة', 'One year', '3600.00')],
-  ],
-  [
-    'c-orphan-eid',
-    'c-orphans',
-    'كسوة العيد للأيتام',
-    'Eid clothes for orphans',
-    'ملابس العيد لإدخال الفرح على الأيتام.',
-    'Eid clothes to bring joy to orphans.',
-    null,
-    true,
-    '25.00',
-    [opt('كسوة', 'Outfit', '200.00')],
-  ],
-  [
-    'c-orphan-school',
-    'c-orphans',
-    'تعليم يتيم',
-    'School for an orphan',
-    'رسوم دراسية وأدوات لطفل يتيم.',
-    'School fees and supplies for an orphan.',
-    null,
-    true,
-    '50.00',
-    [],
-  ],
-  [
-    'c-patient-care',
-    'c-health',
-    'علاج المرضى غير القادرين',
-    'Care for patients in need',
-    'تكاليف العلاج والأدوية للحالات المستحقة.',
-    'Treatment and medicine for patients who cannot pay.',
-    null,
-    true,
-    '10.00',
-    [],
-  ],
-  [
-    'c-dialysis',
-    'c-health',
-    'جلسات غسيل الكلى',
-    'Dialysis sessions',
-    'جلسات غسيل كلى لمرضى محتاجين.',
-    'Dialysis sessions for patients in need.',
-    'urgent',
-    false,
-    null,
-    [opt('جلسة', 'Session', '400.00'), opt('شهر', 'One month', '4800.00')],
-  ],
-  [
-    'c-eye-care',
-    'c-health',
-    'عمليات العيون',
-    'Eye surgery',
-    'عمليات المياه البيضاء لكبار السن.',
-    'Cataract surgery for older people.',
-    null,
-    true,
-    '50.00',
-    [opt('عملية', 'Operation', '1500.00')],
-  ],
-  [
-    'c-home-repair',
-    'c-housing',
-    'ترميم منازل الأسر المتعففة',
-    'Home repairs for families',
-    'إصلاحات تجعل المنزل آمنًا للسكن.',
-    'Repairs that make a home safe to live in.',
-    null,
-    true,
-    '10.00',
-    [],
-  ],
-  [
-    'c-rent',
-    'c-housing',
-    'سداد إيجار',
-    'Pay the rent',
-    'سداد إيجار أسرة مهددة بالإخلاء.',
-    'Rent for a family at risk of eviction.',
-    'new',
-    true,
-    '100.00',
-    [opt('شهر', 'One month', '1500.00')],
-  ],
-  [
-    'c-furniture',
-    'c-housing',
-    'تأثيث منزل',
-    'Furnish a home',
-    'أثاث أساسي لأسرة محتاجة.',
-    'Basic furniture for a family in need.',
-    null,
-    false,
-    null,
-    [opt('غرفة', 'One room', '2000.00'), opt('منزل', 'Whole home', '8000.00')],
-  ],
-  [
-    'c-winter-bag',
-    'c-relief',
-    'حقيبة شتوية للأسرة',
-    'Winter bag for a family',
-    'بطانيات وملابس ومدفأة.',
-    'Blankets, clothes and a heater.',
-    'urgent',
-    true,
-    '10.00',
-    [opt('حقيبة', 'Bag', '300.00')],
-  ],
-  [
-    'c-emergency',
-    'c-relief',
-    'إغاثة عاجلة',
-    'Emergency relief',
-    'مساعدة فورية للمتضررين من الكوارث.',
-    'Immediate help for people hit by disasters.',
-    'urgent',
-    true,
-    '10.00',
-    [],
-  ],
-  [
-    'c-shelter',
-    'c-relief',
-    'خيمة إيواء',
-    'Shelter tent',
-    'خيمة تؤوي أسرة نازحة.',
-    'A tent that shelters a displaced family.',
-    null,
-    false,
-    null,
-    [opt('خيمة', 'Tent', '900.00')],
-  ],
-  [
-    'c-medical-kit',
-    'c-relief',
-    'حقيبة إسعافات',
-    'First-aid kit',
-    'حقيبة إسعافات أولية للمناطق المنكوبة.',
-    'A first-aid kit for disaster areas.',
-    null,
-    true,
-    '10.00',
-    [opt('حقيبة', 'Kit', '120.00'), opt('خمس حقائب', 'Five kits', '600.00')],
-  ],
-  [
-    'c-student-bag',
-    'education',
-    'حقيبة الطالب',
-    'School bag',
-    'أدوات مدرسية لطلاب الأسر المحتاجة.',
-    'School supplies for children from families in need.',
-    null,
-    true,
-    '10.00',
-    [opt('حقيبة', 'Bag', '150.00')],
-  ],
-  [
-    'c-quran-circle',
-    'dawah',
-    'حلقة تحفيظ',
-    'Memorisation circle',
-    'رواتب معلمي حلقات التحفيظ.',
-    'Salaries for the teachers of memorisation circles.',
-    null,
-    true,
-    '50.00',
-    [],
-  ],
+  P('c-preacher-nigeria', 'c-preachers', 'كفالة داعية في نيجيريا لمدة عام', 'Sponsor a preacher in Nigeria for a year',
+    'راتب داعية متفرغ يعلّم الناس دينهم بلغة الهوسا في القرى النائية.',
+    'A full-time preacher who teaches in Hausa in remote villages.', 'urgent', false, null,
+    [opt('كفالة شهر', 'One month', '300.00'), opt('كفالة 3 أشهر', 'Three months', '900.00'), opt('كفالة سنة', 'One year', '3600.00')]),
+  P('c-preacher-senegal', 'c-preachers', 'كفالة داعية في السنغال', 'Sponsor a preacher in Senegal',
+    'داعية يقدّم الدروس بلغة الولوف في المساجد والقرى.', 'A preacher who teaches in Wolof in mosques and villages.',
+    null, true, '50.00', [opt('كفالة شهر', 'One month', '250.00'), opt('كفالة سنة', 'One year', '3000.00')]),
+  P('c-preacher-chad', 'c-preachers', 'كفالة داعية في تشاد', 'Sponsor a preacher in Chad',
+    'كفالة داعية يعلّم العربية والعلوم الشرعية في تشاد.', 'A preacher teaching Arabic and Islamic sciences in Chad.',
+    'new', false, null, [opt('كفالة شهر', 'One month', '250.00')]),
+  P('c-preacher-training', 'c-preachers', 'تأهيل الدعاة الجدد', 'Training new preachers',
+    'برنامج تأهيل للدعاة الجدد في العلوم الشرعية واللغة العربية.', 'A training programme for new preachers in Islamic sciences and Arabic.',
+    null, true, null, []),
+  P('c-translate-hausa', 'c-translation', 'ترجمة معاني القرآن بلغة الهوسا', 'Quran meanings in Hausa',
+    'طباعة وتوزيع نسخ مراجعة من ترجمة معاني القرآن الكريم.', 'Printing and handing out reviewed copies of the Quran meanings in Hausa.',
+    'new', true, '25.00', [opt('نسخة', 'One copy', '25.00'), opt('10 نسخ', 'Ten copies', '250.00')]),
+  P('c-translate-swahili', 'c-translation', 'ترجمة رسائل العقيدة بالسواحيلية', 'Creed epistles in Swahili',
+    'ترجمة رسائل مختصرة في العقيدة إلى اللغة السواحيلية.', 'Short epistles on creed translated into Swahili.',
+    null, true, '15.00', [opt('رسالة', 'One epistle', '15.00')]),
+  P('c-print-fulani', 'c-translation', 'طباعة مطويات بلغة الفولاني', 'Leaflets in Fulani',
+    'مطويات دعوية مطبوعة بلغة الفولاني توزّع في الأسواق.', 'Printed leaflets in Fulani handed out in markets.',
+    null, false, null, [opt('100 مطوية', '100 leaflets', '120.00')]),
+  P('c-translate-review', 'c-translation', 'مراجعة الترجمات', 'Reviewing translations',
+    'مراجعة لغوية وشرعية للترجمات قبل طباعتها.', 'Language and content review of translations before printing.',
+    null, true, null, []),
+  P('c-arabic-somali', 'c-african-langs', 'تعليم العربية للناطقين بالصومالية', 'Arabic lessons for Somali speakers',
+    'مقعد دراسي في حلقات تعليم العربية للناطقين بالصومالية.', 'A seat in Arabic lessons for Somali speakers.',
+    null, true, '50.00', [opt('مقعد', 'One seat', '200.00'), opt('5 مقاعد', 'Five seats', '1000.00')]),
+  P('c-circle-tanzania', 'c-african-langs', 'حلقة تحفيظ في تنزانيا', 'Memorisation circle in Tanzania',
+    'حلقة لتحفيظ القرآن الكريم للأطفال في تنزانيا.', 'A Quran memorisation circle for children in Tanzania.',
+    null, false, null, [opt('شهر', 'One month', '400.00')]),
+  P('c-teacher-mali', 'c-african-langs', 'راتب معلم في مالي', "A teacher's salary in Mali",
+    'راتب معلم يدرّس العربية بلغة البمبارا.', 'A teacher who teaches Arabic in Bambara.',
+    'urgent', false, null, [opt('شهر', 'One month', '350.00'), opt('سنة', 'One year', '4200.00')]),
+  P('c-classroom-niger', 'c-african-langs', 'تجهيز فصل دراسي في النيجر', 'Equip a classroom in Niger',
+    'مقاعد وسبورة وأدوات لفصل دراسي جديد.', 'Desks, a board and supplies for a new classroom.',
+    null, true, '100.00', [opt('فصل', 'One classroom', '4500.00')]),
+  P('c-audio-swahili', 'c-media', 'تسجيل دروس صوتية بالسواحيلية', 'Audio lessons in Swahili',
+    'إنتاج سلسلة دروس صوتية في العقيدة والفقه بالسواحيلية.', 'A series of audio lessons on creed and fiqh in Swahili.',
+    null, true, '50.00', [opt('حلقة', 'One episode', '150.00'), opt('5 حلقات', 'Five episodes', '750.00')]),
+  P('c-video-hausa', 'c-media', 'إنتاج مقاطع مرئية بالهوسا', 'Short videos in Hausa',
+    'مقاطع مرئية قصيرة تشرح أركان الإسلام بلغة الهوسا.', 'Short videos explaining the pillars of Islam in Hausa.',
+    null, false, null, [opt('مقطع', 'One video', '500.00')]),
+  P('c-radio-program', 'c-media', 'برنامج إذاعي أسبوعي', 'A weekly radio programme',
+    'برنامج إذاعي يبث الدروس في المناطق الريفية.', 'A radio programme that carries lessons to rural areas.',
+    null, false, null, [opt('أسبوع', 'One week', '300.00'), opt('شهر', 'One month', '1200.00')]),
+  P('c-well-shallow', 'c-water', 'حفر بئر سطحية', 'Dig a shallow well',
+    'بئر تروي قرية صغيرة لسنوات.', 'A well that serves a small village for years.',
+    null, true, '50.00', [opt('بئر', 'One well', '6000.00')]),
+  P('c-well-deep', 'c-water', 'حفر بئر ارتوازية', 'Dig a deep well',
+    'بئر ارتوازية بمضخة تخدم أكثر من قرية.', 'A deep well with a pump that serves several villages.',
+    null, true, '100.00', [opt('بئر', 'One well', '18000.00')]),
+  P('c-water-cooler', 'c-water', 'برادة مياه لمسجد', 'Water cooler for a mosque',
+    'ماء بارد للمصلين طوال العام.', 'Cold water for worshippers all year.',
+    null, false, null, [opt('برادة', 'One cooler', '2500.00')]),
+  P('c-mosque-build', 'c-mosques', 'بناء مسجد صغير', 'Build a small mosque',
+    'مسجد صغير لقرية لا مسجد فيها.', 'A small mosque for a village without one.',
+    null, true, null, []),
+  P('c-mosque-carpets', 'c-mosques', 'فرش مسجد', 'Carpets for a mosque',
+    'فرش جديد لمسجد في قرية نائية.', 'New carpets for a mosque in a remote village.',
+    null, false, null, [opt('متر', 'One metre', '50.00')]),
+  P('c-mosque-restore', 'c-mosques', 'ترميم مسجد', 'Restore a mosque',
+    'ترميم السقف والجدران ودورات المياه.', 'Repairing the roof, walls and washrooms.',
+    null, true, null, []),
+  P('c-general-needs', 'c-general-fund', 'حيث الحاجة أشد', 'Where the need is greatest',
+    'يصرف تبرعك على المشروع الأشد حاجة في وقته.', 'Your donation goes to the most urgent need at the time.',
+    null, true, null, []),
 ];
+
+/** Archives the API's Development-seed projects and deactivates its categories (admin API; idempotent). */
+async function retireDevelopmentSeed(c, log) {
+  let archived = 0;
+  for (const p of await adminProjects(c)) {
+    if (!RETIRED_PROJECTS.includes(p.slug) || p.status === 'archived') continue;
+    const r = await c.call('POST', `/v1/admin/projects/${p.id}/archive`);
+    if (r.status !== 200 && r.status !== 204)
+      throw new Error(`archive ${p.slug}: ${r.status} ${JSON.stringify(r.body)}`);
+    archived++;
+  }
+  let hidden = 0;
+  for (const cat of (await c.call('GET', '/v1/admin/categories')).body ?? []) {
+    if (!RETIRED_CATEGORIES.includes(cat.slug) || !cat.isActive) continue;
+    const r = await c.call('PUT', `/v1/admin/categories/${cat.id}`, { ...pickCategory(cat), isActive: false });
+    if (r.status !== 200) throw new Error(`deactivate ${cat.slug}: ${r.status} ${JSON.stringify(r.body)}`);
+    hidden++;
+  }
+  log(`development seed retired: ${archived} project(s) archived, ${hidden} category(ies) deactivated`);
+}
 
 const pickCategory = (x) => ({
   slug: x.slug,
@@ -324,6 +166,7 @@ async function adminProjects(c) {
 
 /** Adds what is missing; returns counts. `c` is a signed-in staff client with catalogue rights. */
 export async function seedCatalogue(c, log = () => {}) {
+  await retireDevelopmentSeed(c, log);
   const cats = (await c.call('GET', '/v1/admin/categories')).body;
   const bySlug = new Map(cats.map((x) => [x.slug, x]));
   let sort = Math.max(0, ...cats.map((x) => Number(x.sort) || 0));
@@ -412,5 +255,5 @@ export async function seedCatalogue(c, log = () => {}) {
         throw new Error(`publish ${slug}: ${r.status} ${JSON.stringify(r.body)}`);
     }
   }
-  log(`projects: ${created} created, ${PROJECTS.length} in the Option C set`);
+  log(`projects: ${created} created, ${PROJECTS.length} in the Dar Africa set`);
 }

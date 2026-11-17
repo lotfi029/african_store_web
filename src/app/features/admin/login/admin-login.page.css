@@ -31,8 +31,6 @@
   gap: 8px 16px;
   inline-size: min(960px, 100%);
   color: var(--c-on-dark);
-
-  --logo-ink: var(--c-on-dark);
 }
 
 .brand {
@@ -45,8 +43,9 @@
 }
 
 .mark {
-  inline-size: 40px;
-  block-size: 34px;
+  inline-size: 14px;
+  block-size: 38px;
+  fill: var(--c-on-dark);
 }
 
 .ltools {

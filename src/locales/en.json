@@ -881,5 +881,18 @@
   "store.admin.role-manager-text": "Projects, categories and media, donors (block and unblock), and message templates.",
   "store.admin.role-finance-text": "Donations: cancel, refund, review and receipts; reports and payments without a donation.",
   "store.admin.role-viewer-text": "Read only — actions show disabled, with the reason.",
-  "store.admin.upload-open": "Upload an image"
+  "store.admin.upload-open": "Upload an image",
+  "store.layout.utility-receipts": "Every donation is documented with an official receipt",
+  "store.layout.brand-short": "Dar Africa",
+  "store.layout.search-placeholder-da": "Search a project: preacher sponsorship, translation, water…",
+  "store.layout.footer-quote": "“Whoever guides to good has a reward like the one who does it”",
+  "store.layout.footer-general-fund": "Donate to the general fund",
+  "store.layout.footer-library": "Library",
+  "store.layout.footer-all-projects": "All projects",
+  "store.layout.footer-my-donations": "My donations and receipts",
+  "store.layout.footer-payment": "Payment options",
+  "store.layout.footer-rights": "All rights reserved",
+  "store.layout.bottom-nav-label": "Bottom navigation",
+  "store.layout.bottom-sections": "Sections",
+  "store.layout.bottom-search": "Search"
 }

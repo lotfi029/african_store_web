@@ -6,7 +6,7 @@ import { I18nService } from '../../../core/i18n/i18n';
 /**
  * Category tab bar (Option C §3 row 3): "كل المشاريع" + every active category from `GET /v1/catalog/categories`
  * (non-negotiable #12). Tabs are LINKS, not `role=tab` — they navigate: each sets `?category=` (none for "all"),
- * resets `page` and keeps `q` and `sort`. The active one carries `aria-current="page"` and the 3 px accent underline.
+ * resets `page` and keeps `q` and `sort`. The active one carries `aria-current="page"`, bold, and the 3 px sand underline.
  * Only the bar scrolls sideways on narrow screens, never the page.
  */
 @Component({
@@ -14,7 +14,7 @@ import { I18nService } from '../../../core/i18n/i18n';
   imports: [RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <nav class="tabs" aria-label="التصنيفات" i18n-aria-label="@@store.listing.categories-label">
+    <nav class="tabs" id="cats" aria-label="التصنيفات" i18n-aria-label="@@store.listing.categories-label">
       <div class="track">
         <a
           class="tab"
@@ -45,7 +45,7 @@ import { I18nService } from '../../../core/i18n/i18n';
       border-block-end: 1px solid var(--c-border);
     }
     .tabs {
-      max-width: 1200px;
+      max-width: 1240px;
       margin-inline: auto;
       padding-inline: var(--space-6);
     }
@@ -75,10 +75,11 @@ import { I18nService } from '../../../core/i18n/i18n';
       color: var(--c-text);
       border-block-end-color: var(--c-border-2);
     }
+    /* Active: bold + aria-current carry the state; the sand underline (--c-highlight) is decoration. */
     .tab[aria-current='page'] {
       color: var(--c-text);
-      font-weight: 600;
-      border-block-end-color: var(--c-accent);
+      font-weight: 700;
+      border-block-end-color: var(--c-highlight);
     }
     .tab:focus-visible {
       outline-offset: -3px;

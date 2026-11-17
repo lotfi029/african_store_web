@@ -15,6 +15,16 @@
 
 html {
   scroll-behavior: smooth;
+
+  /* Height of the phone bottom bar (layout/bottom-nav, ≤ 760 px; W-00). Fixed elements at the bottom of the screen
+     (the project page's donate bar, back-to-top) and the public layout's bottom padding sit above it. */
+  --bnav-h: 0px;
+}
+
+@media (width <= 760px) {
+  html {
+    --bnav-h: calc(61px + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 /* Reading direction as a number, for motion that has to follow it (CR-01 FE-1): multiply a

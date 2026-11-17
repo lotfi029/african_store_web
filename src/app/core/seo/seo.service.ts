@@ -66,8 +66,8 @@ export class SeoService {
       property: 'og:locale',
       content: this.i18n.locale === 'ar' ? 'ar_SA' : 'en_US',
     });
-    // W-00: a page without its own image shares the store card (public/og.png, 1200×630: the Dar Africa mark on ink).
-    const image = data.image || `${environment.siteOrigin}/og.png`;
+    // W-00: a page without its own image shares the store card (public/og.png → /{locale}/og.png, 1200×630: the Dar Africa mark on ink).
+    const image = data.image || `${environment.siteOrigin}/${this.i18n.locale}/og.png`;
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
     this.meta.updateTag({ name: 'twitter:title', content: title });
     this.meta.updateTag({ name: 'twitter:description', content: data.description });

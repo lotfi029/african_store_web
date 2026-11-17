@@ -1,8 +1,7 @@
 <div class="util">
   <div class="uwrap">
-    <p class="utext" i18n="@@store.layout.utility-licence">
-      جميع التبرعات موثّقة بإيصال رسمي · ترخيص رقم [رقم الترخيص]
-    </p>
+    <!-- W-00: the licence number shows only once the API exposes it (plan §4, §9) — never a placeholder. -->
+    <p class="utext" i18n="@@store.layout.utility-receipts">جميع التبرعات موثّقة بإيصال رسمي</p>
     <div class="ulinks">
       <a class="ulink" [href]="mainSite" i18n="@@store.layout.main-site">الموقع الرئيسي</a>
       <ta-lang-switch variant="text" />
@@ -13,16 +12,19 @@
 <header class="hdr" [class.scrolled]="scrolled()" [class.away]="away()" (focusin)="away.set(false)">
   <div class="wrap">
     <a class="brand" [href]="mainSite">
-      <svg class="mark" viewBox="1300 290 503 1420" aria-hidden="true" focusable="false">
-        <use href="logo.svg#logo-src" />
-      </svg>
+      <span class="tile">
+        <svg class="mark" viewBox="1300 290 503 1420" aria-hidden="true" focusable="false">
+          <use href="logo.svg#logo-src" />
+        </svg>
+      </span>
       <span class="nm">
-        <ng-container i18n="@@store.layout.association">جمعية الدعوة والتعليم باللغات الأفريقية</ng-container>
+        <ng-container i18n="@@store.layout.brand-short">دار أفريقيا</ng-container>
         <span class="sub" i18n="@@store.layout.store-tagline-r5">متجر التبرعات</span>
       </span>
     </a>
 
     <form class="hsearch" role="search" (submit)="search($event, q)">
+      <ta-icon name="search" [size]="18" class="hsearch-lead" />
       <label class="visually-hidden" for="hdr-q" i18n="@@store.layout.search-label"
         >ابحث في المتجر</label
       >
@@ -33,8 +35,8 @@
         type="search"
         maxlength="100"
         [value]="currentQ()"
-        placeholder="ابحث: سقيا، سلة غذائية، كفالة…"
-        i18n-placeholder="@@store.layout.search-placeholder-c"
+        placeholder="ابحث عن مشروع: كفالة داعية، ترجمة، سقيا…"
+        i18n-placeholder="@@store.layout.search-placeholder-da"
         autocomplete="off"
       />
       <button type="submit" class="hsearch-btn">

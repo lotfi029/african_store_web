@@ -13,7 +13,10 @@ for (const locale of ['ar', 'en'] as const) {
       await page.goto(`/${locale}/`);
       const header = page.locator('header.hdr');
       const util = page.locator('.util');
-      await expect(util).toContainText(locale === 'ar' ? 'ترخيص' : 'Licence');
+      await expect(util).toContainText(locale === 'ar' ? 'إيصال رسمي' : 'official receipt');
+      // W-00: never a placeholder licence number (it shows once the API exposes it).
+      await expect(util).not.toContainText(locale === 'ar' ? 'ترخيص' : 'Licence');
+      await expect(util).not.toContainText('[');
       await expect(util.locator('.ulink')).toHaveAttribute('href', /^https:\/\/darafrica\.org/);
       await expect(header.locator('form[role=search] #hdr-q')).toBeVisible();
       // Empty cart: the button says "السلة" without a total; the accessible name says it is empty.
@@ -113,6 +116,36 @@ for (const locale of ['ar', 'en'] as const) {
       await page.setViewportSize({ width: 320, height: 720 });
       await expectNoHorizontalScroll(page);
       await expectNoA11yViolations(page);
+    });
+
+    test('footer: quote band, association and store links, no placeholder legal text', async ({ page }) => {
+      await page.goto(`/${locale}/`);
+      const foot = page.locator('footer.foot');
+      await expect(foot.locator('.quote')).toBeVisible();
+      await expect(foot.locator(`a[href="https://darafrica.org/${locale}/about"]`)).toHaveCount(1);
+      await expect(foot.locator(`a[href="https://darafrica.org/${locale}/contact"]`)).toHaveCount(1);
+      await expect(foot).not.toContainText('[');
+      await expect(foot.locator('.foot-bottom')).toContainText(String(new Date().getFullYear()));
+    });
+
+    test('phones: the bottom bar (≤ 760 px) — current page, sections and search', async ({ page }) => {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await page.goto(`/${locale}/`, { waitUntil: 'networkidle' });
+      const bar = page.locator('ta-bottom-nav nav');
+      await expect(bar).toBeVisible();
+      await expect(bar.locator('.it')).toHaveCount(5);
+      await expect(bar.locator('[aria-current="page"]')).toHaveAttribute('href', `/${locale}/`);
+      await bar.locator('button.it').nth(0).click();
+      await expect(page.locator('#cats a[aria-current="page"]')).toBeFocused();
+      await bar.locator('button.it').nth(1).click();
+      await expect(page.locator('#hdr-q')).toBeFocused();
+      await bar.locator('a.it').nth(1).click();
+      await expect(page).toHaveURL(new RegExp(`/${locale}/cart$`));
+      await expect(bar.locator('[aria-current="page"]')).toHaveAttribute('href', `/${locale}/cart`);
+      await expectNoHorizontalScroll(page);
+      await expectNoA11yViolations(page, `/${locale}/cart bottom bar`);
+      await page.setViewportSize({ width: 1024, height: 800 });
+      await expect(bar).toBeHidden();
     });
 
     test('language switch keeps the path', async ({ page }) => {

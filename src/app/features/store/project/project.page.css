@@ -108,7 +108,7 @@ h1 {
     display: block;
     position: fixed;
     inset-inline: 0;
-    inset-block-end: 0;
+    inset-block-end: var(--bnav-h);
     z-index: 45;
     background: var(--c-surface);
     border-block-start: 1px solid var(--c-border);

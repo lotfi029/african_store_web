@@ -6,6 +6,7 @@ import { filter, map } from 'rxjs';
 import { GiftCategories } from '../../core/ui/gift-categories.data';
 import { QuickDonate } from '../../core/ui/quick-donate.service';
 import { Icon } from '../../shared/ui/icon/icon';
+import { BottomNav } from '../bottom-nav/bottom-nav';
 import { Footer } from '../footer/footer';
 import { Header } from '../header/header';
 import { SkipLink } from '../skip-link/skip-link';
@@ -13,7 +14,7 @@ import { SkipLink } from '../skip-link/skip-link';
 /** Storefront and account chrome. The admin has its own shell (W-08), outside this layout. */
 @Component({
   selector: 'ta-public-layout',
-  imports: [RouterOutlet, SkipLink, Header, Footer, Icon],
+  imports: [RouterOutlet, SkipLink, Header, Footer, Icon, BottomNav],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ta-skip-link />
@@ -36,6 +37,7 @@ import { SkipLink } from '../skip-link/skip-link';
         <ta-icon name="gift" [size]="22" />
       </button>
     }
+    <ta-bottom-nav />
     <!-- Back to top: after two screens of scrolling; focus returns to the start of the page content. -->
     <button
       type="button"
@@ -50,6 +52,11 @@ import { SkipLink } from '../skip-link/skip-link';
     </button>
   `,
   styles: `
+    /* The phone bottom bar (≤ 760 px) never covers the footer's last line. */
+    :host {
+      display: block;
+      padding-block-end: var(--bnav-h, 0px);
+    }
     main {
       display: block;
       min-block-size: 60vh;
@@ -89,7 +96,7 @@ import { SkipLink } from '../skip-link/skip-link';
       position: fixed;
       inset-inline-start: var(--space-4);
       /* Above the project page's sticky donate bar while it shows (--dbar-h, set by project.page.ts). */
-      inset-block-end: calc(var(--space-5) + var(--dbar-h, 0px));
+      inset-block-end: calc(var(--space-5) + var(--dbar-h, 0px) + var(--bnav-h, 0px));
       z-index: 44;
       inline-size: 48px;
       block-size: 48px;

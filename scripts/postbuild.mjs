@@ -7,7 +7,7 @@
  *   - copies deploy/well-known/apple-developer-merchantid-domain-association to /.well-known/ (Apple Pay, review 04);
  *   - build stamp: /version.json { version, commit, builtAt, env } and <meta name="build"> on every page — no secrets
  *     (BUILD_VERSION / BUILD_SHA from the image build args, else git);
- *   - preloads the Readex Pro faces and Plex Mono 400 on every page (Angular fingerprints them, so index.html can't);
+ *   - preloads the IBM Plex Sans Arabic 400 faces on every page (Angular fingerprints them, so index.html can't);
  *   - rewrites Angular's inline event-dispatch bootstrap to ONE canonical superset call, so the site has exactly one
  *     CSP hash for it (its text otherwise varies by page content);
  *   - (F6.1) critical CSS is inlined by Angular (beasties): the full sheet loads as `media="print"
@@ -130,12 +130,12 @@ const htmlFiles = (dir) =>
     return statSync(p).isDirectory() ? htmlFiles(p) : name.endsWith('.html') ? [p] : [];
   });
 
-// Preloaded faces (owner brief P4): Readex Pro only, the page's own script first. Arabic pages ALSO preload the Latin
+// Preloaded faces (owner brief P4; W-00: IBM Plex Sans Arabic 400), the page's own script first. Arabic pages ALSO preload the Latin
 // subset: Arabic text uses it for digits, spaces and punctuation (W-11), and without it the banner title re-painted
 // when that face arrived — LCP 3.8 s on /ar/ in CI. English pages preload Latin only; Plex Mono loads on demand.
 const PRELOAD = {
-  ar: [/^readex-pro-arabic-wght-[A-Z0-9]+\.woff2$/, /^readex-pro-latin-wght-[A-Z0-9]+\.woff2$/],
-  en: [/^readex-pro-latin-wght-[A-Z0-9]+\.woff2$/],
+  ar: [/^ibm-plex-sans-arabic-arabic-400-[A-Z0-9]+\.woff2$/, /^ibm-plex-sans-arabic-latin-400-[A-Z0-9]+\.woff2$/],
+  en: [/^ibm-plex-sans-arabic-latin-400-[A-Z0-9]+\.woff2$/],
 };
 
 for (const locale of ['ar', 'en']) {

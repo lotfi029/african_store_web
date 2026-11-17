@@ -1,5 +1,5 @@
 /**
- * Store page classes from the approved store prototype (design/ta3lom-store-prototype.html) that several routes share:
+ * Store page classes from the approved store prototype (docs/reference/ta3lom/design/ta3lom-store-prototype.html) that several routes share:
  * page head, crumbs, sub-nav, filter chips, tags, key figures, notes, empty states, the product grid.
  * Semantic tokens only; logical properties only. Component-specific styles stay in their components.
  */

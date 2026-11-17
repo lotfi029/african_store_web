@@ -17,8 +17,16 @@ without a commit. Never redo a committed phase.
 | 5 Home | W-00.6 — home: banner, quick donate, cards, trust | done | G-fast green (unit 419, scripts 16); build:ci green (ar 138.1 / en 136.4 kB JS); e2e home-c + listing + layout 50/50 on the stub; a11y 70 routes × light + dark, 0 violations; LHCI → Phase 8 |
 | 6 Project … admin | W-00.7 — project, checkout, order, account, admin skin | done | G-fast green (unit 419, scripts 16); build:ci green; e2e on the stub: project + checkout + payments + account 16 passed / 12 skipped (real-API only), @showcase 17/17 (build:ci-showcase); a11y 70 routes × light + dark, 0 violations; sign-in (real API only) → Phase 8 |
 | 7 Seed, stub, screenshots | W-00.8 — seed, stub, screenshots | done | real API up (Node 24, .NET 10.0.100, postgres:18); api:seed: dev seed retired, 8 categories / 22 projects; stub re-recorded (29 responses, 7 images); @smoke 69/69 on the new stub; 56 screenshots in docs/screens/w-00 (7 screens × ar/en × light/dark × 1440/390); G-fast green (unit 419, scripts 16) |
-| 8 DoD, container, LHCI | W-00.9 | | |
+| 8 DoD, container, LHCI | W-00.9 — DoD green, container, LHCI | done | G-full on the real API: api:up ✓ · api:seed ✓ · types:check ✓ · typecheck ✓ · lint ✓ · test 419 + scripts 16 ✓ · build ✓ (46 prerendered, ar 138.1 / en 136.4 kB JS gzip) · e2e 117 passed / 19 skipped (stub-only or other-mode specs) · a11y 58 routes × light + dark, 0 violations; build:prod ✓ (local prerender, dry run); docker CONFIG=ci + check-container ✓ + edge aliases ✓ + caddy validate ✓; LHCI perf 94–95, a11y 100, BP 96, SEO 100, LCP ≤ 979 ms, TBT 271–299 ms (floor 250 ✗ — REVIEW; ta3lom baseline on this machine 231–422 ms) |
 | 9 Report | W-00.10 | | |
+
+## Manual pass (Phase 8)
+
+- [x] 320 px: no horizontal page scroll (e2e `expectNoHorizontalScroll` on home, project, 404, drawer; only the category tab bar scrolls sideways).
+- [x] Keyboard only: skip link first, header search, tabs (focus from «الأقسام»), cards' chips/stepper/buttons, cart, checkout (e2e keyboard + focus assertions; a11y run).
+- [x] One `h1` per route (e2e `toHaveCount(1)` on home, project, cart, 404; axe on 58 routes × 2 themes).
+- [x] `/en` falls back to Arabic through `pick()` where English is missing (unchanged `pick()`; English titles seeded for every project).
+- [x] Dark mode follows the OS until the visitor chooses (pre-paint script in `src/index.html`, unchanged; screenshots in both themes).
 
 ## Open REVIEW rows
 

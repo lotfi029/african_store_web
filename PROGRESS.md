@@ -34,6 +34,9 @@ without a commit. Never redo a committed phase.
 
 | W-00.13 CI | W-00.13 — fix: phone query guard for partial matchMedia | done | CI run on `baebb94` red at `npm test`: `quick-donate-gating.spec.ts` × 4, `mq.removeEventListener is not a function` (theme.service.spec's window-wide matchMedia stub has no removeEventListener). The phone listener now registers only when both methods exist. G-fast green (unit 419, scripts 16) |
 
+| W-01.1 | W-01.1 — perf: money and plural formatting without Intl on the first render | done | owner: W-01 performance pass. 4× long-task A/B `/ar/` 356 → 318–324, `/ar/p` 326–340 → 262–282 ms; Lighthouse A/B (45 runs per build) `/ar/` JS TBT −36 ms, `/ar/p` within noise |
+| W-01 LHCI | W-01 — LHCI 5 runs per URL | done | owner choice after the deferral A/B (header ~30–70 ms, banner none, noise ±50): sample 3 → 5, thresholds unchanged (REVIEW) |
+
 ## Manual pass (Phase 8)
 
 - [x] 320 px: no horizontal page scroll (e2e `expectNoHorizontalScroll` on home, project, 404, drawer; only the category tab bar scrolls sideways).

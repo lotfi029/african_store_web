@@ -10,6 +10,25 @@ export function pick(locale: Locale, ar: string, en?: string | null): string {
 
 export const RIYADH = 'Asia/Riyadh';
 
+export type PluralCategory = 'zero' | 'one' | 'two' | 'few' | 'many' | 'other';
+
+/**
+ * CLDR plural category of a whole count — what `new Intl.PluralRules(locale).select(n)` returns for an integer
+ * (i18n.spec compares the two for 0…2000). W-01: no Intl on the home page's first render; the first Arabic
+ * `Intl.PluralRules` loads ICU locale data inside the hydration task (Lighthouse TBT).
+ */
+export function pluralCategory(n: number, locale: Locale): PluralCategory {
+  const i = Math.abs(Math.trunc(n));
+  if (locale === 'en') return i === 1 ? 'one' : 'other';
+  if (i === 0) return 'zero';
+  if (i === 1) return 'one';
+  if (i === 2) return 'two';
+  const r = i % 100;
+  if (r >= 3 && r <= 10) return 'few';
+  if (r >= 11) return 'many';
+  return 'other';
+}
+
 @Injectable({ providedIn: 'root' })
 export class I18nService {
   private readonly localeId = inject(LOCALE_ID);

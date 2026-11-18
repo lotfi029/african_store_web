@@ -24,6 +24,8 @@ without a commit. Never redo a committed phase.
 
 | W-00.11 CI | — | evidence | CI run 2 (`a202d10`) red at LHCI on all four URLs, runner `benchmarkIndex` ~40 % below run 1, same task structure (DECISIONS "LHCI evidence"). Docs pushed; the next CI run on the same code decides |
 
+| LHCI run 3 | — | blocked on owner | Run 3 (`308b3f4`) red at LHCI TBT on `/ar/`, `/ar/p`, `/en/p` (slower runner again). Stopped iterating; owner decision requested in the PR comment (fixture text / W-01 performance pass / accept REVIEW) |
+
 ## Manual pass (Phase 8)
 
 - [x] 320 px: no horizontal page scroll (e2e `expectNoHorizontalScroll` on home, project, 404, drawer; only the category tab bar scrolls sideways).

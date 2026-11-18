@@ -53,7 +53,7 @@ talks to the same `ta3lom_store_api` `/v1` endpoints, and is restyled to `docs/d
 | `a11y` (axe) | ✓ **58 routes × light + dark**, 0 violations (real-API build). On the stub build: 70 routes × 2, 0 violations |
 | `build:prod` | ✓ Production configuration, with the prerender reading the local API (a dry run, never published). CSP and budgets green |
 | Container | ✓ `docker build CONFIG=ci`. `check-container` checks headers, CSP, fallbacks, 404s, cache, healthz, non-root and the label. Edge aliases ✓. `caddy validate` ✓ |
-| LHCI (mobile, median of 3) | ✗ **TBT over the 250 floor; every other category passes** (perf 93–95, a11y 100, BP 96, SEO 100, LCP < 1 s, CLS ≤ 0.012). CI TBT medians: run 1 `/ar/` 279, `/ar/p` 250.5 (`/en/*` ✓); run 2 (W-00.11, slow runner) 378.5 / 334 / 354 / 338; run 3 (same code, slow runner) `/ar/` 312, `/en/` ✓, `/ar/p` 276.5, `/en/p` 298.5. Budget not raised; owner decision requested (REVIEW 8) |
+| LHCI (mobile, median of 3) | ✓ **CI run 8 (`1ea0dd4`, W-00.12) green** on all four URLs: perf, a11y 100, BP 96, SEO 100, LCP < 1 s, CLS ≤ 0.012, TBT within 250 by the median-run rule. TBT per run: `/ar/` 234 / 303 / 318, `/ar/p` 236 / 240 / 282, `/en/` 168 / 212 / 254, `/en/p` 199 / 227 / 237 ms (runner `benchmarkIndex` ~2700–2900). Earlier runs 1–3 were red (see REVIEW 8). The `/ar/` margin is thin |
 | Fonts | /ar/ downloads 76.5 kB of fonts and /en/ 58.9 kB. The budget is 69.0 kB, so /ar/ is 7.5 kB over (REVIEW) |
 
 ## Screenshots
@@ -104,7 +104,7 @@ talks to the same `ta3lom_store_api` `/v1` endpoints, and is restyled to `docs/d
 5. **Footer.** No e-mail, mobile, licence, governance or policy links until they exist.
 6. **Cards, filter bar, trust.** The trust-row placeholder was replaced by «تحت إشراف الجهات الرسمية المختصة». A «دفع آمن» item was added and is hidden in showcase.
 7. **Checkout payment panel.** It shows the gateway's methods as information only. Payment stays a hosted-page redirect.
-8. **Lighthouse TBT.** Run 1 was over the 250 floor on the Arabic pages (279 / 250.5 ms); W-00.11 renders the bottom nav on idle. Run 2 was red on all four pages, but its runner was ~40 % slower (`benchmarkIndex` ~2000–2600 vs ~3800–4250) with the same task structure; normalised, `/ar/` ≈ 234 ms. Run 3 (same code, `benchmarkIndex` 2199–2927) was red on `/ar/` 312, `/ar/p` 276.5 and `/en/p` 298.5 ms. The margin is thin and depends on the runner. Budgets were not raised. The owner chose the performance pass: **W-00.12** puts `content-visibility: auto` on off-screen cards, the trust row and the project panels (`/ar/` main-thread work 272 → 229 ms), and the axe helpers render everything before scanning so the a11y gate keeps checking every element's real colours. It stays REVIEW until CI's LHCI is green.
+8. **Lighthouse TBT — resolved.** Runs 1–3 were over the 250 ms floor (a W-00 regression: off-screen layout of the longer Arabic content, plus the bottom nav). The owner chose the performance pass: W-00.11 (bottom nav on idle) and W-00.12 (`content-visibility: auto` on off-screen cards, the trust row and project panels; the axe helpers render everything before scanning, so the a11y gate keeps checking every element's real colours). CI run 8 is green. The `/ar/` margin is thin (two of three runs over 250), so the home's first-screen hydration is the next lever (W-01). Budgets were never raised.
 
 ## Owner decisions pending
 

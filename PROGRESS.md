@@ -28,6 +28,8 @@ without a commit. Never redo a committed phase.
 
 | W-00.12 | W-00.12 — perf: content-visibility on off-screen blocks; axe renders all first | done | owner choice (performance pass). G-fast green (unit 419, scripts 16); build:ci ✓; @smoke 69/69; @showcase 17/17; a11y 58 × 2 ✓; container ✓; CDP `/ar/` Task 272 → 229 ms. CI LHCI decides |
 
+| W-00.12 CI | — | ✓ green | CI run 8 (`1ea0dd4`) green, LHCI included (TBT `/ar/` 234 / 303 / 318, `/ar/p` 236 / 240 / 282, `/en/` 168–254, `/en/p` 199–237 ms; runner `benchmarkIndex` ~2700–2900). Thin `/ar/` margin noted for W-01 |
+
 ## Manual pass (Phase 8)
 
 - [x] 320 px: no horizontal page scroll (e2e `expectNoHorizontalScroll` on home, project, 404, drawer; only the category tab bar scrolls sideways).

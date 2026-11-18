@@ -46,6 +46,13 @@ try {
       continue;
     }
     await page.waitForTimeout(500);
+    // W-00.12: render `content-visibility: auto` blocks before the scan, so axe checks the real colours of ALL content
+    // (it cannot compute them for unrendered content). Same as e2e/support/a11y.ts renderAllForAxe().
+    await page.evaluate(() => {
+      for (const el of document.querySelectorAll('*'))
+        if (getComputedStyle(el).contentVisibility === 'auto') el.style.contentVisibility = 'visible';
+    });
+    await page.waitForTimeout(100);
     const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze();
     for (const v of results.violations) {
       const entry = { route, rule: v.id, impact: v.impact, help: v.help, nodes: v.nodes.map((n) => n.target.join(' ')) };

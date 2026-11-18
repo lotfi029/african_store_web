@@ -91,6 +91,9 @@ export function trustItems(flags: TrustFlags, showcase = false): TrustItem[] {
     /* W-00 prototype: a bordered panel inside the content column, icon tiles on the tint. */
     :host {
       display: block;
+      /* W-00.12 (Lighthouse TBT): below the fold at load — skipped by layout and paint until it nears the viewport. */
+      content-visibility: auto;
+      contain-intrinsic-size: auto 260px;
       max-width: 1240px;
       margin-inline: auto;
       padding-inline: var(--space-6);

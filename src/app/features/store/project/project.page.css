@@ -43,6 +43,9 @@
 
 /* «عن المشروع» and «شارك الأجر» panels */
 .panel {
+  /* W-00.12 (Lighthouse TBT): «عن المشروع» / «شارك الأجر» are off screen at load on phones. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 240px;
   margin-block-start: 24px;
   padding: 24px;
   border-radius: var(--r-lg);

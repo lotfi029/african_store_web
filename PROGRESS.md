@@ -26,6 +26,8 @@ without a commit. Never redo a committed phase.
 
 | LHCI run 3 | — | blocked on owner | Run 3 (`308b3f4`) red at LHCI TBT on `/ar/`, `/ar/p`, `/en/p` (slower runner again). Stopped iterating; owner decision requested in the PR comment (fixture text / W-01 performance pass / accept REVIEW) |
 
+| W-00.12 | W-00.12 — perf: content-visibility on off-screen blocks; axe renders all first | done | owner choice (performance pass). G-fast green (unit 419, scripts 16); build:ci ✓; @smoke 69/69; @showcase 17/17; a11y 58 × 2 ✓; container ✓; CDP `/ar/` Task 272 → 229 ms. CI LHCI decides |
+
 ## Manual pass (Phase 8)
 
 - [x] 320 px: no horizontal page scroll (e2e `expectNoHorizontalScroll` on home, project, 404, drawer; only the category tab bar scrolls sideways).

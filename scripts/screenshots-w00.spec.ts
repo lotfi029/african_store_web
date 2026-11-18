@@ -1,6 +1,7 @@
 import { expect, test, type BrowserContext, type Page } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { renderAllForAxe } from '../e2e/support/a11y';
 import { signIn, staffSignIn } from '../e2e/support/auth';
 import { payOnHostedPage } from '../e2e/support/payment';
 
@@ -32,6 +33,8 @@ async function shootHere(page: Page, file: string) {
   for (const w of WIDTHS) {
     await page.setViewportSize({ width: w, height: 900 });
     await page.waitForTimeout(600);
+    // Full-page captures don't scroll, so `content-visibility: auto` blocks (W-00.12) are rendered first.
+    await renderAllForAxe(page);
     const h = await page.evaluate(() => document.documentElement.scrollHeight);
     await page.screenshot({
       path: join(OUT, `${file}-${w}.jpg`),
@@ -49,6 +52,7 @@ async function shoot(page: Page, file: string, path: string, settle: 'networkidl
     await page.setViewportSize({ width: w, height: 900 });
     await page.goto(path, { waitUntil: settle });
     await page.waitForTimeout(settle === 'load' ? 2500 : 500);
+    await renderAllForAxe(page);
     const h = await page.evaluate(() => document.documentElement.scrollHeight);
     await page.screenshot({
       path: join(OUT, `${file}-${w}.jpg`),

@@ -188,6 +188,14 @@
   gap: var(--space-5);
 }
 
+/* W-00.12 (Lighthouse TBT): cards off screen are not laid out or painted until they come near the viewport. The
+   intrinsic size keeps the scroll height stable; `auto` remembers each card's real size once it has been shown.
+   axe renders everything before it scans (e2e/support/a11y.ts, scripts/a11y.mjs). */
+.grid > li {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 520px;
+}
+
 @media (width < 600px) {
   .grid {
     grid-template-columns: minmax(0, 1fr);

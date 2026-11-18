@@ -183,6 +183,8 @@ export class PublicLayout {
       const mq = this.doc.defaultView?.matchMedia?.(PHONE_QUERY);
       if (!mq) return;
       this.phone.set(mq.matches);
+      // Partial MediaQueryList (old browsers, test stubs): the first answer stands.
+      if (typeof mq.addEventListener !== 'function' || typeof mq.removeEventListener !== 'function') return;
       const on = (e: MediaQueryListEvent) => this.phone.set(e.matches);
       mq.addEventListener('change', on);
       destroyRef.onDestroy(() => mq.removeEventListener('change', on));

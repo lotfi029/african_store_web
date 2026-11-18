@@ -62,7 +62,7 @@
     "@axe-core/playwright": "^4.14.0",
     "@eslint/js": "^10.0.1",
     "@lhci/cli": "^0.16.1",
-    "@playwright/test": "^1.65.0",
+    "@playwright/test": "^1.65.1",
     "@types/node": "^26.6.6",
     "angular-eslint": "22.6.0",
     "axe-core": "^4.13.0",

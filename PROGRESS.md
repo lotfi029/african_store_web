@@ -20,6 +20,8 @@ without a commit. Never redo a committed phase.
 | 8 DoD, container, LHCI | W-00.9 — DoD green, container, LHCI | done | G-full on the real API: api:up ✓ · api:seed ✓ · types:check ✓ · typecheck ✓ · lint ✓ · test 419 + scripts 16 ✓ · build ✓ (46 prerendered, ar 138.1 / en 136.4 kB JS gzip) · e2e 117 passed / 19 skipped (stub-only or other-mode specs) · a11y 58 routes × light + dark, 0 violations; build:prod ✓ (local prerender, dry run); docker CONFIG=ci + check-container ✓ + edge aliases ✓ + caddy validate ✓; LHCI perf 94–95, a11y 100, BP 96, SEO 100, LCP ≤ 979 ms, TBT 271–299 ms (floor 250 ✗ — REVIEW; ta3lom baseline on this machine 231–422 ms) |
 | 9 Report | W-00.10 — report | done | docs/W-00-report.md (PR body); brand grep clean (source/API references only) |
 
+| W-00.11 | W-00.11 — fix Lighthouse TBT regression (bottom nav on idle) | done | CI run 1 red at LHCI only (TBT /ar/ 279, /ar/p 250.5 > 250). Root cause measured (bottom nav style/layout in the first long task). After the fix: G-fast green (unit 419, scripts 16); build:ci ✓ (ar 137.5 / en 135.8 kB JS); @smoke 69/69 on the stub; a11y 58 × 2 ✓; container ✓; 4× CPU same-session TBT /ar/ 405 → 327, /ar/p 268 → 180 ms. CI on the PR head decides LHCI |
+
 ## Manual pass (Phase 8)
 
 - [x] 320 px: no horizontal page scroll (e2e `expectNoHorizontalScroll` on home, project, 404, drawer; only the category tab bar scrolls sideways).

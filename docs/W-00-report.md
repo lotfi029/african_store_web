@@ -21,7 +21,7 @@ talks to the same `ta3lom_store_api` `/v1` endpoints, and is restyled to `docs/d
 | Tokens | Dar Africa palette (ink, teal, sand, cream). Every `--c-*` name is kept and re-pointed for light and dark. New tokens: `--c-gold-text`, `--c-highlight`, `--c-gold-line`, `--rb`, `--shadow-card`. `contrast-check` has 168 checks, all passing |
 | Fonts | IBM Plex Sans Arabic 400 and 700 (OFL), Arabic + Latin-basic subsets, preloaded by `postbuild`. IBM Plex Mono is kept |
 | Logo | The official mark from `african_web`, as `public/logo.svg#logo-src`. Fill is inherited, because the CSP blocks a `<style>` inside the SVG. Also `favicon.svg`, `favicon.ico` and `og.png` |
-| Layout | Header: ink-tile lockup, pill search, tinted cart pill. Category tabs: sand underline, bold active tab. New footer: quote band, 4 columns, payment pills. New phone **bottom nav** at ≤ 760 px |
+| Layout | Header: ink-tile lockup, pill search, tinted cart pill. Category tabs: sand underline, bold active tab. New footer: quote band, 4 columns, payment pills. New phone **bottom nav** at ≤ 760 px, rendered on idle (client only, W-00.11) |
 | Home | Ink banner with ring art, sand pill, sand CTA, «التفاصيل» link and `aria-pressed` dots. Quick-donate card with 2 × 2 presets and the amount on the CTA. New filter heading. Restyled cards. Trust panel |
 | Project | 16:9 cover, category pill, «عن المشروع» and «شارك الأجر» panels. Aside: option rows, a dashed total and the secure-payment line |
 | Checkout | «طريقة الدفع» panel. It is information only: the hosted-page redirect is unchanged (rule 18) |
@@ -53,7 +53,7 @@ talks to the same `ta3lom_store_api` `/v1` endpoints, and is restyled to `docs/d
 | `a11y` (axe) | ✓ **58 routes × light + dark**, 0 violations (real-API build). On the stub build: 70 routes × 2, 0 violations |
 | `build:prod` | ✓ Production configuration, with the prerender reading the local API (a dry run, never published). CSP and budgets green |
 | Container | ✓ `docker build CONFIG=ci`. `check-container` checks headers, CSP, fallbacks, 404s, cache, healthz, non-root and the label. Edge aliases ✓. `caddy validate` ✓ |
-| LHCI (mobile, median of 3) | perf **94 / 95 / 94 / 94**, a11y **100**, BP **96**, SEO **100**, LCP **979 / 914 / 929 / 862 ms**, CLS ≤ 0.012. **TBT 288 / 271 / 278 / 299 ms, which misses the 250 floor (REVIEW).** ta3lom's own image on the same machine: TBT 422 / 265 / 231 / 268 ms |
+| LHCI (mobile, median of 3) | First PR CI run: TBT `/ar/` 279 ms and `/ar/p` 250.5 ms over the 250 floor (`/en/` passed); everything else green. Root cause and fix: W-00.11 (the bottom nav renders on idle; −80 ms TBT at 4× CPU in a same-session A/B). Local runs on this slower machine: perf 93–94, a11y 100, BP 96, SEO 100, LCP 889–973 ms, CLS ≤ 0.012; local TBT stays over 250 for W-00 and for ta3lom's own image alike, so the PR's CI run decides (REVIEW until green) |
 | Fonts | /ar/ downloads 76.5 kB of fonts and /en/ 58.9 kB. The budget is 69.0 kB, so /ar/ is 7.5 kB over (REVIEW) |
 
 ## Screenshots
@@ -104,7 +104,7 @@ talks to the same `ta3lom_store_api` `/v1` endpoints, and is restyled to `docs/d
 5. **Footer.** No e-mail, mobile, licence, governance or policy links until they exist.
 6. **Cards, filter bar, trust.** The trust-row placeholder was replaced by «تحت إشراف الجهات الرسمية المختصة». A «دفع آمن» item was added and is hidden in showcase.
 7. **Checkout payment panel.** It shows the gateway's methods as information only. Payment stays a hosted-page redirect.
-8. **Lighthouse TBT.** 271–299 ms against the 250 floor. Budgets were not raised. ta3lom's own image fails the same floor on this machine.
+8. **Lighthouse TBT.** The first CI run was over the 250 floor on the Arabic pages (279 / 250.5 ms); it was a real W-00 regression (the eagerly rendered bottom nav), fixed in W-00.11. Budgets were not raised. It stays REVIEW until CI on the PR head is green.
 
 ## Owner decisions pending
 

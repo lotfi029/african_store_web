@@ -37,7 +37,12 @@ import { SkipLink } from '../skip-link/skip-link';
         <ta-icon name="gift" [size]="22" />
       </button>
     }
-    <ta-bottom-nav />
+    <!-- W-00.11: the phone bottom bar renders on the client when the browser is idle, not in the prerender or the first
+         hydration task (it added ~30 ms of style/layout to that long task — Lighthouse TBT). It is position: fixed and
+         the layout already reserves --bnav-h, so its arrival shifts nothing. -->
+    @defer (on idle) {
+      <ta-bottom-nav />
+    }
     <!-- Back to top: after two screens of scrolling; focus returns to the start of the page content. -->
     <button
       type="button"

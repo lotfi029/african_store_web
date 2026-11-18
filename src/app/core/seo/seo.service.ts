@@ -71,13 +71,8 @@ export class SeoService {
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
     this.meta.updateTag({ name: 'twitter:title', content: title });
     this.meta.updateTag({ name: 'twitter:description', content: data.description });
-    if (image) {
-      this.meta.updateTag({ property: 'og:image', content: image });
-      this.meta.updateTag({ name: 'twitter:image', content: image });
-    } else {
-      this.meta.removeTag('property="og:image"');
-      this.meta.removeTag('name="twitter:image"');
-    }
+    this.meta.updateTag({ property: 'og:image', content: image });
+    this.meta.updateTag({ name: 'twitter:image', content: image });
 
     if (data.noindex) {
       this.removeLinks();

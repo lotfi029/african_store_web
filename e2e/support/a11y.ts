@@ -1,28 +1,9 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, type Page } from '@playwright/test';
+import { renderAllForAxe } from '../../scripts/lib/axe-render.mjs';
 
-/**
- * W-00.12: blocks styled `content-visibility: auto` (off-screen cards, trust row, project panels) are not rendered until
- * they near the viewport, and axe cannot compute colours for unrendered content (false colour-contrast results). Before
- * a scan, every such block is rendered (`content-visibility: visible` inline), so axe checks the REAL colours of ALL
- * content — nothing is skipped or relaxed. Returns a function that restores the page.
- */
-export async function renderAllForAxe(page: Page): Promise<() => Promise<void>> {
-  await page.evaluate(() => {
-    for (const el of document.querySelectorAll<HTMLElement>('*'))
-      if (getComputedStyle(el).contentVisibility === 'auto') {
-        el.dataset['axeCv'] = '1';
-        el.style.contentVisibility = 'visible';
-      }
-  });
-  return () =>
-    page.evaluate(() => {
-      for (const el of document.querySelectorAll<HTMLElement>('[data-axe-cv]')) {
-        el.style.removeProperty('content-visibility');
-        delete el.dataset['axeCv'];
-      }
-    });
-}
+/** Re-exported for specs that scan by hand (scripts/screenshots-w00.spec.ts). */
+export { renderAllForAxe };
 
 /**
  * axe on the current page state, in the current theme AND the other one (plan §6: ar/en × light/dark, client states).

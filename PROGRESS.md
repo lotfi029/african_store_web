@@ -30,6 +30,8 @@ without a commit. Never redo a committed phase.
 
 | W-00.12 CI | — | ✓ green | CI run 8 (`1ea0dd4`) green, LHCI included (TBT `/ar/` 234 / 303 / 318, `/ar/p` 236 / 240 / 282, `/en/` 168–254, `/en/p` 199–237 ms; runner `benchmarkIndex` ~2700–2900). Thin `/ar/` margin noted for W-01 |
 
+| W-00.13 | W-00.13 — code-review fixes | done | 7 of 8 review findings fixed (bottom nav «الأقسام» from another page — e2e step failed on the old build; reduced motion on the header tile; donate-bar safe area; SEO image branch; one axe render helper; bottom nav phones-only; one payment-marks list), footer privacy/paths already the Footer REVIEW row. G-fast green (unit 419, scripts 16); build:ci ✓ (ar 137.6 / en 135.9 kB JS); @smoke 69/69; @showcase 17/17; a11y 58 × 2 ✓ |
+
 ## Manual pass (Phase 8)
 
 - [x] 320 px: no horizontal page scroll (e2e `expectNoHorizontalScroll` on home, project, 404, drawer; only the category tab bar scrolls sideways).

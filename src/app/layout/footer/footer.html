@@ -55,10 +55,9 @@
       <div class="pay">
         <span class="pay-h" i18n="@@store.layout.footer-payment">خيارات الدفع</span>
         <ul class="marks" role="list">
-          <li dir="ltr">mada</li>
-          <li dir="ltr">Apple Pay</li>
-          <li dir="ltr">VISA</li>
-          <li dir="ltr">Mastercard</li>
+          @for (m of paymentMarks; track m) {
+            <li dir="ltr">{{ m }}</li>
+          }
         </ul>
       </div>
     }

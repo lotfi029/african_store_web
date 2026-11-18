@@ -27,6 +27,7 @@ import { Icon } from '../../../shared/ui/icon/icon';
 import { Money } from '../../../shared/ui/money/money';
 import { ResourceState } from '../../../shared/ui/resource-state/resource-state';
 import { PaymentRedirect } from '../../../core/payments/payment-redirect';
+import { PAYMENT_MARKS } from '../../../core/payments/payment-marks';
 import { lineProblem } from '../cart/line-problems';
 import type { CheckoutNavState } from '../donate/donate-box';
 import { OtpSignIn } from '../login/otp-sign-in';
@@ -49,6 +50,7 @@ import { CheckoutData } from './checkout.data';
   styleUrl: './checkout.page.css',
 })
 export class CheckoutPage {
+  protected readonly paymentMarks = PAYMENT_MARKS;
   protected readonly auth = inject(StoreAuth);
   protected readonly cart = inject(CartStore);
   protected readonly i18n = inject(I18nService);

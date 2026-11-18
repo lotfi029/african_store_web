@@ -9,6 +9,7 @@ import { chromium } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { renderAllForAxe } from './lib/axe-render.mjs';
 import { readLocalCsp } from './lib/csp.mjs';
 import { startStaticServer } from './lib/static-server.mjs';
 
@@ -46,12 +47,8 @@ try {
       continue;
     }
     await page.waitForTimeout(500);
-    // W-00.12: render `content-visibility: auto` blocks before the scan, so axe checks the real colours of ALL content
-    // (it cannot compute them for unrendered content). Same as e2e/support/a11y.ts renderAllForAxe().
-    await page.evaluate(() => {
-      for (const el of document.querySelectorAll('*'))
-        if (getComputedStyle(el).contentVisibility === 'auto') el.style.contentVisibility = 'visible';
-    });
+    // W-00.12: render `content-visibility: auto` blocks first, so axe checks the real colours of ALL content.
+    await renderAllForAxe(page);
     await page.waitForTimeout(100);
     const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze();
     for (const v of results.violations) {

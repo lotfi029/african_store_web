@@ -144,6 +144,10 @@ for (const locale of ['ar', 'en'] as const) {
       await expect(bar.locator('[aria-current="page"]')).toHaveAttribute('href', `/${locale}/cart`);
       await expectNoHorizontalScroll(page);
       await expectNoA11yViolations(page, `/${locale}/cart bottom bar`);
+      // «الأقسام» from another page: home first, then the tab bar once the home page has rendered.
+      await bar.locator('button.it').nth(0).click();
+      await expect(page).toHaveURL(new RegExp(`/${locale}/$`));
+      await expect(page.locator('#cats a[aria-current="page"]')).toBeFocused();
       await page.setViewportSize({ width: 1024, height: 800 });
       await expect(bar).toBeHidden();
     });

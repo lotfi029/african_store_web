@@ -146,6 +146,13 @@ h1 {
     transform: none;
   }
 
+  /* ≤ 760 px the bar sits on the bottom nav, which already pads the safe area (--bnav-h includes it). */
+  @media (width <= 760px) {
+    .dbar {
+      padding-block-end: var(--space-3);
+    }
+  }
+
   /* Room for the bar under the page so nothing ends up hidden behind it. */
   .pp {
     padding-block-end: 112px;

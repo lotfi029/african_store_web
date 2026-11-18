@@ -534,7 +534,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .hdr,
-  .mark,
+  .tile,
   .burger span:not(.visually-hidden) {
     transition: none;
   }
@@ -543,7 +543,7 @@
     animation: none;
   }
 
-  .brand:hover .mark {
+  .brand:hover .tile {
     transform: none;
   }
 }

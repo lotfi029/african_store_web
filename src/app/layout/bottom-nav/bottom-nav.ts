@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Injector, afterNextRender, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter, map } from 'rxjs';
@@ -107,6 +107,7 @@ export class BottomNav {
   protected readonly auth = inject(StoreAuth);
   private readonly router = inject(Router);
   private readonly doc = inject(DOCUMENT);
+  private readonly injector = inject(Injector);
 
   protected readonly current = toSignal(
     this.router.events.pipe(
@@ -118,8 +119,15 @@ export class BottomNav {
 
   /** «الأقسام»: the category tab bar, focused on its current tab (going home first when it is not on the page). */
   protected async sections(): Promise<void> {
-    if (!this.doc.getElementById('cats')) await this.router.navigateByUrl('/');
-    const bar = this.doc.getElementById('cats');
+    let bar = this.doc.getElementById('cats');
+    if (!bar) {
+      await this.router.navigateByUrl('/');
+      // Zoneless: the home page's template (and its tab bar) renders after the navigation resolves.
+      for (let i = 0; !bar && i < 5; i++) {
+        await new Promise<void>((r) => afterNextRender(() => r(), { injector: this.injector }));
+        bar = this.doc.getElementById('cats');
+      }
+    }
     if (!bar) return;
     const reduce = this.doc.defaultView?.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
     bar.scrollIntoView?.({ behavior: reduce ? 'instant' : 'smooth', block: 'start' });

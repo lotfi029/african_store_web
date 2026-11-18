@@ -1,5 +1,13 @@
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, HostListener, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  HostListener,
+  afterNextRender,
+  inject,
+  signal,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, map } from 'rxjs';
@@ -39,9 +47,12 @@ import { SkipLink } from '../skip-link/skip-link';
     }
     <!-- W-00.11: the phone bottom bar renders on the client when the browser is idle, not in the prerender or the first
          hydration task (it added ~30 ms of style/layout to that long task — Lighthouse TBT). It is position: fixed and
-         the layout already reserves --bnav-h, so its arrival shifts nothing. -->
-    @defer (on idle) {
-      <ta-bottom-nav />
+         the layout already reserves --bnav-h, so its arrival shifts nothing. W-00.13: phones only (≤ 760 px) — wider
+         screens never load its chunk. -->
+    @if (phone()) {
+      @defer (on idle) {
+        <ta-bottom-nav />
+      }
     }
     <!-- Back to top: after two screens of scrolling; focus returns to the start of the page content. -->
     <button
@@ -162,8 +173,20 @@ export class PublicLayout {
     w.scrollTo({ top: 0, behavior: reduce ? 'instant' : 'smooth' });
     this.doc.getElementById('main')?.focus({ preventScroll: true });
   }
+  /** ≤ 760 px (the bottom bar's breakpoint, base.css --bnav-h). Set after the first render, so hydration matches. */
+  protected readonly phone = signal(false);
+
   constructor() {
     inject(GiftCategories).start(); // F-5: the gift-category count, once, after the first render
+    const destroyRef = inject(DestroyRef);
+    afterNextRender(() => {
+      const mq = this.doc.defaultView?.matchMedia?.(PHONE_QUERY);
+      if (!mq) return;
+      this.phone.set(mq.matches);
+      const on = (e: MediaQueryListEvent) => this.phone.set(e.matches);
+      mq.addEventListener('change', on);
+      destroyRef.onDestroy(() => mq.removeEventListener('change', on));
+    });
   }
   private readonly router = inject(Router);
   /** The floating button shows while browsing (home/listing, project pages) — never over cart, checkout or forms. */
@@ -175,6 +198,9 @@ export class PublicLayout {
     { initialValue: isBrowsing(this.router.url) },
   );
 }
+
+/** The phone bottom bar's breakpoint (layout/bottom-nav, base.css `--bnav-h`). */
+export const PHONE_QUERY = '(width <= 760px)';
 
 /** Home/listing (`/`, `/?…`, `/#…`) and project pages (`/p/…`). */
 export function isBrowsing(url: string): boolean {

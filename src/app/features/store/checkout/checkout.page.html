@@ -136,10 +136,9 @@
                 <h2 id="co-pay-h" i18n="@@store.checkout.payment-heading">طريقة الدفع</h2>
                 <div class="pad">
                   <ul class="pmarks" role="list">
-                    <li dir="ltr">mada</li>
-                    <li dir="ltr">Apple Pay</li>
-                    <li dir="ltr">VISA</li>
-                    <li dir="ltr">Mastercard</li>
+                    @for (m of paymentMarks; track m) {
+                      <li dir="ltr">{{ m }}</li>
+                    }
                   </ul>
                   <p class="note" i18n="@@store.checkout.hosted-note">
                     تُكمل الدفع في صفحة بوابة الدفع الآمنة، ولا نطلب بيانات بطاقتك في هذه الصفحة.

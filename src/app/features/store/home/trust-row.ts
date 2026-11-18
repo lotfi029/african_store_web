@@ -40,6 +40,7 @@ export function trustItems(flags: TrustFlags, showcase = false): TrustItem[] {
       key: 'payment',
       icon: 'lock',
       title: $localize`:@@store.home.trust-payment:دفع آمن`,
+      // The same methods as core/payments/payment-marks.ts (translated here, so it stays i18n text).
       text: $localize`:@@store.home.trust-payment-text:مدى · Apple Pay · فيزا · ماستركارد`,
     },
     {

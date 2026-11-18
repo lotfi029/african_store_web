@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { I18nService } from '../../core/i18n/i18n';
+import { PAYMENT_MARKS } from '../../core/payments/payment-marks';
 import { SHOWCASE } from '../../core/showcase/showcase';
 import { QuickDonate } from '../../core/ui/quick-donate.service';
 import { Icon } from '../../shared/ui/icon/icon';
@@ -25,6 +26,7 @@ export class Footer {
   /** Showcase mode (SW-2): no donations link, no payment marks. */
   protected readonly showcase = inject(SHOWCASE);
   protected readonly quick = inject(QuickDonate);
+  protected readonly paymentMarks = PAYMENT_MARKS;
   protected readonly year = new Date().getFullYear();
 
   /** A page of the association's main site in the current locale (`https://darafrica.org/ar/about`). */

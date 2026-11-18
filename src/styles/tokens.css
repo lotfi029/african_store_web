@@ -1,0 +1,313 @@
+/**
+ * Design tokens — Dar Africa (W-00, plan §3; target look docs/design/darafrica-store-prototype.html).
+ * The structure and every semantic name come from ta3lom_store_web; the palette and the values are Dar Africa's.
+ * This file is the ONLY permitted source of colour, spacing, radius, type and
+ * motion values. No component may hardcode a hex, px gap, or duration.
+ */
+:root {
+  /* Colour — palette (plan §3.1). Components never read these; only the semantic layer below does. */
+  --ink: #1b2e2e; /* headings, dark surfaces */
+  --brand: #304f50; /* teal: primary fills, links */
+  --brand-700: #24403f;
+  --brand-900: #1b2e2e;
+  --brand-2: #3d6161; /* secondary teal */
+  --gold: #baa87e; /* sand */
+  --gold-700: #7e6c43;
+  --gold-200: #d6c59b;
+  --gold-tint: #faf7ef;
+  --gold-line: #e9dfc6; /* sand borders */
+  --bg: #faf9f6; /* cream page */
+  --gray: #fff; /* white cards */
+  --gray-2: #efefe8;
+  --line: #e4e4dc;
+  --tint: #eaf0ee; /* selected chips, cart pill */
+  --tint-2: #dce7e4;
+  --text: #1e2a29;
+  --ink-2: #44514f;
+  --muted: #606a67;
+  --muted-on-gray: #56605d; /* muted text on the darker greys (admin page, hovered panels) */
+  --green: #2a7350;
+  --danger: #9a3b35;
+  --warn: #8a5a14;
+  --warn-on-tint: #7a4e10;
+  --footer-text: #d9e2e1;
+  --footer-muted: #bcc8c5;
+
+  /* Decorative sweeps (base.css .grad-text / hero rule): teal → sand, mirrored for start-aligned RTL text */
+  --grad: linear-gradient(-87deg, #baa87e 0%, #304f50 55%, #3d6161 108%);
+  --grad-rtl: linear-gradient(87deg, #baa87e 0%, #304f50 55%, #3d6161 108%);
+
+  /*
+   * ── SEMANTIC LAYER (CR-01 FE-1, ADR-011; values re-pointed in W-00, plan §3.2) ──────────────────
+   * Components use ONLY these `--c-*` / `--chart-*` names — never the palette above, never a
+   * literal (Stylelint enforces it for src/app). Ratios are WCAG 2.x contrast, measured by
+   * scripts/contrast-check.mjs, which `npm run lint` runs — a pair that drifts under its minimum
+   * fails the lint gate (`node scripts/contrast-check.mjs --verbose` prints every ratio).
+   */
+
+  /* Surfaces — cream page, white cards */
+  --c-bg: var(--bg);
+  --c-surface: var(--gray);
+  --c-surface-2: var(--bg);
+  --c-surface-3: var(--gray-2);
+  --c-tint: var(--tint);
+  --c-tint-2: var(--tint-2);
+  --c-gold-tint: var(--gold-tint);
+  --c-gold-line: var(--gold-line);
+
+  /* Text — --c-text 14.06:1 on cream · --c-text-2 7.87:1 · --c-muted 5.31 cream / 5.59 white / 4.85 on tint */
+  --c-text: var(--text);
+  --c-text-2: var(--ink-2);
+  --c-muted: var(--muted);
+  --c-muted-2: var(--muted-on-gray);
+
+  /* Lines */
+  --c-border: var(--line);
+  --c-border-2: var(--gray-2);
+
+  /* Accent TEXT and rings — these lighten in dark mode. --c-link 8.90:1 on white · --c-accent (large text,
+     icons, rules) 6.47:1 · --c-focus is teal in light (gold on cream is 2.22:1, under 3:1 — never gold here) */
+  --c-link: var(--brand);
+  --c-accent: var(--brand-2);
+  --c-accent-strong: var(--brand-700);
+  --c-focus: var(--brand);
+  --c-danger: var(--danger);
+  --c-success: var(--green);
+
+  /* Store web: success TEXT (status pills) and its tint; warning text on the sand tint */
+  --c-success-text: #236145;
+  --c-success-tint: #e3f0e8;
+  --c-warn-text: var(--warn-on-tint);
+
+  /* Category pill text on the sand tint (W-00, new): 4.77:1 */
+  --c-gold-text: var(--gold-700);
+
+  /* Decorative sand (W-00, new): tab underline, banner dots, timeline dot. Never the only cue of a state —
+     the active tab is also bold + aria-current, a pressed dot also aria-pressed. Not a text colour. */
+  --c-highlight: var(--gold);
+
+  /* Brand FILLS — identical in both themes; they always carry --c-on-brand text. --c-on-brand on --c-brand 8.90:1 */
+  --c-brand: var(--brand);
+  --c-brand-strong: var(--brand-700);
+  --c-brand-deep: var(--brand-900);
+  --c-gold: var(--gold);
+  --c-success-fill: var(--green);
+  --c-danger-fill: var(--danger);
+  --c-on-brand: #fff;
+  --c-on-gold: var(--ink); /* 6.09:1 on --c-gold */
+
+  /* Inverse pair — a dark chip on a light page (toast, active pager page) and the reverse in dark mode */
+  --c-inverse: var(--ink);
+  --c-on-inverse: #fff;
+
+  /* Permanently dark surfaces — utility bar, footer, banner, admin top bar, order hero. --c-on-dark 10.78:1 ·
+     --c-on-dark-muted 8.27:1 · --c-gold-on-dark 6.09:1 on --c-surface-dark */
+  --c-surface-dark: var(--ink);
+  --c-surface-indigo: var(--brand-700);
+  --c-on-dark: var(--footer-text);
+  --c-on-dark-muted: var(--footer-muted);
+  --c-gold-on-dark: var(--gold);
+  --c-band-end: var(--brand-700);
+  --c-on-dark-65: rgb(255 255 255 / 65%);
+  --c-on-dark-70: rgb(255 255 255 / 70%);
+  --c-on-dark-72: rgb(255 255 255 / 72%);
+  --c-on-dark-78: rgb(255 255 255 / 78%);
+  --c-on-dark-hover: rgb(255 255 255 / 8%);
+  --c-border-on-dark: rgb(255 255 255 / 12%);
+  --c-border-on-dark-soft: rgb(255 255 255 / 10%);
+  --c-border-on-dark-strong: rgb(255 255 255 / 45%);
+  --c-on-dark-dot: rgb(255 255 255 / 35%); /* banner dots at rest (decorative) */
+
+  /* The edge between a permanently-dark surface (footer, admin sidebar) and the page. Invisible in
+     light mode — dark against cream needs no line — and drawn in dark mode. */
+  --c-dark-surface-edge: transparent;
+
+  /* Staff admin (docs/reference/ta3lom/admin-redesign/02 §5) — used only under features/admin. The top bar stays
+     dark in both themes (--c-on-dark on it); the badge pairs are text-on-tint, checked by contrast-check. */
+  --c-admin-bg: #f3f3ee;
+  --c-admin-side: #ecece5;
+  --c-admin-side-hover: #e3e3da;
+  --c-admin-topbar: var(--c-surface-dark);
+  --c-admin-topbar-2: #2a4241;
+  --c-admin-row-selected: #eef3f1;
+
+  /* Links on the admin's grey page */
+  --c-admin-link: var(--c-accent-strong);
+  --c-badge-ok-bg: #dcefe3;
+  --c-badge-ok-text: #1c5a3c;
+  --c-badge-sched-bg: #dce7e4;
+  --c-badge-sched-text: #24403f;
+  --c-badge-warn-bg: #f6ecd2;
+  --c-badge-warn-text: #634511;
+  --c-badge-err-bg: #f5dedc;
+  --c-badge-err-text: #7e2c27;
+  --c-badge-draft-bg: #ecece5;
+  --c-badge-draft-text: #44514f;
+  --c-badge-new-bg: #faf7ef;
+  --c-badge-new-text: #6a5a35;
+
+  /* Overlays on imagery (thumbnails, video tiles) and modal scrims — theme-independent, from --ink */
+  --c-media-shade-22: rgb(0 0 0 / 22%);
+  --c-media-shade-25: rgb(0 0 0 / 25%);
+  --c-media-shade-30: rgb(0 0 0 / 30%);
+  --c-media-shade-35: rgb(0 0 0 / 35%);
+  --c-media-shade-45: rgb(0 0 0 / 45%);
+  --c-media-shade-65: rgb(0 0 0 / 65%);
+  --c-scrim-70: rgb(27 46 46 / 70%);
+  --c-scrim-80: rgb(27 46 46 / 80%);
+  --c-scrim-88: rgb(27 46 46 / 88%);
+  --c-scrim-90: rgb(27 46 46 / 90%);
+
+  /* One-offs, named for where they are drawn (re-derived from --ink and --gold) */
+  --c-header-glass: rgb(255 255 255 / 92%);
+  --c-header-shadow: rgb(27 46 46 / 7%);
+  --c-hero-glow-brand: rgb(61 97 97 / 60%);
+  --c-hero-glow-gold: rgb(186 168 126 / 22%);
+  --c-gold-glass: rgb(186 168 126 / 18%);
+  --c-mask-solid: #000; /* mask-image alpha only — never painted */
+  --c-shine: rgb(255 255 255 / 35%); /* the button hover sweep (shared/ui/button) */
+
+  /* A logo needs its own light ground in BOTH themes */
+  --c-logo-chip: #fff;
+
+  /* Org chart (FE-5) — box fills with --chart-on text */
+  --chart-neutral: #5a6563;
+  --chart-sky: #3d6161;
+  --chart-green: #2a7350;
+  --chart-brand: var(--brand);
+  --chart-on: #fff;
+  --chart-line: #7c8986; /* connectors: ≥ 3:1 on --c-bg (1.4.11) */
+
+  color-scheme: light;
+
+  /* Radius (plan §3.2): fields 12 · buttons 14 · cards 18 · panels 22 · pills */
+  --r: 12px;
+  --rb: 14px;
+  --rc: 18px;
+  --r-lg: 22px;
+  --rp: 999px;
+
+  /* Type */
+  --fa: 'IBM Plex Sans Arabic', 'Segoe UI', tahoma, sans-serif;
+  --fe: 'IBM Plex Sans Arabic', 'Segoe UI', helvetica, arial, sans-serif;
+  --fm: 'IBM Plex Mono', ui-monospace, menlo, monospace;
+
+  /* Motion */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-1: 0.2s;
+  --dur-2: 0.35s;
+  --dur-3: 0.55s;
+
+  /* Shadow */
+  --shadow-sm: 0 8px 24px rgb(0 0 0 / 25%);
+  --shadow-md: 0 20px 50px rgb(27 46 46 / 12%);
+  --shadow-lg: 0 40px 100px rgb(0 0 0 / 50%);
+  --shadow-brand: 0 10px 26px rgb(48 79 80 / 28%);
+  --shadow-gold: 0 10px 26px rgb(186 168 126 / 35%);
+  --shadow-card: 0 12px 30px rgb(27 46 46 / 10%); /* card hover lift */
+
+  /* Spacing — 4px base scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-9: 50px;
+  --space-10: 72px;
+  --space-11: 100px;
+
+  /*
+   * Breakpoints — CSS custom properties cannot appear inside @media conditions,
+   * so these are documented here for consistent reuse; hardcode the literal
+   * px value in each component's @media rule.
+   * sm 600 · sm-md 700 · md 760 (bottom nav) · md-lg 800 · lg 820 · xl 900 · xl-2 960 ·
+   * xxl 1000 · nav 1280
+   * Staff admin only (features/admin/admin-common.css): adm-phone 640 · adm-rail 1100
+   */
+}
+
+/*
+ * ── DARK THEME (CR-01 FE-1, ADR-011; W-00 values) ───────────────────────────────────────────────
+ * Set on <html> by the pre-paint script in src/index.html and by core/theme.service.ts (the OS decides
+ * unless the visitor chose). Only the semantic layer is re-pointed; the brand fills and the permanently-dark
+ * surfaces keep their roles. Every pair in scripts/contrast-check.mjs is checked in this theme too.
+ */
+:root[data-theme='dark'] {
+  /* Surfaces */
+  --c-bg: #0f1919;
+  --c-surface: #162323;
+  --c-surface-2: #1b2a2a;
+  --c-surface-3: #223434;
+  --c-tint: #22393a;
+  --c-tint-2: #2b4646;
+  --c-gold-tint: #2a2a20;
+  --c-gold-line: #4a4430;
+
+  /* Text */
+  --c-text: #e6ecea;
+  --c-text-2: #c3cfcc;
+  --c-muted: #9eaca9;
+  --c-muted-2: #a8b5b2;
+
+  /* Lines */
+  --c-border: #2b3c3c;
+  --c-border-2: #344848;
+
+  /* Accent text and rings — --c-focus is sand in dark (7.66:1) */
+  --c-link: #9cc3be;
+  --c-accent: #9cc3be;
+  --c-accent-strong: #b7d6d1;
+  --c-focus: #baa87e;
+  --c-danger: #e08a84;
+  --c-success: #79d0a3;
+  --c-success-text: #79d0a3;
+  --c-success-tint: #173327;
+  --c-warn-text: #e2c38a;
+  --c-gold-text: #d6c59b;
+
+  /* Inverse pair */
+  --c-inverse: #e6ecea;
+  --c-on-inverse: #0f1919;
+
+  /* The permanently dark surfaces sit next to a dark page now — keep them apart with an edge */
+  --c-surface-dark: #0b1414;
+  --c-border-on-dark: rgb(255 255 255 / 16%);
+  --c-border-on-dark-soft: rgb(255 255 255 / 14%);
+  --c-dark-surface-edge: rgb(255 255 255 / 14%);
+
+  /* Staff admin */
+  --c-admin-bg: #0f1919;
+  --c-admin-side: #162323;
+  --c-admin-side-hover: #1b2a2a;
+  --c-admin-topbar-2: #223434;
+  --c-admin-row-selected: #22393a;
+  --c-admin-link: #9cc3be;
+  --c-badge-ok-bg: #173327;
+  --c-badge-ok-text: #86dcae;
+  --c-badge-sched-bg: #22393a;
+  --c-badge-sched-text: #b7d6d1;
+  --c-badge-warn-bg: #33290f;
+  --c-badge-warn-text: #eac977;
+  --c-badge-err-bg: #3a1a19;
+  --c-badge-err-text: #f0a39d;
+  --c-badge-draft-bg: #223434;
+  --c-badge-draft-text: #c3cfcc;
+  --c-badge-new-bg: #2a2a20;
+  --c-badge-new-text: #d6c59b;
+  --c-header-glass: rgb(22 35 35 / 92%);
+  --c-header-shadow: rgb(0 0 0 / 35%);
+  --chart-line: #5a6e6b;
+  --chart-neutral: #56625f;
+  --chart-sky: #2f5050;
+  --chart-green: #24664a;
+  --chart-brand: #2c4a4b;
+  --shadow-sm: 0 8px 24px rgb(0 0 0 / 45%);
+  --shadow-md: 0 20px 50px rgb(0 0 0 / 45%);
+  --shadow-lg: 0 40px 100px rgb(0 0 0 / 65%);
+  --shadow-card: 0 12px 30px rgb(0 0 0 / 40%);
+
+  color-scheme: dark;
+}

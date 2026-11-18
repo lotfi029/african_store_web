@@ -1,0 +1,194 @@
+.foot {
+  background: var(--c-surface-dark);
+
+  /* Dark mode only (the token is transparent in light): the footer's top edge against a dark page. */
+  box-shadow: inset 0 1px 0 var(--c-dark-surface-edge);
+  color: var(--c-on-dark);
+  padding-block: 0 28px;
+}
+
+.wrap {
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+/* Quote band (not `.band`: base.css owns that class) */
+.qband {
+  border-block-end: 1px solid var(--c-border-on-dark-soft);
+}
+
+.qband-in {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: 28px;
+}
+
+.quote {
+  margin: 0;
+  color: var(--c-on-brand);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.band-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-block-size: 48px;
+  padding-inline: 22px;
+  border: 0;
+  border-radius: var(--rb);
+  background: var(--c-gold);
+  color: var(--c-on-gold);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.band-btn:hover {
+  filter: brightness(1.06);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 34px;
+  padding-block-start: 48px;
+}
+
+/* Phones and tablets: the about block on its own row, the link groups two by two. */
+@media (width < 800px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 20px;
+    padding-block-start: 36px;
+  }
+
+  .grid > :first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (width >= 800px) {
+  .grid {
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  }
+}
+
+.foot .fh {
+  color: var(--c-on-brand);
+  font-size: 0.95rem;
+  margin-block: 0 var(--space-3);
+  font-weight: 700;
+}
+
+.foot a {
+  color: var(--c-on-dark);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 0.92rem;
+}
+
+.foot a:hover {
+  color: var(--c-on-brand);
+  text-decoration: underline;
+}
+
+.foot p {
+  font-size: 0.92rem;
+  max-width: 44ch;
+  color: var(--c-on-dark-muted);
+  margin: var(--space-3) 0 0;
+}
+
+.foot-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* The mark on the dark ground: its teal parts take `fill` (light here), the sand parts stay sand. */
+.foot-mark {
+  display: grid;
+  place-items: center;
+  inline-size: 50px;
+  block-size: 50px;
+  flex: none;
+  border-radius: var(--rb);
+  border: 1px solid var(--c-border-on-dark);
+}
+
+.foot-mark svg {
+  inline-size: 18px;
+  block-size: 40px;
+  display: block;
+  fill: var(--c-on-dark);
+}
+
+.foot-name {
+  color: var(--c-on-brand);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* Payment marks — text pills, no third-party images */
+.pay {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-block-start: 32px;
+}
+
+.pay-h {
+  font-size: 0.85rem;
+  color: var(--c-on-dark-muted);
+}
+
+.marks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.marks li {
+  border: 1px solid var(--c-border-on-dark);
+  border-radius: var(--r);
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--c-on-dark);
+}
+
+.foot-bottom {
+  border-block-start: 1px solid var(--c-border-on-dark-soft);
+  margin-block-start: 36px;
+  padding-block-start: 20px;
+  font-size: 0.82rem;
+  color: var(--c-on-dark-muted);
+}
+
+@media (width < 800px) {
+  .quote {
+    font-size: 1.1rem;
+  }
+
+  .band-btn {
+    inline-size: 100%;
+    justify-content: center;
+  }
+
+  .foot-bottom {
+    margin-block-start: 28px;
+  }
+}

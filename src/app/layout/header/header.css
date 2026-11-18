@@ -1,0 +1,581 @@
+/* Option C header (docs/r5/home-option-c-spec.md §3 rows 1–2): utility row, logo + big search + actions. Tokens only. */
+:host {
+  display: contents;
+}
+
+/* 1 — utility row on the dark surface; it scrolls away, the header below stays sticky. */
+.util {
+  background: var(--c-surface-dark);
+  color: var(--c-on-dark);
+  font-size: 0.8rem;
+}
+
+.uwrap {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-block: var(--space-1);
+  padding-inline: var(--space-6);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 var(--space-3);
+}
+
+.utext {
+  margin: 0;
+  padding-block: var(--space-2);
+}
+
+/* Phones: one line — the trust text ellipsises beside the two links (it wrapped to three lines). */
+@media (width < 600px) {
+  .uwrap {
+    flex-wrap: nowrap;
+  }
+
+  .utext {
+    flex: 1 1 0;
+    min-inline-size: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ulinks {
+    flex: none;
+    gap: 0;
+  }
+
+  .nm {
+    font-size: 0.92rem;
+  }
+}
+
+.ulinks {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.ulink {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
+  padding-inline: var(--space-2);
+  color: var(--c-on-dark);
+  text-decoration: none;
+}
+
+.ulink:hover {
+  color: var(--c-on-inverse);
+  text-decoration: underline;
+}
+
+/* 2 — header */
+.hdr {
+  background: var(--c-surface);
+  border-block-end: 1px solid var(--c-border);
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 50;
+  transition: box-shadow var(--dur-1);
+}
+
+.hdr.scrolled {
+  box-shadow: 0 8px 30px var(--c-header-shadow);
+}
+
+/* Narrow screens: away while scrolling down (header.ts nextAway), back on scroll up. */
+@media (width < 900px) {
+  .hdr {
+    transition:
+      box-shadow var(--dur-1),
+      transform var(--dur-2) var(--ease);
+  }
+
+  .hdr.away {
+    transform: translateY(-100%);
+    box-shadow: none;
+  }
+}
+
+.wrap {
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-block: var(--space-3);
+  padding-inline: var(--space-6);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-5);
+}
+
+@media (width < 600px) {
+  .uwrap,
+  .wrap {
+    padding-inline: var(--space-4);
+  }
+
+  .wrap {
+    gap: var(--space-2) var(--space-2);
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  color: var(--c-text);
+  flex: 0 1 auto;
+  min-width: 0;
+  min-height: 44px;
+}
+
+/* The mark on an ink tile (prototype .brand .mark): the teal parts take `fill` (light here), the sand parts stay sand. */
+.tile {
+  display: grid;
+  place-items: center;
+  inline-size: 50px;
+  block-size: 50px;
+  flex: none;
+  border-radius: var(--rb);
+  background: var(--c-surface-dark);
+  transition: transform var(--dur-2) var(--ease);
+}
+
+.mark {
+  inline-size: 18px;
+  block-size: 40px;
+  display: block;
+  fill: var(--c-on-dark);
+}
+
+.brand:hover .tile {
+  transform: translateY(-2px);
+}
+
+.nm {
+  font-weight: 700;
+  font-size: 1.06rem;
+  line-height: 1.3;
+  min-width: 0;
+}
+
+.nm,
+.sub {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sub {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--c-muted);
+  font-weight: 400;
+}
+
+/* The big pill search: its own full row on phones and small tablets, between logo and actions from 900 px. */
+.hsearch {
+  order: 3;
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-block-size: 50px;
+  border: 2px solid var(--c-brand);
+  border-radius: var(--rp);
+  padding: 4px;
+  padding-inline-start: var(--space-4);
+  background: var(--c-surface);
+}
+
+.hsearch-lead {
+  color: var(--c-muted);
+  flex: none;
+}
+
+@media (width >= 900px) {
+  .hsearch {
+    order: 0;
+    flex: 1 1 360px;
+  }
+}
+
+.hsearch:focus-within {
+  outline: 2px solid var(--c-focus);
+  outline-offset: 2px;
+}
+
+.hsearch input {
+  flex: 1;
+  min-inline-size: 0;
+  border: 0;
+  background: none;
+  color: var(--c-text);
+  font: inherit;
+  font-size: 0.95rem;
+  padding-inline: 0;
+  min-block-size: 40px;
+  outline: none;
+}
+
+.hsearch input::placeholder {
+  color: var(--c-muted);
+}
+
+.hsearch-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-inline-size: 44px;
+  min-block-size: 42px;
+  padding-inline: 22px;
+  border: 0;
+  border-radius: var(--rp);
+  background: var(--c-brand);
+  color: var(--c-on-brand);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hsearch-btn:hover {
+  background: var(--c-brand-deep);
+}
+
+.hsearch-ic {
+  display: none;
+}
+
+@media (width < 400px) {
+  .hsearch-btn {
+    padding-inline: var(--space-3);
+  }
+
+  .hsearch-ic {
+    display: inline-flex;
+  }
+
+  .hsearch-lbl {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+.acts {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--space-2);
+  margin-inline-start: auto;
+}
+
+@media (width < 400px) {
+  .acts {
+    gap: var(--space-1);
+  }
+}
+
+/* Phones: the theme toggle lives in the menu (.mtheme) so logo and actions fit one row. */
+@media (width < 600px) {
+  .htheme {
+    display: none;
+  }
+}
+
+/* Small phones: sign-in / account also live in the menu (دخول / حسابي), so the association name is never cut. */
+@media (width < 480px) {
+  .acts > .signin,
+  .acts > ta-account-menu {
+    display: none;
+  }
+}
+
+/* حسابي / دخول — outlined, like the account menu trigger. */
+.signin {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-block-size: 44px;
+  min-inline-size: 44px;
+  justify-content: center;
+  padding-inline: var(--space-3);
+  border: 1px solid transparent;
+  border-radius: var(--r);
+  color: var(--c-text);
+  background: var(--c-surface);
+  text-decoration: none;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.signin:hover {
+  border-color: var(--c-text);
+}
+
+/* السلة · total — the tinted pill (prototype .cartbtn); the bump plays on every add. */
+.cartbtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-block-size: 44px;
+  min-inline-size: 44px;
+  justify-content: center;
+  padding-inline: var(--space-4);
+  border-radius: var(--r);
+  background: var(--c-tint);
+  color: var(--c-text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cartbtn:hover {
+  background: var(--c-tint-2);
+}
+
+/* Count badge on the cart icon: phones only (the total is shown from 600 px). */
+.cbadge {
+  display: none;
+}
+
+@media (width < 600px) {
+  .cbadge {
+    position: absolute;
+    inset-block-start: -6px;
+    inset-inline-end: -6px;
+    min-inline-size: 20px;
+    block-size: 20px;
+    padding-inline: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: var(--c-gold);
+    color: var(--c-on-gold);
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1;
+    border: 2px solid var(--c-surface);
+  }
+
+  .ctot {
+    display: none;
+  }
+}
+
+.cartbtn ta-money {
+  --c-muted-2: currentcolor;
+}
+
+.cartbtn.bump {
+  animation: bump var(--dur-2) var(--ease);
+}
+
+@keyframes bump {
+  40% {
+    transform: scale(1.12);
+  }
+}
+
+@media (width < 600px) {
+  .signin,
+  .cartbtn {
+    padding-inline: var(--space-3);
+  }
+
+  .signin .lbl,
+  .ctxt,
+  .sep {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+.quick {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-block-size: 44px;
+  min-inline-size: 44px;
+  justify-content: center;
+  padding-inline: var(--space-4);
+  border: 0;
+  border-radius: var(--rp);
+  background: var(--c-brand-strong);
+  color: var(--c-on-brand);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (width < 1100px) {
+  .acts > .quick {
+    display: none;
+  }
+}
+
+.burger {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  background: none;
+  border: 0;
+  border-radius: var(--r);
+  padding: var(--space-2);
+  cursor: pointer;
+  min-height: 44px;
+  min-width: 44px;
+  align-items: center;
+  justify-content: center;
+}
+
+.burger:hover {
+  background-color: var(--c-surface-3);
+}
+
+.burger span:not(.visually-hidden) {
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--c-text);
+  transition:
+    transform var(--dur-2) var(--ease),
+    opacity var(--dur-1) var(--ease);
+}
+
+.burger[aria-expanded='true'] span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.burger[aria-expanded='true'] span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger[aria-expanded='true'] span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+@media (width >= 1100px) {
+  .burger {
+    display: none;
+  }
+}
+
+.mnav {
+  background: var(--c-surface);
+  border-block-start: 1px solid var(--c-border);
+  padding-block: var(--space-2) var(--space-4);
+  padding-inline: var(--space-6);
+  max-block-size: calc(100dvh - 140px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+@media (width < 600px) {
+  .mnav {
+    padding-inline: var(--space-4);
+  }
+}
+
+.mnav .ml {
+  display: flex;
+  align-items: center;
+  padding-block: var(--space-2);
+  border-block-end: 1px solid var(--c-border);
+  text-decoration: none;
+  color: var(--c-text);
+  font-weight: 500;
+  min-height: 44px;
+}
+
+.mnav .ml:hover {
+  color: var(--c-link);
+}
+
+.mnav .mquick {
+  inline-size: 100%;
+  justify-content: flex-start;
+  border-radius: var(--r);
+  margin-block: var(--space-1);
+}
+
+/* The menu's theme row (phones). */
+.mtheme {
+  display: none;
+}
+
+@media (width < 600px) {
+  .mtheme {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-block-size: 44px;
+    padding-inline: var(--space-2);
+    border-block-start: 1px solid var(--c-border);
+    margin-block-start: var(--space-2);
+    padding-block-start: var(--space-2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hdr,
+  .tile,
+  .burger span:not(.visually-hidden) {
+    transition: none;
+  }
+
+  .cartbtn.bump {
+    animation: none;
+  }
+
+  .brand:hover .tile {
+    transform: none;
+  }
+}
+
+/* Narrow screens (after the base rules, which it overrides): logo and actions share the first row, the search the
+   second — it was three rows on phones. */
+@media (width < 900px) {
+  /* Logo and actions share the first row, the search the second (was three rows on phones). */
+  .wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+
+  .brand {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .acts {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .hsearch {
+    grid-row: 2;
+    grid-column: 1 / -1;
+  }
+}
+
+@media (width < 400px) {
+  .hsearch-lead {
+    display: none;
+  }
+}

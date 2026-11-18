@@ -1,0 +1,73 @@
+<footer class="foot">
+  <!-- Quote band (prototype #foot .band). The button opens the existing quick-donate dialog; hidden in showcase. -->
+  <div class="qband">
+    <div class="wrap qband-in">
+      <p class="quote" i18n="@@store.layout.footer-quote">«مَن دلّ على خير فله مثلُ أجر فاعله»</p>
+      @if (quick.available()) {
+        <button type="button" class="band-btn" (click)="quick.show($event.currentTarget)">
+          <ta-icon name="heart" [size]="18" />
+          <span i18n="@@store.layout.footer-general-fund">تبرع للصندوق العام</span>
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="grid">
+      <div class="about">
+        <div class="foot-brand">
+          <span class="foot-mark">
+            <svg viewBox="1300 290 503 1420" aria-hidden="true" focusable="false">
+              <use href="logo.svg#logo-src" />
+            </svg>
+          </span>
+          <span class="foot-name" i18n="@@store.layout.association">جمعية الدعوة والتعليم باللغات الأفريقية</span>
+        </div>
+        <p i18n="@@store.layout.footer-about-r5">
+          جمعية مرخّصة، تنشر العلم الشرعي وتعليم العربية بلغات أفريقيا عبر الدعاة والترجمة والإنتاج الصوتي والمرئي.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="fh" i18n="@@store.layout.footer-association">الجمعية</h2>
+        <a [href]="main" i18n="@@store.layout.main-site">الموقع الرئيسي</a>
+        <a [href]="mainPath('about')" i18n="@@store.layout.footer-about-link">عن الجمعية</a>
+        <a [href]="mainPath('library')" i18n="@@store.layout.footer-library">المكتبة</a>
+      </div>
+
+      <div>
+        <h2 class="fh" i18n="@@store.layout.footer-store">المتجر</h2>
+        <a routerLink="/" fragment="projects" i18n="@@store.layout.footer-all-projects">كل المشاريع</a>
+        @if (!showcase) {
+          <a routerLink="/account/donations" i18n="@@store.layout.footer-my-donations"
+            >تبرعاتي وإيصالاتي</a
+          >
+        }
+      </div>
+
+      <div>
+        <h2 class="fh" i18n="@@store.layout.footer-contact">تواصل</h2>
+        <a [href]="mainPath('contact')" i18n="@@store.layout.footer-contact-link">تواصل معنا</a>
+      </div>
+    </div>
+
+    @if (!showcase) {
+      <div class="pay">
+        <span class="pay-h" i18n="@@store.layout.footer-payment">خيارات الدفع</span>
+        <ul class="marks" role="list">
+          @for (m of paymentMarks; track m) {
+            <li dir="ltr">{{ m }}</li>
+          }
+        </ul>
+      </div>
+    }
+
+    <div class="foot-bottom">
+      <span
+        ><bdi>©</bdi> {{ year }}
+        <ng-container i18n="@@store.layout.association">جمعية الدعوة والتعليم باللغات الأفريقية</ng-container>
+        — <ng-container i18n="@@store.layout.footer-rights">جميع الحقوق محفوظة</ng-container></span
+      >
+    </div>
+  </div>
+</footer>

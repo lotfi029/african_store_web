@@ -1,0 +1,74 @@
+<div class="ahead">
+  <div>
+    <p class="crumb">
+      <a routerLink="/admin/settings" i18n="@@store.admin.nav-settings-team">الإعدادات والفريق</a>
+    </p>
+    <h1 i18n="@@store.admin.settings-store">إعدادات المتجر</h1>
+    <p i18n="@@store.admin.settings-lede">
+      قيم المتجر العامة. يسري التغيير على الطلبات الجديدة فورًا.
+    </p>
+  </div>
+  <ta-requires policy="staff:admin" />
+</div>
+<ta-resource-state
+  [loading]="data.settings.isLoading() && rows().length === 0"
+  [error]="!!data.settings.error()"
+  (retry)="data.settings.reload()"
+>
+  <ul class="sets">
+    @for (r of rows(); track r.def.key) {
+      <li class="panel">
+        <div class="field">
+          <label [for]="'set-' + r.def.key">{{ r.def.label() }}</label>
+          @if (r.def.hint; as hint) {
+            <small class="muted" [id]="'set-' + r.def.key + '-hint'">{{ hint() }}</small>
+          }
+          <input
+            [id]="'set-' + r.def.key"
+            [attr.inputmode]="
+              r.def.kind === 'money' || r.def.kind === 'money-list'
+                ? 'decimal'
+                : r.def.kind === 'integer'
+                  ? 'numeric'
+                  : r.def.kind === 'mobile'
+                    ? 'tel'
+                    : null
+            "
+            [attr.dir]="r.def.kind === 'text' ? null : 'ltr'"
+            [value]="value(r.def.key)"
+            (input)="onInput(r.def.key, $event)"
+            [readonly]="!canEdit()"
+            [attr.aria-invalid]="!!errors()[r.def.key]"
+            [attr.aria-describedby]="
+              'set-' + r.def.key + '-err' + (r.def.hint ? ' set-' + r.def.key + '-hint' : '')
+            "
+          />
+          <p class="field-errors" [id]="'set-' + r.def.key + '-err'" role="alert">
+            {{ errors()[r.def.key] }}
+          </p>
+        </div>
+        <div class="meta">
+          <small class="muted"
+            ><bdi dir="ltr" class="mono">{{ r.def.key }}</bdi> ·
+            {{ i18n.formatDateTime(r.setting.updatedAt) }}
+            @if (r.setting.updatedBy) {
+              · <bdi dir="ltr">{{ r.setting.updatedBy }}</bdi>
+            }
+          </small>
+          @if (canEdit()) {
+            <button
+              type="button"
+              class="btn sm primary"
+              (click)="save(r.def)"
+              [disabled]="saving() === r.def.key"
+              [attr.aria-busy]="saving() === r.def.key"
+            >
+              <span i18n="@@store.account.save">حفظ</span
+              ><span class="visually-hidden"> {{ r.def.label() }}</span>
+            </button>
+          }
+        </div>
+      </li>
+    }
+  </ul>
+</ta-resource-state>

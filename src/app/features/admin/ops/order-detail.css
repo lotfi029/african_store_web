@@ -1,0 +1,103 @@
+.back {
+  margin: 0;
+  font-size: 0.88rem;
+}
+
+.back a {
+  color: var(--c-link);
+}
+
+.ogrid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (width >= 1100px) {
+  .ogrid {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  }
+}
+
+.ogrid .panel {
+  margin: 0;
+}
+
+.kv {
+  margin: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.kv div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.kv dt {
+  color: var(--c-text-2);
+}
+
+.kv dd {
+  margin: 0;
+  text-align: end;
+  overflow-wrap: anywhere;
+}
+
+.kv .t {
+  font-weight: 600;
+}
+
+.panel a {
+  color: var(--c-link);
+}
+
+.act.fin {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.pay h3 {
+  font-size: 0.95rem;
+  margin-block: 16px 8px;
+}
+
+.pay .kv {
+  margin-block-end: 12px;
+}
+
+.timeline {
+  margin: 0;
+  padding-inline-start: 1.2em;
+  display: grid;
+  gap: 4px;
+  font-size: 0.88rem;
+}
+
+.dlg .field {
+  margin: 0;
+}
+
+/* Review 04 W-2: a refund waiting for the gateway. */
+.pending {
+  margin-block: 8px 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--c-border);
+  background: var(--c-tint);
+  color: var(--c-text);
+}
+
+.pending-note {
+  flex-basis: 100%;
+  margin: 0;
+}
+
+.tbl-wrap:focus-visible {
+  outline: 2px solid var(--c-focus);
+  outline-offset: 2px;
+}

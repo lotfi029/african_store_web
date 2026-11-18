@@ -1,0 +1,2882 @@
+{
+ "meta": {
+  "apiCommit": "27ec8eb"
+ },
+ "/catalog/home": {
+  "featured": [
+   {
+    "id": "01a1eba1-a629-7935-8746-59a6406c505c",
+    "slug": "c-preacher-nigeria",
+    "titleAr": "كفالة داعية في نيجيريا لمدة عام",
+    "titleEn": "Sponsor a preacher in Nigeria for a year",
+    "summaryAr": "راتب داعية متفرغ يعلّم الناس دينهم بلغة الهوسا في القرى النائية.",
+    "summaryEn": "A full-time preacher who teaches in Hausa in remote villages.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+    "coverAltAr": "كفالة الدعاة",
+    "badge": "urgent",
+    "categorySlug": "c-preachers",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "300.00",
+    "options": [
+     {
+      "id": "01a1eba1-a6a7-70a5-bb95-771dc9ffb17a",
+      "labelAr": "كفالة شهر",
+      "labelEn": "One month",
+      "amount": "300.00"
+     },
+     {
+      "id": "01a1eba1-a6a7-7a79-9b18-ba165967d8a7",
+      "labelAr": "كفالة 3 أشهر",
+      "labelEn": "Three months",
+      "amount": "900.00"
+     },
+     {
+      "id": "01a1eba1-a6a7-721b-83a9-315490181502",
+      "labelAr": "كفالة سنة",
+      "labelEn": "One year",
+      "amount": "3600.00"
+     }
+    ],
+    "coverAltEn": "Preacher sponsorship"
+   },
+   {
+    "id": "01a1eba1-a726-7e9e-bac3-fd1b527d9e4e",
+    "slug": "c-preacher-chad",
+    "titleAr": "كفالة داعية في تشاد",
+    "titleEn": "Sponsor a preacher in Chad",
+    "summaryAr": "كفالة داعية يعلّم العربية والعلوم الشرعية في تشاد.",
+    "summaryEn": "A preacher teaching Arabic and Islamic sciences in Chad.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+    "coverAltAr": "كفالة الدعاة",
+    "badge": "new",
+    "categorySlug": "c-preachers",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "250.00",
+    "options": [
+     {
+      "id": "01a1eba1-a736-77a9-9202-0b24dc0d8a70",
+      "labelAr": "كفالة شهر",
+      "labelEn": "One month",
+      "amount": "250.00"
+     }
+    ],
+    "coverAltEn": "Preacher sponsorship"
+   },
+   {
+    "id": "01a1eba1-a7d2-79cb-a601-ba4ac17b7de3",
+    "slug": "c-translate-hausa",
+    "titleAr": "ترجمة معاني القرآن بلغة الهوسا",
+    "titleEn": "Quran meanings in Hausa",
+    "summaryAr": "طباعة وتوزيع نسخ مراجعة من ترجمة معاني القرآن الكريم.",
+    "summaryEn": "Printing and handing out reviewed copies of the Quran meanings in Hausa.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a76f7a9aa5051fe1718991d3.webp",
+    "coverAltAr": "الترجمة والطباعة",
+    "badge": "new",
+    "categorySlug": "c-translation",
+    "allowOpenAmount": true,
+    "minAmount": "25.00",
+    "fromAmount": "25.00",
+    "options": [
+     {
+      "id": "01a1eba1-a7e0-741e-8cfe-bac7ac36480e",
+      "labelAr": "نسخة",
+      "labelEn": "One copy",
+      "amount": "25.00"
+     },
+     {
+      "id": "01a1eba1-a7e0-70e1-b88e-a900fea25afc",
+      "labelAr": "10 نسخ",
+      "labelEn": "Ten copies",
+      "amount": "250.00"
+     }
+    ],
+    "coverAltEn": "Translation and printing"
+   },
+   {
+    "id": "01a1eba1-a920-71f0-9fa1-abc39c3fe7a3",
+    "slug": "c-teacher-mali",
+    "titleAr": "راتب معلم في مالي",
+    "titleEn": "A teacher's salary in Mali",
+    "summaryAr": "راتب معلم يدرّس العربية بلغة البمبارا.",
+    "summaryEn": "A teacher who teaches Arabic in Bambara.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a8827e3aa66d282758474fec.webp",
+    "coverAltAr": "التعليم بلغات أفريقيا",
+    "badge": "urgent",
+    "categorySlug": "c-african-langs",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "350.00",
+    "options": [
+     {
+      "id": "01a1eba1-a92b-700d-b546-d33de853703e",
+      "labelAr": "شهر",
+      "labelEn": "One month",
+      "amount": "350.00"
+     },
+     {
+      "id": "01a1eba1-a92b-709a-8ba8-87e5831935b2",
+      "labelAr": "سنة",
+      "labelEn": "One year",
+      "amount": "4200.00"
+     }
+    ],
+    "coverAltEn": "Teaching in African languages"
+   },
+   {
+    "id": "01a1eba1-a6ce-7ea1-9669-986f399b5064",
+    "slug": "c-preacher-senegal",
+    "titleAr": "كفالة داعية في السنغال",
+    "titleEn": "Sponsor a preacher in Senegal",
+    "summaryAr": "داعية يقدّم الدروس بلغة الولوف في المساجد والقرى.",
+    "summaryEn": "A preacher who teaches in Wolof in mosques and villages.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+    "coverAltAr": "كفالة الدعاة",
+    "badge": null,
+    "categorySlug": "c-preachers",
+    "allowOpenAmount": true,
+    "minAmount": "50.00",
+    "fromAmount": "250.00",
+    "options": [
+     {
+      "id": "01a1eba1-a6e0-7c88-8c3c-5fe8ee62f754",
+      "labelAr": "كفالة شهر",
+      "labelEn": "One month",
+      "amount": "250.00"
+     },
+     {
+      "id": "01a1eba1-a6e0-7bd8-aced-bbcca6b2c129",
+      "labelAr": "كفالة سنة",
+      "labelEn": "One year",
+      "amount": "3000.00"
+     }
+    ],
+    "coverAltEn": "Preacher sponsorship"
+   },
+   {
+    "id": "01a1eba1-a751-7a3d-9791-aba2f62ee75a",
+    "slug": "c-preacher-training",
+    "titleAr": "تأهيل الدعاة الجدد",
+    "titleEn": "Training new preachers",
+    "summaryAr": "برنامج تأهيل للدعاة الجدد في العلوم الشرعية واللغة العربية.",
+    "summaryEn": "A training programme for new preachers in Islamic sciences and Arabic.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+    "coverAltAr": "كفالة الدعاة",
+    "badge": null,
+    "categorySlug": "c-preachers",
+    "allowOpenAmount": true,
+    "minAmount": "10.00",
+    "fromAmount": null,
+    "options": [],
+    "coverAltEn": "Preacher sponsorship"
+   }
+  ],
+  "categories": [
+   {
+    "id": "01a1eba1-a529-7054-a485-f157dd7c8ce3",
+    "slug": "c-preachers",
+    "nameAr": "كفالة الدعاة",
+    "nameEn": "Preacher sponsorship",
+    "descriptionAr": "مشاريع كفالة الدعاة.",
+    "descriptionEn": "Preacher sponsorship projects.",
+    "imageUrl": null,
+    "imageAltAr": null,
+    "acceptsGeneralGifts": false,
+    "projectCount": 4,
+    "imageAltEn": null
+   },
+   {
+    "id": "01a1eba1-a535-7701-9e8e-097859f02708",
+    "slug": "c-translation",
+    "nameAr": "الترجمة والطباعة",
+    "nameEn": "Translation and printing",
+    "descriptionAr": "مشاريع الترجمة والطباعة.",
+    "descriptionEn": "Translation and printing projects.",
+    "imageUrl": null,
+    "imageAltAr": null,
+    "acceptsGeneralGifts": false,
+    "projectCount": 4,
+    "imageAltEn": null
+   },
+   {
+    "id": "01a1eba1-a544-7f5e-ba29-1a067fff388a",
+    "slug": "c-african-langs",
+    "nameAr": "التعليم بلغات أفريقيا",
+    "nameEn": "Teaching in African languages",
+    "descriptionAr": "مشاريع التعليم بلغات أفريقيا.",
+    "descriptionEn": "Teaching in African languages projects.",
+    "imageUrl": null,
+    "imageAltAr": null,
+    "acceptsGeneralGifts": false,
+    "projectCount": 4,
+    "imageAltEn": null
+   },
+   {
+    "id": "01a1eba1-a54d-7667-8efd-855ae6098d8b",
+    "slug": "c-media",
+    "nameAr": "الإنتاج الصوتي والمرئي",
+    "nameEn": "Audio and video production",
+    "descriptionAr": "مشاريع الإنتاج الصوتي والمرئي.",
+    "descriptionEn": "Audio and video production projects.",
+    "imageUrl": null,
+    "imageAltAr": null,
+    "acceptsGeneralGifts": false,
+    "projectCount": 3,
+    "imageAltEn": null
+   },
+   {
+    "id": "01a1eba1-a556-78ef-ba7e-166a86d8c888",
+    "slug": "c-water",
+    "nameAr": "سقيا الماء",
+    "nameEn": "Water",
+    "descriptionAr": "مشاريع سقيا الماء.",
+    "descriptionEn": "Water projects.",
+    "imageUrl": null,
+    "imageAltAr": null,
+    "acceptsGeneralGifts": false,
+    "projectCount": 3,
+    "imageAltEn": null
+   },
+   {
+    "id": "01a1eba1-a55e-7450-9499-33f4695c72cb",
+    "slug": "c-mosques",
+    "nameAr": "المساجد",
+    "nameEn": "Mosques",
+    "descriptionAr": "مشاريع المساجد.",
+    "descriptionEn": "Mosques projects.",
+    "imageUrl": null,
+    "imageAltAr": null,
+    "acceptsGeneralGifts": false,
+    "projectCount": 3,
+    "imageAltEn": null
+   },
+   {
+    "id": "01a1eba1-a567-7749-96fb-ca820072c714",
+    "slug": "c-general-fund",
+    "nameAr": "الصندوق العام",
+    "nameEn": "General fund",
+    "descriptionAr": "مشاريع الصندوق العام.",
+    "descriptionEn": "General fund projects.",
+    "imageUrl": null,
+    "imageAltAr": null,
+    "acceptsGeneralGifts": true,
+    "projectCount": 1,
+    "imageAltEn": null
+   },
+   {
+    "id": "01a1eba1-a570-7b08-b29b-dbc74a7462e9",
+    "slug": "c-iftar",
+    "nameAr": "إفطار الصائمين",
+    "nameEn": "Iftar meals",
+    "descriptionAr": "مشاريع إفطار الصائمين.",
+    "descriptionEn": "Iftar meals projects.",
+    "imageUrl": null,
+    "imageAltAr": null,
+    "acceptsGeneralGifts": false,
+    "projectCount": 0,
+    "imageAltEn": null
+   }
+  ],
+  "amountPresets": [
+   "50.00",
+   "100.00",
+   "500.00"
+  ]
+ },
+ "/catalog/categories": [
+  {
+   "id": "01a1eba1-a529-7054-a485-f157dd7c8ce3",
+   "slug": "c-preachers",
+   "nameAr": "كفالة الدعاة",
+   "nameEn": "Preacher sponsorship",
+   "descriptionAr": "مشاريع كفالة الدعاة.",
+   "descriptionEn": "Preacher sponsorship projects.",
+   "imageUrl": null,
+   "imageAltAr": null,
+   "acceptsGeneralGifts": false,
+   "projectCount": 4,
+   "imageAltEn": null
+  },
+  {
+   "id": "01a1eba1-a535-7701-9e8e-097859f02708",
+   "slug": "c-translation",
+   "nameAr": "الترجمة والطباعة",
+   "nameEn": "Translation and printing",
+   "descriptionAr": "مشاريع الترجمة والطباعة.",
+   "descriptionEn": "Translation and printing projects.",
+   "imageUrl": null,
+   "imageAltAr": null,
+   "acceptsGeneralGifts": false,
+   "projectCount": 4,
+   "imageAltEn": null
+  },
+  {
+   "id": "01a1eba1-a544-7f5e-ba29-1a067fff388a",
+   "slug": "c-african-langs",
+   "nameAr": "التعليم بلغات أفريقيا",
+   "nameEn": "Teaching in African languages",
+   "descriptionAr": "مشاريع التعليم بلغات أفريقيا.",
+   "descriptionEn": "Teaching in African languages projects.",
+   "imageUrl": null,
+   "imageAltAr": null,
+   "acceptsGeneralGifts": false,
+   "projectCount": 4,
+   "imageAltEn": null
+  },
+  {
+   "id": "01a1eba1-a54d-7667-8efd-855ae6098d8b",
+   "slug": "c-media",
+   "nameAr": "الإنتاج الصوتي والمرئي",
+   "nameEn": "Audio and video production",
+   "descriptionAr": "مشاريع الإنتاج الصوتي والمرئي.",
+   "descriptionEn": "Audio and video production projects.",
+   "imageUrl": null,
+   "imageAltAr": null,
+   "acceptsGeneralGifts": false,
+   "projectCount": 3,
+   "imageAltEn": null
+  },
+  {
+   "id": "01a1eba1-a556-78ef-ba7e-166a86d8c888",
+   "slug": "c-water",
+   "nameAr": "سقيا الماء",
+   "nameEn": "Water",
+   "descriptionAr": "مشاريع سقيا الماء.",
+   "descriptionEn": "Water projects.",
+   "imageUrl": null,
+   "imageAltAr": null,
+   "acceptsGeneralGifts": false,
+   "projectCount": 3,
+   "imageAltEn": null
+  },
+  {
+   "id": "01a1eba1-a55e-7450-9499-33f4695c72cb",
+   "slug": "c-mosques",
+   "nameAr": "المساجد",
+   "nameEn": "Mosques",
+   "descriptionAr": "مشاريع المساجد.",
+   "descriptionEn": "Mosques projects.",
+   "imageUrl": null,
+   "imageAltAr": null,
+   "acceptsGeneralGifts": false,
+   "projectCount": 3,
+   "imageAltEn": null
+  },
+  {
+   "id": "01a1eba1-a567-7749-96fb-ca820072c714",
+   "slug": "c-general-fund",
+   "nameAr": "الصندوق العام",
+   "nameEn": "General fund",
+   "descriptionAr": "مشاريع الصندوق العام.",
+   "descriptionEn": "General fund projects.",
+   "imageUrl": null,
+   "imageAltAr": null,
+   "acceptsGeneralGifts": true,
+   "projectCount": 1,
+   "imageAltEn": null
+  },
+  {
+   "id": "01a1eba1-a570-7b08-b29b-dbc74a7462e9",
+   "slug": "c-iftar",
+   "nameAr": "إفطار الصائمين",
+   "nameEn": "Iftar meals",
+   "descriptionAr": "مشاريع إفطار الصائمين.",
+   "descriptionEn": "Iftar meals projects.",
+   "imageUrl": null,
+   "imageAltAr": null,
+   "acceptsGeneralGifts": false,
+   "projectCount": 0,
+   "imageAltEn": null
+  }
+ ],
+ "/catalog/config": {
+  "minGiftAmount": "10.00",
+  "maxLineAmount": "100000.00",
+  "cartMaxLines": 50,
+  "cartMaxTotal": "100000.00",
+  "maxQuantity": 999,
+  "amountPresets": [
+   "50.00",
+   "100.00",
+   "500.00"
+  ],
+  "paymentsEnabled": true,
+  "customerSignIn": true
+ },
+ "/catalog/projects?fields=slug": {
+  "slugs": [
+   "c-arabic-somali",
+   "c-audio-swahili",
+   "c-circle-tanzania",
+   "c-classroom-niger",
+   "c-general-needs",
+   "c-mosque-build",
+   "c-mosque-carpets",
+   "c-mosque-restore",
+   "c-preacher-chad",
+   "c-preacher-nigeria",
+   "c-preacher-senegal",
+   "c-preacher-training",
+   "c-print-fulani",
+   "c-radio-program",
+   "c-teacher-mali",
+   "c-translate-hausa",
+   "c-translate-review",
+   "c-translate-swahili",
+   "c-video-hausa",
+   "c-water-cooler",
+   "c-well-deep",
+   "c-well-shallow"
+  ]
+ },
+ "/catalog/projects?pageSize=100": {
+  "items": [
+   {
+    "id": "01a1eba1-a629-7935-8746-59a6406c505c",
+    "slug": "c-preacher-nigeria",
+    "titleAr": "كفالة داعية في نيجيريا لمدة عام",
+    "titleEn": "Sponsor a preacher in Nigeria for a year",
+    "summaryAr": "راتب داعية متفرغ يعلّم الناس دينهم بلغة الهوسا في القرى النائية.",
+    "summaryEn": "A full-time preacher who teaches in Hausa in remote villages.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+    "coverAltAr": "كفالة الدعاة",
+    "badge": "urgent",
+    "categorySlug": "c-preachers",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "300.00",
+    "options": [
+     {
+      "id": "01a1eba1-a6a7-70a5-bb95-771dc9ffb17a",
+      "labelAr": "كفالة شهر",
+      "labelEn": "One month",
+      "amount": "300.00"
+     },
+     {
+      "id": "01a1eba1-a6a7-7a79-9b18-ba165967d8a7",
+      "labelAr": "كفالة 3 أشهر",
+      "labelEn": "Three months",
+      "amount": "900.00"
+     },
+     {
+      "id": "01a1eba1-a6a7-721b-83a9-315490181502",
+      "labelAr": "كفالة سنة",
+      "labelEn": "One year",
+      "amount": "3600.00"
+     }
+    ],
+    "coverAltEn": "Preacher sponsorship"
+   },
+   {
+    "id": "01a1eba1-a6ce-7ea1-9669-986f399b5064",
+    "slug": "c-preacher-senegal",
+    "titleAr": "كفالة داعية في السنغال",
+    "titleEn": "Sponsor a preacher in Senegal",
+    "summaryAr": "داعية يقدّم الدروس بلغة الولوف في المساجد والقرى.",
+    "summaryEn": "A preacher who teaches in Wolof in mosques and villages.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+    "coverAltAr": "كفالة الدعاة",
+    "badge": null,
+    "categorySlug": "c-preachers",
+    "allowOpenAmount": true,
+    "minAmount": "50.00",
+    "fromAmount": "250.00",
+    "options": [
+     {
+      "id": "01a1eba1-a6e0-7c88-8c3c-5fe8ee62f754",
+      "labelAr": "كفالة شهر",
+      "labelEn": "One month",
+      "amount": "250.00"
+     },
+     {
+      "id": "01a1eba1-a6e0-7bd8-aced-bbcca6b2c129",
+      "labelAr": "كفالة سنة",
+      "labelEn": "One year",
+      "amount": "3000.00"
+     }
+    ],
+    "coverAltEn": "Preacher sponsorship"
+   },
+   {
+    "id": "01a1eba1-a726-7e9e-bac3-fd1b527d9e4e",
+    "slug": "c-preacher-chad",
+    "titleAr": "كفالة داعية في تشاد",
+    "titleEn": "Sponsor a preacher in Chad",
+    "summaryAr": "كفالة داعية يعلّم العربية والعلوم الشرعية في تشاد.",
+    "summaryEn": "A preacher teaching Arabic and Islamic sciences in Chad.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+    "coverAltAr": "كفالة الدعاة",
+    "badge": "new",
+    "categorySlug": "c-preachers",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "250.00",
+    "options": [
+     {
+      "id": "01a1eba1-a736-77a9-9202-0b24dc0d8a70",
+      "labelAr": "كفالة شهر",
+      "labelEn": "One month",
+      "amount": "250.00"
+     }
+    ],
+    "coverAltEn": "Preacher sponsorship"
+   },
+   {
+    "id": "01a1eba1-a751-7a3d-9791-aba2f62ee75a",
+    "slug": "c-preacher-training",
+    "titleAr": "تأهيل الدعاة الجدد",
+    "titleEn": "Training new preachers",
+    "summaryAr": "برنامج تأهيل للدعاة الجدد في العلوم الشرعية واللغة العربية.",
+    "summaryEn": "A training programme for new preachers in Islamic sciences and Arabic.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+    "coverAltAr": "كفالة الدعاة",
+    "badge": null,
+    "categorySlug": "c-preachers",
+    "allowOpenAmount": true,
+    "minAmount": "10.00",
+    "fromAmount": null,
+    "options": [],
+    "coverAltEn": "Preacher sponsorship"
+   },
+   {
+    "id": "01a1eba1-a7d2-79cb-a601-ba4ac17b7de3",
+    "slug": "c-translate-hausa",
+    "titleAr": "ترجمة معاني القرآن بلغة الهوسا",
+    "titleEn": "Quran meanings in Hausa",
+    "summaryAr": "طباعة وتوزيع نسخ مراجعة من ترجمة معاني القرآن الكريم.",
+    "summaryEn": "Printing and handing out reviewed copies of the Quran meanings in Hausa.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a76f7a9aa5051fe1718991d3.webp",
+    "coverAltAr": "الترجمة والطباعة",
+    "badge": "new",
+    "categorySlug": "c-translation",
+    "allowOpenAmount": true,
+    "minAmount": "25.00",
+    "fromAmount": "25.00",
+    "options": [
+     {
+      "id": "01a1eba1-a7e0-741e-8cfe-bac7ac36480e",
+      "labelAr": "نسخة",
+      "labelEn": "One copy",
+      "amount": "25.00"
+     },
+     {
+      "id": "01a1eba1-a7e0-70e1-b88e-a900fea25afc",
+      "labelAr": "10 نسخ",
+      "labelEn": "Ten copies",
+      "amount": "250.00"
+     }
+    ],
+    "coverAltEn": "Translation and printing"
+   },
+   {
+    "id": "01a1eba1-a7ff-773c-9a1c-4a2f7eedfd80",
+    "slug": "c-translate-swahili",
+    "titleAr": "ترجمة رسائل العقيدة بالسواحيلية",
+    "titleEn": "Creed epistles in Swahili",
+    "summaryAr": "ترجمة رسائل مختصرة في العقيدة إلى اللغة السواحيلية.",
+    "summaryEn": "Short epistles on creed translated into Swahili.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a76f7a9aa5051fe1718991d3.webp",
+    "coverAltAr": "الترجمة والطباعة",
+    "badge": null,
+    "categorySlug": "c-translation",
+    "allowOpenAmount": true,
+    "minAmount": "15.00",
+    "fromAmount": "15.00",
+    "options": [
+     {
+      "id": "01a1eba1-a812-7716-8af2-b9303fc49dcf",
+      "labelAr": "رسالة",
+      "labelEn": "One epistle",
+      "amount": "15.00"
+     }
+    ],
+    "coverAltEn": "Translation and printing"
+   },
+   {
+    "id": "01a1eba1-a82e-709b-8e80-3f3d2141e21a",
+    "slug": "c-print-fulani",
+    "titleAr": "طباعة مطويات بلغة الفولاني",
+    "titleEn": "Leaflets in Fulani",
+    "summaryAr": "مطويات دعوية مطبوعة بلغة الفولاني توزّع في الأسواق.",
+    "summaryEn": "Printed leaflets in Fulani handed out in markets.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a76f7a9aa5051fe1718991d3.webp",
+    "coverAltAr": "الترجمة والطباعة",
+    "badge": null,
+    "categorySlug": "c-translation",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "120.00",
+    "options": [
+     {
+      "id": "01a1eba1-a83b-7524-8a50-a975f61212f6",
+      "labelAr": "100 مطوية",
+      "labelEn": "100 leaflets",
+      "amount": "120.00"
+     }
+    ],
+    "coverAltEn": "Translation and printing"
+   },
+   {
+    "id": "01a1eba1-a859-7752-b5e2-70d510cacf0f",
+    "slug": "c-translate-review",
+    "titleAr": "مراجعة الترجمات",
+    "titleEn": "Reviewing translations",
+    "summaryAr": "مراجعة لغوية وشرعية للترجمات قبل طباعتها.",
+    "summaryEn": "Language and content review of translations before printing.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a76f7a9aa5051fe1718991d3.webp",
+    "coverAltAr": "الترجمة والطباعة",
+    "badge": null,
+    "categorySlug": "c-translation",
+    "allowOpenAmount": true,
+    "minAmount": "10.00",
+    "fromAmount": null,
+    "options": [],
+    "coverAltEn": "Translation and printing"
+   },
+   {
+    "id": "01a1eba1-a8da-72c6-8024-ef87168503a2",
+    "slug": "c-arabic-somali",
+    "titleAr": "تعليم العربية للناطقين بالصومالية",
+    "titleEn": "Arabic lessons for Somali speakers",
+    "summaryAr": "مقعد دراسي في حلقات تعليم العربية للناطقين بالصومالية.",
+    "summaryEn": "A seat in Arabic lessons for Somali speakers.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a8827e3aa66d282758474fec.webp",
+    "coverAltAr": "التعليم بلغات أفريقيا",
+    "badge": null,
+    "categorySlug": "c-african-langs",
+    "allowOpenAmount": true,
+    "minAmount": "50.00",
+    "fromAmount": "200.00",
+    "options": [
+     {
+      "id": "01a1eba1-a8e6-7216-b392-b2b23f0404e3",
+      "labelAr": "مقعد",
+      "labelEn": "One seat",
+      "amount": "200.00"
+     },
+     {
+      "id": "01a1eba1-a8e6-756b-a335-c0eaee21b478",
+      "labelAr": "5 مقاعد",
+      "labelEn": "Five seats",
+      "amount": "1000.00"
+     }
+    ],
+    "coverAltEn": "Teaching in African languages"
+   },
+   {
+    "id": "01a1eba1-a8fe-70cf-8080-d0ee1c1f90d4",
+    "slug": "c-circle-tanzania",
+    "titleAr": "حلقة تحفيظ في تنزانيا",
+    "titleEn": "Memorisation circle in Tanzania",
+    "summaryAr": "حلقة لتحفيظ القرآن الكريم للأطفال في تنزانيا.",
+    "summaryEn": "A Quran memorisation circle for children in Tanzania.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a8827e3aa66d282758474fec.webp",
+    "coverAltAr": "التعليم بلغات أفريقيا",
+    "badge": null,
+    "categorySlug": "c-african-langs",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "400.00",
+    "options": [
+     {
+      "id": "01a1eba1-a909-7ce9-9b39-b55c6846ce7c",
+      "labelAr": "شهر",
+      "labelEn": "One month",
+      "amount": "400.00"
+     }
+    ],
+    "coverAltEn": "Teaching in African languages"
+   },
+   {
+    "id": "01a1eba1-a920-71f0-9fa1-abc39c3fe7a3",
+    "slug": "c-teacher-mali",
+    "titleAr": "راتب معلم في مالي",
+    "titleEn": "A teacher's salary in Mali",
+    "summaryAr": "راتب معلم يدرّس العربية بلغة البمبارا.",
+    "summaryEn": "A teacher who teaches Arabic in Bambara.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a8827e3aa66d282758474fec.webp",
+    "coverAltAr": "التعليم بلغات أفريقيا",
+    "badge": "urgent",
+    "categorySlug": "c-african-langs",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "350.00",
+    "options": [
+     {
+      "id": "01a1eba1-a92b-700d-b546-d33de853703e",
+      "labelAr": "شهر",
+      "labelEn": "One month",
+      "amount": "350.00"
+     },
+     {
+      "id": "01a1eba1-a92b-709a-8ba8-87e5831935b2",
+      "labelAr": "سنة",
+      "labelEn": "One year",
+      "amount": "4200.00"
+     }
+    ],
+    "coverAltEn": "Teaching in African languages"
+   },
+   {
+    "id": "01a1eba1-a945-7d06-8963-8da494100a96",
+    "slug": "c-classroom-niger",
+    "titleAr": "تجهيز فصل دراسي في النيجر",
+    "titleEn": "Equip a classroom in Niger",
+    "summaryAr": "مقاعد وسبورة وأدوات لفصل دراسي جديد.",
+    "summaryEn": "Desks, a board and supplies for a new classroom.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a8827e3aa66d282758474fec.webp",
+    "coverAltAr": "التعليم بلغات أفريقيا",
+    "badge": null,
+    "categorySlug": "c-african-langs",
+    "allowOpenAmount": true,
+    "minAmount": "100.00",
+    "fromAmount": "4500.00",
+    "options": [
+     {
+      "id": "01a1eba1-a94f-7163-9cb0-9fe8a5c68126",
+      "labelAr": "فصل",
+      "labelEn": "One classroom",
+      "amount": "4500.00"
+     }
+    ],
+    "coverAltEn": "Teaching in African languages"
+   },
+   {
+    "id": "01a1eba1-a9c6-7030-a645-073a7a8b492d",
+    "slug": "c-audio-swahili",
+    "titleAr": "تسجيل دروس صوتية بالسواحيلية",
+    "titleEn": "Audio lessons in Swahili",
+    "summaryAr": "إنتاج سلسلة دروس صوتية في العقيدة والفقه بالسواحيلية.",
+    "summaryEn": "A series of audio lessons on creed and fiqh in Swahili.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a96e778698441e6b34324ee0.webp",
+    "coverAltAr": "الإنتاج الصوتي والمرئي",
+    "badge": null,
+    "categorySlug": "c-media",
+    "allowOpenAmount": true,
+    "minAmount": "50.00",
+    "fromAmount": "150.00",
+    "options": [
+     {
+      "id": "01a1eba1-a9d6-77ff-868e-85f024f9e84c",
+      "labelAr": "حلقة",
+      "labelEn": "One episode",
+      "amount": "150.00"
+     },
+     {
+      "id": "01a1eba1-a9d6-77c5-a49b-1a3ab471b9f9",
+      "labelAr": "5 حلقات",
+      "labelEn": "Five episodes",
+      "amount": "750.00"
+     }
+    ],
+    "coverAltEn": "Audio and video production"
+   },
+   {
+    "id": "01a1eba1-a9eb-7918-ae99-26535fe0fd8b",
+    "slug": "c-video-hausa",
+    "titleAr": "إنتاج مقاطع مرئية بالهوسا",
+    "titleEn": "Short videos in Hausa",
+    "summaryAr": "مقاطع مرئية قصيرة تشرح أركان الإسلام بلغة الهوسا.",
+    "summaryEn": "Short videos explaining the pillars of Islam in Hausa.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a96e778698441e6b34324ee0.webp",
+    "coverAltAr": "الإنتاج الصوتي والمرئي",
+    "badge": null,
+    "categorySlug": "c-media",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "500.00",
+    "options": [
+     {
+      "id": "01a1eba1-a9f7-7d7b-b203-1b407a064522",
+      "labelAr": "مقطع",
+      "labelEn": "One video",
+      "amount": "500.00"
+     }
+    ],
+    "coverAltEn": "Audio and video production"
+   },
+   {
+    "id": "01a1eba1-aa0f-7eaa-a09d-4ec031c95fcf",
+    "slug": "c-radio-program",
+    "titleAr": "برنامج إذاعي أسبوعي",
+    "titleEn": "A weekly radio programme",
+    "summaryAr": "برنامج إذاعي يبث الدروس في المناطق الريفية.",
+    "summaryEn": "A radio programme that carries lessons to rural areas.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a96e778698441e6b34324ee0.webp",
+    "coverAltAr": "الإنتاج الصوتي والمرئي",
+    "badge": null,
+    "categorySlug": "c-media",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "300.00",
+    "options": [
+     {
+      "id": "01a1eba1-aa1b-7130-8f40-83467b6d1012",
+      "labelAr": "أسبوع",
+      "labelEn": "One week",
+      "amount": "300.00"
+     },
+     {
+      "id": "01a1eba1-aa1b-71e7-9b47-f274c20c7019",
+      "labelAr": "شهر",
+      "labelEn": "One month",
+      "amount": "1200.00"
+     }
+    ],
+    "coverAltEn": "Audio and video production"
+   },
+   {
+    "id": "01a1eba1-aa91-75b8-b8bc-f2e747ea3f83",
+    "slug": "c-well-shallow",
+    "titleAr": "حفر بئر سطحية",
+    "titleEn": "Dig a shallow well",
+    "summaryAr": "بئر تروي قرية صغيرة لسنوات.",
+    "summaryEn": "A well that serves a small village for years.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1aa39741abb2e062b1bb5fdb4.webp",
+    "coverAltAr": "سقيا الماء",
+    "badge": null,
+    "categorySlug": "c-water",
+    "allowOpenAmount": true,
+    "minAmount": "50.00",
+    "fromAmount": "6000.00",
+    "options": [
+     {
+      "id": "01a1eba1-aa9d-7c4b-9f9a-8ff4bac30af1",
+      "labelAr": "بئر",
+      "labelEn": "One well",
+      "amount": "6000.00"
+     }
+    ],
+    "coverAltEn": "Water"
+   },
+   {
+    "id": "01a1eba1-aab6-7c5d-b13e-54d818be5ab0",
+    "slug": "c-well-deep",
+    "titleAr": "حفر بئر ارتوازية",
+    "titleEn": "Dig a deep well",
+    "summaryAr": "بئر ارتوازية بمضخة تخدم أكثر من قرية.",
+    "summaryEn": "A deep well with a pump that serves several villages.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1aa39741abb2e062b1bb5fdb4.webp",
+    "coverAltAr": "سقيا الماء",
+    "badge": null,
+    "categorySlug": "c-water",
+    "allowOpenAmount": true,
+    "minAmount": "100.00",
+    "fromAmount": "18000.00",
+    "options": [
+     {
+      "id": "01a1eba1-aac1-72f8-bee2-4154b7ad80a2",
+      "labelAr": "بئر",
+      "labelEn": "One well",
+      "amount": "18000.00"
+     }
+    ],
+    "coverAltEn": "Water"
+   },
+   {
+    "id": "01a1eba1-aad9-780c-b41d-5bfc40b330a9",
+    "slug": "c-water-cooler",
+    "titleAr": "برادة مياه لمسجد",
+    "titleEn": "Water cooler for a mosque",
+    "summaryAr": "ماء بارد للمصلين طوال العام.",
+    "summaryEn": "Cold water for worshippers all year.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1aa39741abb2e062b1bb5fdb4.webp",
+    "coverAltAr": "سقيا الماء",
+    "badge": null,
+    "categorySlug": "c-water",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "2500.00",
+    "options": [
+     {
+      "id": "01a1eba1-aae5-75c3-bc2c-839d2165bda6",
+      "labelAr": "برادة",
+      "labelEn": "One cooler",
+      "amount": "2500.00"
+     }
+    ],
+    "coverAltEn": "Water"
+   },
+   {
+    "id": "01a1eba1-ab5a-7b61-b46c-2c4569a3531e",
+    "slug": "c-mosque-build",
+    "titleAr": "بناء مسجد صغير",
+    "titleEn": "Build a small mosque",
+    "summaryAr": "مسجد صغير لقرية لا مسجد فيها.",
+    "summaryEn": "A small mosque for a village without one.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1ab0372e6bb876bd126824d18.webp",
+    "coverAltAr": "المساجد",
+    "badge": null,
+    "categorySlug": "c-mosques",
+    "allowOpenAmount": true,
+    "minAmount": "10.00",
+    "fromAmount": null,
+    "options": [],
+    "coverAltEn": "Mosques"
+   },
+   {
+    "id": "01a1eba1-ab74-7cf5-8512-bd5a8a8376d9",
+    "slug": "c-mosque-carpets",
+    "titleAr": "فرش مسجد",
+    "titleEn": "Carpets for a mosque",
+    "summaryAr": "فرش جديد لمسجد في قرية نائية.",
+    "summaryEn": "New carpets for a mosque in a remote village.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1ab0372e6bb876bd126824d18.webp",
+    "coverAltAr": "المساجد",
+    "badge": null,
+    "categorySlug": "c-mosques",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "50.00",
+    "options": [
+     {
+      "id": "01a1eba1-ab80-7d5c-ad17-b9fcc898e771",
+      "labelAr": "متر",
+      "labelEn": "One metre",
+      "amount": "50.00"
+     }
+    ],
+    "coverAltEn": "Mosques"
+   },
+   {
+    "id": "01a1eba1-ab96-7af8-9881-d79894d72edb",
+    "slug": "c-mosque-restore",
+    "titleAr": "ترميم مسجد",
+    "titleEn": "Restore a mosque",
+    "summaryAr": "ترميم السقف والجدران ودورات المياه.",
+    "summaryEn": "Repairing the roof, walls and washrooms.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1ab0372e6bb876bd126824d18.webp",
+    "coverAltAr": "المساجد",
+    "badge": null,
+    "categorySlug": "c-mosques",
+    "allowOpenAmount": true,
+    "minAmount": "10.00",
+    "fromAmount": null,
+    "options": [],
+    "coverAltEn": "Mosques"
+   },
+   {
+    "id": "01a1eba1-ac07-728d-b195-8423365a58b3",
+    "slug": "c-general-needs",
+    "titleAr": "حيث الحاجة أشد",
+    "titleEn": "Where the need is greatest",
+    "summaryAr": "يصرف تبرعك على المشروع الأشد حاجة في وقته.",
+    "summaryEn": "Your donation goes to the most urgent need at the time.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1abaf7d5bb0eeee30b041f24c.webp",
+    "coverAltAr": "الصندوق العام",
+    "badge": null,
+    "categorySlug": "c-general-fund",
+    "allowOpenAmount": true,
+    "minAmount": "10.00",
+    "fromAmount": null,
+    "options": [],
+    "coverAltEn": "General fund"
+   }
+  ],
+  "total": 22,
+  "page": 1,
+  "pageSize": 100
+ },
+ "/catalog/projects?pageSize=100&sort=newest": {
+  "items": [
+   {
+    "id": "01a1eba1-ac07-728d-b195-8423365a58b3",
+    "slug": "c-general-needs",
+    "titleAr": "حيث الحاجة أشد",
+    "titleEn": "Where the need is greatest",
+    "summaryAr": "يصرف تبرعك على المشروع الأشد حاجة في وقته.",
+    "summaryEn": "Your donation goes to the most urgent need at the time.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1abaf7d5bb0eeee30b041f24c.webp",
+    "coverAltAr": "الصندوق العام",
+    "badge": null,
+    "categorySlug": "c-general-fund",
+    "allowOpenAmount": true,
+    "minAmount": "10.00",
+    "fromAmount": null,
+    "options": [],
+    "coverAltEn": "General fund"
+   },
+   {
+    "id": "01a1eba1-ab96-7af8-9881-d79894d72edb",
+    "slug": "c-mosque-restore",
+    "titleAr": "ترميم مسجد",
+    "titleEn": "Restore a mosque",
+    "summaryAr": "ترميم السقف والجدران ودورات المياه.",
+    "summaryEn": "Repairing the roof, walls and washrooms.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1ab0372e6bb876bd126824d18.webp",
+    "coverAltAr": "المساجد",
+    "badge": null,
+    "categorySlug": "c-mosques",
+    "allowOpenAmount": true,
+    "minAmount": "10.00",
+    "fromAmount": null,
+    "options": [],
+    "coverAltEn": "Mosques"
+   },
+   {
+    "id": "01a1eba1-ab74-7cf5-8512-bd5a8a8376d9",
+    "slug": "c-mosque-carpets",
+    "titleAr": "فرش مسجد",
+    "titleEn": "Carpets for a mosque",
+    "summaryAr": "فرش جديد لمسجد في قرية نائية.",
+    "summaryEn": "New carpets for a mosque in a remote village.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1ab0372e6bb876bd126824d18.webp",
+    "coverAltAr": "المساجد",
+    "badge": null,
+    "categorySlug": "c-mosques",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "50.00",
+    "options": [
+     {
+      "id": "01a1eba1-ab80-7d5c-ad17-b9fcc898e771",
+      "labelAr": "متر",
+      "labelEn": "One metre",
+      "amount": "50.00"
+     }
+    ],
+    "coverAltEn": "Mosques"
+   },
+   {
+    "id": "01a1eba1-ab5a-7b61-b46c-2c4569a3531e",
+    "slug": "c-mosque-build",
+    "titleAr": "بناء مسجد صغير",
+    "titleEn": "Build a small mosque",
+    "summaryAr": "مسجد صغير لقرية لا مسجد فيها.",
+    "summaryEn": "A small mosque for a village without one.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1ab0372e6bb876bd126824d18.webp",
+    "coverAltAr": "المساجد",
+    "badge": null,
+    "categorySlug": "c-mosques",
+    "allowOpenAmount": true,
+    "minAmount": "10.00",
+    "fromAmount": null,
+    "options": [],
+    "coverAltEn": "Mosques"
+   },
+   {
+    "id": "01a1eba1-aad9-780c-b41d-5bfc40b330a9",
+    "slug": "c-water-cooler",
+    "titleAr": "برادة مياه لمسجد",
+    "titleEn": "Water cooler for a mosque",
+    "summaryAr": "ماء بارد للمصلين طوال العام.",
+    "summaryEn": "Cold water for worshippers all year.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1aa39741abb2e062b1bb5fdb4.webp",
+    "coverAltAr": "سقيا الماء",
+    "badge": null,
+    "categorySlug": "c-water",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "2500.00",
+    "options": [
+     {
+      "id": "01a1eba1-aae5-75c3-bc2c-839d2165bda6",
+      "labelAr": "برادة",
+      "labelEn": "One cooler",
+      "amount": "2500.00"
+     }
+    ],
+    "coverAltEn": "Water"
+   },
+   {
+    "id": "01a1eba1-aab6-7c5d-b13e-54d818be5ab0",
+    "slug": "c-well-deep",
+    "titleAr": "حفر بئر ارتوازية",
+    "titleEn": "Dig a deep well",
+    "summaryAr": "بئر ارتوازية بمضخة تخدم أكثر من قرية.",
+    "summaryEn": "A deep well with a pump that serves several villages.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1aa39741abb2e062b1bb5fdb4.webp",
+    "coverAltAr": "سقيا الماء",
+    "badge": null,
+    "categorySlug": "c-water",
+    "allowOpenAmount": true,
+    "minAmount": "100.00",
+    "fromAmount": "18000.00",
+    "options": [
+     {
+      "id": "01a1eba1-aac1-72f8-bee2-4154b7ad80a2",
+      "labelAr": "بئر",
+      "labelEn": "One well",
+      "amount": "18000.00"
+     }
+    ],
+    "coverAltEn": "Water"
+   },
+   {
+    "id": "01a1eba1-aa91-75b8-b8bc-f2e747ea3f83",
+    "slug": "c-well-shallow",
+    "titleAr": "حفر بئر سطحية",
+    "titleEn": "Dig a shallow well",
+    "summaryAr": "بئر تروي قرية صغيرة لسنوات.",
+    "summaryEn": "A well that serves a small village for years.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1aa39741abb2e062b1bb5fdb4.webp",
+    "coverAltAr": "سقيا الماء",
+    "badge": null,
+    "categorySlug": "c-water",
+    "allowOpenAmount": true,
+    "minAmount": "50.00",
+    "fromAmount": "6000.00",
+    "options": [
+     {
+      "id": "01a1eba1-aa9d-7c4b-9f9a-8ff4bac30af1",
+      "labelAr": "بئر",
+      "labelEn": "One well",
+      "amount": "6000.00"
+     }
+    ],
+    "coverAltEn": "Water"
+   },
+   {
+    "id": "01a1eba1-aa0f-7eaa-a09d-4ec031c95fcf",
+    "slug": "c-radio-program",
+    "titleAr": "برنامج إذاعي أسبوعي",
+    "titleEn": "A weekly radio programme",
+    "summaryAr": "برنامج إذاعي يبث الدروس في المناطق الريفية.",
+    "summaryEn": "A radio programme that carries lessons to rural areas.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a96e778698441e6b34324ee0.webp",
+    "coverAltAr": "الإنتاج الصوتي والمرئي",
+    "badge": null,
+    "categorySlug": "c-media",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "300.00",
+    "options": [
+     {
+      "id": "01a1eba1-aa1b-7130-8f40-83467b6d1012",
+      "labelAr": "أسبوع",
+      "labelEn": "One week",
+      "amount": "300.00"
+     },
+     {
+      "id": "01a1eba1-aa1b-71e7-9b47-f274c20c7019",
+      "labelAr": "شهر",
+      "labelEn": "One month",
+      "amount": "1200.00"
+     }
+    ],
+    "coverAltEn": "Audio and video production"
+   },
+   {
+    "id": "01a1eba1-a9eb-7918-ae99-26535fe0fd8b",
+    "slug": "c-video-hausa",
+    "titleAr": "إنتاج مقاطع مرئية بالهوسا",
+    "titleEn": "Short videos in Hausa",
+    "summaryAr": "مقاطع مرئية قصيرة تشرح أركان الإسلام بلغة الهوسا.",
+    "summaryEn": "Short videos explaining the pillars of Islam in Hausa.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a96e778698441e6b34324ee0.webp",
+    "coverAltAr": "الإنتاج الصوتي والمرئي",
+    "badge": null,
+    "categorySlug": "c-media",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "500.00",
+    "options": [
+     {
+      "id": "01a1eba1-a9f7-7d7b-b203-1b407a064522",
+      "labelAr": "مقطع",
+      "labelEn": "One video",
+      "amount": "500.00"
+     }
+    ],
+    "coverAltEn": "Audio and video production"
+   },
+   {
+    "id": "01a1eba1-a9c6-7030-a645-073a7a8b492d",
+    "slug": "c-audio-swahili",
+    "titleAr": "تسجيل دروس صوتية بالسواحيلية",
+    "titleEn": "Audio lessons in Swahili",
+    "summaryAr": "إنتاج سلسلة دروس صوتية في العقيدة والفقه بالسواحيلية.",
+    "summaryEn": "A series of audio lessons on creed and fiqh in Swahili.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a96e778698441e6b34324ee0.webp",
+    "coverAltAr": "الإنتاج الصوتي والمرئي",
+    "badge": null,
+    "categorySlug": "c-media",
+    "allowOpenAmount": true,
+    "minAmount": "50.00",
+    "fromAmount": "150.00",
+    "options": [
+     {
+      "id": "01a1eba1-a9d6-77ff-868e-85f024f9e84c",
+      "labelAr": "حلقة",
+      "labelEn": "One episode",
+      "amount": "150.00"
+     },
+     {
+      "id": "01a1eba1-a9d6-77c5-a49b-1a3ab471b9f9",
+      "labelAr": "5 حلقات",
+      "labelEn": "Five episodes",
+      "amount": "750.00"
+     }
+    ],
+    "coverAltEn": "Audio and video production"
+   },
+   {
+    "id": "01a1eba1-a945-7d06-8963-8da494100a96",
+    "slug": "c-classroom-niger",
+    "titleAr": "تجهيز فصل دراسي في النيجر",
+    "titleEn": "Equip a classroom in Niger",
+    "summaryAr": "مقاعد وسبورة وأدوات لفصل دراسي جديد.",
+    "summaryEn": "Desks, a board and supplies for a new classroom.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a8827e3aa66d282758474fec.webp",
+    "coverAltAr": "التعليم بلغات أفريقيا",
+    "badge": null,
+    "categorySlug": "c-african-langs",
+    "allowOpenAmount": true,
+    "minAmount": "100.00",
+    "fromAmount": "4500.00",
+    "options": [
+     {
+      "id": "01a1eba1-a94f-7163-9cb0-9fe8a5c68126",
+      "labelAr": "فصل",
+      "labelEn": "One classroom",
+      "amount": "4500.00"
+     }
+    ],
+    "coverAltEn": "Teaching in African languages"
+   },
+   {
+    "id": "01a1eba1-a920-71f0-9fa1-abc39c3fe7a3",
+    "slug": "c-teacher-mali",
+    "titleAr": "راتب معلم في مالي",
+    "titleEn": "A teacher's salary in Mali",
+    "summaryAr": "راتب معلم يدرّس العربية بلغة البمبارا.",
+    "summaryEn": "A teacher who teaches Arabic in Bambara.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a8827e3aa66d282758474fec.webp",
+    "coverAltAr": "التعليم بلغات أفريقيا",
+    "badge": "urgent",
+    "categorySlug": "c-african-langs",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "350.00",
+    "options": [
+     {
+      "id": "01a1eba1-a92b-700d-b546-d33de853703e",
+      "labelAr": "شهر",
+      "labelEn": "One month",
+      "amount": "350.00"
+     },
+     {
+      "id": "01a1eba1-a92b-709a-8ba8-87e5831935b2",
+      "labelAr": "سنة",
+      "labelEn": "One year",
+      "amount": "4200.00"
+     }
+    ],
+    "coverAltEn": "Teaching in African languages"
+   },
+   {
+    "id": "01a1eba1-a8fe-70cf-8080-d0ee1c1f90d4",
+    "slug": "c-circle-tanzania",
+    "titleAr": "حلقة تحفيظ في تنزانيا",
+    "titleEn": "Memorisation circle in Tanzania",
+    "summaryAr": "حلقة لتحفيظ القرآن الكريم للأطفال في تنزانيا.",
+    "summaryEn": "A Quran memorisation circle for children in Tanzania.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a8827e3aa66d282758474fec.webp",
+    "coverAltAr": "التعليم بلغات أفريقيا",
+    "badge": null,
+    "categorySlug": "c-african-langs",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "400.00",
+    "options": [
+     {
+      "id": "01a1eba1-a909-7ce9-9b39-b55c6846ce7c",
+      "labelAr": "شهر",
+      "labelEn": "One month",
+      "amount": "400.00"
+     }
+    ],
+    "coverAltEn": "Teaching in African languages"
+   },
+   {
+    "id": "01a1eba1-a8da-72c6-8024-ef87168503a2",
+    "slug": "c-arabic-somali",
+    "titleAr": "تعليم العربية للناطقين بالصومالية",
+    "titleEn": "Arabic lessons for Somali speakers",
+    "summaryAr": "مقعد دراسي في حلقات تعليم العربية للناطقين بالصومالية.",
+    "summaryEn": "A seat in Arabic lessons for Somali speakers.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a8827e3aa66d282758474fec.webp",
+    "coverAltAr": "التعليم بلغات أفريقيا",
+    "badge": null,
+    "categorySlug": "c-african-langs",
+    "allowOpenAmount": true,
+    "minAmount": "50.00",
+    "fromAmount": "200.00",
+    "options": [
+     {
+      "id": "01a1eba1-a8e6-7216-b392-b2b23f0404e3",
+      "labelAr": "مقعد",
+      "labelEn": "One seat",
+      "amount": "200.00"
+     },
+     {
+      "id": "01a1eba1-a8e6-756b-a335-c0eaee21b478",
+      "labelAr": "5 مقاعد",
+      "labelEn": "Five seats",
+      "amount": "1000.00"
+     }
+    ],
+    "coverAltEn": "Teaching in African languages"
+   },
+   {
+    "id": "01a1eba1-a859-7752-b5e2-70d510cacf0f",
+    "slug": "c-translate-review",
+    "titleAr": "مراجعة الترجمات",
+    "titleEn": "Reviewing translations",
+    "summaryAr": "مراجعة لغوية وشرعية للترجمات قبل طباعتها.",
+    "summaryEn": "Language and content review of translations before printing.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a76f7a9aa5051fe1718991d3.webp",
+    "coverAltAr": "الترجمة والطباعة",
+    "badge": null,
+    "categorySlug": "c-translation",
+    "allowOpenAmount": true,
+    "minAmount": "10.00",
+    "fromAmount": null,
+    "options": [],
+    "coverAltEn": "Translation and printing"
+   },
+   {
+    "id": "01a1eba1-a82e-709b-8e80-3f3d2141e21a",
+    "slug": "c-print-fulani",
+    "titleAr": "طباعة مطويات بلغة الفولاني",
+    "titleEn": "Leaflets in Fulani",
+    "summaryAr": "مطويات دعوية مطبوعة بلغة الفولاني توزّع في الأسواق.",
+    "summaryEn": "Printed leaflets in Fulani handed out in markets.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a76f7a9aa5051fe1718991d3.webp",
+    "coverAltAr": "الترجمة والطباعة",
+    "badge": null,
+    "categorySlug": "c-translation",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "120.00",
+    "options": [
+     {
+      "id": "01a1eba1-a83b-7524-8a50-a975f61212f6",
+      "labelAr": "100 مطوية",
+      "labelEn": "100 leaflets",
+      "amount": "120.00"
+     }
+    ],
+    "coverAltEn": "Translation and printing"
+   },
+   {
+    "id": "01a1eba1-a7ff-773c-9a1c-4a2f7eedfd80",
+    "slug": "c-translate-swahili",
+    "titleAr": "ترجمة رسائل العقيدة بالسواحيلية",
+    "titleEn": "Creed epistles in Swahili",
+    "summaryAr": "ترجمة رسائل مختصرة في العقيدة إلى اللغة السواحيلية.",
+    "summaryEn": "Short epistles on creed translated into Swahili.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a76f7a9aa5051fe1718991d3.webp",
+    "coverAltAr": "الترجمة والطباعة",
+    "badge": null,
+    "categorySlug": "c-translation",
+    "allowOpenAmount": true,
+    "minAmount": "15.00",
+    "fromAmount": "15.00",
+    "options": [
+     {
+      "id": "01a1eba1-a812-7716-8af2-b9303fc49dcf",
+      "labelAr": "رسالة",
+      "labelEn": "One epistle",
+      "amount": "15.00"
+     }
+    ],
+    "coverAltEn": "Translation and printing"
+   },
+   {
+    "id": "01a1eba1-a7d2-79cb-a601-ba4ac17b7de3",
+    "slug": "c-translate-hausa",
+    "titleAr": "ترجمة معاني القرآن بلغة الهوسا",
+    "titleEn": "Quran meanings in Hausa",
+    "summaryAr": "طباعة وتوزيع نسخ مراجعة من ترجمة معاني القرآن الكريم.",
+    "summaryEn": "Printing and handing out reviewed copies of the Quran meanings in Hausa.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a76f7a9aa5051fe1718991d3.webp",
+    "coverAltAr": "الترجمة والطباعة",
+    "badge": "new",
+    "categorySlug": "c-translation",
+    "allowOpenAmount": true,
+    "minAmount": "25.00",
+    "fromAmount": "25.00",
+    "options": [
+     {
+      "id": "01a1eba1-a7e0-741e-8cfe-bac7ac36480e",
+      "labelAr": "نسخة",
+      "labelEn": "One copy",
+      "amount": "25.00"
+     },
+     {
+      "id": "01a1eba1-a7e0-70e1-b88e-a900fea25afc",
+      "labelAr": "10 نسخ",
+      "labelEn": "Ten copies",
+      "amount": "250.00"
+     }
+    ],
+    "coverAltEn": "Translation and printing"
+   },
+   {
+    "id": "01a1eba1-a751-7a3d-9791-aba2f62ee75a",
+    "slug": "c-preacher-training",
+    "titleAr": "تأهيل الدعاة الجدد",
+    "titleEn": "Training new preachers",
+    "summaryAr": "برنامج تأهيل للدعاة الجدد في العلوم الشرعية واللغة العربية.",
+    "summaryEn": "A training programme for new preachers in Islamic sciences and Arabic.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+    "coverAltAr": "كفالة الدعاة",
+    "badge": null,
+    "categorySlug": "c-preachers",
+    "allowOpenAmount": true,
+    "minAmount": "10.00",
+    "fromAmount": null,
+    "options": [],
+    "coverAltEn": "Preacher sponsorship"
+   },
+   {
+    "id": "01a1eba1-a726-7e9e-bac3-fd1b527d9e4e",
+    "slug": "c-preacher-chad",
+    "titleAr": "كفالة داعية في تشاد",
+    "titleEn": "Sponsor a preacher in Chad",
+    "summaryAr": "كفالة داعية يعلّم العربية والعلوم الشرعية في تشاد.",
+    "summaryEn": "A preacher teaching Arabic and Islamic sciences in Chad.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+    "coverAltAr": "كفالة الدعاة",
+    "badge": "new",
+    "categorySlug": "c-preachers",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "250.00",
+    "options": [
+     {
+      "id": "01a1eba1-a736-77a9-9202-0b24dc0d8a70",
+      "labelAr": "كفالة شهر",
+      "labelEn": "One month",
+      "amount": "250.00"
+     }
+    ],
+    "coverAltEn": "Preacher sponsorship"
+   },
+   {
+    "id": "01a1eba1-a6ce-7ea1-9669-986f399b5064",
+    "slug": "c-preacher-senegal",
+    "titleAr": "كفالة داعية في السنغال",
+    "titleEn": "Sponsor a preacher in Senegal",
+    "summaryAr": "داعية يقدّم الدروس بلغة الولوف في المساجد والقرى.",
+    "summaryEn": "A preacher who teaches in Wolof in mosques and villages.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+    "coverAltAr": "كفالة الدعاة",
+    "badge": null,
+    "categorySlug": "c-preachers",
+    "allowOpenAmount": true,
+    "minAmount": "50.00",
+    "fromAmount": "250.00",
+    "options": [
+     {
+      "id": "01a1eba1-a6e0-7c88-8c3c-5fe8ee62f754",
+      "labelAr": "كفالة شهر",
+      "labelEn": "One month",
+      "amount": "250.00"
+     },
+     {
+      "id": "01a1eba1-a6e0-7bd8-aced-bbcca6b2c129",
+      "labelAr": "كفالة سنة",
+      "labelEn": "One year",
+      "amount": "3000.00"
+     }
+    ],
+    "coverAltEn": "Preacher sponsorship"
+   },
+   {
+    "id": "01a1eba1-a629-7935-8746-59a6406c505c",
+    "slug": "c-preacher-nigeria",
+    "titleAr": "كفالة داعية في نيجيريا لمدة عام",
+    "titleEn": "Sponsor a preacher in Nigeria for a year",
+    "summaryAr": "راتب داعية متفرغ يعلّم الناس دينهم بلغة الهوسا في القرى النائية.",
+    "summaryEn": "A full-time preacher who teaches in Hausa in remote villages.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+    "coverAltAr": "كفالة الدعاة",
+    "badge": "urgent",
+    "categorySlug": "c-preachers",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "300.00",
+    "options": [
+     {
+      "id": "01a1eba1-a6a7-70a5-bb95-771dc9ffb17a",
+      "labelAr": "كفالة شهر",
+      "labelEn": "One month",
+      "amount": "300.00"
+     },
+     {
+      "id": "01a1eba1-a6a7-7a79-9b18-ba165967d8a7",
+      "labelAr": "كفالة 3 أشهر",
+      "labelEn": "Three months",
+      "amount": "900.00"
+     },
+     {
+      "id": "01a1eba1-a6a7-721b-83a9-315490181502",
+      "labelAr": "كفالة سنة",
+      "labelEn": "One year",
+      "amount": "3600.00"
+     }
+    ],
+    "coverAltEn": "Preacher sponsorship"
+   }
+  ],
+  "total": 22,
+  "page": 1,
+  "pageSize": 100
+ },
+ "/catalog/projects?pageSize=100&sort=title": {
+  "items": [
+   {
+    "id": "01a1eba1-a9eb-7918-ae99-26535fe0fd8b",
+    "slug": "c-video-hausa",
+    "titleAr": "إنتاج مقاطع مرئية بالهوسا",
+    "titleEn": "Short videos in Hausa",
+    "summaryAr": "مقاطع مرئية قصيرة تشرح أركان الإسلام بلغة الهوسا.",
+    "summaryEn": "Short videos explaining the pillars of Islam in Hausa.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a96e778698441e6b34324ee0.webp",
+    "coverAltAr": "الإنتاج الصوتي والمرئي",
+    "badge": null,
+    "categorySlug": "c-media",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "500.00",
+    "options": [
+     {
+      "id": "01a1eba1-a9f7-7d7b-b203-1b407a064522",
+      "labelAr": "مقطع",
+      "labelEn": "One video",
+      "amount": "500.00"
+     }
+    ],
+    "coverAltEn": "Audio and video production"
+   },
+   {
+    "id": "01a1eba1-aad9-780c-b41d-5bfc40b330a9",
+    "slug": "c-water-cooler",
+    "titleAr": "برادة مياه لمسجد",
+    "titleEn": "Water cooler for a mosque",
+    "summaryAr": "ماء بارد للمصلين طوال العام.",
+    "summaryEn": "Cold water for worshippers all year.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1aa39741abb2e062b1bb5fdb4.webp",
+    "coverAltAr": "سقيا الماء",
+    "badge": null,
+    "categorySlug": "c-water",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "2500.00",
+    "options": [
+     {
+      "id": "01a1eba1-aae5-75c3-bc2c-839d2165bda6",
+      "labelAr": "برادة",
+      "labelEn": "One cooler",
+      "amount": "2500.00"
+     }
+    ],
+    "coverAltEn": "Water"
+   },
+   {
+    "id": "01a1eba1-aa0f-7eaa-a09d-4ec031c95fcf",
+    "slug": "c-radio-program",
+    "titleAr": "برنامج إذاعي أسبوعي",
+    "titleEn": "A weekly radio programme",
+    "summaryAr": "برنامج إذاعي يبث الدروس في المناطق الريفية.",
+    "summaryEn": "A radio programme that carries lessons to rural areas.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a96e778698441e6b34324ee0.webp",
+    "coverAltAr": "الإنتاج الصوتي والمرئي",
+    "badge": null,
+    "categorySlug": "c-media",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "300.00",
+    "options": [
+     {
+      "id": "01a1eba1-aa1b-7130-8f40-83467b6d1012",
+      "labelAr": "أسبوع",
+      "labelEn": "One week",
+      "amount": "300.00"
+     },
+     {
+      "id": "01a1eba1-aa1b-71e7-9b47-f274c20c7019",
+      "labelAr": "شهر",
+      "labelEn": "One month",
+      "amount": "1200.00"
+     }
+    ],
+    "coverAltEn": "Audio and video production"
+   },
+   {
+    "id": "01a1eba1-ab5a-7b61-b46c-2c4569a3531e",
+    "slug": "c-mosque-build",
+    "titleAr": "بناء مسجد صغير",
+    "titleEn": "Build a small mosque",
+    "summaryAr": "مسجد صغير لقرية لا مسجد فيها.",
+    "summaryEn": "A small mosque for a village without one.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1ab0372e6bb876bd126824d18.webp",
+    "coverAltAr": "المساجد",
+    "badge": null,
+    "categorySlug": "c-mosques",
+    "allowOpenAmount": true,
+    "minAmount": "10.00",
+    "fromAmount": null,
+    "options": [],
+    "coverAltEn": "Mosques"
+   },
+   {
+    "id": "01a1eba1-a751-7a3d-9791-aba2f62ee75a",
+    "slug": "c-preacher-training",
+    "titleAr": "تأهيل الدعاة الجدد",
+    "titleEn": "Training new preachers",
+    "summaryAr": "برنامج تأهيل للدعاة الجدد في العلوم الشرعية واللغة العربية.",
+    "summaryEn": "A training programme for new preachers in Islamic sciences and Arabic.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+    "coverAltAr": "كفالة الدعاة",
+    "badge": null,
+    "categorySlug": "c-preachers",
+    "allowOpenAmount": true,
+    "minAmount": "10.00",
+    "fromAmount": null,
+    "options": [],
+    "coverAltEn": "Preacher sponsorship"
+   },
+   {
+    "id": "01a1eba1-a945-7d06-8963-8da494100a96",
+    "slug": "c-classroom-niger",
+    "titleAr": "تجهيز فصل دراسي في النيجر",
+    "titleEn": "Equip a classroom in Niger",
+    "summaryAr": "مقاعد وسبورة وأدوات لفصل دراسي جديد.",
+    "summaryEn": "Desks, a board and supplies for a new classroom.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a8827e3aa66d282758474fec.webp",
+    "coverAltAr": "التعليم بلغات أفريقيا",
+    "badge": null,
+    "categorySlug": "c-african-langs",
+    "allowOpenAmount": true,
+    "minAmount": "100.00",
+    "fromAmount": "4500.00",
+    "options": [
+     {
+      "id": "01a1eba1-a94f-7163-9cb0-9fe8a5c68126",
+      "labelAr": "فصل",
+      "labelEn": "One classroom",
+      "amount": "4500.00"
+     }
+    ],
+    "coverAltEn": "Teaching in African languages"
+   },
+   {
+    "id": "01a1eba1-a7ff-773c-9a1c-4a2f7eedfd80",
+    "slug": "c-translate-swahili",
+    "titleAr": "ترجمة رسائل العقيدة بالسواحيلية",
+    "titleEn": "Creed epistles in Swahili",
+    "summaryAr": "ترجمة رسائل مختصرة في العقيدة إلى اللغة السواحيلية.",
+    "summaryEn": "Short epistles on creed translated into Swahili.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a76f7a9aa5051fe1718991d3.webp",
+    "coverAltAr": "الترجمة والطباعة",
+    "badge": null,
+    "categorySlug": "c-translation",
+    "allowOpenAmount": true,
+    "minAmount": "15.00",
+    "fromAmount": "15.00",
+    "options": [
+     {
+      "id": "01a1eba1-a812-7716-8af2-b9303fc49dcf",
+      "labelAr": "رسالة",
+      "labelEn": "One epistle",
+      "amount": "15.00"
+     }
+    ],
+    "coverAltEn": "Translation and printing"
+   },
+   {
+    "id": "01a1eba1-a7d2-79cb-a601-ba4ac17b7de3",
+    "slug": "c-translate-hausa",
+    "titleAr": "ترجمة معاني القرآن بلغة الهوسا",
+    "titleEn": "Quran meanings in Hausa",
+    "summaryAr": "طباعة وتوزيع نسخ مراجعة من ترجمة معاني القرآن الكريم.",
+    "summaryEn": "Printing and handing out reviewed copies of the Quran meanings in Hausa.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a76f7a9aa5051fe1718991d3.webp",
+    "coverAltAr": "الترجمة والطباعة",
+    "badge": "new",
+    "categorySlug": "c-translation",
+    "allowOpenAmount": true,
+    "minAmount": "25.00",
+    "fromAmount": "25.00",
+    "options": [
+     {
+      "id": "01a1eba1-a7e0-741e-8cfe-bac7ac36480e",
+      "labelAr": "نسخة",
+      "labelEn": "One copy",
+      "amount": "25.00"
+     },
+     {
+      "id": "01a1eba1-a7e0-70e1-b88e-a900fea25afc",
+      "labelAr": "10 نسخ",
+      "labelEn": "Ten copies",
+      "amount": "250.00"
+     }
+    ],
+    "coverAltEn": "Translation and printing"
+   },
+   {
+    "id": "01a1eba1-ab96-7af8-9881-d79894d72edb",
+    "slug": "c-mosque-restore",
+    "titleAr": "ترميم مسجد",
+    "titleEn": "Restore a mosque",
+    "summaryAr": "ترميم السقف والجدران ودورات المياه.",
+    "summaryEn": "Repairing the roof, walls and washrooms.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1ab0372e6bb876bd126824d18.webp",
+    "coverAltAr": "المساجد",
+    "badge": null,
+    "categorySlug": "c-mosques",
+    "allowOpenAmount": true,
+    "minAmount": "10.00",
+    "fromAmount": null,
+    "options": [],
+    "coverAltEn": "Mosques"
+   },
+   {
+    "id": "01a1eba1-a9c6-7030-a645-073a7a8b492d",
+    "slug": "c-audio-swahili",
+    "titleAr": "تسجيل دروس صوتية بالسواحيلية",
+    "titleEn": "Audio lessons in Swahili",
+    "summaryAr": "إنتاج سلسلة دروس صوتية في العقيدة والفقه بالسواحيلية.",
+    "summaryEn": "A series of audio lessons on creed and fiqh in Swahili.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a96e778698441e6b34324ee0.webp",
+    "coverAltAr": "الإنتاج الصوتي والمرئي",
+    "badge": null,
+    "categorySlug": "c-media",
+    "allowOpenAmount": true,
+    "minAmount": "50.00",
+    "fromAmount": "150.00",
+    "options": [
+     {
+      "id": "01a1eba1-a9d6-77ff-868e-85f024f9e84c",
+      "labelAr": "حلقة",
+      "labelEn": "One episode",
+      "amount": "150.00"
+     },
+     {
+      "id": "01a1eba1-a9d6-77c5-a49b-1a3ab471b9f9",
+      "labelAr": "5 حلقات",
+      "labelEn": "Five episodes",
+      "amount": "750.00"
+     }
+    ],
+    "coverAltEn": "Audio and video production"
+   },
+   {
+    "id": "01a1eba1-a8da-72c6-8024-ef87168503a2",
+    "slug": "c-arabic-somali",
+    "titleAr": "تعليم العربية للناطقين بالصومالية",
+    "titleEn": "Arabic lessons for Somali speakers",
+    "summaryAr": "مقعد دراسي في حلقات تعليم العربية للناطقين بالصومالية.",
+    "summaryEn": "A seat in Arabic lessons for Somali speakers.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a8827e3aa66d282758474fec.webp",
+    "coverAltAr": "التعليم بلغات أفريقيا",
+    "badge": null,
+    "categorySlug": "c-african-langs",
+    "allowOpenAmount": true,
+    "minAmount": "50.00",
+    "fromAmount": "200.00",
+    "options": [
+     {
+      "id": "01a1eba1-a8e6-7216-b392-b2b23f0404e3",
+      "labelAr": "مقعد",
+      "labelEn": "One seat",
+      "amount": "200.00"
+     },
+     {
+      "id": "01a1eba1-a8e6-756b-a335-c0eaee21b478",
+      "labelAr": "5 مقاعد",
+      "labelEn": "Five seats",
+      "amount": "1000.00"
+     }
+    ],
+    "coverAltEn": "Teaching in African languages"
+   },
+   {
+    "id": "01a1eba1-aab6-7c5d-b13e-54d818be5ab0",
+    "slug": "c-well-deep",
+    "titleAr": "حفر بئر ارتوازية",
+    "titleEn": "Dig a deep well",
+    "summaryAr": "بئر ارتوازية بمضخة تخدم أكثر من قرية.",
+    "summaryEn": "A deep well with a pump that serves several villages.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1aa39741abb2e062b1bb5fdb4.webp",
+    "coverAltAr": "سقيا الماء",
+    "badge": null,
+    "categorySlug": "c-water",
+    "allowOpenAmount": true,
+    "minAmount": "100.00",
+    "fromAmount": "18000.00",
+    "options": [
+     {
+      "id": "01a1eba1-aac1-72f8-bee2-4154b7ad80a2",
+      "labelAr": "بئر",
+      "labelEn": "One well",
+      "amount": "18000.00"
+     }
+    ],
+    "coverAltEn": "Water"
+   },
+   {
+    "id": "01a1eba1-aa91-75b8-b8bc-f2e747ea3f83",
+    "slug": "c-well-shallow",
+    "titleAr": "حفر بئر سطحية",
+    "titleEn": "Dig a shallow well",
+    "summaryAr": "بئر تروي قرية صغيرة لسنوات.",
+    "summaryEn": "A well that serves a small village for years.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1aa39741abb2e062b1bb5fdb4.webp",
+    "coverAltAr": "سقيا الماء",
+    "badge": null,
+    "categorySlug": "c-water",
+    "allowOpenAmount": true,
+    "minAmount": "50.00",
+    "fromAmount": "6000.00",
+    "options": [
+     {
+      "id": "01a1eba1-aa9d-7c4b-9f9a-8ff4bac30af1",
+      "labelAr": "بئر",
+      "labelEn": "One well",
+      "amount": "6000.00"
+     }
+    ],
+    "coverAltEn": "Water"
+   },
+   {
+    "id": "01a1eba1-a8fe-70cf-8080-d0ee1c1f90d4",
+    "slug": "c-circle-tanzania",
+    "titleAr": "حلقة تحفيظ في تنزانيا",
+    "titleEn": "Memorisation circle in Tanzania",
+    "summaryAr": "حلقة لتحفيظ القرآن الكريم للأطفال في تنزانيا.",
+    "summaryEn": "A Quran memorisation circle for children in Tanzania.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a8827e3aa66d282758474fec.webp",
+    "coverAltAr": "التعليم بلغات أفريقيا",
+    "badge": null,
+    "categorySlug": "c-african-langs",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "400.00",
+    "options": [
+     {
+      "id": "01a1eba1-a909-7ce9-9b39-b55c6846ce7c",
+      "labelAr": "شهر",
+      "labelEn": "One month",
+      "amount": "400.00"
+     }
+    ],
+    "coverAltEn": "Teaching in African languages"
+   },
+   {
+    "id": "01a1eba1-ac07-728d-b195-8423365a58b3",
+    "slug": "c-general-needs",
+    "titleAr": "حيث الحاجة أشد",
+    "titleEn": "Where the need is greatest",
+    "summaryAr": "يصرف تبرعك على المشروع الأشد حاجة في وقته.",
+    "summaryEn": "Your donation goes to the most urgent need at the time.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1abaf7d5bb0eeee30b041f24c.webp",
+    "coverAltAr": "الصندوق العام",
+    "badge": null,
+    "categorySlug": "c-general-fund",
+    "allowOpenAmount": true,
+    "minAmount": "10.00",
+    "fromAmount": null,
+    "options": [],
+    "coverAltEn": "General fund"
+   },
+   {
+    "id": "01a1eba1-a920-71f0-9fa1-abc39c3fe7a3",
+    "slug": "c-teacher-mali",
+    "titleAr": "راتب معلم في مالي",
+    "titleEn": "A teacher's salary in Mali",
+    "summaryAr": "راتب معلم يدرّس العربية بلغة البمبارا.",
+    "summaryEn": "A teacher who teaches Arabic in Bambara.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a8827e3aa66d282758474fec.webp",
+    "coverAltAr": "التعليم بلغات أفريقيا",
+    "badge": "urgent",
+    "categorySlug": "c-african-langs",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "350.00",
+    "options": [
+     {
+      "id": "01a1eba1-a92b-700d-b546-d33de853703e",
+      "labelAr": "شهر",
+      "labelEn": "One month",
+      "amount": "350.00"
+     },
+     {
+      "id": "01a1eba1-a92b-709a-8ba8-87e5831935b2",
+      "labelAr": "سنة",
+      "labelEn": "One year",
+      "amount": "4200.00"
+     }
+    ],
+    "coverAltEn": "Teaching in African languages"
+   },
+   {
+    "id": "01a1eba1-a82e-709b-8e80-3f3d2141e21a",
+    "slug": "c-print-fulani",
+    "titleAr": "طباعة مطويات بلغة الفولاني",
+    "titleEn": "Leaflets in Fulani",
+    "summaryAr": "مطويات دعوية مطبوعة بلغة الفولاني توزّع في الأسواق.",
+    "summaryEn": "Printed leaflets in Fulani handed out in markets.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a76f7a9aa5051fe1718991d3.webp",
+    "coverAltAr": "الترجمة والطباعة",
+    "badge": null,
+    "categorySlug": "c-translation",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "120.00",
+    "options": [
+     {
+      "id": "01a1eba1-a83b-7524-8a50-a975f61212f6",
+      "labelAr": "100 مطوية",
+      "labelEn": "100 leaflets",
+      "amount": "120.00"
+     }
+    ],
+    "coverAltEn": "Translation and printing"
+   },
+   {
+    "id": "01a1eba1-ab74-7cf5-8512-bd5a8a8376d9",
+    "slug": "c-mosque-carpets",
+    "titleAr": "فرش مسجد",
+    "titleEn": "Carpets for a mosque",
+    "summaryAr": "فرش جديد لمسجد في قرية نائية.",
+    "summaryEn": "New carpets for a mosque in a remote village.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1ab0372e6bb876bd126824d18.webp",
+    "coverAltAr": "المساجد",
+    "badge": null,
+    "categorySlug": "c-mosques",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "50.00",
+    "options": [
+     {
+      "id": "01a1eba1-ab80-7d5c-ad17-b9fcc898e771",
+      "labelAr": "متر",
+      "labelEn": "One metre",
+      "amount": "50.00"
+     }
+    ],
+    "coverAltEn": "Mosques"
+   },
+   {
+    "id": "01a1eba1-a6ce-7ea1-9669-986f399b5064",
+    "slug": "c-preacher-senegal",
+    "titleAr": "كفالة داعية في السنغال",
+    "titleEn": "Sponsor a preacher in Senegal",
+    "summaryAr": "داعية يقدّم الدروس بلغة الولوف في المساجد والقرى.",
+    "summaryEn": "A preacher who teaches in Wolof in mosques and villages.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+    "coverAltAr": "كفالة الدعاة",
+    "badge": null,
+    "categorySlug": "c-preachers",
+    "allowOpenAmount": true,
+    "minAmount": "50.00",
+    "fromAmount": "250.00",
+    "options": [
+     {
+      "id": "01a1eba1-a6e0-7c88-8c3c-5fe8ee62f754",
+      "labelAr": "كفالة شهر",
+      "labelEn": "One month",
+      "amount": "250.00"
+     },
+     {
+      "id": "01a1eba1-a6e0-7bd8-aced-bbcca6b2c129",
+      "labelAr": "كفالة سنة",
+      "labelEn": "One year",
+      "amount": "3000.00"
+     }
+    ],
+    "coverAltEn": "Preacher sponsorship"
+   },
+   {
+    "id": "01a1eba1-a726-7e9e-bac3-fd1b527d9e4e",
+    "slug": "c-preacher-chad",
+    "titleAr": "كفالة داعية في تشاد",
+    "titleEn": "Sponsor a preacher in Chad",
+    "summaryAr": "كفالة داعية يعلّم العربية والعلوم الشرعية في تشاد.",
+    "summaryEn": "A preacher teaching Arabic and Islamic sciences in Chad.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+    "coverAltAr": "كفالة الدعاة",
+    "badge": "new",
+    "categorySlug": "c-preachers",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "250.00",
+    "options": [
+     {
+      "id": "01a1eba1-a736-77a9-9202-0b24dc0d8a70",
+      "labelAr": "كفالة شهر",
+      "labelEn": "One month",
+      "amount": "250.00"
+     }
+    ],
+    "coverAltEn": "Preacher sponsorship"
+   },
+   {
+    "id": "01a1eba1-a629-7935-8746-59a6406c505c",
+    "slug": "c-preacher-nigeria",
+    "titleAr": "كفالة داعية في نيجيريا لمدة عام",
+    "titleEn": "Sponsor a preacher in Nigeria for a year",
+    "summaryAr": "راتب داعية متفرغ يعلّم الناس دينهم بلغة الهوسا في القرى النائية.",
+    "summaryEn": "A full-time preacher who teaches in Hausa in remote villages.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+    "coverAltAr": "كفالة الدعاة",
+    "badge": "urgent",
+    "categorySlug": "c-preachers",
+    "allowOpenAmount": false,
+    "minAmount": "10.00",
+    "fromAmount": "300.00",
+    "options": [
+     {
+      "id": "01a1eba1-a6a7-70a5-bb95-771dc9ffb17a",
+      "labelAr": "كفالة شهر",
+      "labelEn": "One month",
+      "amount": "300.00"
+     },
+     {
+      "id": "01a1eba1-a6a7-7a79-9b18-ba165967d8a7",
+      "labelAr": "كفالة 3 أشهر",
+      "labelEn": "Three months",
+      "amount": "900.00"
+     },
+     {
+      "id": "01a1eba1-a6a7-721b-83a9-315490181502",
+      "labelAr": "كفالة سنة",
+      "labelEn": "One year",
+      "amount": "3600.00"
+     }
+    ],
+    "coverAltEn": "Preacher sponsorship"
+   },
+   {
+    "id": "01a1eba1-a859-7752-b5e2-70d510cacf0f",
+    "slug": "c-translate-review",
+    "titleAr": "مراجعة الترجمات",
+    "titleEn": "Reviewing translations",
+    "summaryAr": "مراجعة لغوية وشرعية للترجمات قبل طباعتها.",
+    "summaryEn": "Language and content review of translations before printing.",
+    "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a76f7a9aa5051fe1718991d3.webp",
+    "coverAltAr": "الترجمة والطباعة",
+    "badge": null,
+    "categorySlug": "c-translation",
+    "allowOpenAmount": true,
+    "minAmount": "10.00",
+    "fromAmount": null,
+    "options": [],
+    "coverAltEn": "Translation and printing"
+   }
+  ],
+  "total": 22,
+  "page": 1,
+  "pageSize": 100
+ },
+ "/catalog/projects/c-arabic-somali": {
+  "id": "01a1eba1-a8da-72c6-8024-ef87168503a2",
+  "slug": "c-arabic-somali",
+  "status": "published",
+  "titleAr": "تعليم العربية للناطقين بالصومالية",
+  "titleEn": "Arabic lessons for Somali speakers",
+  "summaryAr": "مقعد دراسي في حلقات تعليم العربية للناطقين بالصومالية.",
+  "summaryEn": "A seat in Arabic lessons for Somali speakers.",
+  "bodyAr": "مقعد دراسي في حلقات تعليم العربية للناطقين بالصومالية.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "A seat in Arabic lessons for Somali speakers.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a8827e3aa66d282758474fec.webp",
+  "coverAltAr": "التعليم بلغات أفريقيا",
+  "coverAltEn": "Teaching in African languages",
+  "badge": null,
+  "category": {
+   "id": "01a1eba1-a544-7f5e-ba29-1a067fff388a",
+   "slug": "c-african-langs",
+   "nameAr": "التعليم بلغات أفريقيا",
+   "nameEn": "Teaching in African languages"
+  },
+  "allowOpenAmount": true,
+  "minAmount": "50.00",
+  "options": [
+   {
+    "id": "01a1eba1-a8e6-7216-b392-b2b23f0404e3",
+    "labelAr": "مقعد",
+    "labelEn": "One seat",
+    "amount": "200.00"
+   },
+   {
+    "id": "01a1eba1-a8e6-756b-a335-c0eaee21b478",
+    "labelAr": "5 مقاعد",
+    "labelEn": "Five seats",
+    "amount": "1000.00"
+   }
+  ],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:02.73866+00:00"
+ },
+ "/catalog/projects/c-audio-swahili": {
+  "id": "01a1eba1-a9c6-7030-a645-073a7a8b492d",
+  "slug": "c-audio-swahili",
+  "status": "published",
+  "titleAr": "تسجيل دروس صوتية بالسواحيلية",
+  "titleEn": "Audio lessons in Swahili",
+  "summaryAr": "إنتاج سلسلة دروس صوتية في العقيدة والفقه بالسواحيلية.",
+  "summaryEn": "A series of audio lessons on creed and fiqh in Swahili.",
+  "bodyAr": "إنتاج سلسلة دروس صوتية في العقيدة والفقه بالسواحيلية.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "A series of audio lessons on creed and fiqh in Swahili.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a96e778698441e6b34324ee0.webp",
+  "coverAltAr": "الإنتاج الصوتي والمرئي",
+  "coverAltEn": "Audio and video production",
+  "badge": null,
+  "category": {
+   "id": "01a1eba1-a54d-7667-8efd-855ae6098d8b",
+   "slug": "c-media",
+   "nameAr": "الإنتاج الصوتي والمرئي",
+   "nameEn": "Audio and video production"
+  },
+  "allowOpenAmount": true,
+  "minAmount": "50.00",
+  "options": [
+   {
+    "id": "01a1eba1-a9d6-77ff-868e-85f024f9e84c",
+    "labelAr": "حلقة",
+    "labelEn": "One episode",
+    "amount": "150.00"
+   },
+   {
+    "id": "01a1eba1-a9d6-77c5-a49b-1a3ab471b9f9",
+    "labelAr": "5 حلقات",
+    "labelEn": "Five episodes",
+    "amount": "750.00"
+   }
+  ],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:02.977548+00:00"
+ },
+ "/catalog/projects/c-circle-tanzania": {
+  "id": "01a1eba1-a8fe-70cf-8080-d0ee1c1f90d4",
+  "slug": "c-circle-tanzania",
+  "status": "published",
+  "titleAr": "حلقة تحفيظ في تنزانيا",
+  "titleEn": "Memorisation circle in Tanzania",
+  "summaryAr": "حلقة لتحفيظ القرآن الكريم للأطفال في تنزانيا.",
+  "summaryEn": "A Quran memorisation circle for children in Tanzania.",
+  "bodyAr": "حلقة لتحفيظ القرآن الكريم للأطفال في تنزانيا.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "A Quran memorisation circle for children in Tanzania.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a8827e3aa66d282758474fec.webp",
+  "coverAltAr": "التعليم بلغات أفريقيا",
+  "coverAltEn": "Teaching in African languages",
+  "badge": null,
+  "category": {
+   "id": "01a1eba1-a544-7f5e-ba29-1a067fff388a",
+   "slug": "c-african-langs",
+   "nameAr": "التعليم بلغات أفريقيا",
+   "nameEn": "Teaching in African languages"
+  },
+  "allowOpenAmount": false,
+  "minAmount": "10.00",
+  "options": [
+   {
+    "id": "01a1eba1-a909-7ce9-9b39-b55c6846ce7c",
+    "labelAr": "شهر",
+    "labelEn": "One month",
+    "amount": "400.00"
+   }
+  ],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:02.772359+00:00"
+ },
+ "/catalog/projects/c-classroom-niger": {
+  "id": "01a1eba1-a945-7d06-8963-8da494100a96",
+  "slug": "c-classroom-niger",
+  "status": "published",
+  "titleAr": "تجهيز فصل دراسي في النيجر",
+  "titleEn": "Equip a classroom in Niger",
+  "summaryAr": "مقاعد وسبورة وأدوات لفصل دراسي جديد.",
+  "summaryEn": "Desks, a board and supplies for a new classroom.",
+  "bodyAr": "مقاعد وسبورة وأدوات لفصل دراسي جديد.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "Desks, a board and supplies for a new classroom.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a8827e3aa66d282758474fec.webp",
+  "coverAltAr": "التعليم بلغات أفريقيا",
+  "coverAltEn": "Teaching in African languages",
+  "badge": null,
+  "category": {
+   "id": "01a1eba1-a544-7f5e-ba29-1a067fff388a",
+   "slug": "c-african-langs",
+   "nameAr": "التعليم بلغات أفريقيا",
+   "nameEn": "Teaching in African languages"
+  },
+  "allowOpenAmount": true,
+  "minAmount": "100.00",
+  "options": [
+   {
+    "id": "01a1eba1-a94f-7163-9cb0-9fe8a5c68126",
+    "labelAr": "فصل",
+    "labelEn": "One classroom",
+    "amount": "4500.00"
+   }
+  ],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:02.842866+00:00"
+ },
+ "/catalog/projects/c-general-needs": {
+  "id": "01a1eba1-ac07-728d-b195-8423365a58b3",
+  "slug": "c-general-needs",
+  "status": "published",
+  "titleAr": "حيث الحاجة أشد",
+  "titleEn": "Where the need is greatest",
+  "summaryAr": "يصرف تبرعك على المشروع الأشد حاجة في وقته.",
+  "summaryEn": "Your donation goes to the most urgent need at the time.",
+  "bodyAr": "يصرف تبرعك على المشروع الأشد حاجة في وقته.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "Your donation goes to the most urgent need at the time.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1abaf7d5bb0eeee30b041f24c.webp",
+  "coverAltAr": "الصندوق العام",
+  "coverAltEn": "General fund",
+  "badge": null,
+  "category": {
+   "id": "01a1eba1-a567-7749-96fb-ca820072c714",
+   "slug": "c-general-fund",
+   "nameAr": "الصندوق العام",
+   "nameEn": "General fund"
+  },
+  "allowOpenAmount": true,
+  "minAmount": "10.00",
+  "options": [],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:03.541254+00:00"
+ },
+ "/catalog/projects/c-mosque-build": {
+  "id": "01a1eba1-ab5a-7b61-b46c-2c4569a3531e",
+  "slug": "c-mosque-build",
+  "status": "published",
+  "titleAr": "بناء مسجد صغير",
+  "titleEn": "Build a small mosque",
+  "summaryAr": "مسجد صغير لقرية لا مسجد فيها.",
+  "summaryEn": "A small mosque for a village without one.",
+  "bodyAr": "مسجد صغير لقرية لا مسجد فيها.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "A small mosque for a village without one.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1ab0372e6bb876bd126824d18.webp",
+  "coverAltAr": "المساجد",
+  "coverAltEn": "Mosques",
+  "badge": null,
+  "category": {
+   "id": "01a1eba1-a55e-7450-9499-33f4695c72cb",
+   "slug": "c-mosques",
+   "nameAr": "المساجد",
+   "nameEn": "Mosques"
+  },
+  "allowOpenAmount": true,
+  "minAmount": "10.00",
+  "options": [],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:03.367352+00:00"
+ },
+ "/catalog/projects/c-mosque-carpets": {
+  "id": "01a1eba1-ab74-7cf5-8512-bd5a8a8376d9",
+  "slug": "c-mosque-carpets",
+  "status": "published",
+  "titleAr": "فرش مسجد",
+  "titleEn": "Carpets for a mosque",
+  "summaryAr": "فرش جديد لمسجد في قرية نائية.",
+  "summaryEn": "New carpets for a mosque in a remote village.",
+  "bodyAr": "فرش جديد لمسجد في قرية نائية.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "New carpets for a mosque in a remote village.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1ab0372e6bb876bd126824d18.webp",
+  "coverAltAr": "المساجد",
+  "coverAltEn": "Mosques",
+  "badge": null,
+  "category": {
+   "id": "01a1eba1-a55e-7450-9499-33f4695c72cb",
+   "slug": "c-mosques",
+   "nameAr": "المساجد",
+   "nameEn": "Mosques"
+  },
+  "allowOpenAmount": false,
+  "minAmount": "10.00",
+  "options": [
+   {
+    "id": "01a1eba1-ab80-7d5c-ad17-b9fcc898e771",
+    "labelAr": "متر",
+    "labelEn": "One metre",
+    "amount": "50.00"
+   }
+  ],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:03.403276+00:00"
+ },
+ "/catalog/projects/c-mosque-restore": {
+  "id": "01a1eba1-ab96-7af8-9881-d79894d72edb",
+  "slug": "c-mosque-restore",
+  "status": "published",
+  "titleAr": "ترميم مسجد",
+  "titleEn": "Restore a mosque",
+  "summaryAr": "ترميم السقف والجدران ودورات المياه.",
+  "summaryEn": "Repairing the roof, walls and washrooms.",
+  "bodyAr": "ترميم السقف والجدران ودورات المياه.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "Repairing the roof, walls and washrooms.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1ab0372e6bb876bd126824d18.webp",
+  "coverAltAr": "المساجد",
+  "coverAltEn": "Mosques",
+  "badge": null,
+  "category": {
+   "id": "01a1eba1-a55e-7450-9499-33f4695c72cb",
+   "slug": "c-mosques",
+   "nameAr": "المساجد",
+   "nameEn": "Mosques"
+  },
+  "allowOpenAmount": true,
+  "minAmount": "10.00",
+  "options": [],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:03.425703+00:00"
+ },
+ "/catalog/projects/c-preacher-chad": {
+  "id": "01a1eba1-a726-7e9e-bac3-fd1b527d9e4e",
+  "slug": "c-preacher-chad",
+  "status": "published",
+  "titleAr": "كفالة داعية في تشاد",
+  "titleEn": "Sponsor a preacher in Chad",
+  "summaryAr": "كفالة داعية يعلّم العربية والعلوم الشرعية في تشاد.",
+  "summaryEn": "A preacher teaching Arabic and Islamic sciences in Chad.",
+  "bodyAr": "كفالة داعية يعلّم العربية والعلوم الشرعية في تشاد.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "A preacher teaching Arabic and Islamic sciences in Chad.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+  "coverAltAr": "كفالة الدعاة",
+  "coverAltEn": "Preacher sponsorship",
+  "badge": "new",
+  "category": {
+   "id": "01a1eba1-a529-7054-a485-f157dd7c8ce3",
+   "slug": "c-preachers",
+   "nameAr": "كفالة الدعاة",
+   "nameEn": "Preacher sponsorship"
+  },
+  "allowOpenAmount": false,
+  "minAmount": "10.00",
+  "options": [
+   {
+    "id": "01a1eba1-a736-77a9-9202-0b24dc0d8a70",
+    "labelAr": "كفالة شهر",
+    "labelEn": "One month",
+    "amount": "250.00"
+   }
+  ],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:02.310265+00:00"
+ },
+ "/catalog/projects/c-preacher-nigeria": {
+  "id": "01a1eba1-a629-7935-8746-59a6406c505c",
+  "slug": "c-preacher-nigeria",
+  "status": "published",
+  "titleAr": "كفالة داعية في نيجيريا لمدة عام",
+  "titleEn": "Sponsor a preacher in Nigeria for a year",
+  "summaryAr": "راتب داعية متفرغ يعلّم الناس دينهم بلغة الهوسا في القرى النائية.",
+  "summaryEn": "A full-time preacher who teaches in Hausa in remote villages.",
+  "bodyAr": "راتب داعية متفرغ يعلّم الناس دينهم بلغة الهوسا في القرى النائية.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "A full-time preacher who teaches in Hausa in remote villages.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+  "coverAltAr": "كفالة الدعاة",
+  "coverAltEn": "Preacher sponsorship",
+  "badge": "urgent",
+  "category": {
+   "id": "01a1eba1-a529-7054-a485-f157dd7c8ce3",
+   "slug": "c-preachers",
+   "nameAr": "كفالة الدعاة",
+   "nameEn": "Preacher sponsorship"
+  },
+  "allowOpenAmount": false,
+  "minAmount": "10.00",
+  "options": [
+   {
+    "id": "01a1eba1-a6a7-70a5-bb95-771dc9ffb17a",
+    "labelAr": "كفالة شهر",
+    "labelEn": "One month",
+    "amount": "300.00"
+   },
+   {
+    "id": "01a1eba1-a6a7-7a79-9b18-ba165967d8a7",
+    "labelAr": "كفالة 3 أشهر",
+    "labelEn": "Three months",
+    "amount": "900.00"
+   },
+   {
+    "id": "01a1eba1-a6a7-721b-83a9-315490181502",
+    "labelAr": "كفالة سنة",
+    "labelEn": "One year",
+    "amount": "3600.00"
+   }
+  ],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:02.172996+00:00"
+ },
+ "/catalog/projects/c-preacher-senegal": {
+  "id": "01a1eba1-a6ce-7ea1-9669-986f399b5064",
+  "slug": "c-preacher-senegal",
+  "status": "published",
+  "titleAr": "كفالة داعية في السنغال",
+  "titleEn": "Sponsor a preacher in Senegal",
+  "summaryAr": "داعية يقدّم الدروس بلغة الولوف في المساجد والقرى.",
+  "summaryEn": "A preacher who teaches in Wolof in mosques and villages.",
+  "bodyAr": "داعية يقدّم الدروس بلغة الولوف في المساجد والقرى.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "A preacher who teaches in Wolof in mosques and villages.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+  "coverAltAr": "كفالة الدعاة",
+  "coverAltEn": "Preacher sponsorship",
+  "badge": null,
+  "category": {
+   "id": "01a1eba1-a529-7054-a485-f157dd7c8ce3",
+   "slug": "c-preachers",
+   "nameAr": "كفالة الدعاة",
+   "nameEn": "Preacher sponsorship"
+  },
+  "allowOpenAmount": true,
+  "minAmount": "50.00",
+  "options": [
+   {
+    "id": "01a1eba1-a6e0-7c88-8c3c-5fe8ee62f754",
+    "labelAr": "كفالة شهر",
+    "labelEn": "One month",
+    "amount": "250.00"
+   },
+   {
+    "id": "01a1eba1-a6e0-7bd8-aced-bbcca6b2c129",
+    "labelAr": "كفالة سنة",
+    "labelEn": "One year",
+    "amount": "3000.00"
+   }
+  ],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:02.223833+00:00"
+ },
+ "/catalog/projects/c-preacher-training": {
+  "id": "01a1eba1-a751-7a3d-9791-aba2f62ee75a",
+  "slug": "c-preacher-training",
+  "status": "published",
+  "titleAr": "تأهيل الدعاة الجدد",
+  "titleEn": "Training new preachers",
+  "summaryAr": "برنامج تأهيل للدعاة الجدد في العلوم الشرعية واللغة العربية.",
+  "summaryEn": "A training programme for new preachers in Islamic sciences and Arabic.",
+  "bodyAr": "برنامج تأهيل للدعاة الجدد في العلوم الشرعية واللغة العربية.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "A training programme for new preachers in Islamic sciences and Arabic.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a5a2743ba462a633ce8eb561.webp",
+  "coverAltAr": "كفالة الدعاة",
+  "coverAltEn": "Preacher sponsorship",
+  "badge": null,
+  "category": {
+   "id": "01a1eba1-a529-7054-a485-f157dd7c8ce3",
+   "slug": "c-preachers",
+   "nameAr": "كفالة الدعاة",
+   "nameEn": "Preacher sponsorship"
+  },
+  "allowOpenAmount": true,
+  "minAmount": "10.00",
+  "options": [],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:02.334059+00:00"
+ },
+ "/catalog/projects/c-print-fulani": {
+  "id": "01a1eba1-a82e-709b-8e80-3f3d2141e21a",
+  "slug": "c-print-fulani",
+  "status": "published",
+  "titleAr": "طباعة مطويات بلغة الفولاني",
+  "titleEn": "Leaflets in Fulani",
+  "summaryAr": "مطويات دعوية مطبوعة بلغة الفولاني توزّع في الأسواق.",
+  "summaryEn": "Printed leaflets in Fulani handed out in markets.",
+  "bodyAr": "مطويات دعوية مطبوعة بلغة الفولاني توزّع في الأسواق.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "Printed leaflets in Fulani handed out in markets.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a76f7a9aa5051fe1718991d3.webp",
+  "coverAltAr": "الترجمة والطباعة",
+  "coverAltEn": "Translation and printing",
+  "badge": null,
+  "category": {
+   "id": "01a1eba1-a535-7701-9e8e-097859f02708",
+   "slug": "c-translation",
+   "nameAr": "الترجمة والطباعة",
+   "nameEn": "Translation and printing"
+  },
+  "allowOpenAmount": false,
+  "minAmount": "10.00",
+  "options": [
+   {
+    "id": "01a1eba1-a83b-7524-8a50-a975f61212f6",
+    "labelAr": "100 مطوية",
+    "labelEn": "100 leaflets",
+    "amount": "120.00"
+   }
+  ],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:02.571992+00:00"
+ },
+ "/catalog/projects/c-radio-program": {
+  "id": "01a1eba1-aa0f-7eaa-a09d-4ec031c95fcf",
+  "slug": "c-radio-program",
+  "status": "published",
+  "titleAr": "برنامج إذاعي أسبوعي",
+  "titleEn": "A weekly radio programme",
+  "summaryAr": "برنامج إذاعي يبث الدروس في المناطق الريفية.",
+  "summaryEn": "A radio programme that carries lessons to rural areas.",
+  "bodyAr": "برنامج إذاعي يبث الدروس في المناطق الريفية.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "A radio programme that carries lessons to rural areas.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a96e778698441e6b34324ee0.webp",
+  "coverAltAr": "الإنتاج الصوتي والمرئي",
+  "coverAltEn": "Audio and video production",
+  "badge": null,
+  "category": {
+   "id": "01a1eba1-a54d-7667-8efd-855ae6098d8b",
+   "slug": "c-media",
+   "nameAr": "الإنتاج الصوتي والمرئي",
+   "nameEn": "Audio and video production"
+  },
+  "allowOpenAmount": false,
+  "minAmount": "10.00",
+  "options": [
+   {
+    "id": "01a1eba1-aa1b-7130-8f40-83467b6d1012",
+    "labelAr": "أسبوع",
+    "labelEn": "One week",
+    "amount": "300.00"
+   },
+   {
+    "id": "01a1eba1-aa1b-71e7-9b47-f274c20c7019",
+    "labelAr": "شهر",
+    "labelEn": "One month",
+    "amount": "1200.00"
+   }
+  ],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:03.047481+00:00"
+ },
+ "/catalog/projects/c-teacher-mali": {
+  "id": "01a1eba1-a920-71f0-9fa1-abc39c3fe7a3",
+  "slug": "c-teacher-mali",
+  "status": "published",
+  "titleAr": "راتب معلم في مالي",
+  "titleEn": "A teacher's salary in Mali",
+  "summaryAr": "راتب معلم يدرّس العربية بلغة البمبارا.",
+  "summaryEn": "A teacher who teaches Arabic in Bambara.",
+  "bodyAr": "راتب معلم يدرّس العربية بلغة البمبارا.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "A teacher who teaches Arabic in Bambara.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a8827e3aa66d282758474fec.webp",
+  "coverAltAr": "التعليم بلغات أفريقيا",
+  "coverAltEn": "Teaching in African languages",
+  "badge": "urgent",
+  "category": {
+   "id": "01a1eba1-a544-7f5e-ba29-1a067fff388a",
+   "slug": "c-african-langs",
+   "nameAr": "التعليم بلغات أفريقيا",
+   "nameEn": "Teaching in African languages"
+  },
+  "allowOpenAmount": false,
+  "minAmount": "10.00",
+  "options": [
+   {
+    "id": "01a1eba1-a92b-700d-b546-d33de853703e",
+    "labelAr": "شهر",
+    "labelEn": "One month",
+    "amount": "350.00"
+   },
+   {
+    "id": "01a1eba1-a92b-709a-8ba8-87e5831935b2",
+    "labelAr": "سنة",
+    "labelEn": "One year",
+    "amount": "4200.00"
+   }
+  ],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:02.809422+00:00"
+ },
+ "/catalog/projects/c-translate-hausa": {
+  "id": "01a1eba1-a7d2-79cb-a601-ba4ac17b7de3",
+  "slug": "c-translate-hausa",
+  "status": "published",
+  "titleAr": "ترجمة معاني القرآن بلغة الهوسا",
+  "titleEn": "Quran meanings in Hausa",
+  "summaryAr": "طباعة وتوزيع نسخ مراجعة من ترجمة معاني القرآن الكريم.",
+  "summaryEn": "Printing and handing out reviewed copies of the Quran meanings in Hausa.",
+  "bodyAr": "طباعة وتوزيع نسخ مراجعة من ترجمة معاني القرآن الكريم.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "Printing and handing out reviewed copies of the Quran meanings in Hausa.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a76f7a9aa5051fe1718991d3.webp",
+  "coverAltAr": "الترجمة والطباعة",
+  "coverAltEn": "Translation and printing",
+  "badge": "new",
+  "category": {
+   "id": "01a1eba1-a535-7701-9e8e-097859f02708",
+   "slug": "c-translation",
+   "nameAr": "الترجمة والطباعة",
+   "nameEn": "Translation and printing"
+  },
+  "allowOpenAmount": true,
+  "minAmount": "25.00",
+  "options": [
+   {
+    "id": "01a1eba1-a7e0-741e-8cfe-bac7ac36480e",
+    "labelAr": "نسخة",
+    "labelEn": "One copy",
+    "amount": "25.00"
+   },
+   {
+    "id": "01a1eba1-a7e0-70e1-b88e-a900fea25afc",
+    "labelAr": "10 نسخ",
+    "labelEn": "Ten copies",
+    "amount": "250.00"
+   }
+  ],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:02.480847+00:00"
+ },
+ "/catalog/projects/c-translate-review": {
+  "id": "01a1eba1-a859-7752-b5e2-70d510cacf0f",
+  "slug": "c-translate-review",
+  "status": "published",
+  "titleAr": "مراجعة الترجمات",
+  "titleEn": "Reviewing translations",
+  "summaryAr": "مراجعة لغوية وشرعية للترجمات قبل طباعتها.",
+  "summaryEn": "Language and content review of translations before printing.",
+  "bodyAr": "مراجعة لغوية وشرعية للترجمات قبل طباعتها.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "Language and content review of translations before printing.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a76f7a9aa5051fe1718991d3.webp",
+  "coverAltAr": "الترجمة والطباعة",
+  "coverAltEn": "Translation and printing",
+  "badge": null,
+  "category": {
+   "id": "01a1eba1-a535-7701-9e8e-097859f02708",
+   "slug": "c-translation",
+   "nameAr": "الترجمة والطباعة",
+   "nameEn": "Translation and printing"
+  },
+  "allowOpenAmount": true,
+  "minAmount": "10.00",
+  "options": [],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:02.598739+00:00"
+ },
+ "/catalog/projects/c-translate-swahili": {
+  "id": "01a1eba1-a7ff-773c-9a1c-4a2f7eedfd80",
+  "slug": "c-translate-swahili",
+  "status": "published",
+  "titleAr": "ترجمة رسائل العقيدة بالسواحيلية",
+  "titleEn": "Creed epistles in Swahili",
+  "summaryAr": "ترجمة رسائل مختصرة في العقيدة إلى اللغة السواحيلية.",
+  "summaryEn": "Short epistles on creed translated into Swahili.",
+  "bodyAr": "ترجمة رسائل مختصرة في العقيدة إلى اللغة السواحيلية.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "Short epistles on creed translated into Swahili.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a76f7a9aa5051fe1718991d3.webp",
+  "coverAltAr": "الترجمة والطباعة",
+  "coverAltEn": "Translation and printing",
+  "badge": null,
+  "category": {
+   "id": "01a1eba1-a535-7701-9e8e-097859f02708",
+   "slug": "c-translation",
+   "nameAr": "الترجمة والطباعة",
+   "nameEn": "Translation and printing"
+  },
+  "allowOpenAmount": true,
+  "minAmount": "15.00",
+  "options": [
+   {
+    "id": "01a1eba1-a812-7716-8af2-b9303fc49dcf",
+    "labelAr": "رسالة",
+    "labelEn": "One epistle",
+    "amount": "15.00"
+   }
+  ],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:02.529763+00:00"
+ },
+ "/catalog/projects/c-video-hausa": {
+  "id": "01a1eba1-a9eb-7918-ae99-26535fe0fd8b",
+  "slug": "c-video-hausa",
+  "status": "published",
+  "titleAr": "إنتاج مقاطع مرئية بالهوسا",
+  "titleEn": "Short videos in Hausa",
+  "summaryAr": "مقاطع مرئية قصيرة تشرح أركان الإسلام بلغة الهوسا.",
+  "summaryEn": "Short videos explaining the pillars of Islam in Hausa.",
+  "bodyAr": "مقاطع مرئية قصيرة تشرح أركان الإسلام بلغة الهوسا.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "Short videos explaining the pillars of Islam in Hausa.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1a96e778698441e6b34324ee0.webp",
+  "coverAltAr": "الإنتاج الصوتي والمرئي",
+  "coverAltEn": "Audio and video production",
+  "badge": null,
+  "category": {
+   "id": "01a1eba1-a54d-7667-8efd-855ae6098d8b",
+   "slug": "c-media",
+   "nameAr": "الإنتاج الصوتي والمرئي",
+   "nameEn": "Audio and video production"
+  },
+  "allowOpenAmount": false,
+  "minAmount": "10.00",
+  "options": [
+   {
+    "id": "01a1eba1-a9f7-7d7b-b203-1b407a064522",
+    "labelAr": "مقطع",
+    "labelEn": "One video",
+    "amount": "500.00"
+   }
+  ],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:03.010109+00:00"
+ },
+ "/catalog/projects/c-water-cooler": {
+  "id": "01a1eba1-aad9-780c-b41d-5bfc40b330a9",
+  "slug": "c-water-cooler",
+  "status": "published",
+  "titleAr": "برادة مياه لمسجد",
+  "titleEn": "Water cooler for a mosque",
+  "summaryAr": "ماء بارد للمصلين طوال العام.",
+  "summaryEn": "Cold water for worshippers all year.",
+  "bodyAr": "ماء بارد للمصلين طوال العام.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "Cold water for worshippers all year.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1aa39741abb2e062b1bb5fdb4.webp",
+  "coverAltAr": "سقيا الماء",
+  "coverAltEn": "Water",
+  "badge": null,
+  "category": {
+   "id": "01a1eba1-a556-78ef-ba7e-166a86d8c888",
+   "slug": "c-water",
+   "nameAr": "سقيا الماء",
+   "nameEn": "Water"
+  },
+  "allowOpenAmount": false,
+  "minAmount": "10.00",
+  "options": [
+   {
+    "id": "01a1eba1-aae5-75c3-bc2c-839d2165bda6",
+    "labelAr": "برادة",
+    "labelEn": "One cooler",
+    "amount": "2500.00"
+   }
+  ],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:03.248728+00:00"
+ },
+ "/catalog/projects/c-well-deep": {
+  "id": "01a1eba1-aab6-7c5d-b13e-54d818be5ab0",
+  "slug": "c-well-deep",
+  "status": "published",
+  "titleAr": "حفر بئر ارتوازية",
+  "titleEn": "Dig a deep well",
+  "summaryAr": "بئر ارتوازية بمضخة تخدم أكثر من قرية.",
+  "summaryEn": "A deep well with a pump that serves several villages.",
+  "bodyAr": "بئر ارتوازية بمضخة تخدم أكثر من قرية.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "A deep well with a pump that serves several villages.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1aa39741abb2e062b1bb5fdb4.webp",
+  "coverAltAr": "سقيا الماء",
+  "coverAltEn": "Water",
+  "badge": null,
+  "category": {
+   "id": "01a1eba1-a556-78ef-ba7e-166a86d8c888",
+   "slug": "c-water",
+   "nameAr": "سقيا الماء",
+   "nameEn": "Water"
+  },
+  "allowOpenAmount": true,
+  "minAmount": "100.00",
+  "options": [
+   {
+    "id": "01a1eba1-aac1-72f8-bee2-4154b7ad80a2",
+    "labelAr": "بئر",
+    "labelEn": "One well",
+    "amount": "18000.00"
+   }
+  ],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:03.213643+00:00"
+ },
+ "/catalog/projects/c-well-shallow": {
+  "id": "01a1eba1-aa91-75b8-b8bc-f2e747ea3f83",
+  "slug": "c-well-shallow",
+  "status": "published",
+  "titleAr": "حفر بئر سطحية",
+  "titleEn": "Dig a shallow well",
+  "summaryAr": "بئر تروي قرية صغيرة لسنوات.",
+  "summaryEn": "A well that serves a small village for years.",
+  "bodyAr": "بئر تروي قرية صغيرة لسنوات.\n\nكل تبرع يصل إلى مستحقيه بإيصال رسمي.",
+  "bodyEn": "A well that serves a small village for years.\n\nEvery donation reaches the people it is for, with an official receipt.",
+  "coverUrl": "http://localhost:5080/files/public/images/2026/01a1eba1aa39741abb2e062b1bb5fdb4.webp",
+  "coverAltAr": "سقيا الماء",
+  "coverAltEn": "Water",
+  "badge": null,
+  "category": {
+   "id": "01a1eba1-a556-78ef-ba7e-166a86d8c888",
+   "slug": "c-water",
+   "nameAr": "سقيا الماء",
+   "nameEn": "Water"
+  },
+  "allowOpenAmount": true,
+  "minAmount": "50.00",
+  "options": [
+   {
+    "id": "01a1eba1-aa9d-7c4b-9f9a-8ff4bac30af1",
+    "labelAr": "بئر",
+    "labelEn": "One well",
+    "amount": "6000.00"
+   }
+  ],
+  "seoTitleAr": null,
+  "seoTitleEn": null,
+  "seoDescAr": null,
+  "seoDescEn": null,
+  "publishedAt": "2026-11-17T22:30:03.178305+00:00"
+ }
+}

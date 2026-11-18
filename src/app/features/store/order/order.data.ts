@@ -1,0 +1,287 @@
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { HttpClient, HttpErrorResponse, HttpParams, httpResource } from '@angular/common/http';
+import {
+  Injectable,
+  PLATFORM_ID,
+  computed,
+  effect,
+  inject,
+  signal,
+  untracked,
+} from '@angular/core';
+import { firstValueFrom } from 'rxjs';
+import type { OrderStatus, PayOrderResponse } from '../../../core/api/api.types';
+import { type StoreProblem, toProblem } from '../../../core/api/problem';
+import { STORE_API_URL } from '../../../core/api/store-api-url';
+import { StoreAuth } from '../../../core/auth/store-auth';
+import { valueOf } from '../../../core/http/resource-value';
+
+/**
+ * Order states after which polling stops. `payment_review` is not final (review 04 S-8): finance accepts or refunds it,
+ * so the page keeps asking — slowly, every {@link REVIEW_MS}.
+ */
+export const TERMINAL = new Set(['paid', 'cancelled', 'expired', 'refunded']);
+
+/**
+ * What the order page shows (plan §6 F5): paid, pending (the gateway has not answered yet — keep polling), retry (the
+ * attempt failed or no page was opened: "pay again"), expired, review, refunded, cancelled.
+ */
+export type OrderPhase =
+  'paid' | 'pending' | 'retry' | 'expired' | 'review' | 'refunded' | 'cancelled';
+
+export function orderPhase(
+  o: Pick<OrderStatus, 'status' | 'canRetryPayment' | 'paymentStatus'>,
+): OrderPhase {
+  switch (o.status) {
+    case 'paid':
+      return 'paid';
+    case 'payment_review':
+      return 'review';
+    case 'expired':
+      return 'expired';
+    case 'refunded':
+      return 'refunded';
+    case 'cancelled':
+      return 'cancelled';
+    default:
+      // Review 04 S-6: no attempt at all (the gateway was down at checkout) → "pay again", not an endless "checking".
+      return o.canRetryPayment || (o.status === 'pending_payment' && o.paymentStatus == null)
+        ? 'retry'
+        : 'pending';
+  }
+}
+export const FAST_MS = 2_000;
+export const FAST_FOR_MS = 60_000;
+export const SLOW_MS = 10_000;
+export const GIVE_UP_MS = 10 * 60_000;
+/** Review 04 S-8: an order in payment review is asked about once a minute, with no time limit. */
+export const REVIEW_MS = 60_000;
+
+/**
+ * Polling cadence (payments on only): every 2 s for 60 s, then every 10 s; null once 10 minutes have passed. In
+ * payment review: every 60 s until a final state.
+ */
+export function pollDelay(elapsedMs: number, phase: OrderPhase | null = null): number | null {
+  if (phase === 'review') return REVIEW_MS;
+  if (elapsedMs >= GIVE_UP_MS) return null;
+  return elapsedMs < FAST_FOR_MS ? FAST_MS : SLOW_MS;
+}
+
+/** References are shown and linked in their canonical upper case (the API matches them in any case). */
+export const normalizeRef = (ref: string): string => ref.trim().toUpperCase();
+
+const TOKEN_KEY = (ref: string) => `t3s-order-t:${ref}`;
+
+/**
+ * E-2: the status token of an order (`?t=` from the checkout or the SMS/e-mail link) is kept in memory and in
+ * sessionStorage (per reference, this tab only) and removed from the address bar, so it never reaches a referrer, the
+ * history or a shared link. It is not a credential for anything but this order's status.
+ */
+export class OrderTokens {
+  private readonly memory = new Map<string, string>();
+
+  constructor(private readonly storage: Pick<Storage, 'getItem' | 'setItem'> | null) {}
+
+  remember(ref: string, token: string): void {
+    this.memory.set(ref, token);
+    try {
+      this.storage?.setItem(TOKEN_KEY(ref), token);
+    } catch {
+      /* private mode: memory only */
+    }
+  }
+
+  get(ref: string): string | null {
+    const m = this.memory.get(ref);
+    if (m) return m;
+    try {
+      return this.storage?.getItem(TOKEN_KEY(ref)) ?? null;
+    } catch {
+      return null;
+    }
+  }
+}
+
+/** One per app: the checkout remembers the token, the order page reads it. */
+@Injectable({ providedIn: 'root' })
+export class OrderTokenStore extends OrderTokens {
+  constructor() {
+    const doc = inject(DOCUMENT);
+    super(
+      isPlatformBrowser(inject(PLATFORM_ID)) ? (doc.defaultView?.sessionStorage ?? null) : null,
+    );
+  }
+}
+
+/**
+ * R3-2: the status request sends the donor's bearer when signed in (the interceptor adds it) AND the token when known.
+ * Without either there is no request — the page asks the donor to sign in.
+ */
+export function statusRequest(
+  api: string,
+  ref: string,
+  signedIn: boolean,
+  token: string | null,
+): { url: string; params?: { t: string } } | undefined {
+  if (!ref) return undefined;
+  const url = `${api}/orders/${encodeURIComponent(ref)}/status`;
+  if (!signedIn && !token) return undefined;
+  return token ? { url, params: { t: token } } : { url };
+}
+
+export type OrderView = 'loading' | 'ready' | 'signIn' | 'notFound' | 'error';
+
+/**
+ * The order page data (`GET /v1/orders/{reference}/status`): it polls until a terminal state or 10 minutes, and stops
+ * at once on any 4xx (W-4). (Showcase mode never reaches this page: the route goes home.)
+ */
+@Injectable()
+export class OrderData {
+  private readonly api = inject(STORE_API_URL);
+  private readonly http = inject(HttpClient);
+  private readonly auth = inject(StoreAuth);
+  private readonly tokens = inject(OrderTokenStore);
+  private readonly browser = isPlatformBrowser(inject(PLATFORM_ID));
+  readonly ref = signal('');
+  readonly token = signal<string | null>(null);
+  readonly gaveUp = signal(false);
+  private startedAt = Date.now();
+
+  readonly status = httpResource<OrderStatus>(() =>
+    this.browser
+      ? statusRequest(this.api, this.ref(), this.auth.isSignedIn(), this.token())
+      : undefined,
+  );
+  readonly value = computed(() => valueOf(this.status));
+  readonly state = computed(() => this.value()?.status ?? null);
+  readonly isTerminal = computed(() => TERMINAL.has(this.state() ?? ''));
+  readonly phase = computed<OrderPhase | null>(() => {
+    const v = this.value();
+    return v ? orderPhase(v) : null;
+  });
+  /** W-1 for `/pay`: one Idempotency-Key per "pay again" press, kept across its retries until a definite answer. */
+  private payKey: string | null = null;
+  private readonly errorStatus = computed(() => {
+    const e = this.status.error();
+    return e instanceof HttpErrorResponse ? e.status : e ? 0 : null;
+  });
+  /** W-4: any 4xx is final — the answer will not change by asking again. */
+  readonly clientError = computed(() => {
+    const s = this.errorStatus();
+    return s !== null && s >= 400 && s < 500;
+  });
+
+  readonly view = computed<OrderView>(() => {
+    if (this.value()) return 'ready';
+    const signedIn = this.auth.isSignedIn();
+    if (!signedIn && !this.token()) return 'signIn';
+    const s = this.errorStatus();
+    // R3-2: a 404 (or 401) for a signed-out visitor means "sign in to view", not "no such donation".
+    if (s === 404 || s === 401) return signedIn ? 'notFound' : 'signIn';
+    if (s !== null) return 'error';
+    return 'loading';
+  });
+
+  constructor() {
+    effect((onCleanup) => {
+      if (
+        !this.browser ||
+        !this.ref() ||
+        this.status.isLoading() ||
+        this.isTerminal() ||
+        this.phase() === 'retry' ||
+        this.clientError() ||
+        this.gaveUp()
+      )
+        return;
+      const delay = pollDelay(Date.now() - this.startedAt, this.phase());
+      if (delay === null) {
+        untracked(() => this.gaveUp.set(true));
+        return;
+      }
+      const id = setTimeout(() => this.status.reload(), delay);
+      onCleanup(() => clearTimeout(id));
+    });
+  }
+
+  /** Opens an order: the reference in canonical upper case, the token from the URL (then remembered) or from earlier. */
+  open(ref: string, urlToken: string | null): void {
+    const r = normalizeRef(ref);
+    if (urlToken) this.tokens.remember(r, urlToken);
+    this.token.set(urlToken || this.tokens.get(r));
+    this.startedAt = Date.now();
+    this.ref.set(r);
+  }
+
+  /**
+   * "Pay again" (`POST /v1/orders/{ref}/pay`, with the status token when known): a new attempt on the gateway's page.
+   * The key is kept until the API answers definitely (2xx or a 4xx), so a network retry never opens two attempts.
+   */
+  async payAgain(): Promise<
+    { kind: 'redirect'; url: string } | { kind: 'problem'; problem: StoreProblem }
+  > {
+    const ref = this.ref();
+    const token = this.token();
+    this.payKey ??= crypto.randomUUID();
+    try {
+      const res = await firstValueFrom(
+        this.http.post<PayOrderResponse>(
+          `${this.api}/orders/${encodeURIComponent(ref)}/pay`,
+          {},
+          {
+            headers: { 'Idempotency-Key': this.payKey },
+            params: token ? new HttpParams().set('t', token) : undefined,
+          },
+        ),
+      );
+      this.payKey = null;
+      return { kind: 'redirect', url: res.payment.redirectUrl };
+    } catch (e) {
+      const problem = toProblem(e);
+      if (
+        problem.status >= 400 &&
+        problem.status < 500 &&
+        problem.code !== 'idempotency.in_progress'
+      )
+        this.payKey = null;
+      this.status.reload();
+      return { kind: 'problem', problem };
+    }
+  }
+
+  /**
+   * The receipt PDF (DR, or the DRC with `kind = 'drc'`): with the status token, or the signed-in donor's route.
+   * Fetched as a blob (the bearer/credentials only go to the store API) and saved by the page.
+   */
+  async receipt(
+    kind: 'dr' | 'drc' = 'dr',
+  ): Promise<{ blob: Blob; fileName: string } | StoreProblem> {
+    const ref = encodeURIComponent(this.ref());
+    const token = this.token();
+    let params = new HttpParams();
+    if (kind === 'drc') params = params.set('kind', 'drc');
+    if (token) params = params.set('t', token);
+    const url =
+      token || !this.auth.isSignedIn()
+        ? `${this.api}/orders/${ref}/receipt`
+        : `${this.api}/me/donations/${ref}/receipt`;
+    try {
+      const res = await firstValueFrom(
+        this.http.get(url, { params, responseType: 'blob', observe: 'response' }),
+      );
+      const name =
+        /filename="?([^";]+)"?/.exec(res.headers.get('Content-Disposition') ?? '')?.[1] ??
+        `${this.ref()}.pdf`;
+      return { blob: res.body!, fileName: name };
+    } catch (e) {
+      return toProblem(e);
+    }
+  }
+
+  /** "Check again" after the polling stopped: a new 10-minute window. */
+  checkAgain(): void {
+    this.startedAt = Date.now();
+    this.gaveUp.set(false);
+    this.status.reload();
+  }
+}

@@ -1,0 +1,219 @@
+<ta-category-tabs [categories]="data.categoryList()" [active]="query().category" />
+
+<div class="wrap">
+  @if (!hasBanner()) {
+    <h1 class="visually-hidden" i18n="@@store.home.h1-hidden">متجر التبرعات</h1>
+  }
+
+  @if (hasBanner() || showQuick()) {
+    <section class="top" [class.solo]="!hasBanner()">
+      @if (hasBanner()) {
+        <ta-home-banner [featured]="data.featured()" [categories]="data.categoryList()" />
+      }
+      @if (showQuick()) {
+        <aside class="qcard" aria-labelledby="qc-h">
+          <div class="qc-head">
+            <span class="qc-ic" aria-hidden="true"><ta-icon name="gift" [size]="22" /></span>
+            <div>
+              <h2 id="qc-h" class="qc-h" i18n="@@store.home.quick-title-da">تبرع سريع</h2>
+              <p class="qc-sub" i18n="@@store.home.quick-sub">يُصرف حيث الحاجة أشد</p>
+            </div>
+          </div>
+          <!-- Hydrated with the page: a click on a preset of a deferred form was not replayed (Angular event replay). -->
+          <ta-quick-donate-form [list]="data.giftCategories()" variant="inline" idPrefix="qi" />
+        </aside>
+      }
+    </section>
+  }
+
+  @if (showcase) {
+    <!-- Showcase mode (SW-2): the «قريبًا» banner under the hero. -->
+    <ta-showcase-note class="sc-banner" variant="banner" />
+  }
+
+  <section
+    id="projects"
+    class="list"
+    aria-labelledby="list-h"
+    (focusin)="fieldFocused($event, gridTouched)"
+  >
+    <div class="fbar" #fbar>
+      <div class="fhead">
+        <h2 id="list-h" class="count" tabindex="-1">
+          @if (activeCategory(); as c) {
+            <span class="cname">{{ categoryName(c) }}</span>
+          } @else {
+            <span class="cname" i18n="@@store.home.tab-all">كل المشاريع</span>
+          }
+          <span class="n">{{ countText() }}</span>
+        </h2>
+        @if (query().q) {
+          <p class="for">
+            <span i18n="@@store.listing.results-for">
+              نتائج البحث عن «<bdi>{{ query().q }}</bdi
+              >»
+            </span>
+            <a
+              class="clear"
+              routerLink="/"
+              [queryParams]="{ q: null, page: null }"
+              queryParamsHandling="merge"
+              i18n="@@store.home.clear-search"
+              >مسح البحث</a
+            >
+          </p>
+        }
+      </div>
+      <div class="sort">
+        <label for="sort" i18n="@@store.home.sort-label">ترتيب</label>
+        <select id="sort" (change)="onSort($any($event.target).value)">
+          @for (s of sorts; track s) {
+            <option [value]="s" [selected]="s === query().sort">{{ sortLabel(s) }}</option>
+          }
+        </select>
+      </div>
+    </div>
+    <p class="visually-hidden" aria-live="polite">{{ announce() }}</p>
+    @if (data.stale()) {
+      <p class="stale" role="status">
+        <span i18n="@@store.home.stale">تعذّر تحديث البيانات — قد لا تكون المعروضة هي الأحدث.</span>
+        <button type="button" class="retry" (click)="retryAll()" i18n="@@store.ui.retry">
+          إعادة المحاولة
+        </button>
+      </p>
+    }
+
+    @if (unknownCategory()) {
+      <div class="empty">
+        <h3 i18n="@@store.home.category-unavailable">هذا التصنيف غير متاح</h3>
+        <a
+          class="reset"
+          routerLink="/"
+          [queryParams]="{ category: null, page: null }"
+          queryParamsHandling="merge"
+          i18n="@@store.listing.show-all"
+          >عرض كل المشاريع</a
+        >
+      </div>
+    } @else if (data.listing.isLoading() && !data.hasListing()) {
+      <ul class="grid" aria-hidden="true">
+        @for (n of skeletons; track n) {
+          <li class="skel-card">
+            <div class="skel sk-media"></div>
+            <div class="skel sk-line"></div>
+            <div class="skel sk-line short"></div>
+          </li>
+        }
+      </ul>
+      <p class="visually-hidden" role="status" i18n="@@store.ui.loading">جارٍ التحميل…</p>
+    } @else {
+      <ta-resource-state
+        [loading]="false"
+        [error]="!!data.listing.error() && !data.hasListing()"
+        (retry)="data.listing.reload()"
+      >
+        @if (data.items().length > 0) {
+          @defer (on immediate; hydrate on interaction; hydrate when hydrateGrid()) {
+            <ul class="grid">
+              @for (p of data.items(); track p.id) {
+                <li>
+                  <ta-project-card [project]="p" [categoryName]="cardCategory(p.categorySlug)" />
+                </li>
+              }
+            </ul>
+          }
+          <!-- The pager hydrates with the page: keyboard activation of a not-yet-hydrated link could be lost. -->
+          @if (data.pages() > 1) {
+            <nav
+              class="pager"
+              aria-label="ترقيم الصفحات"
+              i18n-aria-label="@@store.ui.data-table-pager-label"
+            >
+              @if (query().page > 1) {
+                <a
+                  class="pg step"
+                  routerLink="/"
+                  [queryParams]="{ page: query().page === 2 ? null : query().page - 1 }"
+                  queryParamsHandling="merge"
+                  i18n="@@store.home.page-prev"
+                  >السابق</a
+                >
+              }
+              @for (n of pageNumbers(); track $index) {
+                @if (n === null) {
+                  <span class="gap" aria-hidden="true">…</span>
+                } @else if (n === query().page) {
+                  <a
+                    class="pg"
+                    aria-current="page"
+                    routerLink="/"
+                    [queryParams]="{ page: n === 1 ? null : n }"
+                    queryParamsHandling="merge"
+                    [attr.aria-label]="pageLabel(n)"
+                    >{{ n }}</a
+                  >
+                } @else {
+                  <a
+                    class="pg"
+                    routerLink="/"
+                    [queryParams]="{ page: n === 1 ? null : n }"
+                    queryParamsHandling="merge"
+                    [attr.aria-label]="pageLabel(n)"
+                    >{{ n }}</a
+                  >
+                }
+              }
+              @if (query().page < data.pages()) {
+                <a
+                  class="pg step"
+                  routerLink="/"
+                  [queryParams]="{ page: query().page + 1 }"
+                  queryParamsHandling="merge"
+                  i18n="@@store.home.page-next"
+                  >التالي</a
+                >
+              }
+            </nav>
+          }
+        } @else if (data.hasListing()) {
+          <div class="empty">
+            @if (query().q) {
+              <h3 i18n="@@store.listing.empty-title">لا توجد مشاريع مطابقة</h3>
+              <p>
+                <span i18n="@@store.home.no-results"
+                  >لا نتائج للبحث عن «<bdi>{{ query().q }}</bdi
+                  >».</span
+                >
+              </p>
+              <a
+                class="reset"
+                routerLink="/"
+                [queryParams]="{ q: null, page: null }"
+                queryParamsHandling="merge"
+                i18n="@@store.home.clear-search"
+                >مسح البحث</a
+              >
+            } @else if (query().category) {
+              <h3 i18n="@@store.home.category-empty">لا توجد مشاريع في هذا التصنيف حاليًا</h3>
+              <a
+                class="reset"
+                routerLink="/"
+                [queryParams]="{ category: null, page: null }"
+                queryParamsHandling="merge"
+                i18n="@@store.listing.show-all"
+                >عرض كل المشاريع</a
+              >
+            } @else {
+              <h3 i18n="@@store.listing.empty-title">لا توجد مشاريع مطابقة</h3>
+              <p i18n="@@store.listing.empty-none">لا توجد مشاريع منشورة الآن. عُد قريبًا.</p>
+            }
+          </div>
+        }
+      </ta-resource-state>
+    }
+  </section>
+</div>
+
+@defer (hydrate on viewport; hydrate on interaction) {
+  <ta-trust-row />
+}

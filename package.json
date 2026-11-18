@@ -1,0 +1,88 @@
+{
+  "name": "ta3lom-store-web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.15.0"
+  },
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "start:en": "ng serve --configuration en --port 4201",
+    "prebuild": "DEPLOY_ENV=local node scripts/routes.mjs",
+    "build": "export DEPLOY_ENV=local && ng build --configuration production,local && npm run postbuild:checks",
+    "build:ci": "export DEPLOY_ENV=ci && node scripts/routes.mjs && ng build --configuration production,ci && npm run postbuild:checks",
+    "build:ci-showcase": "export DEPLOY_ENV=ci-showcase && node scripts/routes.mjs && ng build --configuration production,ci-showcase && npm run postbuild:checks",
+    "build:fullstack": "export DEPLOY_ENV=fullstack && node scripts/routes.mjs && ng build --configuration production,fullstack && npm run postbuild:checks",
+    "build:staging": "export DEPLOY_ENV=staging && node scripts/routes.mjs && ng build --configuration production,staging && npm run postbuild:checks",
+    "build:prod": "export DEPLOY_ENV=production && node scripts/routes.mjs && ng build --configuration production && npm run postbuild:checks",
+    "postbuild:checks": "node scripts/postbuild.mjs && node scripts/gen-csp.mjs && node scripts/check-deploy-output.mjs && node scripts/check-csp.mjs && node scripts/check-bundle-budget.mjs",
+    "watch": "ng build --watch --configuration development",
+    "typecheck": "tsc -p tsconfig.app.json --noEmit && tsc -p tsconfig.spec.json --noEmit",
+    "lint": "eslint . && stylelint \"src/**/*.css\" && node scripts/contrast-check.mjs && node scripts/check-no-commerce.mjs && node scripts/i18n-merge.mjs --check",
+    "format": "prettier --write \"src/**/*.{ts,html,css}\"",
+    "test": "ng test --watch=false && npm run test:scripts",
+    "test:scripts": "node --test 'scripts/tests/*.test.mjs'",
+    "e2e": "playwright test",
+    "a11y": "node scripts/a11y.mjs && A11Y_THEME=dark node scripts/a11y.mjs",
+    "i18n:extract": "ng extract-i18n --output-path src/locales --format xlf && node scripts/i18n-merge.mjs",
+    "types:gen": "openapi-typescript docs/openapi/store-api.v1.json -o src/app/core/api/store-api.types.ts",
+    "types:check": "node scripts/types-check.mjs",
+    "stub-api": "node scripts/stub-api.mjs",
+    "api:up": "bash scripts/api-up.sh",
+    "api:seed": "bash scripts/api-seed-e2e.sh",
+    "lhci": "lhci autorun && node scripts/lhci-targets.mjs",
+    "screenshots": "playwright test --config scripts/playwright.screenshots.config.ts",
+    "api:openapi": "node scripts/api-openapi.mjs && npm run types:gen",
+    "stub-capture": "node scripts/stub-capture.mjs",
+    "screenshots:home-c": "playwright test --config scripts/playwright.screenshots.config.ts screenshots-home-c",
+    "screenshots:showcase": "playwright test --config scripts/playwright.screenshots.config.ts screenshots-showcase",
+    "audit:prod": "node scripts/check-audit.mjs",
+    "screenshots:admin": "playwright test --config e2e/screenshots/admin.config.ts"
+  },
+  "dependencies": {
+    "@angular/aria": "^22.2.7",
+    "@angular/common": "^22.2.6",
+    "@angular/compiler": "^22.2.6",
+    "@angular/core": "^22.2.6",
+    "@angular/forms": "^22.2.6",
+    "@angular/localize": "^22.2.6",
+    "@angular/platform-browser": "^22.2.6",
+    "@angular/platform-server": "^22.2.6",
+    "@angular/router": "^22.2.6",
+    "@angular/ssr": "^22.2.7",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.9.1"
+  },
+  "devDependencies": {
+    "@angular/build": "^22.2.7",
+    "@angular/cli": "^22.2.7",
+    "@angular/compiler-cli": "^22.2.0",
+    "@axe-core/playwright": "^4.14.0",
+    "@eslint/js": "^10.0.1",
+    "@lhci/cli": "^0.16.1",
+    "@playwright/test": "^1.65.0",
+    "@types/node": "^26.6.6",
+    "angular-eslint": "22.6.0",
+    "axe-core": "^4.13.0",
+    "eslint": "^10.14.0",
+    "eslint-plugin-boundaries": "^7.4.3",
+    "jsdom": "^31.0.1",
+    "openapi-typescript": "^7.9.0",
+    "prettier": "^3.10.1",
+    "stylelint": "^18.0.0",
+    "stylelint-config-standard": "^41.0.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "8.72.2",
+    "vitest": "^5.1.0"
+  },
+  "overrides": {
+    "openapi-typescript": {
+      "typescript": "$typescript"
+    },
+    "@angular/forms": {
+      "zod": "^4.6.6"
+    }
+  }
+}

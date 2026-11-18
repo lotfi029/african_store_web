@@ -46,14 +46,14 @@ talks to the same `ta3lom_store_api` `/v1` endpoints, and is restyled to `docs/d
 | `api:up` → `api:seed` | ✓ Development seed retired (6 projects archived, 3 categories deactivated). Seeded 22 published projects in 8 active categories, plus 4 staff roles |
 | `types:check` · `typecheck` · `lint` | ✓ Lint covers ESLint, Stylelint, contrast (168), no-commerce and i18n |
 | `test` | ✓ **419** unit tests (71 files) + **16** script tests |
-| `build` | ✓ 46 prerendered routes. Initial JS gzip: **ar 138.1 kB**, **en 136.4 kB** (budget 150). Initial transfer: **145.1 / 143.4 kB** (budget 400). Generated CSP, hash-only |
+| `build` | ✓ 46 prerendered routes. Initial JS gzip: **ar 137.5 kB**, **en 135.8 kB** (budget 150; after W-00.11). Initial transfer: **144.5 / 142.8 kB** (budget 400). Generated CSP, hash-only |
 | `e2e` (full, real API) | ✓ **117 passed**, 19 skipped (stub-only cases and the `@showcase` set, which runs on its own build) |
 | `e2e @smoke` (stub, as in CI) | ✓ 67/69. The 2 misses were the retired slug; they were fixed and then passed in the real-API run |
 | `e2e @showcase` (`build:ci-showcase`) | ✓ 17/17 |
 | `a11y` (axe) | ✓ **58 routes × light + dark**, 0 violations (real-API build). On the stub build: 70 routes × 2, 0 violations |
 | `build:prod` | ✓ Production configuration, with the prerender reading the local API (a dry run, never published). CSP and budgets green |
 | Container | ✓ `docker build CONFIG=ci`. `check-container` checks headers, CSP, fallbacks, 404s, cache, healthz, non-root and the label. Edge aliases ✓. `caddy validate` ✓ |
-| LHCI (mobile, median of 3) | First PR CI run: TBT `/ar/` 279 ms and `/ar/p` 250.5 ms over the 250 floor (`/en/` passed); everything else green. Root cause and fix: W-00.11 (the bottom nav renders on idle; −80 ms TBT at 4× CPU in a same-session A/B). Local runs on this slower machine: perf 93–94, a11y 100, BP 96, SEO 100, LCP 889–973 ms, CLS ≤ 0.012; local TBT stays over 250 for W-00 and for ta3lom's own image alike, so the PR's CI run decides (REVIEW until green) |
+| LHCI (mobile, median of 3) | ✗ **TBT over the 250 floor; every other category passes** (perf 93–95, a11y 100, BP 96, SEO 100, LCP < 1 s, CLS ≤ 0.012). CI TBT medians: run 1 `/ar/` 279, `/ar/p` 250.5 (`/en/*` ✓); run 2 (W-00.11, slow runner) 378.5 / 334 / 354 / 338; run 3 (same code, slow runner) `/ar/` 312, `/en/` ✓, `/ar/p` 276.5, `/en/p` 298.5. Budget not raised; owner decision requested (REVIEW 8) |
 | Fonts | /ar/ downloads 76.5 kB of fonts and /en/ 58.9 kB. The budget is 69.0 kB, so /ar/ is 7.5 kB over (REVIEW) |
 
 ## Screenshots

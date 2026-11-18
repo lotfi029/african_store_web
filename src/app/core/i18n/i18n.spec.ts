@@ -1,7 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { LOCALE_ID } from '@angular/core';
-import { I18nService, pick } from './i18n';
+import { I18nService, pick, pluralCategory } from './i18n';
 import { normalizeSaudiMobile, toE164, westernDigits } from './western-digits';
+
+describe('pluralCategory() (W-01, no Intl on the first render)', () => {
+  it('matches Intl.PluralRules for whole counts in ar and en', () => {
+    for (const locale of ['ar', 'en'] as const) {
+      const rules = new Intl.PluralRules(locale);
+      for (let n = 0; n <= 2000; n++) expect(pluralCategory(n, locale), `${locale} ${n}`).toBe(rules.select(n));
+    }
+  });
+});
 
 describe('pick()', () => {
   it('falls back to Arabic when English is null or blank', () => {

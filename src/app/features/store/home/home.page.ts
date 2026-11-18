@@ -20,7 +20,7 @@ import { CATALOG_SORTS } from '../../../core/api/api.types';
 import { refreshAfterHydration } from '../../../core/http/refresh-after-hydration';
 import { NavigationScroll } from '../../../core/routing/navigation-scroll';
 import { environment } from '../../../../environments/environment';
-import { I18nService } from '../../../core/i18n/i18n';
+import { I18nService, pluralCategory } from '../../../core/i18n/i18n';
 import { QuickDonate } from '../../../core/ui/quick-donate.service';
 import { SHOWCASE } from '../../../core/showcase/showcase';
 import { type JsonLd, SeoService, siteName } from '../../../core/seo/seo.service';
@@ -45,7 +45,7 @@ import { TrustRow } from './trust-row';
 
 /** "{n} مشروعًا" with the right Arabic plural form (PluralRules), English one/other. */
 export function projectCount(n: number, locale: 'ar' | 'en'): string {
-  switch (new Intl.PluralRules(locale).select(n)) {
+  switch (pluralCategory(n, locale)) {
     case 'zero':
       return $localize`:@@store.home.count-zero:لا توجد مشاريع`;
     case 'one':

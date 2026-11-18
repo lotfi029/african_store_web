@@ -52,6 +52,32 @@ describe('money (halalas, never floats)', () => {
 });
 
 describe('money display', () => {
+  it('W-01: matches Intl.NumberFormat (ar-SA-u-nu-latn / en-SA) exactly, without calling it', () => {
+    const formats = new Map<string, Intl.NumberFormat>();
+    const intl = (v: string, locale: 'ar' | 'en', fd: 0 | 2) => {
+      const key = `${locale}${fd}`;
+      if (!formats.has(key))
+        formats.set(
+          key,
+          new Intl.NumberFormat(locale === 'ar' ? 'ar-SA-u-nu-latn' : 'en-SA', {
+            minimumFractionDigits: fd,
+            maximumFractionDigits: fd,
+          }),
+        );
+      return formats.get(key)!.format(v as unknown as number);
+    };
+    const samples: number[] = [];
+    for (let h = 0; h <= 300_000; h += 7) samples.push(h);
+    for (let e = 3; e <= 13; e++) samples.push(10 ** e, 10 ** e - 1, 10 ** e + 1, 10 ** e * 37 + 99);
+    for (const h of samples)
+      for (const sign of [1, -1]) {
+        if (sign < 0 && h === 0) continue; // "-0.00" is 0 halalas (toHalalas); never a real amount
+        const v = fromHalalas(sign * h);
+        for (const locale of ['ar', 'en'] as const)
+          expect(formatAmount(v, locale), `${v} ${locale}`).toBe(intl(v, locale, h % 100 === 0 ? 0 : 2));
+      }
+  });
+
   it('uses Western digits in Arabic and drops .00 on whole riyals', () => {
     expect(formatAmount('1750.00', 'ar')).toBe('1,750');
     expect(formatAmount('59.97', 'ar')).toBe('59.97');

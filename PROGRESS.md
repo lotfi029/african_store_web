@@ -22,6 +22,8 @@ without a commit. Never redo a committed phase.
 
 | W-00.11 | W-00.11 — fix Lighthouse TBT regression (bottom nav on idle) | done | CI run 1 red at LHCI only (TBT /ar/ 279, /ar/p 250.5 > 250). Root cause measured (bottom nav style/layout in the first long task). After the fix: G-fast green (unit 419, scripts 16); build:ci ✓ (ar 137.5 / en 135.8 kB JS); @smoke 69/69 on the stub; a11y 58 × 2 ✓; container ✓; 4× CPU same-session TBT /ar/ 405 → 327, /ar/p 268 → 180 ms. CI on the PR head decides LHCI |
 
+| W-00.11 CI | — | evidence | CI run 2 (`a202d10`) red at LHCI on all four URLs, runner `benchmarkIndex` ~40 % below run 1, same task structure (DECISIONS "LHCI evidence"). Docs pushed; the next CI run on the same code decides |
+
 ## Manual pass (Phase 8)
 
 - [x] 320 px: no horizontal page scroll (e2e `expectNoHorizontalScroll` on home, project, 404, drawer; only the category tab bar scrolls sideways).

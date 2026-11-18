@@ -104,7 +104,7 @@ talks to the same `ta3lom_store_api` `/v1` endpoints, and is restyled to `docs/d
 5. **Footer.** No e-mail, mobile, licence, governance or policy links until they exist.
 6. **Cards, filter bar, trust.** The trust-row placeholder was replaced by «تحت إشراف الجهات الرسمية المختصة». A «دفع آمن» item was added and is hidden in showcase.
 7. **Checkout payment panel.** It shows the gateway's methods as information only. Payment stays a hosted-page redirect.
-8. **Lighthouse TBT.** The first CI run was over the 250 floor on the Arabic pages (279 / 250.5 ms); it was a real W-00 regression (the eagerly rendered bottom nav), fixed in W-00.11. Budgets were not raised. It stays REVIEW until CI on the PR head is green.
+8. **Lighthouse TBT.** Run 1 was over the 250 floor on the Arabic pages (279 / 250.5 ms); W-00.11 renders the bottom nav on idle. Run 2 was red on all four pages, but its runner was ~40 % slower (`benchmarkIndex` ~2000–2600 vs ~3800–4250) with the same task structure; normalised, `/ar/` ≈ 234 ms. The margin is thin and depends on the runner. Budgets were not raised. It stays REVIEW until CI on the PR head is green.
 
 ## Owner decisions pending
 

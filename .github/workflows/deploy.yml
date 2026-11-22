@@ -17,7 +17,7 @@ name: Deploy
 #                                                                     succeeded → build the PRODUCTION image,
 #                                                                     check-container on it, push (:X.Y.Z, :latest), then
 #                                                                     deploy after the `production` reviewer approves
-#   nightly, repository_dispatch "catalog-changed"                  → staging rebuild of main HEAD, only when CI on that
+#   nightly, repository_dispatch "store-catalog-changed"            → staging rebuild of main HEAD, only when CI on that
 #                                                                     commit succeeded (fresh prerender + sitemap)
 #   workflow_dispatch (environment, tag)                            → rollback: redeploy an earlier image tag, checked
 #                                                                     against the environment and the image label (D-2)
@@ -37,7 +37,9 @@ on:
   schedule:
     - cron: '23 1 * * *' # nightly 04:23 Asia/Riyadh: fresh prerender + sitemap (C-N2)
   repository_dispatch:
-    types: [catalog-changed]
+    # `store-catalog-changed` is what the store API sends (Store:SiteRebuild:EventType default); `catalog-changed`
+    # stays for a hand-sent dispatch.
+    types: [store-catalog-changed, catalog-changed]
   workflow_dispatch:
     inputs:
       environment:

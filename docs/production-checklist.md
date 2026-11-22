@@ -13,11 +13,21 @@ everything else is for the owner (or a later session).
       (deploy/README.md "Switch payments on"). The payment flows themselves are done (R5-Payments, F5a) and tested in CI.
 - [ ] **After Moyasar — Moyasar dashboard (owner):** live publishable/secret keys and the webhook secret into the API's secret files
       (`ta3lom_store_api` `deploy/secrets.md`, never the repo); webhook URL
-      `https://store-api.ta3lom.sa/v1/payments/webhooks/moyasar` (staging: `store-api-staging…`, test keys); payment
-      methods mada, credit card, Apple Pay (domain verification for `store.ta3lom.sa`); run the API's sandbox tests once
+      `https://store-api.darafrica.org/v1/payments/webhooks/moyasar` (staging: `store-api-staging…`, test keys); payment
+      methods mada, credit card, Apple Pay (domain verification for `store.darafrica.org`); run the API's sandbox tests once
       with a test key (`MoyasarSandboxTests`, skipped without one).
-- [ ] **Staging API hosted** at `https://store-api-staging.ta3lom.sa` (the staging deploy is skipped until it answers, H-1).
-- [x] **API CORS** = `https://store.ta3lom.sa` only on production (staging: its own origin); refresh cookies for that site. **[done in code: API PR #17 — Production also allows https://ta3lom.sa and www for the main-site cart badge, MainSiteCorsTests]**
+- [ ] **Staging API hosted** at `https://store-api-staging.darafrica.org` (the staging deploy is skipped until it answers, H-1).
+- [ ] **API CORS** = `https://store.darafrica.org` only on production (staging: its own origin); refresh cookies for that
+      site. The API's `compose.yaml` sets `Store__Cors__Origins__0` from `WEB_DOMAIN`, but its `appsettings.Production.json`
+      still lists `https://ta3lom.sa` and `www` as `BadgeOrigins` (main-site cart badge): override them with
+      `Store__Cors__BadgeOrigins__0=https://darafrica.org` and `__1=https://www.darafrica.org` (or the badge is refused).
+- [ ] **API site rebuild:** in the API's env file `SITE_REBUILD_REPOSITORY=lotfi029/african_store_web` (its compose
+      default is `lotfi029/ta3lom_store_web`) and the `Store__SiteRebuild__Token` secret with Contents read/write on
+      this repo. The API sends `repository_dispatch` `store-catalog-changed`, which `deploy.yml` listens to; otherwise
+      publishing a project rebuilds the other store and the new page here waits for the nightly build.
+- [ ] **API e-mail and receipts:** `SMTP_USER` and `Store__Email__From` / `Store__Email__StaffAlerts` (the API defaults
+      are `store@ta3lom.sa` / `store-alerts@ta3lom.sa`); the admin settings `receipt_org_name_ar` / `_en`,
+      `receipt_licence_no` and `site_name_*` (the receipt falls back to ta3lom's association name when unset).
 - [ ] **Edge proxy:** copy `deploy/edge/store.caddy` into ta3lom-deploy and import it (`deploy/edge/README.md`);
       the `edge` network has a fixed IPv4 subnet = the API's `EDGE_SUBNET`. This container publishes no port (F7).
 
@@ -31,12 +41,12 @@ everything else is for the owner (or a later session).
 - [ ] At least one `urgent` (or featured) project for the home banner.
 - [ ] Privacy and refund pages written and linked from the footer (Q-07).
 - [ ] SMS sender ID registered (Q-12).
-- [ ] Main site: `/donate` redirects to `https://store.ta3lom.sa/ar/` and the main navigation links the store (Q-09). **[code done: lotfi029/ta3lom-web#34 behind `storeEnabled` — flip at go-live]**
+- [ ] Main site: `/donate` redirects to `https://store.darafrica.org/ar/` and the main navigation links the store (Q-09).
 - [x] Zakat and delivery updates stay hidden (`environment.trust.showZakat/showUpdates = false`) until they exist (M-3). **[done: default off, spec-checked]**
 
 ## Infrastructure (owner)
 
-- [ ] DNS for `store.ta3lom.sa`, `store-api.ta3lom.sa` and the two staging names; the edge terminates TLS and sends
+- [ ] DNS for `store.darafrica.org`, `store-api.darafrica.org` and the two staging names; the edge terminates TLS and sends
       HSTS on the production names (`deploy/edge/store.caddy`).
 - [ ] VPS folders, `.env` (`EDGE_ALIAS`), deploy user, GHCR `read:packages` token logged in on the VPS (H-4).
 - [ ] GitHub environments `staging` / `production` (required reviewer, tags only), SSH secrets and known_hosts.
@@ -50,13 +60,13 @@ everything else is for the owner (or a later session).
 - [x] Lighthouse (mobile) on `/ar/`, `/en/`, a project page: accessibility 100, best practices ≥ 95, SEO ≥ 95,
       CLS ≤ 0.05 — **[done in CI on the container]**; performance ≥ 90, LCP ≤ 2.5 s, TBT ≤ 200 ms — **partly met in CI**
       after the F6 pass and the hydration fix (perf 92–95, LCP 2.45–2.66 s, TBT 64–135 ms; floors 0.89 / 2800 ms / 250 ms). **[done in CI, final session: a11y 100, BP 96, SEO 100, CLS 0.000 — perf 85–90, see DECISIONS F6]**
-- [ ] **Lighthouse mobile ≥ 90 on the production URL** (`https://store.ta3lom.sa/ar/`, `/en/`, a project page) — go-live
+- [ ] **Lighthouse mobile ≥ 90 on the production URL** (`https://store.darafrica.org/ar/`, `/en/`, a project page) — go-live
       item (review 06 §4): the F6 pass is done (DECISIONS F6); the remaining options (responsive images from the API, grid
       hydration) are listed there.
 - [ ] **After Moyasar:** trust row SMS wording ("برسالة نصية بعد الدفع") assumes **payments are on** (review 06 L-14) —
       check it when payments are switched on (in showcase no order and no SMS exist).
 - [x] axe clean ar/en × light/dark on production — **[done in CI on every route]**.
-- [ ] Google Search Console: property for `store.ta3lom.sa`, sitemap `https://store.ta3lom.sa/sitemap.xml` submitted.
+- [ ] Google Search Console: property for `store.darafrica.org`, sitemap `https://store.darafrica.org/sitemap.xml` submitted.
 - [x] Staging is not indexed (X-Robots-Tag, robots.txt `Disallow: /`) — **[done, checked by the build and container]**.
 
 ## Delivered in this PR

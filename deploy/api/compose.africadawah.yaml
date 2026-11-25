@@ -10,3 +10,7 @@ services:
       # Sender of receipts and notifications, and where staff alerts go (defaults: store@ / store-alerts@ta3lom.sa).
       Store__Email__From: ${SMTP_USER:?set SMTP_USER}
       Store__Email__StaffAlerts: ${STAFF_ALERTS_EMAIL:-${SMTP_USER}}
+      # SMTP server of that mailbox (API default smtp.hostinger.com, port 465, SSL).
+      Store__Email__Host: ${SMTP_HOST:-smtp.hostinger.com}
+      # Display name of that sender (API default «متجر تعلّم»).
+      Store__Email__FromName: "التبرعات - جمعية الدعوة والتعليم باللغات الافريقية"

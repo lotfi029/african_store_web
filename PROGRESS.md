@@ -39,6 +39,7 @@ without a commit. Never redo a committed phase.
 | W-02 | W-02 — review: API contract, catalogue rebuild dispatch, go-live checklist | done | contract review vs API `27ec8eb` (DECISIONS W-02): typecheck, types:check, lint, unit 406 (70 files) ✓, scripts 16 ✓. No `src/` behaviour change |
 | W-03 | W-03 — deploy: Dar Africa API deployment kit | done | typecheck, lint, unit 406 (70 files) ✓; `build:prod` (stub prerender) ✓ all post-build checks. No `src/` change |
 | W-04 | W-04 — ci: Lighthouse CPU throttling calibrated to the runner | done | scripts 20 ✓ (4 new); local `npm run lhci` on the production build: runner 2269 → 3.03×, all assertions ✓ (TBT 103–166 ms). CI decides |
+| W-05 | W-05 — ci: Lighthouse TBT is a warning (owner choice) | done | W-04 did not turn `main` green (TBT `/ar/` 271–296 ms on fast and slow runners alike). `total-blocking-time` → `warn`; performance, LCP, CLS, a11y, BP, SEO stay hard gates. CI decides |
 
 ## Manual pass (Phase 8)
 

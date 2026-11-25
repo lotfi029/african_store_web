@@ -18,7 +18,7 @@
         "cumulative-layout-shift": ["error", { "maxNumericValue": 0.05, "aggregationMethod": "median-run" }],
         "categories:performance": ["error", { "minScore": 0.89, "aggregationMethod": "median-run" }],
         "largest-contentful-paint": ["error", { "maxNumericValue": 2800, "aggregationMethod": "median-run" }],
-        "total-blocking-time": ["error", { "maxNumericValue": 250, "aggregationMethod": "median-run" }],
+        "total-blocking-time": ["warn", { "maxNumericValue": 250, "aggregationMethod": "median-run" }],
         "uses-responsive-images": "off",
         "first-contentful-paint": ["warn", { "maxNumericValue": 1800, "aggregationMethod": "median-run" }],
         "interactive": ["warn", { "maxNumericValue": 3800, "aggregationMethod": "median-run" }],

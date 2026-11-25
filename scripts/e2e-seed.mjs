@@ -4,7 +4,7 @@
  *   Staff: one per R5 role (admin via the API's `create-admin` CLI; store_manager, finance and viewer created by that
  *   admin). Each is signed in once: password → TOTP set-up (the secret is recorded) → the forced password change of
  *   new staff (a new strong password is recorded). Credentials: e2e/.auth/staff.json (git-ignored, E-4).
- *   Catalogue (W-00): the API's Development seed is retired (archived / deactivated) and the Dar Africa set
+ *   Catalogue (W-00): the API's Development seed is retired (archived / deactivated) and the africadawah set
  *   (scripts/seed-catalogue.mjs: 8 categories, one empty, and 22 projects) is added by the store_manager through the
  *   admin API.
  */

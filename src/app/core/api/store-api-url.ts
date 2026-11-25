@@ -1,7 +1,7 @@
 import { InjectionToken } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
-/** Base URL of the store API, e.g. `https://store-api.darafrica.org/v1` (plan §2.3). No trailing slash. */
+/** Base URL of the store API, e.g. `https://store-api.africadawah.org/v1` (plan §2.3). No trailing slash. */
 export const STORE_API_URL = new InjectionToken<string>('STORE_API_URL', {
   providedIn: 'root',
   factory: () => environment.apiUrl.replace(/\/$/, ''),

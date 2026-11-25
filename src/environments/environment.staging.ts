@@ -1,14 +1,14 @@
 /**
- * Staging (`npm run build:staging`, image CONFIG=staging): https://store-staging.darafrica.org reading the staging API.
+ * Staging (`npm run build:staging`, image CONFIG=staging): https://store-staging.africadawah.org reading the staging API.
  * noindex everywhere (meta, X-Robots-Tag, robots.txt `Disallow: /`), the "نسخة تجريبية / Staging" ribbon, and NO payments
  * guard (staging may run with payments off). Must match scripts/lib/envs.mjs `staging`.
  */
 export const environment = {
   production: true,
   envName: 'staging' as 'development' | 'local' | 'ci' | 'fullstack' | 'staging' | 'production',
-  apiUrl: 'https://store-api-staging.darafrica.org/v1',
-  siteOrigin: 'https://store-staging.darafrica.org',
-  mainSiteUrl: 'https://darafrica.org',
+  apiUrl: 'https://store-api-staging.africadawah.org/v1',
+  siteOrigin: 'https://store-staging.africadawah.org',
+  mainSiteUrl: 'https://africadawah.org',
   /** `noindex` = every page `noindex, nofollow` whatever the route says (staging). */
   robots: 'noindex' as 'index' | 'noindex',
   /**

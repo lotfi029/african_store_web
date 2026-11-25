@@ -4,13 +4,13 @@
 #   postgres:18 ── migrate image ── API image (Development: fake gateway, /dev/*)   ┐
 #   web image (CONFIG=fullstack: production host names, noindex, never published)  ├─ Docker network "edge" (fixed subnet)
 #   caddy:2-alpine importing deploy/edge/store.caddy UNCHANGED + `local_certs`      ┘  :443 on 127.0.0.1
-#   Playwright → https://store.darafrica.org (e2e/payments.spec.ts, ar + en)
+#   Playwright → https://store.africadawah.org (e2e/payments.spec.ts, ar + en)
 #
 # The API is built from the API repo at STORE_API_REF (default: main; set it to the API PR branch until that merges —
 # DECISIONS C-3). STORE_API_DIR is a local clone (default ../ta3lom_store_api); the ref is fetched from origin and built
 # from a clean `git archive`, so the clone's working tree is never touched.
 #
-# Needs: Docker, Node 24 (scripts/dev-env.sh), root or a writable /etc/hosts (store.darafrica.org and store-api.darafrica.org
+# Needs: Docker, Node 24 (scripts/dev-env.sh), root or a writable /etc/hosts (store.africadawah.org and store-api.africadawah.org
 # → 127.0.0.1, removed again on exit), free ports 443 and 5099. Optional BUILD_CA=<pem> for networks that inspect TLS.
 # Nothing here is a secret: the database password is random per run and lives only in a temp dir.
 #   STORE_API_REF=final/api-payments-hosting bash scripts/full-stack-e2e.sh [extra playwright args]
@@ -26,8 +26,8 @@ P=t3s-fs                       # container/network prefix
 NET="$P-edge"
 SUBNET="${FS_EDGE_SUBNET:-172.31.250.0/24}"
 API_PORT=5099                  # host port for the build-time prerender and the seed's create-admin only
-WEB=https://store.darafrica.org
-API=https://store-api.darafrica.org
+WEB=https://store.africadawah.org
+API=https://store-api.africadawah.org
 WORK="$(mktemp -d)"
 HOSTS_MARK="# t3s-full-stack-e2e"
 log() { printf '\nfull-stack-e2e: %s\n' "$*"; }
@@ -96,13 +96,13 @@ docker run -d --name "$P-caddy" --network "$NET" -p 127.0.0.1:443:443 \
 for _ in $(seq 1 30); do docker exec "$P-caddy" test -f /data/caddy/pki/authorities/local/root.crt && break; sleep 1; done
 docker exec "$P-caddy" cat /data/caddy/pki/authorities/local/root.crt > "$WORK/edge-root.crt"
 
-if ! grep -q "store-api.darafrica.org" /etc/hosts; then
-  [ -w /etc/hosts ] || { echo "full-stack-e2e: add '127.0.0.1 store.darafrica.org store-api.darafrica.org' to /etc/hosts" >&2; exit 1; }
-  printf '127.0.0.1 store.darafrica.org store-api.darafrica.org %s\n' "$HOSTS_MARK" >> /etc/hosts
+if ! grep -q "store-api.africadawah.org" /etc/hosts; then
+  [ -w /etc/hosts ] || { echo "full-stack-e2e: add '127.0.0.1 store.africadawah.org store-api.africadawah.org' to /etc/hosts" >&2; exit 1; }
+  printf '127.0.0.1 store.africadawah.org store-api.africadawah.org %s\n' "$HOSTS_MARK" >> /etc/hosts
 fi
 export NODE_EXTRA_CA_CERTS="$WORK/edge-root.crt"
 # The local edge, never an outbound proxy (curl and Chromium honour these; Node's fetch ignores proxies anyway).
-export NO_PROXY="store.darafrica.org,store-api.darafrica.org,127.0.0.1,localhost${NO_PROXY:+,$NO_PROXY}"
+export NO_PROXY="store.africadawah.org,store-api.africadawah.org,127.0.0.1,localhost${NO_PROXY:+,$NO_PROXY}"
 export no_proxy="$NO_PROXY"
 for _ in $(seq 1 30); do curl -fsS --cacert "$WORK/edge-root.crt" "$API/health/ready" >/dev/null 2>&1 && break; sleep 1; done
 

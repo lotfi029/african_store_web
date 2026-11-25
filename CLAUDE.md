@@ -1,8 +1,8 @@
-# Dar Africa store web
+# africadawah store web
 
-Storefront, customer account and staff admin of the **Dar Africa** donation store (جمعية الدعوة والتعليم باللغات
-الأفريقية), served as static files at **https://store.darafrica.org**. **Donations only** — projects with options and
-open amounts, general gifts to categories. Data comes from the store API at `https://store-api.darafrica.org/v1`
+Storefront, customer account and staff admin of the **africadawah** donation store (جمعية الدعوة والتعليم باللغات
+الأفريقية), served as static files at **https://store.africadawah.org**. **Donations only** — projects with options and
+open amounts, general gifts to categories. Data comes from the store API at `https://store-api.africadawah.org/v1`
 (a deployment of `lotfi029/ta3lom_store_api`, the backend of both store web apps; same `/v1` contract — owner step,
 plan §11).
 
@@ -66,7 +66,7 @@ features (store | account | admin) → shared → core          layout → share
 1. **Logical CSS only** (`margin-inline-start`, `inset-inline-end`…). Stylelint forbids `left/right/margin-left…`.
 2. **Arabic first.** Build and check RTL first. Arabic body `line-height: 1.85`, English `1.55`. Western digits everywhere.
 3. **English falls back to Arabic** through `pick()` — never an empty string.
-4. **Every route calls `SeoService.set()`** (title, description, canonical on `store.darafrica.org`, hreflang, OG); noindex
+4. **Every route calls `SeoService.set()`** (title, description, canonical on `store.africadawah.org`, hreflang, OG); noindex
    on cart, checkout, orders, account, admin, login, 404, listing searches (`?q=`) and pages > 1 (`noindex, follow`).
 5. **Exactly one `<h1>` per route**; landmarks `<main>`, `<nav>`, `<footer>`.
 6. **Images:** `alt` is a required input and comes from the API `MediaAsset` (`altAr`/`altEn`), never hardcoded.

@@ -8,7 +8,7 @@ import { QuickDonate } from '../../core/ui/quick-donate.service';
 import { Icon } from '../../shared/ui/icon/icon';
 
 /**
- * Store footer (Dar Africa prototype `#foot`, W-00): the quote band with «تبرع للصندوق العام» (opens the quick-donate
+ * Store footer (africadawah prototype `#foot`, W-00): the quote band with «تبرع للصندوق العام» (opens the quick-donate
  * dialog — hidden in showcase), about, association links on the main site (about, library, contact), store links,
  * payment marks as text pills (hidden in showcase) and the copyright. No licence number, e-mail or policy links until
  * they exist (the API does not expose them yet; no placeholder legal text is ever published — ta3lom W-02).
@@ -29,7 +29,7 @@ export class Footer {
   protected readonly paymentMarks = PAYMENT_MARKS;
   protected readonly year = new Date().getFullYear();
 
-  /** A page of the association's main site in the current locale (`https://darafrica.org/ar/about`). */
+  /** A page of the association's main site in the current locale (`https://africadawah.org/ar/about`). */
   protected mainPath(page: string): string {
     return `${this.main}/${this.locale}/${page}`;
   }

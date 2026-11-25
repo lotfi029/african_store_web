@@ -47,7 +47,7 @@ for (const locale of ['ar', 'en'] as const) {
         .toContain('DonateAction');
       await expect(page.locator('link[rel=canonical]')).toHaveAttribute(
         'href',
-        `https://store.darafrica.org/${locale}/p/${p!.slug}`,
+        `https://store.africadawah.org/${locale}/p/${p!.slug}`,
       );
 
       const box = page.locator('aside.buybox');

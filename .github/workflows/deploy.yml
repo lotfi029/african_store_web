@@ -1,6 +1,6 @@
 name: Deploy
 
-# DAR AFRICA (W-00): deploys are OFF until the owner sets the repository variable DEPLOY_ENABLED=true together with the
+# AFRICADAWAH (W-00): deploys are OFF until the owner sets the repository variable DEPLOY_ENABLED=true together with the
 # `staging` / `production` environments, the VPS SSH secrets and the GHCR read token on the VPS (docs/W-00-report.md,
 # owner steps; plan §11). Every job that builds, pushes or deploys an image checks vars.DEPLOY_ENABLED; the PR dry run
 # (echo only, no secret, no image) still runs.
@@ -140,7 +140,7 @@ jobs:
     steps:
       - name: Dry run of the staging deploy
         env:
-          PRERENDER_API_URL: https://store-api-staging.darafrica.org/v1
+          PRERENDER_API_URL: https://store-api-staging.africadawah.org/v1
         run: |
           if curl -sf --max-time 15 "$PRERENDER_API_URL/catalog/config" > /dev/null; then
             echo "Staging API is up: a main run builds and pushes $IMAGE:staging-<sha> and :staging."
@@ -148,9 +148,9 @@ jobs:
             echo "::warning::Staging API $PRERENDER_API_URL is unreachable — a main run would SKIP the staging build and deploy (H-1)."
           fi
           echo "A main run then executes on the staging VPS (STAGING_SSH_* secrets):"
-          echo "  cd \$STAGING_DEPLOY_DIR && EDGE_ALIAS=darafrica-store-web-staging STORE_WEB_IMAGE=$IMAGE:staging-${{ github.event.pull_request.head.sha }} docker compose -f docker-compose.store-web.yml -p darafrica-store-web-staging pull"
-          echo "  EDGE_ALIAS=darafrica-store-web-staging STORE_WEB_IMAGE=$IMAGE:staging-${{ github.event.pull_request.head.sha }} docker compose -f docker-compose.store-web.yml -p darafrica-store-web-staging up -d --wait"
-          echo "and smoke-checks: node scripts/smoke-deploy.mjs https://store-staging.darafrica.org <sha> --env staging"
+          echo "  cd \$STAGING_DEPLOY_DIR && EDGE_ALIAS=africadawah-store-web-staging STORE_WEB_IMAGE=$IMAGE:staging-${{ github.event.pull_request.head.sha }} docker compose -f docker-compose.store-web.yml -p africadawah-store-web-staging pull"
+          echo "  EDGE_ALIAS=africadawah-store-web-staging STORE_WEB_IMAGE=$IMAGE:staging-${{ github.event.pull_request.head.sha }} docker compose -f docker-compose.store-web.yml -p africadawah-store-web-staging up -d --wait"
+          echo "and smoke-checks: node scripts/smoke-deploy.mjs https://store-staging.africadawah.org <sha> --env staging"
 
   staging:
     needs: gate
@@ -162,18 +162,18 @@ jobs:
       packages: write
     environment:
       name: staging
-      url: https://store-staging.darafrica.org
+      url: https://store-staging.africadawah.org
     concurrency:
       group: deploy-staging
       cancel-in-progress: false
     env:
-      PRERENDER_API_URL: https://store-api-staging.darafrica.org/v1
-      SITE: https://store-staging.darafrica.org
+      PRERENDER_API_URL: https://store-api-staging.africadawah.org/v1
+      SITE: https://store-staging.africadawah.org
       SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
       SSH_USER: ${{ secrets.STAGING_SSH_USER }}
       SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
       SSH_KNOWN_HOSTS: ${{ secrets.STAGING_SSH_KNOWN_HOSTS }}
-      DEPLOY_DIR: ${{ vars.STAGING_DEPLOY_DIR || '/srv/darafrica-store-web-staging' }}
+      DEPLOY_DIR: ${{ vars.STAGING_DEPLOY_DIR || '/srv/africadawah-store-web-staging' }}
       SHA: ${{ needs.gate.outputs.sha }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -235,7 +235,7 @@ jobs:
         if: steps.probe.outputs.api == 'up'
         run: |
           TAG="staging-${SHA}"
-          REMOTE="cd '$DEPLOY_DIR' && EDGE_ALIAS=darafrica-store-web-staging STORE_WEB_IMAGE='$IMAGE:$TAG' docker compose -f docker-compose.store-web.yml -p darafrica-store-web-staging pull && EDGE_ALIAS=darafrica-store-web-staging STORE_WEB_IMAGE='$IMAGE:$TAG' docker compose -f docker-compose.store-web.yml -p darafrica-store-web-staging up -d --wait"
+          REMOTE="cd '$DEPLOY_DIR' && EDGE_ALIAS=africadawah-store-web-staging STORE_WEB_IMAGE='$IMAGE:$TAG' docker compose -f docker-compose.store-web.yml -p africadawah-store-web-staging pull && EDGE_ALIAS=africadawah-store-web-staging STORE_WEB_IMAGE='$IMAGE:$TAG' docker compose -f docker-compose.store-web.yml -p africadawah-store-web-staging up -d --wait"
           if [ -z "$SSH_HOST" ] || [ -z "$SSH_USER" ] || [ -z "$SSH_KEY" ] || [ -z "$SSH_KNOWN_HOSTS" ]; then
             echo "::warning::STAGING_SSH_* secrets are not set — deploy SKIPPED. Dry run (what would run on the VPS):"
             echo "  ssh <STAGING_SSH_USER>@<STAGING_SSH_HOST> \"$REMOTE\""
@@ -247,7 +247,7 @@ jobs:
           printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes "$SSH_USER@$SSH_HOST" "$REMOTE"
           echo "deployed=true" >> "$GITHUB_OUTPUT"
-      - name: Smoke-check https://store-staging.darafrica.org
+      - name: Smoke-check https://store-staging.africadawah.org
         if: steps.deploy.outputs.deployed == 'true'
         run: node scripts/smoke-deploy.mjs "$SITE" "$SHA" --env staging
       - name: Remove the SSH key
@@ -267,7 +267,7 @@ jobs:
       group: production-image
       cancel-in-progress: false
     env:
-      PRERENDER_API_URL: https://store-api.darafrica.org/v1
+      PRERENDER_API_URL: https://store-api.africadawah.org/v1
       SHA: ${{ needs.gate.outputs.sha }}
       VERSION: ${{ needs.gate.outputs.version }}
     outputs:
@@ -323,17 +323,17 @@ jobs:
     # The `production` environment has a required reviewer (repository settings): this job waits for that approval.
     environment:
       name: production
-      url: https://store.darafrica.org
+      url: https://store.africadawah.org
     concurrency:
       group: deploy-production
       cancel-in-progress: false
     env:
-      SITE: https://store.darafrica.org
+      SITE: https://store.africadawah.org
       SSH_HOST: ${{ secrets.PRODUCTION_SSH_HOST }}
       SSH_USER: ${{ secrets.PRODUCTION_SSH_USER }}
       SSH_KEY: ${{ secrets.PRODUCTION_SSH_KEY }}
       SSH_KNOWN_HOSTS: ${{ secrets.PRODUCTION_SSH_KNOWN_HOSTS }}
-      DEPLOY_DIR: ${{ vars.PRODUCTION_DEPLOY_DIR || '/srv/darafrica-store-web' }}
+      DEPLOY_DIR: ${{ vars.PRODUCTION_DEPLOY_DIR || '/srv/africadawah-store-web' }}
       TAG: ${{ needs.production-image.outputs.version }}
       SHA: ${{ needs.gate.outputs.sha }}
     steps:
@@ -350,8 +350,8 @@ jobs:
           printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key && chmod 600 ~/.ssh/deploy_key
           printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes "$SSH_USER@$SSH_HOST" \
-            "cd '$DEPLOY_DIR' && EDGE_ALIAS=darafrica-store-web STORE_WEB_IMAGE='$IMAGE:$TAG' docker compose -f docker-compose.store-web.yml -p darafrica-store-web pull && EDGE_ALIAS=darafrica-store-web STORE_WEB_IMAGE='$IMAGE:$TAG' docker compose -f docker-compose.store-web.yml -p darafrica-store-web up -d --wait"
-      - name: Smoke-check https://store.darafrica.org
+            "cd '$DEPLOY_DIR' && EDGE_ALIAS=africadawah-store-web STORE_WEB_IMAGE='$IMAGE:$TAG' docker compose -f docker-compose.store-web.yml -p africadawah-store-web pull && EDGE_ALIAS=africadawah-store-web STORE_WEB_IMAGE='$IMAGE:$TAG' docker compose -f docker-compose.store-web.yml -p africadawah-store-web up -d --wait"
+      - name: Smoke-check https://store.africadawah.org
         run: node scripts/smoke-deploy.mjs "$SITE" "$SHA" --env production
       - name: Remove the SSH key
         if: always()
@@ -378,9 +378,9 @@ jobs:
       SSH_USER: ${{ inputs.environment == 'production' && secrets.PRODUCTION_SSH_USER || secrets.STAGING_SSH_USER }}
       SSH_KEY: ${{ inputs.environment == 'production' && secrets.PRODUCTION_SSH_KEY || secrets.STAGING_SSH_KEY }}
       SSH_KNOWN_HOSTS: ${{ inputs.environment == 'production' && secrets.PRODUCTION_SSH_KNOWN_HOSTS || secrets.STAGING_SSH_KNOWN_HOSTS }}
-      DEPLOY_DIR: ${{ inputs.environment == 'production' && (vars.PRODUCTION_DEPLOY_DIR || '/srv/darafrica-store-web') || (vars.STAGING_DEPLOY_DIR || '/srv/darafrica-store-web-staging') }}
-      PROJECT: ${{ inputs.environment == 'production' && 'darafrica-store-web' || 'darafrica-store-web-staging' }}
-      SITE: ${{ inputs.environment == 'production' && 'https://store.darafrica.org' || 'https://store-staging.darafrica.org' }}
+      DEPLOY_DIR: ${{ inputs.environment == 'production' && (vars.PRODUCTION_DEPLOY_DIR || '/srv/africadawah-store-web') || (vars.STAGING_DEPLOY_DIR || '/srv/africadawah-store-web-staging') }}
+      PROJECT: ${{ inputs.environment == 'production' && 'africadawah-store-web' || 'africadawah-store-web-staging' }}
+      SITE: ${{ inputs.environment == 'production' && 'https://store.africadawah.org' || 'https://store-staging.africadawah.org' }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -402,7 +402,7 @@ jobs:
       - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
       - name: The image's config label must match the environment (D-2)
         run: |
-          label="$(docker buildx imagetools inspect "$IMAGE:$TAG" --format '{{ json .Image }}' | jq -r '.config.Labels["org.darafrica.store-web.config"] // empty')"
+          label="$(docker buildx imagetools inspect "$IMAGE:$TAG" --format '{{ json .Image }}' | jq -r '.config.Labels["org.africadawah.store-web.config"] // empty')"
           [ "$label" = "$TARGET" ] || { echo "::error::$IMAGE:$TAG was built for '${label:-unknown}', not $TARGET"; exit 1; }
       - name: Redeploy ${{ inputs.tag }} to ${{ inputs.environment }}
         run: |

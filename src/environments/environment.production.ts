@@ -1,13 +1,13 @@
 /**
- * Production: https://store.darafrica.org reading https://store-api.darafrica.org/v1 (ADR-S09).
+ * Production: https://store.africadawah.org reading https://store-api.africadawah.org/v1 (ADR-S09).
  * Must match scripts/lib/envs.mjs `production`.
  */
 export const environment = {
   production: true,
   envName: 'production' as 'development' | 'local' | 'ci' | 'fullstack' | 'staging' | 'production',
-  apiUrl: 'https://store-api.darafrica.org/v1',
-  siteOrigin: 'https://store.darafrica.org',
-  mainSiteUrl: 'https://darafrica.org',
+  apiUrl: 'https://store-api.africadawah.org/v1',
+  siteOrigin: 'https://store.africadawah.org',
+  mainSiteUrl: 'https://africadawah.org',
   /** `noindex` = every page `noindex, nofollow` whatever the route says (staging). */
   robots: 'index' as 'index' | 'noindex',
   /**

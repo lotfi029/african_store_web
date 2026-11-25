@@ -13,7 +13,7 @@ export interface SeoData {
   /** Page title without the site name (the service appends it). Omit on the home page. */
   title?: string;
   description: string;
-  /** Path inside the locale, starting with `/` (`/p/smart-study`); canonical = https://store.darafrica.org/{locale}{path}. */
+  /** Path inside the locale, starting with `/` (`/p/smart-study`); canonical = https://store.africadawah.org/{locale}{path}. */
   path: string;
   /** Cart, checkout, account, admin, login, order and 404 are `noindex` (`nofollow` too unless `follow`). */
   noindex?: boolean;
@@ -27,10 +27,10 @@ export interface SeoData {
 
 /** The store's name in the current locale (titles, Open Graph, JSON-LD). */
 export const siteName = (): string =>
-  $localize`:@@store.seo.site-name:متجر التبرعات — دار أفريقيا`;
+  $localize`:@@store.seo.site-name:التبرعات - جمعية الدعوة والتعليم باللغات الافريقية`;
 const JSON_LD_ID = 'ta-seo-json-ld';
 
-/** Every route calls `set()` (non-negotiable #4; a unit test checks every page does). Canonicals on store.darafrica.org. */
+/** Every route calls `set()` (non-negotiable #4; a unit test checks every page does). Canonicals on store.africadawah.org. */
 @Injectable({ providedIn: 'root' })
 export class SeoService {
   private readonly titleService = inject(Title);
@@ -66,7 +66,7 @@ export class SeoService {
       property: 'og:locale',
       content: this.i18n.locale === 'ar' ? 'ar_SA' : 'en_US',
     });
-    // W-00: a page without its own image shares the store card (public/og.png → /{locale}/og.png, 1200×630: the Dar Africa mark on ink).
+    // W-00: a page without its own image shares the store card (public/og.png → /{locale}/og.png, 1200×630: the africadawah mark on ink).
     const image = data.image || `${environment.siteOrigin}/${this.i18n.locale}/og.png`;
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
     this.meta.updateTag({ name: 'twitter:title', content: title });

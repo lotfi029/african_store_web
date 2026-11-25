@@ -20,7 +20,7 @@ test('Apple Pay placeholder: staging and a production dry run warn, local/ci say
 test("Apple Pay: Moyasar's real file passes everywhere", () =>
   assert.deepEqual(applePayVerdict({ ...prod, placeholder: false, showcase: false }), {}));
 
-const sitemap = '<urlset><url><loc>https://store.darafrica.org/ar/</loc></url><url><loc>https://store.darafrica.org/en/p/wells</loc></url></urlset>';
+const sitemap = '<urlset><url><loc>https://store.africadawah.org/ar/</loc></url><url><loc>https://store.africadawah.org/en/p/wells</loc></url></urlset>';
 const pages = [
   { path: 'ar/index.html', html: `<main>${NOTE.ar}</main>` },
   { path: 'en/index.html', html: `<main>${NOTE.en}</main>` },

@@ -27,7 +27,7 @@ async function apiJson(path) {
   let last;
   for (let attempt = 0; attempt < 4; attempt += 1) {
     try {
-      const res = await fetch(`${API_URL}${path}`, { headers: { 'user-agent': 'darafrica-store-build/1.0' } });
+      const res = await fetch(`${API_URL}${path}`, { headers: { 'user-agent': 'africadawah-store-build/1.0' } });
       if (res.ok) return res.json();
       last = new Error(`${path} -> HTTP ${res.status}`);
       if (res.status < 500 && res.status !== 429) break;

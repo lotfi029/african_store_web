@@ -39,7 +39,7 @@ const projects = Object.fromEntries(
 const categories = Object.fromEntries(data['/catalog/categories'].map((c) => [c.id, c]));
 
 const problem = (status, code, extra = {}) => ({
-  type: `https://store-api.darafrica.org/problems/${code}`,
+  type: `https://store-api.africadawah.org/problems/${code}`,
   title: code,
   status,
   code,

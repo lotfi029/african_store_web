@@ -96,8 +96,8 @@ X-Robots-Tag on staging, client-route fallbacks, real 404s, cache headers, compr
 ### TLS: the edge model (F7)
 
 - The VPS runs ONE edge Caddy (the owner's edge deploy repo, `edge/`) on 80/443 that terminates TLS for every site. This
-  container publishes **no port**: it joins the external Docker network `edge` with the alias `store-web` (production) or
-  `store-web-staging` (staging), and the edge proxies to `store-web:8080` / `store-web-staging:8080`. The store block for
+  container publishes **no port**: it joins the external Docker network `edge` with the alias `darafrica-store-web` (production) or
+  `darafrica-store-web-staging` (staging), and the edge proxies to `darafrica-store-web:8080` / `darafrica-store-web-staging:8080`. The store block for
   the edge is `deploy/edge/store.caddy` in this repo (copy it into the edge deploy repo — `deploy/edge/README.md`); it sends
   HSTS on the production names and `X-Robots-Tag: noindex` on the staging names.
 - The container sends no HSTS (owner M-8) and the edge must not add its own CSP — the container's is generated per
@@ -109,15 +109,15 @@ X-Robots-Tag on staging, client-route fallbacks, real 404s, cache headers, compr
 
 1. **DNS.** `A`/`AAAA` records: `store.darafrica.org` and `store-staging.darafrica.org` → the VPS (same host as the API is fine).
 2. **Docker** with the compose plugin. A deploy user (e.g. `deploy`) in the `docker` group, no sudo.
-3. **Folders.** `/srv/store-web` (production) and `/srv/store-web-staging`; copy `deploy/docker-compose.store-web.yml`
+3. **Folders.** `/srv/darafrica-store-web` (production) and `/srv/darafrica-store-web-staging`; copy `deploy/docker-compose.store-web.yml`
    into each and add a `.env` next to it:
 
    ```bash
-   # /srv/store-web-staging/.env
-   EDGE_ALIAS=store-web-staging
+   # /srv/darafrica-store-web-staging/.env
+   EDGE_ALIAS=darafrica-store-web-staging
    ```
 
-   (`/srv/store-web/.env`: `EDGE_ALIAS=store-web`.) The deploy passes `EDGE_ALIAS` and `STORE_WEB_IMAGE` per run. The
+   (`/srv/darafrica-store-web/.env`: `EDGE_ALIAS=darafrica-store-web`.) The deploy passes `EDGE_ALIAS` and `STORE_WEB_IMAGE` per run. The
    `edge` network must exist first (the edge deploy repo `edge/up.sh`, fixed IPv4 subnet — `deploy/edge/README.md`).
 4. **GHCR pull access (owner H-4, review 06 L-7).** The package stays **private**. GHCR does **not** accept
    fine-grained tokens: create a **classic** personal access token with **`read:packages` only**, on a **dedicated machine
@@ -146,7 +146,7 @@ X-Robots-Tag on staging, client-route fallbacks, real 404s, cache headers, compr
 - Environments **`staging`** and **`production`**; `production` with a **required reviewer** and limited to tags `v*`.
 - Secrets per environment: `STAGING_SSH_HOST`, `STAGING_SSH_USER`, `STAGING_SSH_KEY` (a dedicated ed25519 private key),
   `STAGING_SSH_KNOWN_HOSTS` (`ssh-keyscan -t ed25519 <host>`, checked, then pasted); the same four with `PRODUCTION_`.
-  Optional variables `STAGING_DEPLOY_DIR` / `PRODUCTION_DEPLOY_DIR` (defaults `/srv/store-web-staging`, `/srv/store-web`).
+  Optional variables `STAGING_DEPLOY_DIR` / `PRODUCTION_DEPLOY_DIR` (defaults `/srv/darafrica-store-web-staging`, `/srv/darafrica-store-web`).
 - Missing staging secrets → the staging job builds and pushes, then SKIPS the deploy with a warning and prints the
   commands it would run. An unreachable staging API → the whole staging job is skipped with a warning (H-1): staging goes
   live after the API hosting session.
@@ -166,15 +166,15 @@ its environment, and only then pushed. A failed CI run deploys nothing.
   `store-catalog-changed` after a catalogue change; `catalog-changed` by hand works too). The job builds `:staging-<sha>`, then on the VPS:
 
   ```bash
-  cd /srv/store-web-staging
-  STORE_WEB_IMAGE=ghcr.io/lotfi029/african-store-web:staging-<sha> docker compose -f docker-compose.store-web.yml -p store-web-staging pull
-  STORE_WEB_IMAGE=ghcr.io/lotfi029/african-store-web:staging-<sha> docker compose -f docker-compose.store-web.yml -p store-web-staging up -d --wait
+  cd /srv/darafrica-store-web-staging
+  STORE_WEB_IMAGE=ghcr.io/lotfi029/african-store-web:staging-<sha> docker compose -f docker-compose.store-web.yml -p darafrica-store-web-staging pull
+  STORE_WEB_IMAGE=ghcr.io/lotfi029/african-store-web:staging-<sha> docker compose -f docker-compose.store-web.yml -p darafrica-store-web-staging up -d --wait
   ```
 
 - **Production:** push a tag `vX.Y.Z` (strict semver — a pre-release such as `v1.2.3-rc.1` is
   never deployed and never moves `:latest`, L-5) on `main`. CI runs on the tag; once it succeeded `production-image`
   builds, checks and pushes `:X.Y.Z` and `:latest` (one build at a time); `production` waits for the reviewer, then runs
-  the same two commands in `/srv/store-web` with `-p store-web`.
+  the same two commands in `/srv/darafrica-store-web` with `-p darafrica-store-web`.
 
 **First deploy of an environment (empty catalogue).** Every build refuses to publish a store with no published project
 (`routes.mjs`), but a new environment's database is empty and the admin that adds projects is in this image. For the
@@ -192,7 +192,7 @@ first deploy only:
 **Edge aliases (review 04 H-1).** The compose service is called `web`, never `store-web`: Compose gives every service
 its own name as a DNS alias on each network, so a staging service named `store-web` also answered to the production
 alias on the shared `edge` network. Only `EDGE_ALIAS` names an environment there. CI runs both projects side by side
-(`scripts/check-edge-aliases.sh`) and fails if `store-web` resolves to anything but the production container.
+(`scripts/check-edge-aliases.sh`) and fails if `darafrica-store-web` resolves to anything but the production container.
 
 **Apple Pay (review 04).** Moyasar's hosted page offers Apple Pay only on a verified domain: Apple fetches
 `https://store.darafrica.org/.well-known/apple-developer-merchantid-domain-association` (served `text/plain`, `no-cache`;
@@ -230,7 +230,7 @@ By hand on the VPS: the same two commands with the older tag (check the label fi
 - **Uptime:** an external monitor (UptimeRobot, Better Stack, …) every 1–5 min on `https://store.darafrica.org/healthz`
   (expects `200` and `ok`) and on `https://store.darafrica.org/ar/` (expects `200` and the text `متجر التبرعات`); alert the
   owner. `/healthz` proves the container serves; `/ar/` proves the edge, TLS and the site.
-- **Container health:** `docker compose -p store-web ps` (healthy), `docker compose -p store-web logs --tail 100`.
+- **Container health:** `docker compose -p darafrica-store-web ps` (healthy), `docker compose -p darafrica-store-web logs --tail 100`.
 - **Client errors:** set `errorReportUrl` in `environment.production.ts` to an endpoint you control (its origin is added
   to the CSP automatically); reports carry route, code, a scrubbed message and the build sha — no personal data.
 - **Lighthouse:** CI uploads the `lighthouse` artifact per run; repeat on the production URLs before go-live.

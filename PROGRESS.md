@@ -40,6 +40,7 @@ without a commit. Never redo a committed phase.
 | W-03 | W-03 — deploy: Dar Africa API deployment kit | done | typecheck, lint, unit 406 (70 files) ✓; `build:prod` (stub prerender) ✓ all post-build checks. No `src/` change |
 | W-04 | W-04 — ci: Lighthouse CPU throttling calibrated to the runner | done | scripts 20 ✓ (4 new); local `npm run lhci` on the production build: runner 2269 → 3.03×, all assertions ✓ (TBT 103–166 ms). CI decides |
 | W-05 | W-05 — ci: Lighthouse TBT is a warning (owner choice) | done | W-04 did not turn `main` green (TBT `/ar/` 271–296 ms on fast and slow runners alike). `total-blocking-time` → `warn`; performance, LCP, CLS, a11y, BP, SEO stay hard gates. CI decides |
+| W-06 | W-06 — deploy: names unique on a VPS shared with ta3lom | done | `darafrica-store-web(-staging)` / `darafrica-store-api(-staging)` aliases and projects, `/srv/darafrica-store-*` folders, `edge/conf/darafrica-store.caddy` with `darafrica_store_*` snippets; `check-edge-aliases` and `validate-caddy` run in CI |
 
 ## Manual pass (Phase 8)
 

@@ -5,16 +5,23 @@ kept here and handed over (as in ta3lom_store_web). Everything below is an **own
 
 ## 1. Copy the block
 
-1. Copy `deploy/edge/store.caddy` to the edge deploy repo `edge/conf/store.caddy`.
-2. Add `import conf/store.caddy` to `Caddyfile`, `Caddyfile.cutover` and `Caddyfile.staging` (the same file serves all
+1. Copy `deploy/edge/store.caddy` to the edge deploy repo as `edge/conf/darafrica-store.caddy` (NOT `store.caddy`: on a VPS
+   shared with ta3lom that file is ta3lom's store block).
+2. Add `import conf/darafrica-store.caddy` to `Caddyfile`, `Caddyfile.cutover` and `Caddyfile.staging` (the same file serves all
    three: the staging hosts are inert until their DNS points at the VPS).
 3. Validate before reloading: `scripts/validate-caddy.sh` here, or on the VPS
    `docker compose exec edge caddy validate --config /etc/caddy/Caddyfile`, then `caddy reload`.
 
-What it does: `store.darafrica.org` → `store-web:8080`, `store-api.darafrica.org` → `store-api:8080` (bodies up to 21 MB; the
+What it does: `store.darafrica.org` → `darafrica-store-web:8080`, `store-api.darafrica.org` → `darafrica-store-api:8080` (bodies up to 21 MB; the
 payment webhook path `/v1/payments/webhooks/*` is not cached or buffered), `store-staging.darafrica.org` →
-`store-web-staging:8080`, `store-api-staging.darafrica.org` → `store-api-staging:8080`. HSTS on the two production names
+`darafrica-store-web-staging:8080`, `store-api-staging.darafrica.org` → `darafrica-store-api-staging:8080`. HSTS on the two production names
 only; `X-Robots-Tag: noindex, nofollow` on the staging names. The containers send their own CSP and security headers.
+
+**Sharing the VPS with ta3lom (W-06).** Every name Dar Africa puts on the shared `edge` network or the edge Caddyfile is
+prefixed `darafrica-`: container aliases `darafrica-store-web(-staging)` and `darafrica-store-api(-staging)`, compose
+projects `darafrica-store-web(-staging)` and `darafrica-store(-staging)` (API), folders `/srv/darafrica-store-web(-staging)`,
+snippets `darafrica_store_*`. ta3lom uses `store-web`, `store-api`, `/srv/store-web` and `store_*`; reusing them would make
+a Dar Africa deploy replace ta3lom's containers or split the edge's traffic between the two stores.
 
 ## 2. The `edge` network needs a fixed IPv4 subnet
 
@@ -48,8 +55,8 @@ both store API env files. The API refuses to start without it.
 
 ## 3. Start order and memory
 
-`edge` network → edge Caddy → store API (`ta3lom-store`, then `ta3lom-store-staging`) → store web (`store-web`,
-`store-web-staging`). Memory limits: API 512 MB + Postgres 512 MB per environment, web 128 MB per environment.
+`edge` network → edge Caddy → store API (`ta3lom-store`, then `ta3lom-store-staging`) → store web (`darafrica-store-web`,
+`darafrica-store-web-staging`). Memory limits: API 512 MB + Postgres 512 MB per environment, web 128 MB per environment.
 
 ## 4. Backups
 

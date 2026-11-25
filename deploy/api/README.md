@@ -17,3 +17,17 @@ in that repo) applies word for word, with these differences:
   Production without it). In showcase, Moyasar and `Store__Sms__AppSid` are not needed.
 - After the first start, in `/admin` → settings: `site_name_ar` / `site_name_en`, `receipt_org_name_ar` /
   `receipt_org_name_en` (the receipt falls back to ta3lom's association name), `receipt_licence_no`, `support_mobile`.
+
+## Same VPS as ta3lom (W-06)
+
+The Dar Africa API is a second set of containers next to ta3lom's, never a change to them:
+
+| | ta3lom | Dar Africa |
+|---|---|---|
+| Folder | `/srv/ta3lom-store/deploy/` | `/srv/darafrica-store/deploy/` (the API's `compose.yaml`, `backup.sh`, `restore-test.sh` + this kit) |
+| Compose project | `ta3lom-store(-staging)` | `darafrica-store(-staging)` (own Postgres, volumes, secrets) |
+| Edge alias | `store-api(-staging)` | `darafrica-store-api(-staging)` (`EDGE_ALIAS` in the env files) |
+| Backups | `/var/backups/ta3lom-store` | `/var/backups/darafrica-store` (same cron lines with this folder and `-f compose.darafrica.yaml`) |
+
+Both join the same `edge` network and use the same `EDGE_SUBNET`. The API repository's `deploy.yml` deploys ta3lom only;
+the Dar Africa API is updated with the runbook commands in its own folder (`STORE_VERSION` = the API image tag).

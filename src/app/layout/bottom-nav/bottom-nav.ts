@@ -19,7 +19,7 @@ export function currentItem(url: string): BottomNavItem {
 }
 
 /**
- * Phone bottom bar (Dar Africa prototype, W-00 plan §4 Phase 4), shown ≤ 760 px: الرئيسية · الأقسام · البحث · السلة ·
+ * Phone bottom bar (africadawad prototype, W-00 plan §4 Phase 4), shown ≤ 760 px: الرئيسية · الأقسام · البحث · السلة ·
  * حسابي. «الأقسام» scrolls to and focuses the category tab bar (`#cats`, on the home page — from another page it goes
  * home first); «البحث» focuses the header search (`#hdr-q`). Showcase mode hides السلة and حسابي (no cart or account).
  * The public layout pads its bottom by `--bnav-h` while the bar shows (base.css), so it never covers content.

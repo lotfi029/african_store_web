@@ -12,7 +12,7 @@
 export const ENVS = {
   local: {
     apiUrl: 'http://localhost:5080/v1',
-    site: 'https://store.darafrica.org',
+    site: 'https://store.africadawad.org',
     robots: 'index',
     deployable: false,
     errorReportUrl: '',
@@ -20,7 +20,7 @@ export const ENVS = {
   },
   ci: {
     apiUrl: 'http://localhost:3000/v1',
-    site: 'https://store.darafrica.org',
+    site: 'https://store.africadawad.org',
     robots: 'index',
     deployable: false,
     errorReportUrl: '',
@@ -29,7 +29,7 @@ export const ENVS = {
   // The ci build with showcase on: the @showcase e2e on the stub (environment.ci-showcase.ts). Never published.
   'ci-showcase': {
     apiUrl: 'http://localhost:3000/v1',
-    site: 'https://store.darafrica.org',
+    site: 'https://store.africadawad.org',
     robots: 'index',
     deployable: false,
     errorReportUrl: '',
@@ -37,24 +37,24 @@ export const ENVS = {
   },
   // F10 full-stack e2e (scripts/full-stack-e2e.sh): production names served locally; never published.
   fullstack: {
-    apiUrl: 'https://store-api.darafrica.org/v1',
-    site: 'https://store.darafrica.org',
+    apiUrl: 'https://store-api.africadawad.org/v1',
+    site: 'https://store.africadawad.org',
     robots: 'noindex',
     deployable: false,
     errorReportUrl: '',
     showcase: false,
   },
   staging: {
-    apiUrl: 'https://store-api-staging.darafrica.org/v1',
-    site: 'https://store-staging.darafrica.org',
+    apiUrl: 'https://store-api-staging.africadawad.org/v1',
+    site: 'https://store-staging.africadawad.org',
     robots: 'noindex',
     deployable: true,
     errorReportUrl: '',
     showcase: true,
   },
   production: {
-    apiUrl: 'https://store-api.darafrica.org/v1',
-    site: 'https://store.darafrica.org',
+    apiUrl: 'https://store-api.africadawad.org/v1',
+    site: 'https://store.africadawad.org',
     robots: 'index',
     deployable: true,
     errorReportUrl: '',

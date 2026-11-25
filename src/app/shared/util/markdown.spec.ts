@@ -40,12 +40,12 @@ function text(blocks: Block[]): string {
 describe('markdown subset (C-5)', () => {
   it('parses paragraphs, h2–h4, lists, quotes, strong, em and links', () => {
     const b = parseMarkdown(
-      '# Title\n## Sub\n#### Deep\nline one\nline two\n\n- a\n- **b**\n\n1. x\n2. _y_\n\n> quoted [site](https://darafrica.org)\n\nmail [us](mailto:store@darafrica.org)',
+      '# Title\n## Sub\n#### Deep\nline one\nline two\n\n- a\n- **b**\n\n1. x\n2. _y_\n\n> quoted [site](https://africadawad.org)\n\nmail [us](mailto:store@africadawad.org)',
     );
     expect(b.map((x) => x.kind)).toEqual(['h', 'h', 'h', 'p', 'ul', 'ol', 'quote', 'p']);
     expect(b.slice(0, 3).map((x) => (x as { level: number }).level)).toEqual([2, 2, 4]);
     expect(text([b[3]])).toBe('line one line two');
-    expect(hrefs(b)).toEqual(['https://darafrica.org/', 'mailto:store@darafrica.org']);
+    expect(hrefs(b)).toEqual(['https://africadawad.org/', 'mailto:store@africadawad.org']);
     expect(parseInline('a **b *c* d** e')).toEqual([
       { kind: 'text', text: 'a ' },
       {

@@ -1,26 +1,26 @@
 # Store sites on the shared edge Caddy (inherited from ta3lom_store_web F8). The VPS edge config lives in the owner's edge
-# deploy repo, so this block lives here and the owner copies it to that repo's `edge/conf/darafrica-store.caddy`, imported by `Caddyfile`,
+# deploy repo, so this block lives here and the owner copies it to that repo's `edge/conf/africadawad-store.caddy`, imported by `Caddyfile`,
 # `Caddyfile.cutover` and `Caddyfile.staging` (deploy/edge/README.md). Validated by scripts/validate-caddy.sh.
 # Upstreams are Docker aliases on the external `edge` network (no published ports):
-#   darafrica-store-web / darafrica-store-web-staging  — this repo's container (deploy/docker-compose.store-web.yml), :8080
-#   darafrica-store-api / darafrica-store-api-staging  — the store API (ta3lom_store_api deploy/compose.yaml), :8080
+#   africadawad-store-web / africadawad-store-web-staging  — this repo's container (deploy/docker-compose.store-web.yml), :8080
+#   africadawad-store-api / africadawad-store-api-staging  — the store API (ta3lom_store_api deploy/compose.yaml), :8080
 # The containers send their own CSP and security headers; the edge adds only HSTS (production names) and noindex
 # (staging names). The edge sets X-Forwarded-For/Proto; the API trusts them only from the edge subnet
 # (Store__ForwardedHeaders__KnownNetworks__0 = EDGE_SUBNET).
 
 # "?" = only when the container did not send it: the API and the staging web send these headers themselves, and a
 # duplicated X-Robots-Tag reads as "noindex, nofollow, noindex, nofollow" (smoke-deploy refuses it).
-(darafrica_store_hsts) {
+(africadawad_store_hsts) {
 	header ?Strict-Transport-Security "max-age=31536000; includeSubDomains"
 }
 
-(darafrica_store_noindex) {
+(africadawad_store_noindex) {
 	header ?X-Robots-Tag "noindex, nofollow"
 }
 
 # The API: 21 MB bodies (20 MB media uploads + multipart overhead); the payment webhook is never cached or buffered so
 # the API reads the raw body itself (signature check, 256 KB limit enforced by the API).
-(darafrica_store_api) {
+(africadawad_store_api) {
 	request_body {
 		max_size 21MB
 	}
@@ -38,24 +38,24 @@
 	}
 }
 
-store.darafrica.org {
-	import darafrica_store_hsts
+store.africadawad.org {
+	import africadawad_store_hsts
 	encode zstd gzip
-	reverse_proxy darafrica-store-web:8080
+	reverse_proxy africadawad-store-web:8080
 }
 
-store-api.darafrica.org {
-	import darafrica_store_hsts
-	import darafrica_store_api darafrica-store-api
+store-api.africadawad.org {
+	import africadawad_store_hsts
+	import africadawad_store_api africadawad-store-api
 }
 
-store-staging.darafrica.org {
-	import darafrica_store_noindex
+store-staging.africadawad.org {
+	import africadawad_store_noindex
 	encode zstd gzip
-	reverse_proxy darafrica-store-web-staging:8080
+	reverse_proxy africadawad-store-web-staging:8080
 }
 
-store-api-staging.darafrica.org {
-	import darafrica_store_noindex
-	import darafrica_store_api darafrica-store-api-staging
+store-api-staging.africadawad.org {
+	import africadawad_store_noindex
+	import africadawad_store_api africadawad-store-api-staging
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Review 04 H-1: production and staging side by side on ONE edge network, from deploy/docker-compose.store-web.yml
-# unchanged — `darafrica-store-web` must resolve to the production container only and `darafrica-store-web-staging` to the staging one only.
+# unchanged — `africadawad-store-web` must resolve to the production container only and `africadawad-store-web-staging` to the staging one only.
 # (With the service named `store-web`, Compose also gave the staging container the alias `store-web`.)
 #   bash scripts/check-edge-aliases.sh <store-web image>
 set -euo pipefail
@@ -34,16 +34,16 @@ resolve() {   # every A record of a name on the edge network, sorted, one line
     | awk '/^Name:/{n=1; next} n && /^Address/{print $NF}' | sort | tr '\n' ' ' | sed 's/ $//'
 }
 
-up t3s-alias-prod darafrica-store-web
-up t3s-alias-staging darafrica-store-web-staging
+up t3s-alias-prod africadawad-store-web
+up t3s-alias-staging africadawad-store-web-staging
 prod="$(ip_of t3s-alias-prod)"
 staging="$(ip_of t3s-alias-staging)"
-got_prod="$(resolve darafrica-store-web)"
-got_staging="$(resolve darafrica-store-web-staging)"
-echo "check-edge-aliases: production $prod, staging $staging; darafrica-store-web → [$got_prod], darafrica-store-web-staging → [$got_staging]"
+got_prod="$(resolve africadawad-store-web)"
+got_staging="$(resolve africadawad-store-web-staging)"
+echo "check-edge-aliases: production $prod, staging $staging; africadawad-store-web → [$got_prod], africadawad-store-web-staging → [$got_staging]"
 
 fail=0
-[ "$got_prod" = "$prod" ] || { echo "check-edge-aliases: darafrica-store-web must resolve to the production container only" >&2; fail=1; }
-[ "$got_staging" = "$staging" ] || { echo "check-edge-aliases: darafrica-store-web-staging must resolve to the staging container only" >&2; fail=1; }
+[ "$got_prod" = "$prod" ] || { echo "check-edge-aliases: africadawad-store-web must resolve to the production container only" >&2; fail=1; }
+[ "$got_staging" = "$staging" ] || { echo "check-edge-aliases: africadawad-store-web-staging must resolve to the staging container only" >&2; fail=1; }
 [ "$fail" -eq 0 ] || exit 1
 echo "check-edge-aliases: OK — each environment answers to its own alias only"

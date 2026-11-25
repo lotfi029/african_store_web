@@ -960,7 +960,7 @@
       </trans-unit>
       <trans-unit id="store.seo.site-name" datatype="html">
         <source>التبرعات - جمعية الدعوة والتعليم باللغات الافريقية</source>
-        <target state="translated">Dar Africa donation store</target>
+        <target state="translated">Donations - Association for Da'wah and Education in African Languages</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/seo/seo.service.ts</context>
           <context context-type="linenumber">30</context>
@@ -3912,7 +3912,7 @@
       </trans-unit>
       <trans-unit id="store.admin.login-brand" datatype="html">
         <source>جمعية الدعوة والتعليم باللغات الافريقية — لوحة الفريق</source>
-        <target state="translated">Dar Africa store — team panel</target>
+        <target state="translated">Association for Da'wah and Education in African Languages — team panel</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/admin/login/admin-login.page.html</context>
           <context context-type="linenumber">8,10</context>
@@ -4072,7 +4072,7 @@
       </trans-unit>
       <trans-unit id="store.admin.login-description" datatype="html">
         <source>دخول فريق التبرعات - جمعية الدعوة والتعليم باللغات الافريقية.</source>
-        <target state="translated">Sign-in for the Dar Africa donation store team.</target>
+        <target state="translated">Sign-in for the Donations - Association for Da'wah and Education in African Languages team.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/admin/login/admin-login.page.ts</context>
           <context context-type="linenumber">93</context>
@@ -5856,7 +5856,7 @@
       </trans-unit>
       <trans-unit id="store.admin.brand-name" datatype="html">
         <source>جمعية الدعوة والتعليم باللغات الافريقية</source>
-        <target state="translated">Dar Africa store</target>
+        <target state="translated">Association for Da'wah and Education in African Languages</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/admin/shell/admin-shell.html</context>
           <context context-type="linenumber">14,15</context>
@@ -8036,7 +8036,7 @@
       </trans-unit>
       <trans-unit id="store.layout.brand-short" datatype="html">
         <source>جمعية الدعوة والتعليم باللغات الافريقية</source>
-        <target state="translated">Dar Africa</target>
+        <target state="translated">Association for Da'wah and Education in African Languages</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/header/header.html</context>
           <context context-type="linenumber">21,22</context>

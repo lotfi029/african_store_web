@@ -7,9 +7,9 @@
 export const environment = {
   production: true,
   envName: 'fullstack' as 'development' | 'local' | 'ci' | 'fullstack' | 'staging' | 'production',
-  apiUrl: 'https://store-api.darafrica.org/v1',
-  siteOrigin: 'https://store.darafrica.org',
-  mainSiteUrl: 'https://darafrica.org',
+  apiUrl: 'https://store-api.africadawad.org/v1',
+  siteOrigin: 'https://store.africadawad.org',
+  mainSiteUrl: 'https://africadawad.org',
   /** `noindex` = every page `noindex, nofollow` whatever the route says (staging). */
   robots: 'noindex' as 'index' | 'noindex',
   /**
@@ -22,7 +22,7 @@ export const environment = {
    * The only hosts the web ever redirects a donor to for payment (ADR-S05; https except localhost). Moyasar's hosted
    * invoice page in staging/production; the API's own fake page (`/dev/payments/{id}`) in development, local and CI.
    */
-  paymentHosts: ['store-api.darafrica.org'] as readonly string[],
+  paymentHosts: ['store-api.africadawad.org'] as readonly string[],
   /** http allowed for the payment page (the local fake gateway); never on staging/production. */
   paymentAllowHttp: false,
   /** Option C trust row (owner M-3, REVIEW: move to the API config later): hidden while zakat is off / no updates. */

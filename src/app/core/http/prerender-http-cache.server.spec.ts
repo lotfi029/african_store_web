@@ -1,7 +1,7 @@
 import { prerenderUrl } from './prerender-http-cache.server';
 
 describe('prerender API URL (C-1)', () => {
-  const runtime = 'https://store-api.darafrica.org/v1';
+  const runtime = 'https://store-api.africadawad.org/v1';
   const stub = 'http://localhost:3000/v1';
 
   it('reads build-time data from PRERENDER_API_URL while the app keeps the runtime URL', () => {

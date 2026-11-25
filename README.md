@@ -1,7 +1,7 @@
 # african_store_web
 
-Storefront, customer account and staff admin of the **Dar Africa donation store** (جمعية الدعوة والتعليم باللغات
-الأفريقية) — Angular 22, static output, served at https://store.darafrica.org. Start with [CLAUDE.md](CLAUDE.md) and
+Storefront, customer account and staff admin of the **africadawad donation store** (جمعية الدعوة والتعليم باللغات
+الأفريقية) — Angular 22, static output, served at https://store.africadawad.org. Start with [CLAUDE.md](CLAUDE.md) and
 [docs/plan/w-00-plan.md](docs/plan/w-00-plan.md).
 
 Forked from `lotfi029/ta3lom_store_web` (same architecture, Angular version and rules) and talking to the same

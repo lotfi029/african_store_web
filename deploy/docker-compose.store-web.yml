@@ -1,11 +1,11 @@
 # Store web on the shared VPS behind the EDGE Caddy (plan §6 F7; the same model as the store API's deploy/compose.yaml).
 # This file runs NO proxy and publishes NO port: the edge (the edge deploy repo, `edge/`, the only Caddy on 80/443, terminating TLS)
-# reaches the container over the external `edge` network by its alias — `darafrica-store-web` (production) or
-# `darafrica-store-web-staging` (staging); see deploy/edge/store.caddy. One file, two projects:
-#   EDGE_ALIAS=darafrica-store-web         STORE_WEB_IMAGE=ghcr.io/lotfi029/african-store-web:<tag> \
-#     docker compose -f docker-compose.store-web.yml -p darafrica-store-web up -d --wait
-#   EDGE_ALIAS=darafrica-store-web-staging STORE_WEB_IMAGE=ghcr.io/lotfi029/african-store-web:staging-<sha> \
-#     docker compose -f docker-compose.store-web.yml -p darafrica-store-web-staging up -d --wait
+# reaches the container over the external `edge` network by its alias — `africadawad-store-web` (production) or
+# `africadawad-store-web-staging` (staging); see deploy/edge/store.caddy. One file, two projects:
+#   EDGE_ALIAS=africadawad-store-web         STORE_WEB_IMAGE=ghcr.io/lotfi029/african-store-web:<tag> \
+#     docker compose -f docker-compose.store-web.yml -p africadawad-store-web up -d --wait
+#   EDGE_ALIAS=africadawad-store-web-staging STORE_WEB_IMAGE=ghcr.io/lotfi029/african-store-web:staging-<sha> \
+#     docker compose -f docker-compose.store-web.yml -p africadawad-store-web-staging up -d --wait
 # (EDGE_ALIAS also lives in each folder's .env; the deploy workflow passes it explicitly.) No secrets: the image is
 # public static files. Runbook: deploy/README.md.
 # Review 04 H-1: the service is `web`, NOT `store-web` — Compose adds the service name as a DNS alias on every network,
@@ -20,7 +20,7 @@ services:
       TLS_MODE: edge
     networks:
       edge:
-        aliases: ["${EDGE_ALIAS:?set EDGE_ALIAS (darafrica-store-web or darafrica-store-web-staging)}"]
+        aliases: ["${EDGE_ALIAS:?set EDGE_ALIAS (africadawad-store-web or africadawad-store-web-staging)}"]
     read_only: true
     tmpfs:
       - /tmp:size=16m,mode=1777

@@ -37,6 +37,7 @@ without a commit. Never redo a committed phase.
 | W-01.1 | W-01.1 — perf: money and plural formatting without Intl on the first render | done | owner: W-01 performance pass. 4× long-task A/B `/ar/` 356 → 318–324, `/ar/p` 326–340 → 262–282 ms; Lighthouse A/B (45 runs per build) `/ar/` JS TBT −36 ms, `/ar/p` within noise |
 | W-01 LHCI | W-01 — LHCI 5 runs per URL | done | owner choice after the deferral A/B (header ~30–70 ms, banner none, noise ±50): sample 3 → 5, thresholds unchanged (REVIEW) |
 | W-02 | W-02 — review: API contract, catalogue rebuild dispatch, go-live checklist | done | contract review vs API `27ec8eb` (DECISIONS W-02): typecheck, types:check, lint, unit 406 (70 files) ✓, scripts 16 ✓. No `src/` behaviour change |
+| W-03 | W-03 — deploy: Dar Africa API deployment kit | done | typecheck, lint, unit 406 (70 files) ✓; `build:prod` (stub prerender) ✓ all post-build checks. No `src/` change |
 
 ## Manual pass (Phase 8)
 

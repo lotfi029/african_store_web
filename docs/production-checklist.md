@@ -17,17 +17,18 @@ everything else is for the owner (or a later session).
       methods mada, credit card, Apple Pay (domain verification for `store.darafrica.org`); run the API's sandbox tests once
       with a test key (`MoyasarSandboxTests`, skipped without one).
 - [ ] **Staging API hosted** at `https://store-api-staging.darafrica.org` (the staging deploy is skipped until it answers, H-1).
-- [ ] **API CORS** = `https://store.darafrica.org` only on production (staging: its own origin); refresh cookies for that
-      site. The API's `compose.yaml` sets `Store__Cors__Origins__0` from `WEB_DOMAIN`, but its `appsettings.Production.json`
-      still lists `https://ta3lom.sa` and `www` as `BadgeOrigins` (main-site cart badge): override them with
-      `Store__Cors__BadgeOrigins__0=https://darafrica.org` and `__1=https://www.darafrica.org` (or the badge is refused).
-- [ ] **API site rebuild:** in the API's env file `SITE_REBUILD_REPOSITORY=lotfi029/african_store_web` (its compose
-      default is `lotfi029/ta3lom_store_web`) and the `Store__SiteRebuild__Token` secret with Contents read/write on
-      this repo. The API sends `repository_dispatch` `store-catalog-changed`, which `deploy.yml` listens to; otherwise
-      publishing a project rebuilds the other store and the new page here waits for the nightly build.
-- [ ] **API e-mail and receipts:** `SMTP_USER` and `Store__Email__From` / `Store__Email__StaffAlerts` (the API defaults
-      are `store@ta3lom.sa` / `store-alerts@ta3lom.sa`); the admin settings `receipt_org_name_ar` / `_en`,
-      `receipt_licence_no` and `site_name_*` (the receipt falls back to ta3lom's association name when unset).
+- [ ] **Dar Africa API deployment** from the kit in [`deploy/api/`](../deploy/api/README.md): copy
+      `.env.production.example` / `.env.staging.example` and `compose.darafrica.yaml` next to the API's
+      `compose.yaml`; add `-f compose.darafrica.yaml` to every compose command. It covers what the API still defaults
+      to ta3lom for:
+      - `SITE_REBUILD_REPOSITORY=lotfi029/african_store_web`, plus the `Store__SiteRebuild__Token` secret (Contents
+        read/write on this repo). Without them, publishing rebuilds ta3lom's site, and new pages here wait for the
+        nightly build. The API sends `store-catalog-changed`, which `deploy.yml` listens to.
+      - badge CORS (`darafrica.org`, `www`); `appsettings.Production.json` lists `ta3lom.sa`, and no env-file line reaches it.
+      - the e-mail sender and staff alerts (`SMTP_USER`; the defaults are `store@` / `store-alerts@ta3lom.sa`).
+      CORS for the site itself comes from `WEB_DOMAIN`.
+- [ ] **API settings in `/admin`** after the first start: `site_name_*`, `receipt_org_name_*` (the receipt falls back to
+      ta3lom's association name), `receipt_licence_no`, `support_mobile`.
 - [ ] **Edge proxy:** copy `deploy/edge/store.caddy` into ta3lom-deploy and import it (`deploy/edge/README.md`);
       the `edge` network has a fixed IPv4 subnet = the API's `EDGE_SUBNET`. This container publishes no port (F7).
 

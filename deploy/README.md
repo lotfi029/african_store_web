@@ -161,8 +161,8 @@ ref is the tag and the `production` environment's "`v*` tags only" rule applies;
 succeeded. The image is built, **checked with `check-container.mjs`** for
 its environment, and only then pushed. A failed CI run deploys nothing.
 
-- **Staging:** merge to `main` (or wait for the nightly, or send `repository_dispatch` `catalog-changed` from the API
-  after a catalogue change). The job builds `:staging-<sha>`, then on the VPS:
+- **Staging:** merge to `main` (or wait for the nightly, or the API's `repository_dispatch`
+  `store-catalog-changed` after a catalogue change; `catalog-changed` by hand works too). The job builds `:staging-<sha>`, then on the VPS:
 
   ```bash
   cd /srv/store-web-staging
@@ -185,7 +185,7 @@ first deploy only:
    only (with the «قريبًا» banner in showcase), `check-container` accepts a home page without project links, and the
    run shows a warning.
 3. Create the staff account (API runbook `create-admin`), sign in at `/admin`, add and publish the categories and
-   projects. Publishing triggers a staging rebuild (`catalog-changed`); for production push a new tag.
+   projects. Publishing triggers a staging rebuild (`store-catalog-changed`); for production push a new tag.
 4. **Delete the variable** as soon as each environment has a published project — every later build has the guard back.
 
 **Edge aliases (review 04 H-1).** The compose service is called `web`, never `store-web`: Compose gives every service
@@ -238,4 +238,6 @@ By hand on the VPS: the same two commands with the older tag (check the label fi
 
 Options, amounts and availability refresh in the browser after every page load. Titles, descriptions, SEO text and the
 sitemap of prerendered pages change with the next build: the nightly staging build picks them up; for production, tag a
-release (or let the API send `catalog-changed` once that hook exists).
+release. The API sends `repository_dispatch` `store-catalog-changed` (debounced) after a catalogue change, which
+rebuilds staging, only when its deployment points `SITE_REBUILD_REPOSITORY` at `lotfi029/african_store_web` and has
+the `Store__SiteRebuild__Token` secret (API `deploy/compose.yaml` defaults to the ta3lom web repo).

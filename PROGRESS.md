@@ -38,6 +38,7 @@ without a commit. Never redo a committed phase.
 | W-01 LHCI | W-01 — LHCI 5 runs per URL | done | owner choice after the deferral A/B (header ~30–70 ms, banner none, noise ±50): sample 3 → 5, thresholds unchanged (REVIEW) |
 | W-02 | W-02 — review: API contract, catalogue rebuild dispatch, go-live checklist | done | contract review vs API `27ec8eb` (DECISIONS W-02): typecheck, types:check, lint, unit 406 (70 files) ✓, scripts 16 ✓. No `src/` behaviour change |
 | W-03 | W-03 — deploy: Dar Africa API deployment kit | done | typecheck, lint, unit 406 (70 files) ✓; `build:prod` (stub prerender) ✓ all post-build checks. No `src/` change |
+| W-04 | W-04 — ci: Lighthouse CPU throttling calibrated to the runner | done | scripts 20 ✓ (4 new); local `npm run lhci` on the production build: runner 2269 → 3.03×, all assertions ✓ (TBT 103–166 ms). CI decides |
 
 ## Manual pass (Phase 8)
 

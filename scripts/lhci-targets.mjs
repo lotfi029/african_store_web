@@ -20,8 +20,10 @@ console.log('lhci-targets: median of runs vs owner targets (perf ≥ 90, a11y 10
 for (const [url, ds] of Object.entries(runs)) {
   const c = (k) => median(ds.map((d) => d.categories[k].score));
   const a = (k) => median(ds.map((d) => d.audits[k].numericValue));
+  const bi = Math.round(median(ds.map((d) => d.environment?.benchmarkIndex ?? 0)));
+  const cpu = ds[0].configSettings?.throttling?.cpuSlowdownMultiplier;
   const m = { perf: c('performance'), a11y: c('accessibility'), bp: c('best-practices'), seo: c('seo'), lcp: a('largest-contentful-paint'), cls: a('cumulative-layout-shift'), tbt: a('total-blocking-time') };
   console.log(
-    `  ${new URL(url).pathname.padEnd(24)} perf ${Math.round(m.perf * 100)} ${mark(m.perf >= T.perf)}  a11y ${Math.round(m.a11y * 100)} ${mark(m.a11y >= T.a11y)}  BP ${Math.round(m.bp * 100)} ${mark(m.bp >= T.bp)}  SEO ${Math.round(m.seo * 100)} ${mark(m.seo >= T.seo)}  LCP ${Math.round(m.lcp)} ms ${mark(m.lcp <= T.lcp)}  CLS ${m.cls.toFixed(3)} ${mark(m.cls <= T.cls)}  TBT ${Math.round(m.tbt)} ms ${mark(m.tbt <= T.tbt)}`,
+    `  ${new URL(url).pathname.padEnd(24)} perf ${Math.round(m.perf * 100)} ${mark(m.perf >= T.perf)}  a11y ${Math.round(m.a11y * 100)} ${mark(m.a11y >= T.a11y)}  BP ${Math.round(m.bp * 100)} ${mark(m.bp >= T.bp)}  SEO ${Math.round(m.seo * 100)} ${mark(m.seo >= T.seo)}  LCP ${Math.round(m.lcp)} ms ${mark(m.lcp <= T.lcp)}  CLS ${m.cls.toFixed(3)} ${mark(m.cls <= T.cls)}  TBT ${Math.round(m.tbt)} ms ${mark(m.tbt <= T.tbt)}  (runner ${bi}, CPU ${cpu}×)`,
   );
 }

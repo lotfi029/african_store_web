@@ -1,5 +1,5 @@
 /**
- * africadawad catalogue (W-00 plan Phase 7) for local runs, e2e, the stub capture and screenshots ONLY — added through
+ * africadawah catalogue (W-00 plan Phase 7) for local runs, e2e, the stub capture and screenshots ONLY — added through
  * the ADMIN API (never SQL), idempotent. Never used for staging or production (the catalogue there is the owner's,
  * created in /admin — plan §11).
  * The API's Development seed (ta3lom's 3 categories and 6 projects) is RETIRED, not mixed in: its projects are archived
@@ -22,7 +22,7 @@ export const RETIRED_PROJECTS = [
   'learner-support',
 ];
 
-/** [slug, nameAr, nameEn, acceptsGeneralGifts, rgb] — placeholder cover colours from the africadawad palette. */
+/** [slug, nameAr, nameEn, acceptsGeneralGifts, rgb] — placeholder cover colours from the africadawah palette. */
 export const CATEGORIES = [
   ['c-preachers', 'كفالة الدعاة', 'Preacher sponsorship', false, [48, 79, 80]],
   ['c-translation', 'الترجمة والطباعة', 'Translation and printing', false, [160, 141, 98]],
@@ -255,5 +255,5 @@ export async function seedCatalogue(c, log = () => {}) {
         throw new Error(`publish ${slug}: ${r.status} ${JSON.stringify(r.body)}`);
     }
   }
-  log(`projects: ${created} created, ${PROJECTS.length} in the africadawad set`);
+  log(`projects: ${created} created, ${PROJECTS.length} in the africadawah set`);
 }

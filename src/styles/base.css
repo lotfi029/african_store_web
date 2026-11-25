@@ -75,7 +75,7 @@ html[dir='ltr'] body {
   line-height: 1.55;
 }
 
-/* W-00: africadawad headings are bold (prototype). IBM Plex Sans Arabic ships 400 and 700 only (DECISIONS: fonts), so
+/* W-00: africadawah headings are bold (prototype). IBM Plex Sans Arabic ships 400 and 700 only (DECISIONS: fonts), so
    ta3lom's 400/500 heading weights would both render 400. */
 h1,
 h2,

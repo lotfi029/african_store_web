@@ -153,11 +153,11 @@ describe('ErrorReporter (P5, PII-free)', () => {
 
   it('F-4: URLs lose host and query; %40 e-mails and Saudi mobiles are redacted', () => {
     const admin = scrub(
-      'Http failure response for https://store-api.africadawad.org/v1/admin/customers?q=%D9%85%D8%AD%D9%85%D8%AF%20a.b%40c.sa: 500 Internal Server Error',
+      'Http failure response for https://store-api.africadawah.org/v1/admin/customers?q=%D9%85%D8%AD%D9%85%D8%AF%20a.b%40c.sa: 500 Internal Server Error',
     );
     expect(admin).toContain('/v1/admin/customers');
     expect(admin).not.toMatch(/store-api|\?q=|%40|%D9|a\.b/);
-    const status = scrub('GET https://store-api.africadawad.org/v1/orders/T3-26-000123/status?t=s3cr3tT0ken failed');
+    const status = scrub('GET https://store-api.africadawah.org/v1/orders/T3-26-000123/status?t=s3cr3tT0ken failed');
     expect(status).toContain('/v1/orders/:ref/status');
     expect(status).not.toMatch(/s3cr3t|\?t=|T3-26/);
     expect(scrub('relative /v1/admin/customers?mobile=0551234567 failed')).not.toMatch(/055|mobile=/);

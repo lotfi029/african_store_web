@@ -17,11 +17,11 @@ for (const locale of ['ar', 'en'] as const) {
       // W-00: never a placeholder licence number (it shows once the API exposes it).
       await expect(util).not.toContainText(locale === 'ar' ? 'ترخيص' : 'Licence');
       await expect(util).not.toContainText('[');
-      await expect(util.locator('.ulink')).toHaveAttribute('href', /^https:\/\/africadawad\.org/);
+      await expect(util.locator('.ulink')).toHaveAttribute('href', /^https:\/\/africadawah\.org/);
       await expect(header.locator('form[role=search] #hdr-q')).toBeVisible();
       // Empty cart: the button says "السلة" without a total; the accessible name says it is empty.
       await expect(header.locator('a.cartbtn .ctot')).toHaveCount(0);
-      await expect(header.locator('.brand')).toHaveAttribute('href', /^https:\/\/africadawad\.org/);
+      await expect(header.locator('.brand')).toHaveAttribute('href', /^https:\/\/africadawah\.org/);
       await expect(header.locator('a.cartbtn')).toHaveAttribute('href', `/${locale}/cart`);
       await expect(header.locator('a.signin')).toHaveAttribute('href', `/${locale}/login`);
       await expect(page.locator('.util a.lang')).toHaveAttribute(
@@ -122,8 +122,8 @@ for (const locale of ['ar', 'en'] as const) {
       await page.goto(`/${locale}/`);
       const foot = page.locator('footer.foot');
       await expect(foot.locator('.quote')).toBeVisible();
-      await expect(foot.locator(`a[href="https://africadawad.org/${locale}/about"]`)).toHaveCount(1);
-      await expect(foot.locator(`a[href="https://africadawad.org/${locale}/contact"]`)).toHaveCount(1);
+      await expect(foot.locator(`a[href="https://africadawah.org/${locale}/about"]`)).toHaveCount(1);
+      await expect(foot.locator(`a[href="https://africadawah.org/${locale}/contact"]`)).toHaveCount(1);
       await expect(foot).not.toContainText('[');
       await expect(foot.locator('.foot-bottom')).toContainText(String(new Date().getFullYear()));
     });

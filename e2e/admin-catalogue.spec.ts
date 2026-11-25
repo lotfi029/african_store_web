@@ -53,7 +53,7 @@ for (const locale of ['ar', 'en'] as const) {
       await page.locator('#pe-slug').fill(`e2e-prj-${id}`);
       await page.locator('#pe-tar').fill(`مشروع ${id}`);
       await page.locator('#pe-sar').fill('ملخص قصير للمشروع.');
-      await page.locator('#pe-bar').fill('## القصة\n\nنص **عريض** ورابط [هنا](https://africadawad.org).');
+      await page.locator('#pe-bar').fill('## القصة\n\nنص **عريض** ورابط [هنا](https://africadawah.org).');
       // W-A3: the English fields sit behind the عربي / English tabs.
       await page.getByRole('tab', { name: 'English' }).click();
       await page.locator('#pe-ten').fill(`Project ${id}`);

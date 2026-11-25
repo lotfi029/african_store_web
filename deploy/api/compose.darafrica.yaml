@@ -1,12 +1,12 @@
-# africadawad overrides for ta3lom_store_api's deploy/compose.yaml. That file passes only a fixed list of variables to the
+# africadawah overrides for ta3lom_store_api's deploy/compose.yaml. That file passes only a fixed list of variables to the
 # API, and the API's appsettings.Production.json still names ta3lom for these — an env-file line can't change them.
-# Copy next to the API's compose.yaml and add it to EVERY compose command:  -f compose.yaml -f compose.africadawad.yaml
+# Copy next to the API's compose.yaml and add it to EVERY compose command:  -f compose.yaml -f compose.africadawah.yaml
 services:
   api:
     environment:
-      # Main-site cart badge (GET /v1/cart/summary from africadawad.org). Both entries replace ta3lom.sa / www.ta3lom.sa.
-      Store__Cors__BadgeOrigins__0: https://africadawad.org
-      Store__Cors__BadgeOrigins__1: https://www.africadawad.org
+      # Main-site cart badge (GET /v1/cart/summary from africadawah.org). Both entries replace ta3lom.sa / www.ta3lom.sa.
+      Store__Cors__BadgeOrigins__0: https://africadawah.org
+      Store__Cors__BadgeOrigins__1: https://www.africadawah.org
       # Sender of receipts and notifications, and where staff alerts go (defaults: store@ / store-alerts@ta3lom.sa).
       Store__Email__From: ${SMTP_USER:?set SMTP_USER}
       Store__Email__StaffAlerts: ${STAFF_ALERTS_EMAIL:-${SMTP_USER}}

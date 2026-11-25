@@ -7,8 +7,8 @@ export const environment = {
   production: true,
   envName: 'local' as 'development' | 'local' | 'ci' | 'fullstack' | 'staging' | 'production',
   apiUrl: 'http://localhost:5080/v1',
-  siteOrigin: 'https://store.africadawad.org',
-  mainSiteUrl: 'https://africadawad.org',
+  siteOrigin: 'https://store.africadawah.org',
+  mainSiteUrl: 'https://africadawah.org',
   /** `noindex` = every page `noindex, nofollow` whatever the route says (staging). */
   robots: 'index' as 'index' | 'noindex',
   /**

@@ -188,8 +188,8 @@ try {
   else expect(/Sitemap: https:\/\//.test(robots), 'robots.txt must point at the sitemap');
 
   // The image's config label must match the environment it is checked for (review 06 D-2)
-  const label = docker('inspect', '-f', '{{index .Config.Labels "org.africadawad.store-web.config"}}', image);
-  expect(label === ENV, `image label org.africadawad.store-web.config is "${label}", expected "${ENV}"`);
+  const label = docker('inspect', '-f', '{{index .Config.Labels "org.africadawah.store-web.config"}}', image);
+  expect(label === ENV, `image label org.africadawah.store-web.config is "${label}", expected "${ENV}"`);
 } catch (e) {
   problems.push(String(e.message ?? e));
 } finally {

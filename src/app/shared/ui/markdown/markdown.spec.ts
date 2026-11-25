@@ -18,14 +18,14 @@ describe('<ta-markdown> (C-5)', () => {
 
   it('renders the allowed elements', () => {
     const el = render(
-      '## Head\n\nSome **bold** and *em* with [a link](https://africadawad.org/x).\n\n- one\n- two\n\n> quote',
+      '## Head\n\nSome **bold** and *em* with [a link](https://africadawah.org/x).\n\n- one\n- two\n\n> quote',
     );
     expect(el.querySelector('h2')?.textContent).toBe('Head');
     expect(el.querySelector('strong')?.textContent).toBe('bold');
     expect(el.querySelector('p')?.textContent).toBe('Some bold and em with a link.');
     expect(el.querySelector('em')?.textContent).toBe('em');
     const a = el.querySelector('a') as HTMLAnchorElement;
-    expect(a.getAttribute('href')).toBe('https://africadawad.org/x');
+    expect(a.getAttribute('href')).toBe('https://africadawah.org/x');
     expect(a.getAttribute('rel')).toBe('noopener noreferrer');
     expect(a.getAttribute('target')).toBe('_blank');
     expect(el.querySelectorAll('li')).toHaveLength(2);

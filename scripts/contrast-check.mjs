@@ -54,7 +54,7 @@ const PAIRS = [
   ['--c-danger', '--c-surface-2', TEXT, 'error text on panels'],
   ['--c-success', '--c-success-tint', LARGE, 'thanks check icon on its tint'],
   ['--c-warn-text', '--c-gold-tint', LARGE, 'thanks alert icon on its tint'],
-  // W-00 (africadawad, plan §3.2): the new and re-pointed pairs
+  // W-00 (africadawah, plan §3.2): the new and re-pointed pairs
   ['--c-gold-text', '--c-gold-tint', TEXT, 'category pill text on the sand tint'],
   ['--c-gold-text', '--c-surface', TEXT, 'sand text on cards'],
   ['--c-muted', '--c-tint', TEXT, 'muted text on a selected (tinted) chip'],

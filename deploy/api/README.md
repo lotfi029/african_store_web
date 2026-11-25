@@ -1,4 +1,4 @@
-# africadawad store API — deployment kit
+# africadawah store API — deployment kit
 
 The store web calls `ta3lom_store_api` unchanged (plan A-6). Production and staging run **their own deployment** of that
 API image (own database, keys and secrets) with the files here. The API's runbook (`deploy/README.md`, `secrets.md`
@@ -6,11 +6,11 @@ in that repo) applies word for word, with these differences:
 
 | File | Copy to (next to the API's `deploy/compose.yaml`) | Why |
 |---|---|---|
-| `.env.production.example` | `.env.production` | africadawad domains, `SITE_REBUILD_REPOSITORY=lotfi029/african_store_web`, showcase switches |
+| `.env.production.example` | `.env.production` | africadawah domains, `SITE_REBUILD_REPOSITORY=lotfi029/african_store_web`, showcase switches |
 | `.env.staging.example` | `.env.staging` | the same for staging |
-| `compose.africadawad.yaml` | `compose.africadawad.yaml` | badge CORS and e-mail sender, which no env-file line reaches |
+| `compose.africadawah.yaml` | `compose.africadawah.yaml` | badge CORS and e-mail sender, which no env-file line reaches |
 
-- Use the compose project names `africadawad-store` / `africadawad-store-staging` and add `-f compose.africadawad.yaml` to
+- Use the compose project names `africadawah-store` / `africadawah-store-staging` and add `-f compose.africadawah.yaml` to
   every `docker compose` command of the API runbook (`up`, `run --rm api create-admin`, `logs`, backups).
 - Secrets: the API's `secrets.md` list, generated fresh for this deployment. `Store__SiteRebuild__Token` is a GitHub
   fine-grained token with **Contents: read and write on `lotfi029/african_store_web`** (the API refuses to start in
@@ -20,14 +20,14 @@ in that repo) applies word for word, with these differences:
 
 ## Same VPS as ta3lom (W-06)
 
-The africadawad API is a second set of containers next to ta3lom's, never a change to them:
+The africadawah API is a second set of containers next to ta3lom's, never a change to them:
 
-| | ta3lom | africadawad |
+| | ta3lom | africadawah |
 |---|---|---|
-| Folder | `/srv/ta3lom-store/deploy/` | `/srv/africadawad-store/deploy/` (the API's `compose.yaml`, `backup.sh`, `restore-test.sh` + this kit) |
-| Compose project | `ta3lom-store(-staging)` | `africadawad-store(-staging)` (own Postgres, volumes, secrets) |
-| Edge alias | `store-api(-staging)` | `africadawad-store-api(-staging)` (`EDGE_ALIAS` in the env files) |
-| Backups | `/var/backups/ta3lom-store` | `/var/backups/africadawad-store` (same cron lines with this folder and `-f compose.africadawad.yaml`) |
+| Folder | `/srv/ta3lom-store/deploy/` | `/srv/africadawah-store/deploy/` (the API's `compose.yaml`, `backup.sh`, `restore-test.sh` + this kit) |
+| Compose project | `ta3lom-store(-staging)` | `africadawah-store(-staging)` (own Postgres, volumes, secrets) |
+| Edge alias | `store-api(-staging)` | `africadawah-store-api(-staging)` (`EDGE_ALIAS` in the env files) |
+| Backups | `/var/backups/ta3lom-store` | `/var/backups/africadawah-store` (same cron lines with this folder and `-f compose.africadawah.yaml`) |
 
 Both join the same `edge` network and use the same `EDGE_SUBNET`. The API repository's `deploy.yml` deploys ta3lom only;
-the africadawad API is updated with the runbook commands in its own folder (`STORE_VERSION` = the API image tag).
+the africadawah API is updated with the runbook commands in its own folder (`STORE_VERSION` = the API image tag).

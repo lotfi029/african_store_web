@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Post-deploy smoke check (deploy.yml; also the runbook's manual check):
- *   node scripts/smoke-deploy.mjs https://store-staging.africadawad.org [expected-commit-sha] [--env staging|production]
+ *   node scripts/smoke-deploy.mjs https://store-staging.africadawah.org [expected-commit-sha] [--env staging|production]
  * /healthz 200 "ok"; /ar/ and /en/ 200 with the build stamp; /version.json's commit = the expected sha (when given)
  * and its env; staging answers X-Robots-Tag noindex. Retries for up to ~2 minutes while the container starts.
  */

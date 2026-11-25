@@ -24,7 +24,7 @@ export function bannerSlides(featured: readonly ProjectCard[]): ProjectCard[] {
 }
 
 /**
- * Campaign banner (africadawad prototype, W-00): ink panel with decorative ring art, a sand pill («حملة عاجلة» for an
+ * Campaign banner (africadawah prototype, W-00): ink panel with decorative ring art, a sand pill («حملة عاجلة» for an
  * urgent card, else the category), the title — the page's single `<h1>` —, summary, the sand «تبرع الآن» CTA and the
  * «التفاصيل» ghost link → `/p/{slug}`. Several urgent cards: labelled previous/next buttons and dots (`aria-pressed`),
  * NO auto-rotate; the change is announced in a polite live region. No cover image and no progress bar (A-10).
@@ -36,7 +36,7 @@ export function bannerSlides(featured: readonly ProjectCard[]): ProjectCard[] {
   template: `
     @if (slide(); as s) {
       <section class="banner" [attr.aria-label]="regionLabel">
-        <!-- Decorative ring art (africadawad prototype), never announced. -->
+        <!-- Decorative ring art (africadawah prototype), never announced. -->
         <svg class="rings" viewBox="0 0 420 420" aria-hidden="true" focusable="false">
           <circle cx="210" cy="210" r="205" />
           <circle cx="210" cy="210" r="150" />

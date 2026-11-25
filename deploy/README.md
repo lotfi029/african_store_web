@@ -135,7 +135,8 @@ X-Robots-Tag on staging, client-route fallbacks, real 404s, cache headers, compr
    **Rotate** it before it expires: create a new token, run the same login again, check a pull
    (`docker pull ghcr.io/lotfi029/african-store-web:staging`), then revoke the old token.
 5. **Edge proxy:** import `store.caddy` (§2) in the edge Caddyfile(s) and reload the edge.
-6. **API side.** CORS on the API = the site origin only (`https://store.darafrica.org`, staging its own), refresh cookies
+6. **API side.** Deploy the API from the kit in [`api/`](api/README.md) (Dar Africa env files and compose override).
+   CORS on the API = the site origin only (`https://store.darafrica.org`, staging its own), refresh cookies
    for that site. The web sends credentials and bearer tokens only to its API origin. The API repo's old Caddy block that
    served these files and imported `caddy-headers.conf` for its CSP must be replaced by the reverse proxy above (the CSP
    now comes from this container) — see the PR's "API follow-ups".

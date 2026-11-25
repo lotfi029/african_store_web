@@ -13,7 +13,7 @@ describe('SeoService', () => {
   it('puts the canonical and hreflang alternates on store.darafrica.org', () => {
     const { seo, doc } = setup('en');
     seo.set({ title: 'Smart study', description: 'd', path: '/p/smart-study' });
-    expect(doc.title).toBe('Smart study — متجر التبرعات — دار أفريقيا');
+    expect(doc.title).toBe('Smart study — التبرعات - جمعية الدعوة والتعليم باللغات الافريقية');
     expect(doc.querySelector('link[rel=canonical]')?.getAttribute('href')).toBe(
       'https://store.darafrica.org/en/p/smart-study',
     );

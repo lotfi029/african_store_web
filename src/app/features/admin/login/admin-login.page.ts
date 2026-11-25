@@ -90,7 +90,7 @@ export class AdminLoginPage {
   constructor() {
     this.seo.set({
       title: $localize`:@@store.admin.login-title:دخول فريق المتجر`,
-      description: $localize`:@@store.admin.login-description:دخول فريق متجر التبرعات — دار أفريقيا.`,
+      description: $localize`:@@store.admin.login-description:دخول فريق التبرعات - جمعية الدعوة والتعليم باللغات الافريقية.`,
       path: '/admin/login',
       noindex: true,
     });

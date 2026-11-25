@@ -27,7 +27,7 @@ export interface SeoData {
 
 /** The store's name in the current locale (titles, Open Graph, JSON-LD). */
 export const siteName = (): string =>
-  $localize`:@@store.seo.site-name:متجر التبرعات — دار أفريقيا`;
+  $localize`:@@store.seo.site-name:التبرعات - جمعية الدعوة والتعليم باللغات الافريقية`;
 const JSON_LD_ID = 'ta-seo-json-ld';
 
 /** Every route calls `set()` (non-negotiable #4; a unit test checks every page does). Canonicals on store.darafrica.org. */

@@ -4,11 +4,23 @@ name: Deploy
 # `staging` / `production` environments, the VPS SSH secrets and the GHCR read token on the VPS (docs/W-00-report.md,
 # owner steps; plan §11). Every job that builds, pushes or deploys an image checks vars.DEPLOY_ENABLED; the PR dry run
 # (echo only, no secret, no image) still runs.
+# AFRICADAWAH (W-09): there is no staging yet (owner: staging DNS and API come with Moyasar payments). While the
+# repository variable STAGING_ENABLED is not "true", a CI-green merge to main goes STRAIGHT to production (target
+# `direct`: production image, check-container against the production API, deploy, smoke check) and catalogue rebuilds
+# are production only. Set STAGING_ENABLED=true once store-staging / store-api-staging exist: from then on production
+# waits for the staging deploy and its smoke check, exactly as ta3lom does.
 # Runbook: deploy/README.md. Images: ghcr.io/lotfi029/african-store-web (private package; the VPS pulls with its OWN
 # read:packages token — this workflow never sends a registry token to the VPS, owner H-4).
 # Deploys run ONLY after CI succeeded on the same commit (review 06 D-1):
-#   CI succeeded on a push to main                                  → build the STAGING image, check-container on it,
-#                                                                     push (:staging-<sha>, :staging), deploy to `staging`
+#   CI succeeded on a push to main (STAGING_ENABLED=true)           → build the STAGING image, check-container on it,
+#                                                                     push (:staging-<sha>, :staging), deploy to `staging`;
+#                                                                     once staging is deployed and smoke-checked, PROMOTE:
+#                                                                     the gate numbered the next vX.Y.Z (latest tag, patch
+#                                                                     + 1) and created that tag on the commit (a tag made
+#                                                                     by GITHUB_TOKEN starts no workflow), then the
+#                                                                     production image + deploy below run without a
+#                                                                     release (owner, 2026-11-27: "deploy direct")
+#   CI succeeded on a push to main (no staging, W-09)               → same vX.Y.Z tag, then the production image + deploy
 #   push of a tag vX.Y.Z (strict semver, no pre-release)            → review 04 H-3: the run's ref IS the tag, so the
 #                                                                     `production` environment's "v* tags only" rule
 #                                                                     applies (a workflow_run always ran on main). The
@@ -17,8 +29,10 @@ name: Deploy
 #                                                                     succeeded → build the PRODUCTION image,
 #                                                                     check-container on it, push (:X.Y.Z, :latest), then
 #                                                                     deploy after the `production` reviewer approves
-#   nightly, repository_dispatch "store-catalog-changed"            → staging rebuild of main HEAD, only when CI on that
-#                                                                     commit succeeded (fresh prerender + sitemap)
+#   nightly, repository_dispatch "store-catalog-changed" (the API,  → fresh prerender + sitemap of the latest vX.Y.Z
+#   after staff catalogue saves) or "catalog-changed"                 (the code production runs; the image tag is
+#                                                                     rebuilt): production, plus staging when main HEAD
+#                                                                     is that commit (LIVE-2). Never waits on CI.
 #   workflow_dispatch (environment, tag)                            → rollback: redeploy an earlier image tag, checked
 #                                                                     against the environment and the image label (D-2)
 # First deploy of an environment (empty catalogue, the admin is in this image): repository variable
@@ -37,8 +51,8 @@ on:
   schedule:
     - cron: '23 1 * * *' # nightly 04:23 Asia/Riyadh: fresh prerender + sitemap (C-N2)
   repository_dispatch:
-    # `store-catalog-changed` is what the store API sends (Store:SiteRebuild:EventType default); `catalog-changed`
-    # stays for a hand-sent dispatch.
+    # The API sends `store-catalog-changed` after every debounced burst of staff catalogue saves (its outbox,
+    # Store:SiteRebuild); `catalog-changed` is kept for a manual dispatch.
     types: [store-catalog-changed, catalog-changed]
   workflow_dispatch:
     inputs:
@@ -55,6 +69,13 @@ on:
 permissions:
   contents: read
 
+# Catalogue rebuilds (dispatch and nightly) share one queue: one runs, and only the NEWEST waiting run is kept (GitHub
+# cancels an older pending run in the group), so a burst of saves becomes at most one more rebuild. Every other event
+# gets its own group (never cancelled).
+concurrency:
+  group: ${{ (github.event_name == 'repository_dispatch' || github.event_name == 'schedule') && 'catalog-rebuild' || format('deploy-{0}', github.run_id) }}
+  cancel-in-progress: false
+
 env:
   IMAGE: ghcr.io/lotfi029/african-store-web
   # "1" only while the repository variable ALLOW_EMPTY_CATALOGUE is "true" (first deploy); empty otherwise.
@@ -68,13 +89,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     permissions:
-      contents: read
+      contents: write # creates the vX.Y.Z tag of a promoted main commit
       actions: read
       checks: read
     outputs:
       target: ${{ steps.decide.outputs.target }}
       sha: ${{ steps.decide.outputs.sha }}
       version: ${{ steps.decide.outputs.version }}
+      promote: ${{ steps.decide.outputs.promote }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         if: github.event_name == 'push'
@@ -90,13 +112,43 @@ jobs:
           RUN_EVENT: ${{ github.event.workflow_run.event }}
           RUN_BRANCH: ${{ github.event.workflow_run.head_branch }}
           RUN_SHA: ${{ github.event.workflow_run.head_sha }}
+          STAGING_ENABLED: ${{ vars.STAGING_ENABLED == 'true' && 'true' || '' }}
         run: |
-          target=none sha= version=
+          target=none sha= version= promote=
+          # Production version of main@$sha: its existing strict vX.Y.Z tag, else the next patch of the latest one. The
+          # tag is created here so two quick runs can never take the same number (the API refuses an existing ref).
+          promote_tag() {
+            existing="$(gh api "repos/$GITHUB_REPOSITORY/git/matching-refs/tags/v" --paginate --jq '.[] | select(.object.sha == "'"$sha"'") | .ref' \
+              | sed 's#^refs/tags/v##' | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -1 || true)"
+            if [ -n "$existing" ]; then
+              version="$existing"
+              return
+            fi
+            latest="$(gh api "repos/$GITHUB_REPOSITORY/git/matching-refs/tags/v" --paginate --jq '.[].ref' \
+              | sed 's#^refs/tags/v##' | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -1 || true)"
+            IFS=. read -r major minor patch <<<"${latest:-0.0.0}"
+            for i in 1 2 3 4 5; do
+              patch=$((patch + 1)) version="$major.$minor.$patch"
+              gh api -X POST "repos/$GITHUB_REPOSITORY/git/refs" -f ref="refs/tags/v$version" -f sha="$sha" > /dev/null && return
+              echo "v$version is taken — trying the next patch"; version=
+            done
+            echo "::error::could not create a vX.Y.Z tag for $sha"; exit 1
+          }
           if [ "$EVENT" = workflow_run ]; then
             if [ "$RUN_CONCLUSION" != success ] || [ "$RUN_EVENT" != push ]; then
               echo "CI concluded '$RUN_CONCLUSION' on a '$RUN_EVENT' event — nothing to deploy."
             elif [ "$RUN_BRANCH" = main ]; then
-              target=staging sha="$RUN_SHA"
+              sha="$RUN_SHA"
+              case "$sha" in ''|*[!0-9a-f]*) echo "::error::invalid sha"; exit 1 ;; esac
+              promote_tag
+              promote=true
+              if [ -n "$STAGING_ENABLED" ]; then
+                target=staging
+                echo "::notice::main@$sha → staging, then production as v$version"
+              else
+                target=direct
+                echo "::notice::main@$sha → production as v$version (no staging: STAGING_ENABLED is not true, W-09)"
+              fi
             else
               # H-3: tags deploy from their own push event (below), never from a workflow_run.
               echo "::notice::$RUN_BRANCH is not main — not deployed from here."
@@ -121,14 +173,24 @@ jobs:
             [ -n "$ok" ] || { echo "::error::CI on $sha did not finish within 45 minutes"; exit 1; }
             target=production version="${GITHUB_REF_NAME#v}"
           else
-            # schedule / repository_dispatch: main HEAD, only if CI succeeded on it
-            sha="$(gh api "repos/$GITHUB_REPOSITORY/commits/main" --jq .sha)"
-            ok="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/ci.yml/runs?head_sha=$sha&status=success&per_page=1" --jq '.total_count')"
-            if [ "${ok:-0}" -gt 0 ]; then target=staging
-            else echo "::warning::CI has not succeeded on main@$sha — nightly/catalog rebuild SKIPPED (D-1)."; sha=; fi
+            # schedule / repository_dispatch (LIVE-2): fresh prerender + sitemap of the code production runs = the
+            # latest strict vX.Y.Z tag (made only after CI and staging passed on main). Never waits for, or ships, a
+            # newer main commit still in CI: that merge's own deploy will prerender the current catalogue too.
+            version="$(gh api "repos/$GITHUB_REPOSITORY/git/matching-refs/tags/v" --paginate --jq '.[].ref' \
+              | sed 's#^refs/tags/v##' | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -1 || true)"
+            if [ -z "$version" ]; then
+              echo "::warning::no vX.Y.Z tag yet — catalogue rebuild SKIPPED."
+            else
+              sha="$(gh api "repos/$GITHUB_REPOSITORY/commits/v$version" --jq .sha)"
+              head="$(gh api "repos/$GITHUB_REPOSITORY/commits/main" --jq .sha)"
+              # Staging too when it runs the same commit; otherwise staging gets its data with its own next deploy.
+              if [ -n "$STAGING_ENABLED" ] && [ "$sha" = "$head" ]; then target=staging; else target=rebuild; fi
+              promote=true
+              echo "::notice::catalogue rebuild of v$version ($sha) → ${target/rebuild/production only}"
+            fi
           fi
           case "$sha" in ''|*[!0-9a-f]*) [ "$target" = none ] || { echo "::error::invalid sha"; exit 1; } ;; esac
-          { echo "target=$target"; echo "sha=$sha"; echo "version=$version"; } >> "$GITHUB_OUTPUT"
+          { echo "target=$target"; echo "sha=$sha"; echo "version=$version"; echo "promote=$promote"; } >> "$GITHUB_OUTPUT"
           echo "Deploy target: $target ${sha:+@ $sha} ${version:+(version $version)}"
 
   # Pull requests touching the deploy path: probe the staging API and print exactly what a main-branch run would do.
@@ -166,6 +228,8 @@ jobs:
     concurrency:
       group: deploy-staging
       cancel-in-progress: false
+    outputs:
+      deployed: ${{ steps.smoke.outcome == 'success' && 'true' || 'false' }}
     env:
       PRERENDER_API_URL: https://store-api-staging.africadawah.org/v1
       SITE: https://store-staging.africadawah.org
@@ -248,15 +312,21 @@ jobs:
           ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes "$SSH_USER@$SSH_HOST" "$REMOTE"
           echo "deployed=true" >> "$GITHUB_OUTPUT"
       - name: Smoke-check https://store-staging.africadawah.org
+        id: smoke
         if: steps.deploy.outputs.deployed == 'true'
         run: node scripts/smoke-deploy.mjs "$SITE" "$SHA" --env staging
       - name: Remove the SSH key
         if: always()
         run: rm -f ~/.ssh/deploy_key
 
+  # A release tag (target production), a main commit promoted after its staging deploy passed the smoke check, a main
+  # commit sent straight to production while there is no staging (target direct, W-09), or a catalogue rebuild.
   production-image:
-    needs: gate
-    if: vars.DEPLOY_ENABLED == 'true' && needs.gate.outputs.target == 'production'
+    needs: [gate, staging]
+    if: >-
+      !cancelled() && vars.DEPLOY_ENABLED == 'true' && (needs.gate.outputs.target == 'production'
+      || needs.gate.outputs.target == 'rebuild' || needs.gate.outputs.target == 'direct'
+      || (needs.gate.outputs.promote == 'true' && needs.staging.outputs.deployed == 'true'))
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -317,10 +387,11 @@ jobs:
 
   production:
     needs: [gate, production-image]
-    if: vars.DEPLOY_ENABLED == 'true'
+    if: ${{ !cancelled() && vars.DEPLOY_ENABLED == 'true' && needs.production-image.result == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    # The `production` environment has a required reviewer (repository settings): this job waits for that approval.
+    # Waits for the `production` environment's protection rules, if any (repository settings). For a promoted main
+    # commit and a catalogue rebuild the environment must allow the `main` branch and have no required reviewer.
     environment:
       name: production
       url: https://store.africadawah.org
@@ -341,7 +412,21 @@ jobs:
         with:
           ref: ${{ needs.gate.outputs.sha }}
           persist-credentials: false
+      - name: Still the newest version? (a catalogue rebuild never replaces a newer deploy)
+        id: newest
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          latest="$(gh api "repos/$GITHUB_REPOSITORY/git/matching-refs/tags/v" --paginate --jq '.[].ref' \
+            | sed 's#^refs/tags/v##' | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -1 || true)"
+          if [ -n "$latest" ] && [ "$latest" != "$TAG" ] && [ "$(printf '%s\n%s\n' "$TAG" "$latest" | sort -V | tail -1)" = "$latest" ]; then
+            echo "::notice::v$latest exists — its own deploy carries a fresh catalogue; v$TAG is not deployed."
+            echo "go=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "go=true" >> "$GITHUB_OUTPUT"
+          fi
       - name: Deploy to the production VPS
+        if: steps.newest.outputs.go == 'true'
         run: |
           test -n "$SSH_HOST" && test -n "$SSH_USER" && test -n "$SSH_KEY" && test -n "$SSH_KNOWN_HOSTS" \
             || { echo "::error::PRODUCTION_SSH_* secrets are missing"; exit 1; }
@@ -352,6 +437,7 @@ jobs:
           ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes "$SSH_USER@$SSH_HOST" \
             "cd '$DEPLOY_DIR' && EDGE_ALIAS=africadawah-store-web STORE_WEB_IMAGE='$IMAGE:$TAG' docker compose -f docker-compose.store-web.yml -p africadawah-store-web pull && EDGE_ALIAS=africadawah-store-web STORE_WEB_IMAGE='$IMAGE:$TAG' docker compose -f docker-compose.store-web.yml -p africadawah-store-web up -d --wait"
       - name: Smoke-check https://store.africadawah.org
+        if: steps.newest.outputs.go == 'true'
         run: node scripts/smoke-deploy.mjs "$SITE" "$SHA" --env production
       - name: Remove the SSH key
         if: always()

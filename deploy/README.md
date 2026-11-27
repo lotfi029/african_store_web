@@ -9,8 +9,8 @@ by the VPS from GHCR. Go-live checklist: [docs/production-checklist.md](../docs/
 | Site | `https://store-staging.africadawah.org` | `https://store.africadawah.org` |
 | API (runtime, compiled in) | `https://store-api-staging.africadawah.org/v1` | `https://store-api.africadawah.org/v1` |
 | Image | `ghcr.io/lotfi029/african-store-web:staging-<sha>` (+ `:staging`) | `ghcr.io/lotfi029/african-store-web:<version>` (+ `:latest`) |
-| Built on | push to `main`, nightly 01:23 UTC, `repository_dispatch: catalog-changed` | tag `vX.Y.Z` |
-| Deployed | automatically (`staging` environment) | after the `production` environment's required reviewer approves |
+| Built on | push to `main`, nightly 01:23 UTC, `repository_dispatch: store-catalog-changed` (the API, after staff catalogue saves) — **only while `STAGING_ENABLED=true`** | a push to `main` (auto `vX.Y.Z`; after staging once staging exists); the nightly or a catalogue rebuild (latest `vX.Y.Z`, fresh prerender); or a tag `vX.Y.Z` |
+| Deployed | automatically (`staging` environment) | automatically (the `production` environment's rules apply) |
 | Robots | `noindex, nofollow` everywhere (meta, `X-Robots-Tag`, `robots.txt Disallow: /`, no sitemap), "نسخة تجريبية" ribbon | indexable, sitemap |
 | Payments | **off — showcase mode** (`showcase: true`) until Moyasar | **off — showcase mode** until Moyasar |
 | Apple Pay file | placeholder allowed (warning) | placeholder allowed in showcase (warning); **Moyasar's real file required** once `showcase: false` — the build fails on the placeholder |
@@ -45,7 +45,10 @@ prerendered pages lack the note, and a live build that shows the note.
    `scripts/lib/envs.mjs` `staging`/`production`; `environment.spec.ts` says which value each environment has).
 3. Web: Moyasar's Apple Pay domain file in `deploy/well-known/` (section "Apple Pay" below) — a production build with
    `showcase: false` fails on the placeholder.
-4. Staging (push to `main`) → a sandbox donation and its refund; then tag `vX.Y.Z` for production. No data changes.
+4. Staging first: DNS, the staging API and `STAGING_SSH_*`, then the repository variable `STAGING_ENABLED=true`. Every
+   merge to `main` then goes to staging and, once its smoke check passes, on to production by itself. To test a sandbox
+   donation and its refund on staging before production gets the change, add a required reviewer to the `production`
+   environment for that merge and approve it after the test. No data changes.
 
 ## 1. Build and image (what CI does)
 
@@ -143,7 +146,12 @@ X-Robots-Tag on staging, client-route fallbacks, real 404s, cache headers, compr
 
 ## 4. GitHub settings
 
-- Environments **`staging`** and **`production`**; `production` with a **required reviewer** and limited to tags `v*`.
+- Environments **`staging`** and **`production`**; `production` allows the branch **`main`** and tags `v*` (no
+  required reviewer since 2026-11-27: every merge to `main` goes live, owner's choice).
+- Repository variable **`STAGING_ENABLED`**: unset while there is no staging (owner: staging DNS and API come with
+  Moyasar). Unset → a merge to `main` goes straight to production and catalogue rebuilds are production only. Set it to
+  `true` once `store-staging` / `store-api-staging` and the `STAGING_SSH_*` secrets exist: production then waits for the
+  staging deploy and its smoke check.
 - Secrets per environment: `STAGING_SSH_HOST`, `STAGING_SSH_USER`, `STAGING_SSH_KEY` (a dedicated ed25519 private key),
   `STAGING_SSH_KNOWN_HOSTS` (`ssh-keyscan -t ed25519 <host>`, checked, then pasted); the same four with `PRODUCTION_`.
   Optional variables `STAGING_DEPLOY_DIR` / `PRODUCTION_DEPLOY_DIR` (defaults `/srv/africadawah-store-web-staging`, `/srv/africadawah-store-web`).
@@ -171,9 +179,15 @@ its environment, and only then pushed. A failed CI run deploys nothing.
   STORE_WEB_IMAGE=ghcr.io/lotfi029/african-store-web:staging-<sha> docker compose -f docker-compose.store-web.yml -p africadawah-store-web-staging up -d --wait
   ```
 
-- **Production:** push a tag `vX.Y.Z` (strict semver — a pre-release such as `v1.2.3-rc.1` is
+- **Production (default):** merge to `main`. Once CI succeeded on the commit, the gate numbers it with the next patch
+  of the latest `vX.Y.Z` tag and creates that tag (made by `GITHUB_TOKEN`, so it starts no second run). Without staging
+  (`STAGING_ENABLED` unset) `production-image` and `production` run right away (target `direct`); with staging they run
+  once staging is deployed and smoke-checked. `production-image` still runs `check-container` against the production
+  API before the push and `production` smoke-checks the site. A failed CI or check deploys nothing (the tag stays, and
+  the next merge takes the next number). No release to publish.
+- **Production (manual release):** push a tag `vX.Y.Z` (strict semver — a pre-release such as `v1.2.3-rc.1` is
   never deployed and never moves `:latest`, L-5) on `main`. CI runs on the tag; once it succeeded `production-image`
-  builds, checks and pushes `:X.Y.Z` and `:latest` (one build at a time); `production` waits for the reviewer, then runs
+  builds, checks and pushes `:X.Y.Z` and `:latest` (one build at a time); `production` waits for the environment's rules, then runs
   the same two commands in `/srv/africadawah-store-web` with `-p africadawah-store-web`.
 
 **First deploy of an environment (empty catalogue).** Every build refuses to publish a store with no published project
@@ -182,11 +196,11 @@ first deploy only:
 
 1. GitHub → Settings → Secrets and variables → Actions → **Variables** → repository variable
    `ALLOW_EMPTY_CATALOGUE` = `true`.
-2. Deploy as usual (re-run the main deploy for staging, push the tag for production). The build publishes the home page
+2. Deploy as usual (merge to `main`, or re-run its Deploy run). The build publishes the home page
    only (with the «قريبًا» banner in showcase), `check-container` accepts a home page without project links, and the
    run shows a warning.
 3. Create the staff account (API runbook `create-admin`), sign in at `/admin`, add and publish the categories and
-   projects. Publishing triggers a staging rebuild (`store-catalog-changed`); for production push a new tag.
+   projects. Publishing triggers a rebuild of production (and staging once it exists): `store-catalog-changed`, §9.
 4. **Delete the variable** as soon as each environment has a published project — every later build has the guard back.
 
 **Edge aliases (review 04 H-1).** The compose service is called `web`, never `store-web`: Compose gives every service
@@ -237,8 +251,18 @@ By hand on the VPS: the same two commands with the older tag (check the label fi
 
 ## 9. After a catalogue change
 
-Options, amounts and availability refresh in the browser after every page load. Titles, descriptions, SEO text and the
-sitemap of prerendered pages change with the next build: the nightly staging build picks them up; for production, tag a
-release. The API sends `repository_dispatch` `store-catalog-changed` (debounced) after a catalogue change, which
-rebuilds staging, only when its deployment points `SITE_REBUILD_REPOSITORY` at `lotfi029/african_store_web` and has
-the `Store__SiteRebuild__Token` secret (API `deploy/compose.yaml` defaults to the ta3lom web repo).
+Options, amounts and availability refresh in the browser after every page load (the API answers `no-cache` + ETag, so a
+reload or a new visit shows a change at once). Open home and project pages also update live: they listen to the API's
+`GET /v1/catalog/events` (Server-Sent Events, API LIVE-1, from API image 1.0.2) and re-read their data within about 2
+seconds of a staff save (`core/http/catalog-live`). Titles, descriptions, SEO text and the sitemap of prerendered pages
+(what search engines and link previews such as WhatsApp read) change with the next build.
+
+**Catalogue rebuild (LIVE-2).** After staff save a catalogue change, the API's outbox (`CatalogChanged` → debounce →
+`Store:SiteRebuild`) sends one `repository_dispatch` `store-catalog-changed` to this repository. The Deploy run rebuilds
+the code production runs (the latest `vX.Y.Z` tag) with a fresh prerender and sitemap, rebuilds the `:X.Y.Z` and
+`:latest` images, and deploys production (staging too when it exists and `main` HEAD is that commit). It never waits on
+CI: a newer merge still in CI deploys its own fresh catalogue, and a rebuild never replaces a newer version already
+deployed. A few minutes end to end. Dispatch and nightly runs share the `catalog-rebuild` concurrency group: one runs,
+only the newest waiting run is kept. Needs the africadawah API's `SITE_REBUILD_REPOSITORY=lotfi029/african_store_web`
+and its `Store__SiteRebuild__Token` (fine-grained, Contents read/write on this repository; `deploy/api/`). A manual
+`repository_dispatch` `catalog-changed` does the same.

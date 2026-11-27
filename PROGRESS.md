@@ -43,6 +43,7 @@ without a commit. Never redo a committed phase.
 | W-06 | W-06 — deploy: names unique on a VPS shared with ta3lom | done | `darafrica-store-web(-staging)` / `darafrica-store-api(-staging)` aliases and projects, `/srv/darafrica-store-*` folders, `edge/conf/darafrica-store.caddy` with `darafrica_store_*` snippets; `check-edge-aliases` and `validate-caddy` run in CI |
 | W-07 | W-07 — brand: africadawah name and domain | done | typecheck ✓, lint ✓ (i18n all translated), unit 406 ✓ + scripts ✓, build:ci ✓ (canonical store.africadawah.org, budgets OK); header checked at 320 px ar / 1280 px en (no horizontal scroll) |
 | W-08 | W-08 — production API install script | done | `bash -n` ✓; sha256 of the three API files checked against ta3lom_store_api v1.0.0; secret names and modes match the API's `secrets.md` |
+| W-09 | W-09 — live catalogue updates, page rebuilds and deploy on merge (ta3lom web #73, #74, #76, deploy direct) | in review | see the PR's test plan |
 
 ## Manual pass (Phase 8)
 
